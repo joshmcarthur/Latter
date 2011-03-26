@@ -17,7 +17,9 @@ MODELS_DIR = File.join(APP_DIR, 'models')
 require File.join(MODELS_DIR, 'player.rb')
 require File.join(MODELS_DIR, 'challenge.rb')
 
-set :public, PUBLIC_DIR
+set :root, File.dirname(__FILE__)
+set :static, true
+set :sessions, true
 
 
 ##### Latter: A Table Tennis Ladder ############
@@ -69,7 +71,7 @@ end
 get '/player/:id' do
   @player = Player.get(params[:id])
   not_found?(@player)
-  
+
   haml :"players/show"
 end
 
@@ -89,7 +91,7 @@ end
 post '/player/:id' do
   @player = Player.get(params[:id])
   not_found?(@player)
-  
+
   updated = @player.update! params[:player]
   updated ? redirect("/player/#{params[:id]}") : error(400, I18N[:record_not_saved])
 end
@@ -97,7 +99,7 @@ end
 post '/player/:id/delete' do
   @player = Player.get(params[:id])
   not_found?(@player)
-  
+
   @player.destroy
   redirect '/players'
 end
@@ -119,8 +121,8 @@ end
 get '/challenge/:id/:from_id/vs/:to_id' do
   @challenge = Challenge.get(params[:id])
   not_found?(@challenge)
-  
-  haml :"challenges/show"  
+
+  haml :"challenges/show"
 end
 
 post '/challenge' do
@@ -128,15 +130,15 @@ post '/challenge' do
   @challenge.from_player = Player.get(params[:challenge][:from_player_id])
   @challenge.to_player = Player.get(params[:challenge][:to_player_id])
   @challenge.completed = false
-  @challenge.save ? redirect('/challenges') : redirect('/challenges/new')  
+  @challenge.save ? redirect('/challenges') : redirect('/challenges/new')
 end
 
 post '/challenge/:id/update' do
   @challenge = Challenge.get(params[:id])
   not_found?(@challenge)
-  
+
   @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
-  
+
   @challenge.winner = Player.get(params[:challenge][:winner_id])
   @challenge.score = params[:challenge][:score]
   @challenge.completed = true
@@ -152,4 +154,4 @@ def authenticate!
   @current_player = Player.get(session[:player_id])
   redirect '/' unless @current_player
 end
-  
+
