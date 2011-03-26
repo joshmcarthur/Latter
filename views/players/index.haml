@@ -1,0 +1,18 @@
+%h1 Players
+
+%ul#players
+  - @players.each_with_index do |player, position|
+    %li
+      = position + 1
+      = player.name
+      %button{:class => 'challenge'}
+        Challenge
+      %button{:class => 'edit'}
+        Edit
+      %button{:class => 'delete'}
+        Delete
+
+%div.controls
+  %button{:class => 'add'}
+    Add Player
+    

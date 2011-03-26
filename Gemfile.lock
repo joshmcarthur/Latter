@@ -1,0 +1,97 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.2.4)
+    awesome_print (0.3.2)
+    bcrypt-ruby (2.1.4)
+    compass (0.10.6)
+      haml (>= 3.0.4)
+    data_mapper (1.1.0)
+      dm-aggregates (= 1.1.0)
+      dm-constraints (= 1.1.0)
+      dm-core (= 1.1.0)
+      dm-migrations (= 1.1.0)
+      dm-serializer (= 1.1.0)
+      dm-timestamps (= 1.1.0)
+      dm-transactions (= 1.1.0)
+      dm-types (= 1.1.0)
+      dm-validations (= 1.1.0)
+    data_objects (0.10.3)
+      addressable (~> 2.1)
+    diff-lcs (1.1.2)
+    dm-aggregates (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-constraints (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-do-adapter (1.1.0)
+      data_objects (~> 0.10.2)
+      dm-core (~> 1.1.0)
+    dm-migrations (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-observer (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-serializer (1.1.0)
+      dm-core (~> 1.1.0)
+      fastercsv (~> 1.5.4)
+      json (~> 1.4.6)
+    dm-sqlite-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_sqlite3 (~> 0.10.2)
+    dm-timestamps (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-transactions (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-types (1.1.0)
+      bcrypt-ruby (~> 2.1.4)
+      dm-core (~> 1.1.0)
+      fastercsv (~> 1.5.4)
+      json (~> 1.4.6)
+      stringex (~> 1.2.0)
+      uuidtools (~> 2.1.2)
+    dm-validations (1.1.0)
+      dm-core (~> 1.1.0)
+    do_sqlite3 (0.10.3)
+      data_objects (= 0.10.3)
+    fastercsv (1.5.4)
+    haml (3.0.25)
+    json (1.4.6)
+    rack (1.2.2)
+    rack-test (0.5.7)
+      rack (>= 1.0)
+    rdiscount (1.6.8)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.4.0)
+    sinatra (1.1.2)
+      rack (~> 1.1)
+      tilt (~> 1.2)
+    state_machine (0.10.1)
+    stringex (1.2.1)
+    tilt (1.2.2)
+    uuidtools (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  compass
+  data_mapper
+  data_objects
+  dm-migrations
+  dm-observer
+  dm-sqlite-adapter
+  do_sqlite3
+  haml
+  rack-test
+  rdiscount
+  rspec (= 2.4.0)
+  sinatra (= 1.1.2)
+  state_machine
