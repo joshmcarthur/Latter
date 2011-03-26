@@ -2,6 +2,7 @@ require 'bundler/setup'
 
 require 'sinatra'
 require 'haml'
+require 'erb'
 
 require 'dm-core'
 require 'dm-migrations'
@@ -18,8 +19,8 @@ require File.join(MODELS_DIR, 'player.rb')
 require File.join(MODELS_DIR, 'challenge.rb')
 
 set :root, File.dirname(__FILE__)
-set :static, true
-set :sessions, true
+enable :sessions
+enable :static
 
 
 ##### Latter: A Table Tennis Ladder ############
@@ -55,12 +56,18 @@ get '/' do
 end
 
 post '/login' do
-  @current_player = Player.first(:email => params[:email])
-  @current_player ? redirect('/players') : haml(:"auth/login")
+  @current_player = Player.first(:email => params[:email].downcase)
+  if @current_player
+    session[:player_id] = @current_player.id
+    redirect '/players'
+  else
+    haml :"auth/login"
+  end
 end
 
 get '/logout' do
   session[:player_id] = nil
+  redirect '/'
 end
 
 get '/players' do
@@ -151,7 +158,8 @@ def not_found?(object)
 end
 
 def authenticate!
-  @current_player = Player.get(session[:player_id])
+  puts "SESSION: #{session['player_id']}\n"
+  @current_player ||= Player.get(session[:player_id])
   redirect '/' unless @current_player
 end
 

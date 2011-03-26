@@ -1,2 +1,7 @@
-%h2 Login to Latter
+%form#login{:method => "post", :action => "/login"}
+  %label
+    Email...
+  %input{:type => "text", :name => "email"}
+  %button.button.login{:type => "submit"}
+    Login
 
