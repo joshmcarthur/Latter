@@ -1,1 +1,13 @@
 %h1 Challenges
+
+%ul#challenges
+  - @challenges.each do |challenge|
+    %li
+      = challenge.from_player.name
+      = " - vs - "
+      = challenge.to_player.name
+      - unless challenge.completed?
+        %span.status To be played.
+        %a{:href => "/challenges/#{challenge.id}/edit", :class => 'button edit_challenge'} Enter score.
+        
+        

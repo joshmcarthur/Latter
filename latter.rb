@@ -51,7 +51,7 @@ end
 
 
 get '/' do
-  redirect '/players' if @current_player
+  redirect '/players' and return if @current_player
   haml :"auth/login"
 end
 
@@ -75,6 +75,24 @@ get '/players' do
   haml :"players/index"
 end
 
+get '/player/new' do
+  haml :"players/form"
+end
+
+get '/player/:id/edit' do
+  @player = Player.get(params[:id])
+  not_found?(@player)
+  
+  haml :"players/form"
+end
+
+post '/player/:id/update' do
+  @player = Player.get(params[:id])
+  not_found?(@player)
+  
+  @player.update!(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form") 
+end
+
 get '/player/:id' do
   @player = Player.get(params[:id])
   not_found?(@player)
@@ -82,15 +100,8 @@ get '/player/:id' do
   haml :"players/show"
 end
 
-get '/player/new' do
-  haml :"players/new"
-end
-
-get '/player/edit' do
-  haml :"players/edit"
-end
-
 post '/player' do
+  puts params
   @player = Player.create(params[:player])
   @player.saved? ? redirect("/player/#{@player.id}") : error(400, I18N[:record_not_saved])
 end

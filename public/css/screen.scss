@@ -81,7 +81,34 @@ button {  width: auto; overflow: visible; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
 
-html, body { height: 100%; width: 100%; color: #454545; font-size: 16px; }
+
+
+/* Fonts */
+@font-face {
+    font-family: 'DroidSansRegular';
+    src: url('../fonts/DroidSans-webfont.eot');
+    src: url('../fonts/DroidSans-webfont.eot?iefix') format('eot'),
+         url('../fonts/DroidSans-webfont.woff') format('woff'),
+         url('../fonts/DroidSans-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-webfont.svg#webfontw7zqO19G') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'DroidSansBold';
+    src: url('../fonts/DroidSans-Bold-webfont.eot');
+    src: url('../fonts/DroidSans-Bold-webfont.eot?iefix') format('eot'),
+         url('../fonts/DroidSans-Bold-webfont.woff') format('woff'),
+         url('../fonts/DroidSans-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-Bold-webfont.svg#webfontSOhoM6aS') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html, body { height: 100%; width: 100%; color: #454545; font-size: 16px; font-family: 'DroidSansRegular', sans-serif;}
 body {
     /* Opera */
     background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2JhKDIzMiwyMzIsMjMyLDEpOyIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYmEoMjM5LDIzOSwyMzksMSk7IiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IGZpbGw9InVybCgjZ3JhZGllbnQpIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIiAvPjwvc3ZnPg==);
@@ -99,6 +126,23 @@ body {
     -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFE8E8E8,EndColorStr=#FFEFEFEF)";
 }
 
+h1, h2, h3, h4, h5, h6 { font-family: 'DroidSansBold', sans-serif; }
+h1 { font-size: 30px; }
+h2 { font-size: 25px; }
+h3 { font-size: 22px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+section#main { width: 50%; margin: 2% auto; }
+ol#players { width: 100%; margin: 2% auto; font-size: 30px; list-style-position: inside;}
+ol#players li { line-height: 40px; padding: 10px; border-bottom: solid 1px #CCC; }
+ol#players li section.player-buttons { float: right; }
+ol#players li section.player-buttons form { display: inline-block;}
+ol#players li section.player-buttons form button.challenge { margin: 0; }
+section.controls { width: 100%; margin: 2% auto; border-top: solid 2px #454545; }
+section.controls .button { line-height: 45px; text-align: center; width: 125px; margin: 15px 10px; }
+
 @mixin rounded-glow {
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -108,7 +152,56 @@ body {
     -webkit-box-shadow: 0px 0px 25px #888;
 }
 
-form#login
+
+@mixin red-gradient {
+    color: white;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+    background: #B33630;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#DC5F59',endColorstr='#B33630');
+    background: -webkit-gradient(linear,0% 0,0% 100%,from(#DC5F59),to(#B33630));
+    background: -moz-linear-gradient(-90deg,#DC5F59,#B33630);
+    border-bottom-color: #CD504A;
+}
+
+
+@mixin green-gradient {
+    color: #FFF;
+    background: #3E9533;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#419B36',endColorstr='#357F2C');
+    background: -webkit-gradient(linear,0% 0,0% 100%,from(#419B36),to(#357F2C));
+    background: -moz-linear-gradient(-90deg,#419B36,#357F2C);
+    border-bottom-color: #3E9533;
+}
+
+@mixin yellow-gradient {
+    /* Opera */
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2JhKDI1MSwxODQsNDEsMSk7IiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6cmdiYSgyNTUsMTM2LDAsMSk7IiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IGZpbGw9InVybCgjZ3JhZGllbnQpIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIiAvPjwvc3ZnPg==);
+
+    /* Firefox */
+    background: -moz-linear-gradient( top, rgba(251,184,41,1), rgba(255,136,0,1) );
+
+    /* Chrome & Safari */
+    background: -webkit-gradient( linear, left top, left bottom, color-stop( 0, rgba(251,184,41,1) ), color-stop( 1, rgba(255,136,0,1) ) );
+
+    /* IE5.5 - IE7 */
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFBB829,EndColorStr=#FFFF8800);
+
+    /* IE8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFBB829,EndColorStr=#FFFF8800)";
+    color: #FFF;
+}
+
+@mixin blue-gradient {
+    color:#fff;
+    text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+    border-bottom-color:#0770a0;
+    background:#0770a0;
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0ca6dd',endColorstr='#0770a0');
+    background:-webkit-gradient(linear,0% 0,0% 100%,from(#0ca6dd),to(#0770a0));
+    background:-moz-linear-gradient(-90deg,#0ca6dd,#0770a0);
+}
+
+form#login, form.styled
 {
     @include rounded-glow;
     margin: 10% auto;
@@ -118,14 +211,22 @@ form#login
     border: solid 1px #7FC938;
 }
 
-form#login label
+form legend
+{
+    font-size: 30px;
+    font-family: 'DroidSansBold', sans-serif;
+    margin-top: -8%;
+    margin-bottom: 10px;
+}
+
+form label
 {
     display: block;
     font-size: 20px;
     text-shadow: 0 -1px 0 rgba(100, 100, 100, 0.1);
 }
 
-form#login input[type=text] {
+form input[type=text] {
     padding: 5px 10px;
     border: 1px solid #D8DEE2;
     width: 350px;
@@ -133,30 +234,52 @@ form#login input[type=text] {
     font-size: 30px;
 }
 
-button.button:hover, button.button:focus
-{
+footer 
+{   
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    @include green-gradient;
+} 
+
+footer div {
     color: white;
+    line-height: 65px;
+    width: 100%;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    border-top: solid 1px #999;
     text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-    background: #3E9533;
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#419B36',endColorstr='#357F2C');
-    background: -webkit-gradient(linear,0% 0,0% 100%,from(#419B36),to(#357F2C));
-    background: -moz-linear-gradient(-90deg,#419B36,#357F2C);
-    border-bottom-color: #3E9533;
 }
 
+button.button:hover, button.button:focus
+{
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.button.login { margin-bottom: 5px; margin-top: 5px; min-width: 100px; }
+.button.login:hover, .button.login:focus { @include green-gradient; }
+.button.challenge:hover, .button.challenge:focus { @include blue-gradient; }
+.button.delete:hover, .button.delete:focus { @include red-gradient; }
+.button.edit:hover, .button.edit:focus { @include yellow-gradient; }
+.button.add:hover, .button.add:focus { @include blue-gradient; }
+.button.new_challenge:hover, .button.new_challenge:focus { @include blue-gradient; }
 
 button.button, a.button {
+    line-height: normal;
+    text-decoration: none;
     display: inline-block;
-    height: 34px;
+    line-height: 30px;
     padding: 0;
     position: relative;
     top: 1px;
-    margin: 5px 10px;
+    margin: 0px 10px;
     float: right;
     overflow: auto;
-    font-family: helvetica,arial,freesans,clean,sans-serif;
+    font-family: 'DroidSansRegular',sans-serif;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     color: #333;
     text-shadow: 1px 1px 0 white;
     white-space: nowrap;
@@ -177,14 +300,38 @@ button.button, a.button {
     margin-left: 1px;
     padding: 0 13px;
     -webkit-font-smoothing: subpixel-antialiased!important;
-    min-width: 100px;
 }
 
-
-
-
-
-
+span.you {
+    float: left;
+    line-height: normal;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0;
+    position: relative;
+    top: 1px;
+    margin: 0px 10px;
+    overflow: auto;
+    font-family: 'DroidSansRegular', sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    color: #333;
+    text-shadow: 1px 1px 0 white;
+    white-space: nowrap;
+    border: none;
+    overflow: visible;
+    background: #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    margin-left: 1px;
+    padding: 0 13px;
+    -webkit-font-smoothing: subpixel-antialiased!important;
+}
 
 
 @media all and (orientation:portrait) {

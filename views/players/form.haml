@@ -1,0 +1,11 @@
+%form{:method => 'post', :action => @player ? "/player/#{@player.id}/update" : "/player", :class => 'styled'}
+  %legend
+    = @player ? "Editing #{@player.name}" : "New Player"
+  %label{:for => 'player[name]'}
+    Name...
+  %input{:type => 'text', :name => 'player[name]', :value => @player ? @player.name : ""}
+  %label{:for => 'player[email]'}
+    Email...
+  %input{:type => 'text', :name => 'player[email]', :value => @player ? @player.email : ""}
+  %button.button.save.login{:type => 'submit'}
+    = "Save #{@player ? @player.name : ""}"

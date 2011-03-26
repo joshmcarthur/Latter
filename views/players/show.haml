@@ -1,0 +1,10 @@
+%h1= @player.name
+%span.email= @player.email
+
+%section#challenges
+  - if @player.challenges.length > 0
+    = @player.challenges.length.to_s + " challenges."
+    = @player.total_wins.to_s + " wins."
+  - else
+    This player hasn't yet competed.
+    

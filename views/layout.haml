@@ -22,8 +22,12 @@
     %script{:type => 'text/javascript', :src => '/js/modernizr.min.js'}
 
   %body
-    %h1.title Latter
-    = yield
+    %section#main
+      = yield
+    %footer
+      %div
+        Latter
+        = ":: #{@current_player.name}" if @current_player
 
     %script{:type => 'text/javascript', :src => '/js/jquery.min.js'}
     %script{:type => 'text/javascript', :src => '/js/application.js'}
