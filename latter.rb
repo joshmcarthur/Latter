@@ -165,6 +165,7 @@ post '/challenge/:id/update' do
   not_found?(@challenge)
 
   @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
+  
   @challenge.set_score_and_winner(:from_player_score => params[:challenge][:from_player_score],
     :to_player_score => params[:challenge][:to_player_score]
   )  
