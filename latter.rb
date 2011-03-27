@@ -165,11 +165,9 @@ post '/challenge/:id/update' do
   not_found?(@challenge)
 
   @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
-  
   @challenge.set_score_and_winner(:from_player_score => params[:challenge][:from_player_score],
     :to_player_score => params[:challenge][:to_player_score]
-  )
-  
+  )  
   @challenge.completed = true
   challenge_updated = @challenge.save
   challenge_updated ? send_mail(:to => @challenge.to_player.email, :subject => "Updated Challenge on Latter", :template => 'challenge_updated') && redirect('/challenges') : redirect('/challenge/edit')
