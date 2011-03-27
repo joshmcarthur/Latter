@@ -1,11 +1,12 @@
 %h1 You have been challenged!
 
-%strong= "Hi #{@player.name},"
+%strong= "Hi #{@object.to_player_name},"
 %p
 %p
-  You've received a challenge from 
-  = "#{@from_player.name}!"
+  You've received a challenge from
+  = "#{@object.from_player_name}!"
 %p
   Cheers,
   %br
   Latter
+

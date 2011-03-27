@@ -88,15 +88,15 @@ end
 get '/player/:id/edit' do
   @player = Player.get(params[:id])
   not_found?(@player)
-  
+
   haml :"players/form"
 end
 
 post '/player/:id/update' do
   @player = Player.get(params[:id])
   not_found?(@player)
-  
-  @player.update!(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form") 
+
+  @player.update!(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form")
 end
 
 get '/player/:id' do
@@ -141,7 +141,7 @@ end
 get '/challenge/:id/edit' do
   @challenge = Challenge.get(params[:id])
   not_found?(@challenge)
-  
+
   haml :"challenges/form"
 end
 
@@ -165,17 +165,18 @@ post '/challenge/:id/update' do
   not_found?(@challenge)
 
   @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
-  
+
   @challenge.set_score_and_winner(:from_player_score => params[:challenge][:from_player_score],
     :to_player_score => params[:challenge][:to_player_score]
-  )  
+  )
   @challenge.completed = true
   challenge_updated = @challenge.save
-  challenge_updated ? send_mail(:to => @challenge.to_player.email, :subject => "Updated Challenge on Latter", :template => 'challenge_updated') && redirect('/challenges') : redirect('/challenge/edit')
+  challenge_updated ? send_mail(:to => @challenge.to_player.email, :subject => "Updated Challenge on Latter", :template => 'challenge_updated', :object => @challenge) && redirect('/challenges') : redirect('/challenge/edit')
 end
 
 
 def send_mail(options)
+  @object = options[:object]
   Pony.mail(
     :to => options[:to],
     :from => MAIL_FROM,
