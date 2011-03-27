@@ -3,7 +3,7 @@
 %ol#players
   - @players.each do |player|
     %li
-      = player.name
+      %a{:href => "/player/#{player.id}"}= player.name
       %section.player-buttons
         - if player != @current_player
           %form{:method => 'post', :action => '/challenge'}

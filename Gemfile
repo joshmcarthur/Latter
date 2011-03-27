@@ -11,6 +11,8 @@ gem 'rdiscount'
 gem 'haml'
 gem 'compass'
 gem 'state_machine'
+gem 'pony'
+gem 'heroku'
 
 group :test do
   gem 'rspec', '=2.4.0'

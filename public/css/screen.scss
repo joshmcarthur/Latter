@@ -40,7 +40,7 @@ h1,h2,h3,h4,h5,h6 { font-weight: bold; }
 html { overflow-y: scroll; }
 
 a:hover, a:active { outline: none; }
-a, a:active, a:visited { color: #607890; }
+a, a:active, a:visited { color: #607890; text-decoration: none; }
 a:hover { color: #036; }
 
 ul, ol { margin-left: 1.8em; }
@@ -133,6 +133,9 @@ h3 { font-size: 22px; }
 h4 { font-size: 20px; }
 h5 { font-size: 18px; }
 h6 { font-size: 16px; }
+
+h1.player_name { font-size: 60px; }
+span.email { font-size: 25px; padding: 25px 0; display: block; }
 
 section#main { width: 50%; margin: 2% auto; }
 ol#players, ul#challenges { width: 100%; margin: 2% auto; font-size: 30px; list-style-position: inside;}

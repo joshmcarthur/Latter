@@ -19,7 +19,7 @@ class Player
   
   def winning_percentage
     if self.challenges.length > 0
-      ((self.total_wins / self.challenges.length) * 100).to_s.concat("%")
+      ((self.total_wins.to_f / self.challenges.length.to_f) * 100).to_i.to_s.concat("%")
     else
       "0%"
     end

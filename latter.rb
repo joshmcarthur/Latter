@@ -2,7 +2,7 @@ require 'bundler/setup'
 
 require 'sinatra'
 require 'haml'
-require 'erb'
+require 'pony'
 
 require 'dm-core'
 require 'dm-migrations'
@@ -14,6 +14,8 @@ require 'dm-observer'
 APP_DIR = File.expand_path(File.dirname(__FILE__))
 PUBLIC_DIR = File.join(APP_DIR, 'public')
 MODELS_DIR = File.join(APP_DIR, 'models')
+
+MAIL_FROM = "updates@latter.joshmcarthur.me"
 
 require File.join(MODELS_DIR, 'player.rb')
 require File.join(MODELS_DIR, 'challenge.rb')
@@ -68,7 +70,7 @@ get '/logout' do
 end
 
 get '/players' do
-  @players = Player.all.sort { |a, b| a.total_wins <=> b.total_wins }
+  @players = Player.all.sort { |a,b| b.total_wins <=> a.total_wins }
   haml :"players/index"
 end
 
@@ -148,7 +150,7 @@ post '/challenge' do
   @challenge.from_player = Player.get(params[:challenge][:from_player_id])
   @challenge.to_player = Player.get(params[:challenge][:to_player_id])
   @challenge.completed = false
-  @challenge.save ? redirect('/challenges') : redirect('/challenge/new')
+  @challenge.save ? redirect('/challenges') : send_mail(:to => @challenge.to_player.email, :subject => "New Challenge on Latter", :template => 'new_challenge') && redirect('/challenge/new')
 end
 
 post '/challenge/:id/update' do
@@ -164,7 +166,26 @@ post '/challenge/:id/update' do
   @challenge.score = params[:challenge][:score]
   @challenge.completed = true
   challenge_updated = @challenge.save
-  challenge_updated ? redirect('/challenges') : redirect('/challenge/edit')
+  challenge_updated ? send_mail(:to => @challenge.to_player.email, :subject => "Updated Challenge on Latter", :template => 'challenge_updated') && redirect('/challenges') : redirect('/challenge/edit')
+end
+
+
+def new_mail(options)
+  Pony.mail(
+    :to => options[:to],
+    :from => MAIL_FROM,
+    :subject => options[:subject],
+    :body => haml(:"mail/#{options[:template]}"),
+    :via => :smtp,
+    :via_options => {
+      :address => 'smtp.sendgrid.net',
+      :port => '25',
+      :authentication => :plain,
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password => ENV['SENDGRID_PASSWORD'],
+      :domain => ENV['SENDGRID_DOMAIN']
+    }
+  )
 end
 
 def not_found?(object)
