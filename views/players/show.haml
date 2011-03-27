@@ -1,10 +1,37 @@
 %h1= @player.name
 %span.email= @player.email
 
-%section#challenges
+%section#stats
   - if @player.challenges.length > 0
-    = @player.challenges.length.to_s + " challenges."
-    = @player.total_wins.to_s + " wins."
+    %p
+      %strong Winning Percentage: 
+      %span= @player.winning_percentage
+    %p
+      %strong Initiated Challenges:
+      %span= @player.initiated_challenges.length
+    %p
+      %strong Defending Challenges:
+      %span= @player.challenged_challenges.length
   - else
     This player hasn't yet competed.
+%ul#challenges
+  - @player.challenges.select { |c| c.completed? }.each do |challenge|
+    %li
+      - if challenge.from_player
+        %a{:href => "/player/#{challenge.from_player.id}", :class => 'player-link'}
+          = challenge.from_player.name
+      - else
+        = challenge.from_player_name
+      = " vs. "
+      - if challenge.to_player
+        %a{:href => "/player/#{challenge.to_player.id}", :class => 'player-link'}
+          = challenge.to_player.name
+      - else
+        = challenge.to_player_name
+      %section.challenge-line-info
+        - unless challenge.completed?
+          %span.status To be played.
+          %a{:href => "/challenge/#{challenge.id}/edit", :class => 'button edit_challenge'} Enter score.
+        - else
+          %a{:href => "/challenge/#{challenge.id}", :class => 'button view_challenge'} View result.
     

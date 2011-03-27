@@ -28,6 +28,8 @@
       %div
         Latter
         = ":: #{@current_player.name}" if @current_player
+        - if @current_player
+          %a.button.logout{:href => '/logout'} Logout
 
     %script{:type => 'text/javascript', :src => '/js/jquery.min.js'}
     %script{:type => 'text/javascript', :src => '/js/application.js'}

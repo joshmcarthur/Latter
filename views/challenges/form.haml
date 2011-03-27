@@ -1,0 +1,27 @@
+%form.styled{:action => @challenge ? "/challenge/#{@challenge.id}/update" : "/challenge", :method => "post"}
+  %legend= @challenge ? "Editing Challenge" : "New Challenge"
+  %select.player-select{:name => 'challenge[from_player_id]'}
+    - Player.all.each do |player|
+      %option{:value => player.id, :selected => (@challenge && @challenge.from_player == player ? true : false)}= player.name
+  %span.vs= " - vs - "
+  %select.player-select{:name => 'challenge[to_player_id]'}
+    - Player.all.each do |player|
+      %option{:value => player.id, :selected => (@challenge && @challenge.to_player == player ? true : false)}= player.name
+  
+  %section#scores
+    - if @challenge && !@challenge.completed?
+      %label= "#{@challenge.from_player_name}'s score..."
+      %input{:type => 'text', :name => 'challenge[from_player_score]', :id => 'from_player_score', :onchange => "set_result('#{@challenge.from_player_name}', '#{@challenge.to_player_name}');"}
+      %label= "#{@challenge.to_player_name}'s score..."
+      %input{:type => 'text', :name => 'challenge[to_player_score]', :id => 'to_player_score', :onchange => "set_result('#{@challenge.from_player_name}', '#{@challenge.to_player_name}');"}
+      %span.result
+    - elsif @challenge && @challenge.completed?
+      %section.notice
+        Sorry, the scores are locked in
+        = @challenge.winner ? " - looks like #{@challenge.winner.name} won." : "." 
+    - else
+      %section.notice
+        You can't enter results until the record has been saved.
+  %button.button.save.login{:type => 'submit'}
+    Save Challenge    
+      

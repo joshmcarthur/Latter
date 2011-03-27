@@ -1,0 +1,19 @@
+%h1= "#{@challenge.from_player_name} challenged #{@challenge.to_player_name}"
+%section#results
+  - if @challenge.winner
+    = "#{@challenge.winner.name} won, #{@challenge.score}" 
+  - else
+    = "The result was a draw, #{@challenge.score}"
+%section.view_challenge.controls
+  - unless @challenge.from_player == @current_player
+    %form{:method => 'post', :action => '/challenge'}
+      %input{:type => 'hidden', :name => 'challenge[from_player_id]', :value => @current_player.id}
+      %input{:type => 'hidden', :name => 'challenge[to_player_id]', :value => @challenge.from_player.id}
+      %button.button{:type => 'submit', :class => 'challenge'}
+        = "Challenge #{@challenge.from_player_name}"
+  - unless @challenge.to_player == @current_player
+    %form{:method => 'post', :action => '/challenge'}
+      %input{:type => 'hidden', :name => 'challenge[from_player_id]', :value => @current_player.id}
+      %input{:type => 'hidden', :name => 'challenge[to_player_id]', :value => @challenge.to_player.id}
+      %button.button{:type => 'submit', :class => 'challenge'}
+        = "Why don't you challenge #{@challenge.to_player_name}?"

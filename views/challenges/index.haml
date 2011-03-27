@@ -3,11 +3,22 @@
 %ul#challenges
   - @challenges.each do |challenge|
     %li
-      = challenge.from_player.name
-      = " - vs - "
-      = challenge.to_player.name
-      - unless challenge.completed?
-        %span.status To be played.
-        %a{:href => "/challenges/#{challenge.id}/edit", :class => 'button edit_challenge'} Enter score.
+      - if challenge.from_player
+        %a{:href => "/player/#{challenge.from_player.id}", :class => 'player-link'}
+          = challenge.from_player.name
+      - else
+        = challenge.from_player_name
+      = " vs. "
+      - if challenge.to_player
+        %a{:href => "/player/#{challenge.to_player.id}", :class => 'player-link'}
+          = challenge.to_player.name
+      - else
+        = challenge.to_player_name
+      %section.challenge-line-info
+        - unless challenge.completed?
+          %span.status To be played.
+          %a{:href => "/challenge/#{challenge.id}/edit", :class => 'button edit_challenge'} Enter score.
+        - else
+          %a{:href => "/challenge/#{challenge.id}", :class => 'button view_challenge'} View result.
         
         

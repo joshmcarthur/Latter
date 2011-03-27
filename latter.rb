@@ -37,16 +37,13 @@ configure :test do
 end
 
 configure do
-  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/latter.db.sqlite3")
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
   DataMapper.auto_upgrade!
 end
 
-before '/player*' do
-  authenticate!
-end
-
-before '/challenge*' do
-  authenticate!
+before do
+  current_player!
+  authenticate! unless request.path =~ /\A\/\Z/ || request.path =~ /\A\/login\Z/
 end
 
 
@@ -129,14 +126,17 @@ end
 
 
 get '/challenge/new' do
-  haml :"challenges/new"
+  haml :"challenges/form"
 end
 
-get '/challenge/edit' do
-  haml :"challenges/edit"
+get '/challenge/:id/edit' do
+  @challenge = Challenge.get(params[:id])
+  not_found?(@challenge)
+  
+  haml :"challenges/form"
 end
 
-get '/challenge/:id/:from_id/vs/:to_id' do
+get '/challenge/:id' do
   @challenge = Challenge.get(params[:id])
   not_found?(@challenge)
 
@@ -148,7 +148,7 @@ post '/challenge' do
   @challenge.from_player = Player.get(params[:challenge][:from_player_id])
   @challenge.to_player = Player.get(params[:challenge][:to_player_id])
   @challenge.completed = false
-  @challenge.save ? redirect('/challenges') : redirect('/challenges/new')
+  @challenge.save ? redirect('/challenges') : redirect('/challenge/new')
 end
 
 post '/challenge/:id/update' do
@@ -156,21 +156,26 @@ post '/challenge/:id/update' do
   not_found?(@challenge)
 
   @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
-
-  @challenge.winner = Player.get(params[:challenge][:winner_id])
+  
+  @challenge.set_score_and_winner(:from_player_score => params[:challenge][:from_player_score],
+    :to_player_score => params[:challenge][:to_player_score]
+  )
+  
   @challenge.score = params[:challenge][:score]
   @challenge.completed = true
   challenge_updated = @challenge.save
-  challenge_updated ? redirect('/challenges') : redirect('/challenges/edit')
+  challenge_updated ? redirect('/challenges') : redirect('/challenge/edit')
 end
 
 def not_found?(object)
   error(404, I18N[:record_not_found]) unless object
 end
 
-def authenticate!
-  puts "SESSION: #{session['player_id']}\n"
+def current_player!
   @current_player ||= Player.get(session[:player_id])
+end
+
+def authenticate!
   redirect '/' unless @current_player
 end
 
