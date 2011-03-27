@@ -170,7 +170,6 @@ post '/challenge/:id/update' do
     :to_player_score => params[:challenge][:to_player_score]
   )
   
-  @challenge.score = params[:challenge][:score]
   @challenge.completed = true
   challenge_updated = @challenge.save
   challenge_updated ? send_mail(:to => @challenge.to_player.email, :subject => "Updated Challenge on Latter", :template => 'challenge_updated') && redirect('/challenges') : redirect('/challenge/edit')
