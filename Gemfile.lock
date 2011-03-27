@@ -34,6 +34,9 @@ GEM
       dm-core (~> 1.1.0)
     dm-observer (1.1.0)
       dm-core (~> 1.1.0)
+    dm-postgres-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_postgres (~> 0.10.2)
     dm-serializer (1.1.0)
       dm-core (~> 1.1.0)
       fastercsv (~> 1.5.4)
@@ -54,6 +57,8 @@ GEM
       uuidtools (~> 2.1.2)
     dm-validations (1.1.0)
       dm-core (~> 1.1.0)
+    do_postgres (0.10.3)
+      data_objects (= 0.10.3)
     do_sqlite3 (0.10.3)
       data_objects (= 0.10.3)
     fastercsv (1.5.4)
@@ -111,6 +116,7 @@ DEPENDENCIES
   data_objects
   dm-migrations
   dm-observer
+  dm-postgres-adapter
   dm-sqlite-adapter
   do_sqlite3
   haml
