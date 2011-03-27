@@ -145,7 +145,7 @@ ol#players li section.player-buttons { float: right; }
 ol#players li section.player-buttons form { display: inline-block;}
 ol#players li section.player-buttons form button.challenge { margin: 0; }
 section.controls { width: 100%; margin: 2% auto; border-top: solid 2px #454545; }
-section.controls .button { line-height: 45px; text-align: center; width: 125px; margin: 15px 10px; }
+section.controls .button { height: 45px; line-height: 45px; text-align: center; width: 125px; margin: 15px 10px; }
 section.view_challenge.controls .button { float: left; width: auto;}
 ul#challenges { list-style: none; }
 ul#challenges section.challenge-line-info { width: 220px; float: right; }
@@ -158,6 +158,9 @@ ul#challenges section.challenge-line-info span.status { background-color: #333; 
     -o-border-radius: 25px;
     border-radius: 25px;
     -webkit-box-shadow: 0px 0px 25px #888;
+    -moz-box-shadow: 0px 0px 25px #888;
+    -o-box-shadow: 0px 0px 25px #888;
+    box-shadow: 0px 0px 25px #888;
 }
 
 
@@ -223,7 +226,6 @@ form legend
 {
     font-size: 30px;
     font-family: 'DroidSansBold', sans-serif;
-    margin-top: -8%;
     margin-bottom: 10px;
 }
 
@@ -252,6 +254,7 @@ section#scores span.result { position: absolute; top: 45%; right: 10px; font-siz
 footer 
 {   
     bottom: 0px;
+    left: 0px;
     position: fixed;
     width: 100%;
     @include green-gradient;
@@ -289,6 +292,7 @@ button.button, a.button {
     text-decoration: none;
     display: inline-block;
     line-height: 30px;
+    height: 30px;
     margin: 0px 10px;
     float: right;
     overflow: auto;
