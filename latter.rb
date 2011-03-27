@@ -39,18 +39,25 @@ configure :test do
 end
 
 configure do
-  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
+  DataMapper.setup(:default, ENV["DATABASE_URL"] || "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
   DataMapper.auto_upgrade!
 end
 
 before do
   current_player!
-  authenticate! unless request.path =~ /\A\/\Z/ || request.path =~ /\A\/login\Z/
+  authenticate! unless request.path =~ /\A\/\Z/ || request.path =~ /\A\/login\Z/ || request.path =~ /\A\/setup\Z/
 end
 
 
 get '/' do
   redirect '/players' and return if @current_player
+  haml :"auth/login"
+end
+
+get '/setup' do
+  if Player.all.length == 0
+    Player.create(:name => 'Admin', :email => 'admin@example.org')
+  end
   haml :"auth/login"
 end
 
