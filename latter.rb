@@ -177,7 +177,7 @@ post '/challenge/:id/update' do
 end
 
 
-def new_mail(options)
+def send_mail(options)
   Pony.mail(
     :to => options[:to],
     :from => MAIL_FROM,
