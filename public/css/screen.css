@@ -457,6 +457,18 @@ button.button:hover, button.button:focus {
   background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#0ca6dd), to(#0770a0));
   background: -moz-linear-gradient(-90deg, #0ca6dd, #0770a0); }
 
+.button.challenges, .button.players {
+  color: #fff;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+  border-bottom-color: #0770a0;
+  background: #0770a0;
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0ca6dd',endColorstr='#0770a0');
+  background: -webkit-gradient(linear, 0% 0, 0% 100%, from(#0ca6dd), to(#0770a0));
+  background: -moz-linear-gradient(-90deg, #0ca6dd, #0770a0);
+  float: left;
+  margin-left: 17px;
+  margin-top: 17px; }
+
 .button.delete:hover, .button.delete:focus {
   color: white;
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);

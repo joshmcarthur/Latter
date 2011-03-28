@@ -26,6 +26,9 @@
       = yield
     %footer
       %div
+        - if @current_player
+          %a.button.players{:href => '/players'} Players
+          %a.button.challenges{:href => '/challenges'} Challenges
         Latter
         = ":: #{@current_player.name}" if @current_player
         - if @current_player

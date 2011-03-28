@@ -157,7 +157,16 @@ post '/challenge' do
   @challenge.from_player = Player.get(params[:challenge][:from_player_id])
   @challenge.to_player = Player.get(params[:challenge][:to_player_id])
   @challenge.completed = false
-  @challenge.save ? redirect('/challenges') : send_mail(:to => @challenge.to_player.email, :subject => "New Challenge on Latter", :template => 'new_challenge') && redirect('/challenge/new')
+  if @challenge.save
+    send_mail(:to => @challenge.to_player.email,
+      :subject => "New Challenge on Latter",
+      :template => 'new_challenge',
+      :object => @challenge
+    )
+    redirect '/challenges'
+  else
+    redirect '/challenge/new'
+  end
 end
 
 post '/challenge/:id/update' do

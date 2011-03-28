@@ -252,14 +252,14 @@ section#scores input { width: 40%; display: inline-block; }
 section#scores { position: relative; margin: 10px auto;}
 section#scores span.result { position: absolute; top: 45%; right: 10px; font-size: 30px; }
 
-footer 
-{   
+footer
+{
     bottom: 0px;
     left: 0px;
     position: fixed;
     width: 100%;
     @include green-gradient;
-} 
+}
 
 footer div {
     color: white;
@@ -280,6 +280,7 @@ button.button:hover, button.button:focus
 .button.login { margin-bottom: 5px; margin-top: 5px; min-width: 100px; }
 .button.login:hover, .button.login:focus { @include green-gradient; }
 .button.challenge:hover, .button.challenge:focus { @include blue-gradient; }
+.button.challenges, .button.players { @include blue-gradient; float: left; margin-left: 17px; margin-top: 17px; }
 .button.delete:hover, .button.delete:focus { @include red-gradient; }
 .button.edit:hover, .button.edit:focus { @include yellow-gradient; }
 .button.add:hover, .button.add:focus { @include blue-gradient; }
