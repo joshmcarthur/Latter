@@ -42,6 +42,13 @@ configure :test do
   DataMapper.auto_upgrade!
 end
 
+configure :development do
+  PONY_SMTP_OPTIONS = { 
+    :address => "localhost",
+    :port => "25"
+  }
+end
+
 
 configure :production do
   PONY_SMTP_OPTIONS = {
