@@ -82,6 +82,8 @@ GEM
     pony (1.1)
       mail (> 2.0)
     rack (1.2.2)
+    rack-flash (0.1.1)
+      rack
     rack-test (0.5.7)
       rack (>= 1.0)
     rake (0.8.7)
@@ -122,6 +124,7 @@ DEPENDENCIES
   haml
   heroku
   pony
+  rack-flash
   rack-test
   rdiscount
   rspec (= 2.4.0)

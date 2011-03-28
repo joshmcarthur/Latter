@@ -13,6 +13,13 @@
     %meta{:name => "author", :content => "sudojosh"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
 
+    :javascript
+      $(function() {
+        - if flash[:notice]
+          = "$('<p>#{flash[:notice]}</p>').lNotification();"
+        - if flash[:error]
+          = "$('<p>#{flash[:error]}</p>').lNotification();"
+      });
 
     %title Latter
 
@@ -35,5 +42,6 @@
           %a.button.logout{:href => '/logout'} Logout
 
     %script{:type => 'text/javascript', :src => '/js/jquery.min.js'}
+    %script{:type => 'text/javascript', :src => '/js/latter.notification.js'}
     %script{:type => 'text/javascript', :src => '/js/application.js'}
 

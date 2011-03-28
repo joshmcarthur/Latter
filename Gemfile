@@ -14,6 +14,7 @@ gem 'state_machine'
 gem 'pony'
 gem 'heroku'
 gem 'dm-postgres-adapter'
+gem 'rack-flash'
 
 group :test do
   gem 'rspec', '=2.4.0'

@@ -3,6 +3,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'haml'
 require 'pony'
+require 'rack-flash'
 
 require 'dm-core'
 require 'dm-migrations'
@@ -21,7 +22,7 @@ require File.join(MODELS_DIR, 'challenge.rb')
 set :root, File.dirname(__FILE__)
 enable :sessions
 enable :static
-
+use Rack::Flash
 
 ##### Latter: A Table Tennis Ladder ############
 
@@ -143,7 +144,7 @@ post '/player/:id/delete' do
 end
 
 get '/challenges' do
-  @challenges = Challenge.all
+  @challenges = Challenge.all(:order => [:completed.desc, :created_at.desc])
   haml :"challenges/index"
 end
 
