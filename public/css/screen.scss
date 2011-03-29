@@ -185,21 +185,14 @@ ul#challenges section.challenge-line-info span.status { background-color: #333; 
 }
 
 @mixin yellow-gradient {
-    /* Opera */
-    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2JhKDIzMywxOTcsMTEzLDEpOyIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYmEoMjM0LDE5MSwzNywxKTsiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNncmFkaWVudCkiIGhlaWdodD0iMTAwJSIgd2lkdGg9IjEwMCUiIC8+PC9zdmc+);
-
-    /* Firefox */
-    background: -moz-linear-gradient( top, rgba(233,197,113,1), rgba(234,191,37,1) );
-
-    /* Chrome & Safari */
-    background: -webkit-gradient( linear, left top, left bottom, color-stop( 0, rgba(233,197,113,1) ), color-stop( 1, rgba(234,191,37,1) ) );
-
-    /* IE5.5 - IE7 */
-    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFE9C571,EndColorStr=#FFEABF25);
-
-    /* IE8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFE9C571,EndColorStr=#FFEABF25)";
-    border-bottom: solid 1px #E9C571;
+    border-bottom: solid 1px #5d7676;
+    color:#fff;
+    text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+    border-bottom-color:#0770a0;
+    background:#6a8896;
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5d7676',endColorstr='#6a8896');
+    background:-webkit-gradient(linear,0% 0,0% 100%,from(#5d7676),to(#6a8896));
+    background:-moz-linear-gradient(-90deg,#5d7676,#6a8896);
 }
 
 @mixin blue-gradient {

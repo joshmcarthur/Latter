@@ -10,6 +10,7 @@ class Challenge
   property :completed, Boolean, :required => true, :default => false
   property :winner_id, Integer
   property :score, String
+  property :created_at, DateTime, :default => lambda { |record, property| Time.now }
   
   belongs_to :from_player, Player, :child_key => [:from_player_id]
   belongs_to :to_player, Player, :child_key => [:to_player_id]
@@ -38,9 +39,10 @@ class Challenge
     
     if from_score > to_score
       self.winner = self.from_player
+      self.score = [from_score.to_s, to_score.to_s].join(SCORE_JOINER)
     elsif from_score < to_score
       self.winner = self.to_player
+      self.score = [to_score.to_s, from_score.to_s].join(SCORE_JOINER)
     end
-    self.score = [from_score.to_s, to_score.to_s].join(SCORE_JOINER)
   end    
 end
