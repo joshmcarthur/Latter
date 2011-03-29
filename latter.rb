@@ -42,12 +42,6 @@ configure :test do
   DataMapper.auto_upgrade!
 end
 
-configure :development do
-  PONY_SMTP_OPTIONS = { 
-    :address => "localhost",
-    :port => "25"
-  }
-end
 
 
 configure :production do
@@ -64,7 +58,6 @@ end
 configure do
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
   DataMapper.auto_upgrade!
-  PONY_SMTP_OPTIONS = {}
 end
 
 before do

@@ -283,6 +283,9 @@ section#main {
   width: 50%;
   margin: 2% auto; }
 
+section#main, footer {
+  min-width: 700px; }
+
 ol#players, ul#challenges {
   width: 100%;
   margin: 2% auto;
