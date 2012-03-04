@@ -1,0 +1,48 @@
+body { padding-top: 100px; } /* To offset the top fixing of the navbar */
+.navbar a.brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  float: right;
+  font-weight: bold;
+  color: black;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  transition: all .2s linear;
+}
+
+.player.name h1 { line-height: 50px; }
+a.player.email { line-height: 30px; font-size: 18px; }
+a.player.email i { margin: 3px; }
+
+#stats .thumbnail h1 { font-size: 50px; text-align: center; line-height: 100px; }
+#stats .thumbnail .label { font-size: 18px; line-height: 25px; text-align: center; }
+
+#enter_score label { font-weight: bold; }
+#enter_score input { margin-left: 55px; margin-top: 10px; }
+#enter_score .vs h3 { line-height: 200px; }
+
+#challenges .thumbnail.winner { background-color: #46a546; }
+#challenges .thumbnail.loser  { background-color: #9d261d; }
+#challenges .thumbnail.drawer { background-color: #f89406; }
+
+.vs { text-align: center; }
+.vs h1 { font-size: 150px; line-height: 200px; }
+
+.stat-group .progress {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.stat-group .label {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.stat-group .label.ranking {
+  line-height: 20px;
+}
+.stat-group { margin-bottom: 5px; }
+.controls { margin-top: 18px; }

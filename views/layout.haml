@@ -7,41 +7,43 @@
     %meta{'http-equiv' => "X-UA-Compatible", :content => "IE-edge,chrome=1"}
 
     %link{'href' => '/favicon.ico', :type => 'application/x-icon', :rel => 'shortcut icon'}
-    %link{:href => '/apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png'}
-    %link{:href => '/css/screen.css', :rel => 'stylesheet', :type => 'text/css'}
     %meta{:name => "description", :content => "Latter :: Table Tennis Ladder"}
     %meta{:name => "author", :content => "sudojosh"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
 
-    :javascript
-      $(function() {
-        - if flash[:notice]
-          = "$('<p>#{flash[:notice]}</p>').lNotification();"
-        - if flash[:error]
-          = "$('<p>#{flash[:error]}</p>').lNotification();"
-      });
+    %link{:rel => "stylesheet", :href => "/css/bootstrap.css"}
+    %link{:rel => "stylesheet", :href => "/css/custom.css"}
 
     %title Latter
-
-    /[if lt IE 8]
-      %link{:href => '/css/ie.css', :rel => 'stylesheet', :type => 'text/css', :rel => 'screen, projection'}
 
     %script{:type => 'text/javascript', :src => '/js/modernizr.min.js'}
 
   %body
-    %section#main
-      = yield
-    %footer
-      %div
-        - if @current_player
-          %a.button.players{:href => '/players'} Players
-          %a.button.challenges{:href => '/challenges'} Challenges
-        Latter
-        = ":: #{@current_player.name}" if @current_player
-        - if @current_player
-          %a.button.logout{:href => '/logout'} Logout
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand Latter
+          - if current_player
+            %ul.nav.pull-right
 
-    %script{:type => 'text/javascript', :src => '/js/jquery.min.js'}
-    %script{:type => 'text/javascript', :src => '/js/latter.notification.js'}
+          %ul.nav.pull-left
+            %li.dropdown
+              %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
+                Players
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "/players"} All Players
+                %li
+                  %a{:href => "/players/new"} New Player
+            %li
+              %a{:href => "/challenges"} Challenges
+            %li
+              %a{:href => "/logout"} Logout
+    .container
+      = yield
+
+    %script{:type => 'text/javascript', :src => 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'}
+    %script{:type => 'text/javascript', :src => '/js/bootstrap.min.js'}
     %script{:type => 'text/javascript', :src => '/js/application.js'}
 

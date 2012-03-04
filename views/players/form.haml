@@ -1,11 +1,19 @@
-%form{:method => 'post', :action => @player ? "/player/#{@player.id}/update" : "/player", :class => 'styled'}
-  %legend
-    = @player ? "Editing #{@player.name}" : "New Player"
-  %label{:for => 'player[name]'}
-    Name...
-  %input{:type => 'text', :name => 'player[name]', :value => @player ? @player.name : ""}
-  %label{:for => 'player[email]'}
-    Email...
-  %input{:type => 'text', :name => 'player[email]', :value => @player ? @player.email : ""}
-  %button.button.save.login{:type => 'submit'}
-    = "Save #{@player ? @player.name : ""}"
+.row
+  %form.span6.well.offset3{:method => 'post', :action => !@player.new? ? "/player/#{@player.id}/update" : "/player"}
+    %fieldset
+      %legend= !@player.new? ? "Editing #{@player.name}" : "New Player"
+      .control-group
+        %label{:for => 'player[name]'} Name
+        .controls
+          %input{:type => 'text', :name => 'player[name]', :value => @player.name}
+      .control-group
+        %label{:for => 'player[email]'} Email
+        .controls
+          .input-prepend
+            .add-on
+              %i.icon-envelope
+            %input{:type => 'email', :name => 'player[email]', :value => @player.email}
+      .form-actions
+        %button.btn.btn-primary.btn-large{:type => 'submit'} Save
+        %button.btn.btn-large{:type => 'reset'} Clear
+

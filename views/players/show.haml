@@ -1,37 +1,38 @@
-%h1.player_name= @player.name
-%span.email= @player.email
+.page-header
+  .row
+    .thumbnail.span1
+      %img{:src => @player.gravatar_url}
+    .span10.player.name
+      %h1= @player.name
+      %a.player.email{:href => "mailto:#{@player.email}"}
+        %i.icon-envelope
+        = @player.email
 
 %section#stats
-  - if @player.challenges.length > 0
-    %p
-      %strong Winning Percentage: 
-      %span= @player.winning_percentage
-    %p
-      %strong Initiated Challenges:
-      %span= @player.initiated_challenges.length
-    %p
-      %strong Defending Challenges:
-      %span= @player.challenged_challenges.length
-  - else
-    This player hasn't yet competed.
-%ul#challenges
+  - if @player.challenges.empty?
+    .alert.alert-info
+      %i.icon-info-sign
+      This player hasn't yet competed.
+  .row
+    .span4
+      .thumbnail
+        %h1= @player.winning_percentage
+        .caption
+          .label.label-success Winning Percentage
+    .span4
+      .thumbnail
+        %h1= @player.initiated_challenges.length
+        .caption
+          .label.label-success Initiated Challenges
+    .span4
+      .thumbnail
+        %h1= @player.challenged_challenges.length
+        .caption
+          .label.label-success Defended Challenges
+
+%h2 Challenges
+%hr
+#challenges
   - @player.challenges.select { |c| c.completed? }.each do |challenge|
-    %li
-      - if challenge.from_player
-        %a{:href => "/player/#{challenge.from_player.id}", :class => 'player-link'}
-          = challenge.from_player.name
-      - else
-        = challenge.from_player_name
-      = " vs. "
-      - if challenge.to_player
-        %a{:href => "/player/#{challenge.to_player.id}", :class => 'player-link'}
-          = challenge.to_player.name
-      - else
-        = challenge.to_player_name
-      %section.challenge-line-info
-        - unless challenge.completed?
-          %span.status To be played.
-          %a{:href => "/challenge/#{challenge.id}/edit", :class => 'button edit_challenge'} Enter score.
-        - else
-          %a{:href => "/challenge/#{challenge.id}", :class => 'button view_challenge'} View result.
-    
+    = haml(:"challenges/challenge_row", :locals => {:challenge => challenge})
+

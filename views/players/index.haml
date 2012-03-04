@@ -1,27 +1,71 @@
-%h1 Players
+.page-header
+  %h1 Players
 
-%ol#players
+%ul.thumbnails
   - @players.each do |player|
-    %li
-      %a{:href => "/player/#{player.id}"}= player.name
-      %section.player-buttons
-        - if player != @current_player
-          %form{:method => 'post', :action => '/challenge'}
-            %input{:type => 'hidden', :name => 'challenge[from_player_id]', :value => @current_player.id}
-            %input{:type => 'hidden', :name => 'challenge[to_player_id]', :value => player.id}
-            %button.button{:type => 'submit', :class => 'challenge'}
-              Challenge
-        - else
-          %span.you You!
-        %a.button.edit{:href => "/player/#{player.id}/edit"}
-          Edit
-        %form{:method => 'post', :action => "/player/#{player.id}/delete"}
-          %button.button{:type => 'submit', :class => 'delete'}
-            Delete
+    %li.span3
+      .thumbnail
+        %img{:src => player.gravatar_url(:size => 260)}
+        .caption
+          %h4= player.name
+          - if player.challenged_challenges.first(:completed => false, :from_player_id => current_player.id)
+            .label.label-important Challenged!
+          - elsif player == current_player
+            .label.label-success You!
+          - else
+            .spacer{:style => "display:block;height: 16px;"} &nbsp;
+          %h5 Statistics
+          .stat-group
+            .progress
+              .bar{:style => "width:#{player.winning_percentage}"}
+            .label= "Wins #{player.winning_percentage} of the time"
 
-%section.controls
-  %a.button.add{:href => "/player/new"}
-    Add Player
-  %a.button.new_challenge{:href => "/challenge/new"}
-    New Challenge
-    
+          .stat-group
+            .label.label-important.ranking= "Ranking: #{player.ranking}"
+
+          .btn-group.controls
+            %a.btn{:href => "/player/#{player.id}"}
+              %i.icon-user
+              View Profile
+            - if current_player == player
+              %a.btn{:href => "/player/#{player.id}/edit"}
+                %i.icon-edit
+                Edit Profile
+            - else
+              - if challenge = player.challenged_challenges.first(:completed => false, :from_player_id => current_player.id)
+                %a.enter_score.btn{:"data-challenge-id" => challenge.id}
+                  %i.icon-plus-sign
+                  Enter Score
+              - else
+                %a.challenge.btn{:"data-player-id" => player.id, :href => "#"}
+                  %i.icon-screenshot
+                  Challenge
+
+#enter_score.modal{:style => "display:none;"}
+  .modal-header
+    %a.close{:"data-dismiss" => "modal"} x
+    %h3 Complete Match
+  %form{:method => "post", :action => "/"}
+    .modal-body
+      %fieldset
+        .row
+          .span2
+            .control-group#from_player_score
+              %label{:for => "from_player_score"}
+              .controls
+                .thumbnail
+                  %img
+                  %input.span1{:type => 'number', :maxlength => 3, :name => 'challenge[from_player_score]'}
+          .span1.vs
+            %h3 vs.
+          .span2
+            .control-group#to_player_score
+              %label{:for => "to_player_score"}
+              .controls
+                .thumbnail
+                  %img
+                  %input.span1{:type => 'number', :maxlength => 3, :name => 'challenge[to_player_score]'}
+    .modal-footer
+      .form-actions
+        %button.btn.btn-primary{:type => "submit"} Submit Score
+        %a.btn{:"data-dismiss" => "modal"} Cancel
