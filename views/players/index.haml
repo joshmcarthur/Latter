@@ -33,7 +33,7 @@
                 Edit Profile
             - else
               - if challenge = player.challenged_challenges.first(:completed => false, :from_player_id => current_player.id)
-                %a.enter_score.btn{:"data-challenge-id" => challenge.id}
+                %a.enter_score.btn{:title => 'Enter Score', :"data-challenge-id" => challenge.id, :href => "#"}
                   %i.icon-plus-sign
                   Enter Score
               - else
