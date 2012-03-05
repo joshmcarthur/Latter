@@ -3,7 +3,7 @@
 
 %ul.thumbnails
   - @players.each do |player|
-    %li.span3
+    %li.player.span3
       .thumbnail
         %img{:src => player.gravatar_url(:size => 260)}
         .caption
