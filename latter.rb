@@ -9,7 +9,6 @@ class Latter < Sinatra::Base
 
   configure :test do
     DataMapper.setup(:default, "sqlite3::memory")
-    DataMapper.auto_upgrade!
   end
 
   configure :development do
@@ -18,9 +17,8 @@ class Latter < Sinatra::Base
       :port => 1025,
       :domain => "localhost"
     }
+    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
   end
-
-
 
   configure :production do
     PONY_SMTP_OPTIONS = {
@@ -31,21 +29,24 @@ class Latter < Sinatra::Base
       :password => ENV['SENDGRID_PASSWORD'],
       :domain => ENV['SENDGRID_DOMAIN']
     }
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
   end
 
   configure do
-    DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
     DataMapper.auto_upgrade!
   end
 
   before do
-    current_player
     authenticate! if authenticate?(request)
   end
 
 
   get '/' do
-    current_player ? redirect('/players') : haml(:"auth/login")
+    current_player ? redirect('/players') : redirect('/login')
+  end
+
+  get '/login' do
+    haml :"auth/login"
   end
 
   post '/login' do
@@ -53,7 +54,7 @@ class Latter < Sinatra::Base
       session[:player_id] = current_player.id
       redirect '/players'
     else
-      haml :"auth/login"
+      redirect '/login'
     end
   end
 
@@ -172,25 +173,6 @@ class Latter < Sinatra::Base
     haml :"challenges/index"
   end
 
-
-  post '/challenge' do
-    @challenge = Challenge.new
-    @challenge.from_player = Player.get(params[:challenge][:from_player_id])
-    @challenge.to_player = Player.get(params[:challenge][:to_player_id])
-    @challenge.completed = false
-    if @challenge.save
-      send_mail(
-        :to => @challenge.to_player.email,
-        :from => @challenge.from_player.email,
-        :subject => "New Challenge on Latter",
-        :template => 'new_challenge',
-        :object => @challenge
-      )
-      redirect '/challenges'
-    else
-      redirect '/challenge/new'
-    end
-  end
 
 
   def send_mail(options)
