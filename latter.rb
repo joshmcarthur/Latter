@@ -5,10 +5,19 @@ class Latter < Sinatra::Base
   Dir[File.join(settings.root, 'models', '*.rb')].each { |rb| require rb }
   enable :sessions
   enable :static
+  set :host, 'http://localhost:9292'
 
   configure :test do
     DataMapper.setup(:default, "sqlite3::memory")
     DataMapper.auto_upgrade!
+  end
+
+  configure :development do
+    PONY_SMTP_OPTIONS = {
+      :address => "localhost",
+      :port => 1025,
+      :domain => "localhost"
+    }
   end
 
 
@@ -54,7 +63,7 @@ class Latter < Sinatra::Base
   end
 
   get '/players' do
-    @players = Player.all.sort { |a,b| b.total_wins <=> a.total_wins }
+    @players = Player.all.sort_by { |player| player.ranking }
     haml :"players/index"
   end
 
@@ -112,6 +121,17 @@ class Latter < Sinatra::Base
       :to_player_id => params[:id]
     )
 
+    send_mail(
+      :to => @challenge.to_player.email,
+      :from => @challenge.from_player.email,
+      :subject => "You've been challenged!",
+      :template => 'new_challenge',
+      :locals => {
+        :host => settings.host,
+        :challenge => @challenge
+      }
+    )
+
     content_type 'application/javascript'
     erb :"challenges/create"
   end
@@ -132,6 +152,17 @@ class Latter < Sinatra::Base
     )
     @challenge.completed = true
     @challenge.save
+
+    send_mail(
+      :to => [@challenge.to_player.email, @challenge.from_player.email],
+      :from => @challenge.from_player.email,
+      :subject => "Challenge completed!",
+      :template => 'challenge_updated',
+      :locals => {
+        :host => settings.host,
+        :challenge => @challenge
+      }
+    )
 
     redirect '/'
   end
@@ -161,39 +192,13 @@ class Latter < Sinatra::Base
     end
   end
 
-  post '/challenge/:id/update' do
-    @challenge = Challenge.get(params[:id])
-    not_found?(@challenge)
-
-    @challenge.completed? ? (error(400, I18N[:challenge_can_only_be_updated_once])) : nil
-
-    @challenge.set_score_and_winner(
-      :from_player_score => params[:challenge][:from_player_score],
-      :to_player_score => params[:challenge][:to_player_score]
-    )
-    @challenge.completed = true
-    if @challenge.save
-      send_mail(
-        :to => @challenge.to_player.email,
-        :from => @challenge.from_player.email,
-        :subject => "Updated Challenge on Latter",
-        :template => "challenge_updated",
-        :object => @challenge
-      )
-      redirect '/challenges'
-    else
-      redirect "/challenge/#{@challenge.id}/edit"
-    end
-  end
-
 
   def send_mail(options)
-    @object = options[:object]
     Pony.mail(
       :to => options[:to],
       :from => options[:from],
       :subject => options[:subject],
-      :html_body => haml(:"mail/#{options[:template]}", :layout => false),
+      :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
       :via => :smtp,
       :via_options => PONY_SMTP_OPTIONS
     )
