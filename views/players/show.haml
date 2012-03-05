@@ -34,5 +34,6 @@
 %hr
 #challenges
   - @player.challenges.select { |c| c.completed? }.each do |challenge|
+    - challenge.reload
     = haml(:"challenges/challenge_row", :locals => {:challenge => challenge})
 
