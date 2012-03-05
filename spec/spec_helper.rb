@@ -9,9 +9,10 @@ require File.join(File.dirname(__FILE__), '..', 'latter')
 
 set :environment, :test
 
-RSpec.configure do |conf|
-  conf.before(:all) do
+RSpec.configure do |config|
+  config.before(:all)  do
     Capybara.app = Latter
+    DataMapper.auto_migrate!
   end
 end
 
