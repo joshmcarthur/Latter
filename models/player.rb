@@ -37,6 +37,7 @@ class Player
 
   def ranking
     # Array is zero-indexed - let's add one
+    #
     Player.all.sort_by { |player| player.winning_percentage(false) }.reverse.index(self) + 1
   end
 
