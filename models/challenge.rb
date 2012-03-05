@@ -11,7 +11,8 @@ class Challenge
   property :to_player_name, String
   property :completed, Boolean, :required => true, :default => false
   property :winner_id, Integer
-  property :score, String
+  property :from_player_score, Integer
+  property :to_player_score, Integer
   property :created_at, DateTime, :default => lambda { |record, property| Time.now }
 
   belongs_to :from_player, Player, :child_key => [:from_player_id]
@@ -47,18 +48,20 @@ class Challenge
     self.completed and self.winner_id.nil?
   end
 
+  def score
+    [from_player_score.to_s, to_player_score.to_s].join(SCORE_JOINER)
+  end
+
   def set_score_and_winner(options)
     return unless options && options[:from_player_score] && options[:to_player_score]
     from_score, to_score = options[:from_player_score].to_i, options[:to_player_score].to_i
 
+    self.from_player_score = from_score
+    self.to_player_score = to_score
     if from_score > to_score
       self.winner = self.from_player
-      self.score = [from_score.to_s, to_score.to_s].join(SCORE_JOINER)
     elsif from_score < to_score
       self.winner = self.to_player
-      self.score = [to_score.to_s, from_score.to_s].join(SCORE_JOINER)
-    else
-      self.score = [to_score.to_s, from_score.to_s].join(SCORE_JOINER)
     end
   end
 end

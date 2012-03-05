@@ -13,7 +13,7 @@ class Player
   has n, :challenged_challenges, 'Challenge', :child_key => [:to_player_id]
 
   def challenges
-    (initiated_challenges + challenged_challenges).uniq
+    (initiated_challenges + challenged_challenges)
   end
 
   def challenged_by?(another_player)
@@ -27,8 +27,8 @@ class Player
   end
 
   def winning_percentage(return_string = true)
-    if self.challenges.length > 0
-      percentage = ((self.total_wins.to_f / self.challenges.length.to_f) * 100).to_i
+    if self.challenges.all(:completed => true).length > 0
+      percentage = ((self.total_wins.to_f / self.challenges.all(:completed => true).length.to_f) * 100).to_i
       return_string ? percentage.to_s.concat("%") : percentage
     else
       return_string ? "0%" : 0
