@@ -10,9 +10,7 @@ def logout
 end
 
 describe Latter do
-
   before(:all) do
-    set :environment, :test
     @players = FactoryGirl.create_list(:player, 5)
   end
 
@@ -200,7 +198,11 @@ describe Latter do
 
       it "should complete a challenge", :js => true do
         visit "/players"
-        click_link 'Enter Score'
+        page.should have_content("Enter Score")
+        within '.player:last-child' do
+          click_link 'Enter Score'
+        end
+
         fill_in 'challenge[from_player_score]', :with => 15
         fill_in 'challenge[to_player_score]', :with => 6
         click_button 'Submit Score'
