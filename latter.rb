@@ -8,10 +8,7 @@ class Latter < Sinatra::Base
 
   configure :test do
     PONY_OPTIONS = {
-      :method => :smtp,
-      :address => "localhost",
-      :port => 1025,
-      :domain => "localhost"
+      :method => :test,
     }
     DataMapper.setup(:default, "sqlite3::memory")
     set :host, 'http://localhost:9292'
