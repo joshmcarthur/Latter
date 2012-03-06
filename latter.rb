@@ -5,7 +5,6 @@ class Latter < Sinatra::Base
   Dir[File.join(settings.root, 'models', '*.rb')].each { |rb| require rb }
   enable :sessions
   enable :static
-  set :host, 'http://localhost:9292'
 
   configure :test do
     PONY_OPTIONS = {
@@ -15,6 +14,7 @@ class Latter < Sinatra::Base
       :domain => "localhost"
     }
     DataMapper.setup(:default, "sqlite3::memory")
+    set :host, 'http://localhost:9292'
   end
 
   configure :development do
@@ -25,6 +25,7 @@ class Latter < Sinatra::Base
       :domain => "localhost"
     }
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter.db.sqlite3")
+    set :host, 'http://localhost:9292'
   end
 
   configure :production do
@@ -35,6 +36,7 @@ class Latter < Sinatra::Base
       :domain => "localhost"
     }
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter_production.db")
+    set :host, 'http://latter.3months.com'
   end
 
   configure do
