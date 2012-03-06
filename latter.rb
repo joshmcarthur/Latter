@@ -28,7 +28,12 @@ class Latter < Sinatra::Base
   end
 
   configure :production do
-    PONY_OPTIONS = {:method => :sendmail}
+    PONY_OPTIONS = {
+      :method => :smtp,
+      :address => "localhost",
+      :port => 25,
+      :domain => "localhost"
+    }
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter_production.db")
   end
 
