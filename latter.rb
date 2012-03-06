@@ -10,7 +10,7 @@ class Latter < Sinatra::Base
     PONY_OPTIONS = {
       :method => :test,
     }
-    DataMapper.setup(:default, "sqlite3::memory")
+    DataMapper.setup(:default, "sqlite::memory")
     set :host, 'http://localhost:9292'
   end
 
@@ -190,8 +190,8 @@ class Latter < Sinatra::Base
     )
   end
 
-  def not_found?(object)
-    error(404, I18N[:record_not_found]) unless object
+  def not_found?(klass = nil)
+    error(404, "Record not found") unless klass
   end
 
   helpers do
