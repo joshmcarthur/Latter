@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), 'player')
+
 class Challenge
   include DataMapper::Resource
   SCORE_JOINER = " : "
