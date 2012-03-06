@@ -8,11 +8,18 @@ class Latter < Sinatra::Base
   set :host, 'http://localhost:9292'
 
   configure :test do
+    PONY_OPTIONS = {
+      :method => :smtp,
+      :address => "localhost",
+      :port => 1025,
+      :domain => "localhost"
+    }
     DataMapper.setup(:default, "sqlite3::memory")
   end
 
   configure :development do
-    PONY_SMTP_OPTIONS = {
+    PONY_OPTIONS = {
+      :method => :smtp,
       :address => "localhost",
       :port => 1025,
       :domain => "localhost"
@@ -21,15 +28,8 @@ class Latter < Sinatra::Base
   end
 
   configure :production do
-    PONY_SMTP_OPTIONS = {
-      :address => "smtp.sendgrid.net",
-      :port => '25',
-      :authentication => :plain,
-      :user_name => ENV['SENDGRID_USERNAME'],
-      :password => ENV['SENDGRID_PASSWORD'],
-      :domain => ENV['SENDGRID_DOMAIN']
-    }
-    DataMapper.setup(:default, ENV['DATABASE_URL'])
+    PONY_OPTIONS = {:method => :sendmail}
+    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter_production.db")
   end
 
   configure do
@@ -181,8 +181,8 @@ class Latter < Sinatra::Base
       :from => options[:from],
       :subject => options[:subject],
       :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
-      :via => :smtp,
-      :via_options => PONY_SMTP_OPTIONS
+      :via => PONY_OPTIONS[:method],
+      :via_options => PONY_OPTIONS
     )
   end
 
