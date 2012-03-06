@@ -9,7 +9,10 @@ gem 'dm-sqlite-adapter'
 gem 'haml'
 gem 'gravtastic'
 gem 'pony'
-gem 'dm-postgres-adapter'
+
+group :production do
+  gem 'dm-postgres-adapter'
+end
 
 group :development, :test do
   gem 'data_objects'
