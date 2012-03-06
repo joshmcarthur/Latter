@@ -1,5 +1,3 @@
-require_relative 'player'
-
 class Challenge
   include DataMapper::Resource
   SCORE_JOINER = " : "
