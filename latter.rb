@@ -28,12 +28,15 @@ class Latter < Sinatra::Base
   configure :production do
     PONY_OPTIONS = {
       :method => :smtp,
-      :address => "localhost",
-      :port => 25,
-      :domain => "localhost"
+      :address => "smtp.sendgrid.net",
+      :port => '587',
+      :authentication => :plain,
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password => ENV['SENDGRID_PASSWORD'],
+      :domain => ENV['SENDGRID_DOMAIN']
     }
-    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/latter_production.db")
-    set :host, 'http://latter.3months.com'
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
+    set :host, ENV['HOST']
   end
 
   configure do
