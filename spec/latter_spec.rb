@@ -188,28 +188,28 @@ describe Latter do
         page.should have_content(@new_player.name)
       end
 
-      # #FIXME our CI can't run Selenium specs....
-      #it "should create a challenge", :js => true do
-      #  visit "/players"
-      #  within '.player:last-child' do
-      #    click_link 'Challenge'
-      #    page.should have_content 'Enter Score'
-      #  end
-      #end
+      #FIXME our CI can't run Selenium specs....
+      it "should create a challenge", :js => true do
+        visit "/players"
+        within '.player:last-child' do
+          click_link 'Challenge'
+          page.should have_content 'Enter Score'
+        end
+      end
 
-      #it "should complete a challenge", :js => true do
-      #  visit "/players"
-      #  page.should have_content("Enter Score")
-      #  within '.player:last-child' do
-      #    click_link 'Enter Score'
-      #  end
+      it "should complete a challenge", :js => true do
+        visit "/players"
+        page.should have_content("Enter Score")
+        within '.player:last-child' do
+          click_link 'Enter Score'
+        end
 
-      #  fill_in 'challenge[from_player_score]', :with => 15
-      #  fill_in 'challenge[to_player_score]', :with => 6
-      #  click_button 'Submit Score'
-      #
-      #  page.should_not have_content 'Enter Score'
-      #end
+        fill_in 'challenge[from_player_score]', :with => 15
+        fill_in 'challenge[to_player_score]', :with => 6
+        click_button 'Submit Score'
+
+        page.should_not have_content 'Enter Score'
+      end
 
       it "should list challenges" do
         visit "/challenges"
