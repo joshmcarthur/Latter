@@ -6,6 +6,7 @@ class Player
   property :id, Serial
   property :name, String, :required => true
   property :email, String, :required => true
+  property :calculated_ranking, Integer
 
   has_gravatar
   has n, :won_challenges, 'Challenge', :child_key => [:winner_id]
@@ -35,10 +36,15 @@ class Player
     end
   end
 
-  def ranking
-    # Array is zero-indexed - let's add one
-    #
-    Player.all.sort_by { |player| player.winning_percentage(false) }.reverse.index(self) + 1
+  def ranking(calculate = false)
+    if calculate or self.calculated_ranking.nil?
+      # Array is zero-indexed - let's add one
+      #
+      ranking = Player.all.sort_by { |player| player.winning_percentage(false) }.reverse.index(self) + 1
+      self.update!(:calculated_ranking => ranking)
+    end
+
+    self.calculated_ranking
   end
 
   def ranking_as_percentage

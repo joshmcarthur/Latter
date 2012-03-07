@@ -22,7 +22,7 @@ class Challenge
   before :save, :name_players
 
   validates_with_block do
-    if self.from_player && self.to_player
+    if self.from_player and self.to_player
       if self.from_player == self.to_player
         [false, "A Player can't play themselves, that's just sad!"]
       else
@@ -58,10 +58,16 @@ class Challenge
 
     self.from_player_score = from_score
     self.to_player_score = to_score
+
     if from_score > to_score
       self.winner = self.from_player
     elsif from_score < to_score
       self.winner = self.to_player
     end
+
+    self.from_player.ranking(true)
+    self.to_player.ranking(true)
+
+    self
   end
 end
