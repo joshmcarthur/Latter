@@ -21,6 +21,7 @@ describe Latter do
         :challenge,
         :from_player => @player,
         :winner => @player,
+        :to_player => @players.last,
         :completed => true
       )
     end
@@ -35,10 +36,11 @@ describe Latter do
     it "should calculate a ranking" do
       # We should be numero uno
       @player.ranking.should eq(1)
+      @player.ranking.should eq(1)
       # ....and no one else should be
-      #(@players - @player).each do |player|
-      #  player.ranking.should_not eq(1)
-      #end
+      (@players - [@player]).each do |player|
+        player.ranking.should_not eq(1)
+      end
     end
 
     it "should calculate a winning percentage" do
