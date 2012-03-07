@@ -28,6 +28,7 @@ a.player.email i { margin: 3px; }
 #challenges .thumbnail.drawer { background-color: #f89406; }
 
 .vs { text-align: center; }
+.modal-body .vs { width: 130px; }
 .vs h1 { font-size: 150px; line-height: 200px; }
 
 .stat-group .progress {
@@ -46,3 +47,4 @@ a.player.email i { margin: 3px; }
 }
 .stat-group { margin-bottom: 5px; }
 .controls { margin-top: 18px; }
+
