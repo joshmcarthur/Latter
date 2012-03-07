@@ -43,6 +43,22 @@ describe Latter do
       end
     end
 
+    it "should refresh the cache of a ranking" do
+      2.times do
+        challenge = Factory.create(
+          :challenge
+        )
+
+        challenge.set_score_and_winner(
+          :from_player_score => 21,
+          :to_player_score => 19
+        )
+      end
+
+      @player.reload
+      @player.ranking.should_not eq(1)
+    end
+
     it "should calculate a winning percentage" do
       @player.winning_percentage.to_i.should be > 1
     end
@@ -53,7 +69,11 @@ describe Latter do
 
   describe Challenge do
     before(:all) do
-      @challenge = Factory.build(:challenge)
+      @challenge = Factory.create(
+        :challenge,
+        :from_player => Factory.create(:player),
+        :to_player => Factory.create(:player)
+      )
     end
 
     it "should create a challenge given valid attributes" do
