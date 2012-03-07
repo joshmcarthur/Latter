@@ -1,14 +1,12 @@
-FactoryGirl.sequence(:player_name) do |n|
-  "player#{n}"
-end
+FactoryGirl.define do
+  factory :player do
+    sequence(:name) { |num| "player#{num}" }
+    email { |p| "#{p.name}@3months.com" }
+  end
 
-FactoryGirl.define(:player) do |player|
-  player.name { Factory.next(:player_name) }
-  player.email { |u| "#{u.name}@3months.com" }
-end
-
-FactoryGirl.define(:challenge) do |chal|
-  chal.association :from_player, :factory => :player
-  chal.association :to_player, :factory => :player
-  chal.completed false
+  factory :challenge do
+    association :from_player, :factory => :player
+    association :to_player, :factory => :player
+    completed false
+  end
 end
