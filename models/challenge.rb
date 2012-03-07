@@ -53,7 +53,6 @@ class Challenge
   end
 
   def set_score_and_winner(options)
-    return unless options && options[:from_player_score] && options[:to_player_score]
     from_score, to_score = options[:from_player_score].to_i, options[:to_player_score].to_i
 
     self.from_player_score = from_score
@@ -63,6 +62,8 @@ class Challenge
       self.winner = self.from_player
     elsif from_score < to_score
       self.winner = self.to_player
+    else
+      self.winner = nil
     end
 
     self.from_player.ranking(true)
