@@ -1,4 +1,3 @@
-body { padding-top: 100px; } /* To offset the top fixing of the navbar */
 .navbar a.brand {
   padding-right: 0;
   padding-left: 125px;
@@ -48,3 +47,33 @@ a.player.email i { margin: 3px; }
 .stat-group { margin-bottom: 5px; }
 .controls { margin-top: 18px; }
 
+.player .controls .btn { font-size: 10px; }
+
+// Landscape phones and down
+@media (max-width: 480px) {
+
+}
+
+// Landscape phone to portrait tablet
+@media (max-width: 768px) {
+  .player .controls .btn { font-size: 8px; }
+  .stat-group.win_percentage { display: none; }
+}
+
+// Portrait tablet to landscape and desktop
+@media (min-width: 768px) and (max-width: 980px) {
+  .player .controls .btn { font-size: 10px; }
+
+}
+
+@media (min-width: 980px) {
+  body { padding-top: 100px; }
+
+  .player .controls .btn { font-size: 11px; }
+
+}
+
+// Large desktop
+@media (min-width: 1200px) {
+
+}

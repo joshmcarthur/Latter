@@ -22,24 +22,29 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          %a.brand Latter
           - if current_player
-            %ul.nav.pull-right
+            .btn.pull-left.btn-navbar{:"data-toggle" => "collapse", :"data-target" => ".nav-collapse"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          %a.brand Latter
 
-          %ul.nav.pull-left
-            %li.dropdown
-              %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
-                Players
-                %b.caret
-              %ul.dropdown-menu
+          - if current_player
+            .nav-collapse
+              %ul.nav.pull-left
+                %li.dropdown
+                  %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
+                    Players
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "/players"} All Players
+                    %li
+                      %a{:href => "/players/new"} New Player
                 %li
-                  %a{:href => "/players"} All Players
+                  %a{:href => "/challenges"} Challenges
                 %li
-                  %a{:href => "/players/new"} New Player
-            %li
-              %a{:href => "/challenges"} Challenges
-            %li
-              %a{:href => "/logout"} Logout
+                  %a{:href => "/logout"} Logout
     .container
       = yield
 

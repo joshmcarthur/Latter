@@ -5,7 +5,7 @@
   .span6.vs
     %h1 vs.
     - if challenge.completed?
-      .label Completed
+      .label.label-info= "Completed (#{challenge.score})"
     - else
       .label To be Played
   .span3
