@@ -10,7 +10,7 @@ class Latter < Sinatra::Base
     PONY_OPTIONS = {
       :method => :test,
     }
-    DataMapper.setup(:default, "sqlite::memory")
+    DataMapper.setup(:default, "sqlite::memory:")
     set :host, 'http://localhost:9292'
   end
 
