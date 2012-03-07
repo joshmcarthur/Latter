@@ -5,8 +5,8 @@ FactoryGirl.define do
   end
 
   factory :challenge do
-    association :from_player, :factory => :player
-    association :to_player, :factory => :player
+    from_player { Factory(:player) }
+    to_player { Factory(:player) }
     completed false
   end
 end
