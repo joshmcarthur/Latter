@@ -36,7 +36,6 @@ describe Latter do
     it "should calculate a ranking" do
       # We should be numero uno
       @player.ranking.should eq(1)
-      @player.ranking.should eq(1)
       # ....and no one else should be
       (@players - [@player]).each do |player|
         player.ranking.should_not eq(1)
@@ -46,13 +45,16 @@ describe Latter do
     it "should refresh the cache of a ranking" do
       2.times do
         challenge = Factory.create(
-          :challenge
+          :challenge,
+          :from_player => @players.last,
+          :to_player => @player
         )
 
         challenge.set_score_and_winner(
           :from_player_score => 21,
           :to_player_score => 19
         )
+        challenge.save
       end
 
       @player.reload
@@ -68,12 +70,8 @@ describe Latter do
   end
 
   describe Challenge do
-    before(:all) do
-      @challenge = Factory.create(
-        :challenge,
-        :from_player => Factory.create(:player),
-        :to_player => Factory.create(:player)
-      )
+    before(:each) do
+      @challenge = Factory(:challenge)
     end
 
     it "should create a challenge given valid attributes" do
