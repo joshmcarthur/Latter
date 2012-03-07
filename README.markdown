@@ -1,6 +1,9 @@
 Latter!
 ====
 
+[![Build Status](https://secure.travis-ci.org/joshmcarthur/Latter.png)](http://travis-ci.org/joshmcarthur]/Latter)
+
+
 Latter is a simple ladder application built for the staff of [3Months](http://www.3months.com) by [Josh McArthur](http://twitter.com/sudojosh). It's hacked together pretty badly, but does have the dubious honour of being the first of my projects to be properly covered by tests.
 
 Installation:
