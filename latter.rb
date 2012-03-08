@@ -52,6 +52,10 @@ class Latter < Sinatra::Base
     current_player ? redirect('/players') : redirect('/login')
   end
 
+  get '/pages/:slug' do
+    haml :"pages/#{params[:slug]}"
+  end
+
   get '/login' do
     haml :"auth/login"
   end
