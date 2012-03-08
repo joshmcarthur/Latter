@@ -1,6 +1,7 @@
 class Player
   include DataMapper::Resource
   include Gravtastic
+  CHALLENGABLE_SENSITIVITY = 1
 
 
   property :id, Serial
@@ -15,6 +16,10 @@ class Player
 
   def challenges
     (initiated_challenges + challenged_challenges)
+  end
+
+  def can_challenge?(another_player)
+    (self.ranking - another_player.ranking).abs <= Player::CHALLENGABLE_SENSITIVITY
   end
 
   def challenged_by?(another_player)

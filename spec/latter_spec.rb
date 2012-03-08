@@ -42,6 +42,16 @@ describe Latter do
       end
     end
 
+    it "should let a player close to another challenge them" do
+      @closest_player = @players.select { |p| p.ranking == 2 }.first
+      @closest_player.can_challenge?(@player).should be_true
+    end
+
+    it "should not let a player far away from another challenge them" do
+      @furtherest_player = @players.select { |p| p.ranking == 3 }.first
+      @furtherest_player.can_challenge?(@player).should_not be_true
+    end
+
     it "should refresh the cache of a ranking" do
       2.times do
         challenge = Factory.create(
