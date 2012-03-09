@@ -114,6 +114,15 @@ describe Latter do
         @challenge.drawer?(@challenge.from_player).should be_true
         @challenge.drawer?(@challenge.to_player).should be_true
       end
+      
+      it "should correctly calculate the winning margin" do
+          @challenge.set_score_and_winner(
+            :from_player_score => 21,
+            :to_player_score => 10
+          )
+          @challenge.winning_margin.should == 11
+      end
+      
     end
   end
 

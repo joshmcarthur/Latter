@@ -51,6 +51,13 @@ class Challenge
   def score
     [from_player_score.to_s, to_player_score.to_s].join(SCORE_JOINER)
   end
+  
+  def winning_margin
+    return 0 unless completed?
+    
+    margin = from_player_score - to_player_score  
+    margin < 0 ? margin * -1 : margin
+  end
 
   def set_score_and_winner(options)
     from_score, to_score = options[:from_player_score].to_i, options[:to_player_score].to_i
