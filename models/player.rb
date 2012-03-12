@@ -1,7 +1,15 @@
 class Player
   include DataMapper::Resource
   include Gravtastic
-
+  
+  #these constants are used to calculate how many points a 
+  #player has accrued in the last n days
+  WIN_POINTS = 3 
+  THRASH_POINTS = 1 
+  THRASH_MARGIN = 12
+  CONSOLATION_POINTS = 1
+  CONSOLATION_MARGIN = 2
+  POINT_TIME_LIMIT = 30 
 
   property :id, Serial
   property :name, String, :required => true
@@ -16,6 +24,10 @@ class Player
   def challenges
     (initiated_challenges + challenged_challenges)
   end
+  
+  def recent_challenges
+    challenges.map{|c| c if c.created_at >= Date.today - POINT_TIME_LIMIT}.compact
+  end
 
   def challenged_by?(another_player)
     !self.challenges.select do |challenge|
@@ -25,6 +37,20 @@ class Player
 
   def total_wins
     self.won_challenges.length
+  end
+  
+  def points
+    total = 0
+    self.recent_challenges.each do |challenge|
+      if challenge.winner?(self)
+        total += WIN_POINTS
+        total += THRASH_POINTS if challenge.winning_margin >= THRASH_MARGIN
+      elsif challenge.loser?(self) && challenge.winning_margin <= CONSOLATION_MARGIN
+        total += CONSOLATION_POINTS
+      end
+    end
+    
+    total
   end
 
   def winning_percentage(return_string = true)

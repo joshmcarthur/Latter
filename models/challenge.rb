@@ -53,10 +53,7 @@ class Challenge
   end
   
   def winning_margin
-    return 0 unless completed?
-    
-    margin = from_player_score - to_player_score  
-    margin < 0 ? margin * -1 : margin
+    (from_player_score.to_i - to_player_score.to_i).abs
   end
 
   def set_score_and_winner(options)

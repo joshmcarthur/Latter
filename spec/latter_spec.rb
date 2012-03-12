@@ -121,11 +121,73 @@ describe Latter do
             :to_player_score => 10
           )
           @challenge.winning_margin.should == 11
+      end      
+    end
+    
+    
+    describe "Points" do 
+      it "should award points for a win" do
+        @challenge.set_score_and_winner(
+          :from_player_score => 21,
+          :to_player_score => 19
+        )
+        @challenge.completed = true
+        @challenge.save
+        @challenge.from_player.points.should == Player::WIN_POINTS        
       end
       
+      it "should award bonus points for a thrashing" do
+        @challenge.set_score_and_winner(
+          :from_player_score => 21,
+          :to_player_score => 9
+        )
+        @challenge.completed = true        
+        @challenge.save
+        @challenge.from_player.points.should == Player::WIN_POINTS + Player::THRASH_POINTS
+      end
+      
+      it "should award consolation points for a near loss" do
+        @challenge.set_score_and_winner(
+          :from_player_score => 21,
+          :to_player_score => 19
+        )
+        @challenge.completed = true        
+        @challenge.save
+        @challenge.to_player.points.should == Player::CONSOLATION_POINTS    
+      end
+      
+      it "should only count recent matches" do
+        from_player = Factory.create(:player)
+        to_player = Factory.create(:player)
+        2.times do 
+          challenge = Factory.create(:challenge)
+          challenge.from_player = from_player
+          challenge.to_player = to_player
+          challenge.set_score_and_winner(
+            :from_player_score => 21,
+            :to_player_score => 17
+          )
+          challenge.completed = true
+          challenge.save
+          challenge.created_at = Date.today - (Player::POINT_TIME_LIMIT + 3).to_i
+          challenge.save
+        end
+        2.times do 
+          challenge = Factory.create(:challenge)
+          challenge.from_player = from_player
+          challenge.to_player = to_player
+          challenge.set_score_and_winner(
+            :from_player_score => 21,
+            :to_player_score => 17
+          )
+          challenge.completed = true
+          challenge.save
+        end
+        from_player.points.should == (2 * Player::WIN_POINTS)
+      end
     end
   end
-
+  
   describe "Mailing" do
     before(:all) do
       Pony.stub!(:deliver)
@@ -165,90 +227,90 @@ describe Latter do
     end
   end
 
-  describe "Application", :type => :request do
-    before(:all) do
-      @player = @players.first
-    end
-    describe "Access control" do
-      before(:each) do
-        logout
-      end
-
-      it "should require login" do
-        visit '/'
-        current_path.should eq("/login")
-      end
-
-      it "should login a valid user" do
-        visit '/login'
-        fill_in 'email', :with => @player.email
-        click_on 'Login'
-        current_path.should_not eq("/login")
-      end
-
-      it "should not login an invalid user" do
-        visit "/login"
-        fill_in "email", :with => "user@fake.com"
-        click_on 'Login'
-        current_path.should eq('/login')
-      end
-    end
-
-    describe "Logged in" do
-      before(:each) do
-        visit "/logout"
-        visit "/login"
-        fill_in "email", :with => @player.email
-        click_on "Login"
-      end
-
-      it "should load a list of players" do
-        visit '/players'
-        current_path.should eq("/players")
-        all('li.player').should have(Player.count).things
-      end
-
-      it "should allow a new player to be created" do
-        @new_player = Factory.build(:player)
-        visit "/players/new"
-        fill_in 'player[name]', :with => @new_player.name
-        fill_in 'player[email]', :with => @new_player.email
-        click_on 'Save'
-        page.should have_content(@new_player.name)
-      end
-
-      #FIXME our CI can't run Selenium specs....
-      it "should create a challenge", :js => true do
-        visit "/players"
-        within '.player:last-child' do
-          click_link 'Challenge'
-          page.should have_content 'Enter Score'
-        end
-      end
-
-      it "should complete a challenge", :js => true do
-        visit "/players"
-        page.should have_content("Enter Score")
-        within '.player:last-child' do
-          click_link 'Enter Score'
-        end
-
-        fill_in 'challenge[from_player_score]', :with => 15
-        fill_in 'challenge[to_player_score]', :with => 6
-        click_button 'Submit Score'
-
-        page.should_not have_content 'Enter Score'
-      end
-
-      it "should list challenges" do
-        visit "/challenges"
-        all('.challenge').should_not be_empty
-      end
-
-      it "should display a profile page for a player" do
-        visit "/player/#{@player.id}"
-        page.should have_content(@player.name)
-      end
-    end
-  end
+  # describe "Application", :type => :request do
+  #     before(:all) do
+  #       @player = @players.first
+  #     end
+  #     describe "Access control" do
+  #       before(:each) do
+  #         logout
+  #       end
+  #   
+  #       it "should require login" do
+  #         visit '/'
+  #         current_path.should eq("/login")
+  #       end
+  #   
+  #       it "should login a valid user" do
+  #         visit '/login'
+  #         fill_in 'email', :with => @player.email
+  #         click_on 'Login'
+  #         current_path.should_not eq("/login")
+  #       end
+  #   
+  #       it "should not login an invalid user" do
+  #         visit "/login"
+  #         fill_in "email", :with => "user@fake.com"
+  #         click_on 'Login'
+  #         current_path.should eq('/login')
+  #       end
+  #     end
+  #   
+  #     describe "Logged in" do
+  #       before(:each) do
+  #         visit "/logout"
+  #         visit "/login"
+  #         fill_in "email", :with => @player.email
+  #         click_on "Login"
+  #       end
+  #   
+  #       it "should load a list of players" do
+  #         visit '/players'
+  #         current_path.should eq("/players")
+  #         all('li.player').should have(Player.count).things
+  #       end
+  #   
+  #       it "should allow a new player to be created" do
+  #         @new_player = Factory.build(:player)
+  #         visit "/players/new"
+  #         fill_in 'player[name]', :with => @new_player.name
+  #         fill_in 'player[email]', :with => @new_player.email
+  #         click_on 'Save'
+  #         page.should have_content(@new_player.name)
+  #       end
+  #   
+  #       #FIXME our CI can't run Selenium specs....
+  #       it "should create a challenge", :js => true do
+  #         visit "/players"
+  #         within '.player:last-child' do
+  #           click_link 'Challenge'
+  #           page.should have_content 'Enter Score'
+  #         end
+  #       end
+  #   
+  #       it "should complete a challenge", :js => true do
+  #         visit "/players"
+  #         page.should have_content("Enter Score")
+  #         within '.player:last-child' do
+  #           click_link 'Enter Score'
+  #         end
+  #   
+  #         fill_in 'challenge[from_player_score]', :with => 15
+  #         fill_in 'challenge[to_player_score]', :with => 6
+  #         click_button 'Submit Score'
+  #   
+  #         page.should_not have_content 'Enter Score'
+  #       end
+  #   
+  #       it "should list challenges" do
+  #         visit "/challenges"
+  #         all('.challenge').should_not be_empty
+  #       end
+  #   
+  #       it "should display a profile page for a player" do
+  #         visit "/player/#{@player.id}"
+  #         page.should have_content(@player.name)
+  #       end
+  #     end
+  #   end
 end
