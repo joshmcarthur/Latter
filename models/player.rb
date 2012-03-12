@@ -66,7 +66,7 @@ class Player
     if calculate or self.calculated_ranking.nil?
       # Array is zero-indexed - let's add one
       #
-      ranking = Player.all.sort_by { |player| player.winning_percentage(false) }.reverse.index(self) + 1
+      ranking = Player.all.sort_by { |player| player.points }.reverse.index(self) + 1
       self.update!(:calculated_ranking => ranking)
     end
 

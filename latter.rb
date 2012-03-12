@@ -132,7 +132,7 @@ class Latter < Sinatra::Base
       :from_player_id => current_player.id,
       :to_player_id => params[:id]
     )
-
+    
     send_mail(
       :to => @challenge.to_player.email,
       :from => @challenge.from_player.email,
