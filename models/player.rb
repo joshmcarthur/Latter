@@ -18,6 +18,10 @@ class Player
     (initiated_challenges + challenged_challenges)
   end
 
+  def can_challenge?(another_player)
+    (self.ranking - another_player.ranking).abs <= Player::CHALLENGABLE_SENSITIVITY
+  end
+
   def in_progress_challenges(another_player)
     (
       initiated_challenges.all(
