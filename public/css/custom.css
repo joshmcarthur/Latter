@@ -19,8 +19,10 @@ a.player.email i { margin: 3px; }
 #stats .thumbnail .label { font-size: 18px; line-height: 25px; text-align: center; }
 
 #enter_score label { font-weight: bold; }
-#enter_score input { margin-left: 55px; margin-top: 10px; }
+#enter_score input { width: 50%; margin: 10px 20%; }
 #enter_score .vs h3 { line-height: 200px; }
+.modal-body .span2 { width: 40%; float: left; }
+.modal-body .span1.vs { width: 20%; float:left; }
 
 #challenges .thumbnail.winner { background-color: #46a546; }
 #challenges .thumbnail.loser  { background-color: #9d261d; }
@@ -63,11 +65,13 @@ a.player.email i { margin: 3px; }
 // Portrait tablet to landscape and desktop
 @media (min-width: 768px) and (max-width: 980px) {
   .player .controls .btn { font-size: 10px; }
+  .modal-body .span1.vs { width: 5%; }
 
 }
 
 @media (min-width: 980px) {
   body { padding-top: 100px; }
+  .modal-body .span1.vs { width: 5%; }
 
   .player .controls .btn { font-size: 11px; }
 
