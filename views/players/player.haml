@@ -32,7 +32,6 @@
                 %i.icon-plus-sign
                 Enter Score
             - else
-              - if current_player.can_challenge?(player)
-                %a.challenge.btn{:"data-player-id" => player.id, :href => "#"}
-                  %i.icon-screenshot
-                  Challenge
+              %a.challenge.btn{:"data-player-id" => player.id, :href => "#"}
+                %i.icon-screenshot
+                Challenge
