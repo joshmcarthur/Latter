@@ -11,6 +11,9 @@ end
 
 describe Latter do
   before(:all) do
+    Player.destroy # Delete all players
+    Challenge.destroy # Delete all challenges
+
     @players = FactoryGirl.create_list(:player, 5)
   end
 
@@ -69,6 +72,18 @@ describe Latter do
 
       @player.reload
       @player.ranking.should_not eq(1)
+    end
+
+    it "should return in progress challenges where the player is the challenger" do
+      @other_player = Factory.create(:player)
+      @challenge = Factory.create(:challenge, :from_player => @player, :to_player => @other_player, :completed => false)
+      @player.in_progress_challenges(@other_player).first.id.should eq(@challenge.id)
+    end
+
+    it "should return in progress challenges where the player is the defender" do
+      @other_player = Factory.create(:player)
+      @challenge = Factory.create(:challenge, :to_player => @player, :from_player => @other_player, :completed => false)
+      @player.in_progress_challenges(@other_player).first.id.should eq(@challenge.id)
     end
 
     it "should calculate a winning percentage" do
@@ -218,19 +233,19 @@ describe Latter do
         page.should have_content(@new_player.name)
       end
 
-      #FIXME our CI can't run Selenium specs....
       it "should create a challenge", :js => true do
+        Challenge.destroy
         visit "/players"
-        within '.player:last-child' do
+        within '.player:first-child' do
           click_link 'Challenge'
-          page.should have_content 'Enter Score'
         end
+        page.should have_content 'Enter Score'
       end
 
       it "should complete a challenge", :js => true do
         visit "/players"
         page.should have_content("Enter Score")
-        within '.player:last-child' do
+        within '.player:first-child' do
           click_link 'Enter Score'
         end
 
