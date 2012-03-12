@@ -6,7 +6,7 @@ class Player
 
   property :id, Serial
   property :name, String, :required => true
-  property :email, String, :required => true
+  property :email, String, :required => true, :unique_index => true
   property :calculated_ranking, Integer
 
   has_gravatar
@@ -58,7 +58,8 @@ class Player
       # Array is zero-indexed - let's add one
       #
       ranking = Player.all.sort_by { |player| player.winning_percentage(false) }.reverse.index(self) + 1
-      self.update!(:calculated_ranking => ranking)
+      self.calculated_ranking = ranking
+      self.save
     end
 
     self.calculated_ranking

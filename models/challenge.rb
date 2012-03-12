@@ -5,9 +5,9 @@ class Challenge
   SCORE_JOINER = " : "
 
   property :id, Serial, :required => true
-  property :from_player_id, Integer, :required => true
+  property :from_player_id, Integer, :required => true, :index => true
   property :from_player_name, String
-  property :to_player_id, Integer, :required => true
+  property :to_player_id, Integer, :required => true, :index => true
   property :to_player_name, String
   property :completed, Boolean, :required => true, :default => false
   property :winner_id, Integer
