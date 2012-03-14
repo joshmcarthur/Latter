@@ -124,6 +124,17 @@ describe Latter do
         @challenge.completed.should be_true
       end
 
+      it "should recalculate the ranking of all players when a challenge is completed" do
+        players = Player.all
+        players.each { |p| p.should_receive(:ranking).with(true) }
+        Player.should_receive(:all).and_return(players)
+
+        @challenge.set_score_and_winner(
+          :from_player_score => 15,
+          :to_player_score => 6
+        )
+      end
+
       it "should correctly identify the winner" do
         @challenge.winner?(@challenge.from_player).should be_true
       end

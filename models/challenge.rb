@@ -66,9 +66,7 @@ class Challenge
       self.winner = nil
     end
 
-    self.from_player.ranking(true)
-    self.to_player.ranking(true)
-
+    Player.all.each { |player| player.ranking(true) }
     self
   end
 end
