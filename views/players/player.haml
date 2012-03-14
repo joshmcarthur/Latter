@@ -1,37 +1,32 @@
-%li.player.span3
-  .thumbnail
-    %img{:src => player.gravatar_url(:size => 260)}
-      .caption
-        %h4= player.name
-        - if player.challenged_challenges.first(:completed => false, :from_player_id => current_player.id)
-          .label.label-important Challenged!
-        - elsif player == current_player
-          .label.label-success You!
+.row-fluid.player
+  .span2
+    .thumbnail
+      %img{:src => player.gravatar_url(:size => 200)}
+  .span4
+    %h4= player.name
+    /Statistics go here
+    .stat-group.win_percentage
+      .progress
+        .bar{:style => "width:#{player.winning_percentage}"}
+      .label= "Wins #{player.winning_percentage} of the time"
+  .span4
+    .btn-group.controls
+      %a.btn{:href => "/player/#{player.id}"}
+        %i.icon-user
+        View Profile
+        - if current_player == player
+          %a.btn{:href => "/player/#{player.id}/edit"}
+            %i.icon-edit
+            Edit Profile
         - else
-          .spacer{:style => "display:block;height: 16px;"} &nbsp;
-        %h5 Statistics
-        .stat-group.win_percentage
-          .progress
-            .bar{:style => "width:#{player.winning_percentage}"}
-          .label= "Wins #{player.winning_percentage} of the time"
-
-        .stat-group
-          .label.label-important.ranking= "Ranking: #{player.ranking}"
-
-        .btn-group.controls
-          %a.btn{:href => "/player/#{player.id}"}
-            %i.icon-user
-            View Profile
-          - if current_player == player
-            %a.btn{:href => "/player/#{player.id}/edit"}
-              %i.icon-edit
-              Edit Profile
+          - if challenge = player.in_progress_challenges(current_player).first
+            %a.enter_score.btn{:title => 'Enter Score', :"data-challenge-id" => challenge.id, :href => "#"}
+              %i.icon-plus-sign
+              Enter Score
           - else
-            - if challenge = player.in_progress_challenges(current_player).first
-              %a.enter_score.btn{:title => 'Enter Score', :"data-challenge-id" => challenge.id, :href => "#"}
-                %i.icon-plus-sign
-                Enter Score
-            - else
-              %a.challenge.btn{:"data-player-id" => player.id, :href => "#"}
-                %i.icon-screenshot
-                Challenge
+            %a.challenge.btn{:"data-player-id" => player.id, :href => "#"}
+              %i.icon-screenshot
+              Challenge
+  .span2
+    .ranking= player.ranking
+
