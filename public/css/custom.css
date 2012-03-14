@@ -28,7 +28,8 @@ a.player.email i { margin: 3px; }
 #challenges .thumbnail.loser  { background-color: #9d261d; }
 #challenges .thumbnail.drawer { background-color: #f89406; }
 
-.sidebar {background-color: #EFEFEF; }
+.sidebar { background-color: #EFEFEF; margin-bottom: 10px;}
+.profile { padding: 10%; }
 .profile h2 { text-align: center; }
 .profile .thumbnail { box-shadow: none; border: none;}
 
@@ -40,6 +41,14 @@ a.player.email i { margin: 3px; }
   vertical-align: middle;
   background-color: #FF0000;
 }
+
+.player {
+  margin-bottom: 2%;
+}
+
+.player h3 { line-height: 200%; }
+
+.player:nth-child(odd) { background-color: #F9F9F9; }
 
 .vs { text-align: center; }
 .modal-body .vs { width: 130px; }
