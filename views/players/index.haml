@@ -1,7 +1,8 @@
 .row-fluid
   - if current_player
-    .span3.sidebar
-      = haml(:"players/profile")
+    .span3
+      .sidebar
+        = haml(:"players/profile")
   - else
     .span3.sidebar
       %a.btn.large{:href => "/login"} Login to see your Profile here
