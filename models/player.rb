@@ -20,13 +20,20 @@ class Player
   has n, :won_challenges, 'Challenge', :child_key => [:winner_id]
   has n, :initiated_challenges, 'Challenge', :child_key => [:from_player_id]
   has n, :challenged_challenges, 'Challenge', :child_key => [:to_player_id]
+  
+  def self.recalculate_rankings
+    Player.all.sort_by { |player| player.points }.reverse.each_with_index do |player, i|
+      player.calculated_ranking = i+1
+      player.save
+    end
+  end
 
   def challenges
     (initiated_challenges + challenged_challenges)
   end
   
   def recent_challenges
-    challenges.map{|c| c if c.created_at >= Date.today - POINT_TIME_LIMIT}.compact
+    challenges.map{|c| c if c.completed? && (c.created_at >= Date.today - POINT_TIME_LIMIT)}.compact
   end
 
   def challenged_by?(another_player)
@@ -62,15 +69,8 @@ class Player
     end
   end
 
-  def ranking(calculate = false)
-    if calculate or self.calculated_ranking.nil?
-      # Array is zero-indexed - let's add one
-      #
-      ranking = Player.all.sort_by { |player| player.points }.reverse.index(self) + 1
-      self.update!(:calculated_ranking => ranking)
-    end
-
-    self.calculated_ranking
+  def ranking
+    self.calculated_ranking || 0
   end
 
   def ranking_as_percentage

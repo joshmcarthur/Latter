@@ -69,9 +69,8 @@ class Challenge
     else
       self.winner = nil
     end
-
-    self.from_player.ranking(true)
-    self.to_player.ranking(true)
+    
+    Player.recalculate_rankings
 
     self
   end
