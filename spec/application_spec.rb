@@ -85,4 +85,30 @@ describe "Application", :type => :request do
       page.should have_content(@player.name)
     end
   end
+
+  describe "Activity Stream" do
+    before(:all) do
+      login_as(all_players.first)
+      @activities = []
+      5.times do
+        @activities << Factory.create(:activity)
+        sleep 1
+      end
+    end
+
+    it "should fetch the five most recent activities" do
+      get '/activities.json'
+      JSON.parse(last_response.body).should have(5).things
+    end
+
+    it "should return activities with valid information" do
+      get '/activities.json'
+      JSON.parse(last_response.body).first['message'].should match(/Message/)
+    end
+
+    it "should allow passing in a last modified date to filter activities" do
+      get '/activities.json', :modified_since => @activities[2..-1].first.created_at
+      last_response.body.should eq @activities[2..-1].to_json
+    end
+  end
 end

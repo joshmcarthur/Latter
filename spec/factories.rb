@@ -9,4 +9,8 @@ FactoryGirl.define do
     to_player { Factory(:player) }
     completed false
   end
+
+  factory :activity do
+    sequence(:message) { |num| "Message #{num}" }
+  end
 end
