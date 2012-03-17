@@ -6,9 +6,6 @@
   font-weight: bold;
   color: white;
   background: url(/img/latter.png) no-repeat 50% 50%;
-  -webkit-transition: all .2s linear;
-  -moz-transition: all .2s linear;
-  transition: all .2s linear;
 }
 
 .player.name h1 { line-height: 50px; }
@@ -28,7 +25,12 @@ a.player.email i { margin: 3px; }
 #challenges .thumbnail.loser  { background-color: #9d261d; }
 #challenges .thumbnail.drawer { background-color: #f89406; }
 
-.sidebar { background-color: #EFEFEF; margin-bottom: 10px;}
+.sidebar {
+  background-color: #EFEFEF;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
 .profile { padding: 10%; }
 .profile h2 { text-align: center; margin: 10% auto; }
 .profile .thumbnail { box-shadow: none; border: none;}
@@ -42,11 +44,13 @@ a.player.email i { margin: 3px; }
 
 .player {
   margin-bottom: 2%;
+  padding: 1%;
 }
 
 .player h3 { line-height: 200%; }
+.player .controls .btn { font-size: 12px; }
 
-.player:nth-child(odd) { background-color: #F9F9F9; }
+.player:nth-child(odd) { background-color: #EDEDED; }
 
 .vs { text-align: center; }
 .modal-body .vs { width: 130px; }
@@ -68,39 +72,77 @@ a.player.email i { margin: 3px; }
 }
 
 
-// Landscape phones and down
 @media (max-width: 480px) {
-  .profile .thumbnail > img {
-    height: 100px !important;
-  }
-
+  /* Current user profile */
+  .sidebar { background: transparent; border-radius: 0; border-bottom: solid 1px #DDD; }
+  .profile { padding: 2%; }
+  .profile .thumbnail > img { max-height: 100px; }
   .profile h2 { margin: 2% auto; }
-  .profile .ranking { padding: 5%; font-size: 150%; }
+  .profile .ranking { width: 30%; padding: 1%; font-size: 150%; margin: auto; }
+
+  /* A Player row */
+  .player { border-radius: 5px; }
+  .player .thumbnail { float: left; }
+  .player .thumbnail > img { max-height: 36px; }
+  .player h3 { float: left; margin-left: 5%; line-height: 36px; }
+  .player .row-fluid:last-child { margin-top: 2%; }
+  .player .row-fluid:last-child .span2 { width: 100%; }
+  .player .row-fluid:last-child .controls .btn { font-size: 12px; width: 41% !important; line-height: 150%; }
+  .player .row-fluid:last-child .ranking { padding: 2%; font-size: 120%; margin: 2% auto; }
+  .ranking { width: 50%: }
+
 }
 
-// Landscape phone to portrait tablet
-@media (max-width: 768px) {
-  .player .controls .btn { font-size: 8px; }
-  .stat-group.win_percentage { display: none; }
+@media (max-width: 769px) {
+
+  /* Current user profile */
+  .sidebar { background: transparent; border-radius: 0; border-bottom: solid 1px #DDD; }
+  .profile { padding: 2%; }
+  .profile .thumbnail > img { max-height: 150px; }
+  .profile h2 { margin: 5%; auto; }
+  .profile .ranking { width: 50%; padding: 2%; font-size: 150%; margin: auto; }
+
+  /* A Player row */
+  .player { border-radius: 5px; }
+  .player .stat-group { display: none; }
+  .player .thumbnail { float: left; }
+  .player .thumbnail > img { max-height: 48px; }
+  .player h3 { float: left; margin-left: 5%; line-height: 48px; }
+  .player .row-fluid:last-child { margin-top: 2%; }
+  .player .row-fluid:last-child .span2 { width: 100%; }
+  .player .row-fluid:last-child .controls .btn { font-size: 12px; width: 42%; line-height: 150%; }
+  .player .row-fluid:last-child .ranking { padding: 2%; font-size: 120%; margin: 2% auto; }
+  .ranking { width: 50%: }
 }
 
-// Portrait tablet to landscape and desktop
-@media (min-width: 768px) and (max-width: 980px) {
-  .player .controls .btn { font-size: 10px; }
-  .modal-body .span1.vs { width: 5%; }
-  .sidebar {  min-height: 800px; }
+
+@media (min-width: 769px) and (max-width: 980px) {
+  /* Player row */
+  .player .row-fluid:last-child .statistics {
+    width: 31.491712705%; /* The width of a .span4 */
+  }
+  .player .row-fluid:last-child .controls {
+    width: 48.618784527%; /* The width of a .span6 */
+  }
 
 }
 
 @media (min-width: 980px) {
+
   body { padding-top: 60px; }
   .modal-body .span1.vs { width: 5%; }
-  .sidebar {  min-height: 800px;  }
-
-
 }
 
-// Large desktop
 @media (min-width: 1200px) {
-
+  /* Player row - switch to more block elements */
+  .player .statistics { float: none; }
+  .player .controls { float: none; margin-top: 10px; margin-left: 0; }
+  .player .controls .btn { width: 41%; font-size: 14px; }
+  .player .row-fluid:last-child { position: relative; }
+  .player .row-fluid:last-child .span2 { /* Ranking container */
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    float: none;
+  }
 }

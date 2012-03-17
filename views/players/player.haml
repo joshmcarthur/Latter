@@ -7,14 +7,14 @@
       .span12
         %h3= player.name
     .row-fluid
-      .span6
+      .span5.statistics
         /Statistics go here
         .stat-group.win_percentage
           .progress
             .bar{:style => "width:#{player.winning_percentage}"}
           .label= "Wins #{player.winning_percentage} of the time"
-      .span4
-        .btn-group.controls
+      .span5.controls
+        .btn-group
           %a.btn.btn-large{:href => "/player/#{player.id}"}
             %i.icon-user
             View Profile

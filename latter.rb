@@ -75,7 +75,7 @@ class Latter < Sinatra::Base
   end
 
   get '/players' do
-    @players = Player.all.sort_by { |player| player.ranking }
+    @players = Player.all.sort_by { |player| player.ranking}
     haml :"players/index"
   end
 
@@ -132,7 +132,7 @@ class Latter < Sinatra::Base
       :from_player_id => current_player.id,
       :to_player_id => params[:id]
     )
-
+    
     send_mail(
       :to => @challenge.to_player.email,
       :from => @challenge.from_player.email,
@@ -187,14 +187,18 @@ class Latter < Sinatra::Base
 
 
   def send_mail(options)
-    Pony.mail(
-      :to => options[:to],
-      :from => options[:from],
-      :subject => options[:subject],
-      :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
-      :via => PONY_OPTIONS[:method],
-      :via_options => PONY_OPTIONS
-    )
+    begin
+      Pony.mail(
+        :to => options[:to],
+        :from => options[:from],
+        :subject => options[:subject],
+        :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
+        :via => PONY_OPTIONS[:method],
+        :via_options => PONY_OPTIONS
+      )
+    rescue
+    
+    end
   end
 
   def not_found?(klass = nil)

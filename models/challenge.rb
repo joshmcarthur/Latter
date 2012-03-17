@@ -15,9 +15,9 @@ class Challenge
   property :to_player_score, Integer
   property :created_at, DateTime, :default => lambda { |record, property| Time.now }
 
-  belongs_to :from_player, Player, :child_key => [:from_player_id]
-  belongs_to :to_player, Player, :child_key => [:to_player_id]
-  belongs_to :winner, Player, :child_key => [:winner_id]
+  belongs_to :from_player, Player
+  belongs_to :to_player, Player
+  belongs_to :winner, Player
 
   before :save, :name_players
 
@@ -52,6 +52,10 @@ class Challenge
     [from_player_score.to_s, to_player_score.to_s].join(SCORE_JOINER)
   end
 
+  def winning_margin
+    (from_player_score.to_i - to_player_score.to_i).abs
+  end
+
   def set_score_and_winner(options)
     from_score, to_score = options[:from_player_score].to_i, options[:to_player_score].to_i
 
@@ -66,7 +70,8 @@ class Challenge
       self.winner = nil
     end
 
-    Player.all.each { |player| player.ranking(true) }
+    Player.recalculate_rankings
+
     self
   end
 end

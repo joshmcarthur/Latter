@@ -5,9 +5,8 @@ require 'rack/test'
 require 'factory_girl'
 FactoryGirl.find_definitions
 
-ENV['RACK_ENV'] = ENV['RACK_ENV'] || 'test'
-
 require File.join(File.dirname(__FILE__), '..', 'latter')
+Dir[File.join(File.dirname(__FILE__), 'support', '*.rb')].each { |file| require file }
 
 set :environment, :test
 
@@ -15,6 +14,8 @@ RSpec.configure do |config|
   config.before(:all)  do
     Capybara.app = Latter
     DataMapper.auto_migrate!
+    Player.destroy
+    Challenge.destroy
   end
 end
 
