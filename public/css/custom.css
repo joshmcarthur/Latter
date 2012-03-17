@@ -58,7 +58,7 @@ a.player_email i { margin: 3px; }
 
 .vs { text-align: center; }
 .modal-body .vs { width: 130px; }
-.vs h1 { font-size: 150px; line-height: 200px; }
+.vs h1 { font-size: 150px; line-height: 1; }
 
 .stat-group .progress {
   margin-bottom: 0px;
@@ -91,9 +91,14 @@ a.player_email i { margin: 3px; }
   .player h3 { float: left; margin-left: 5%; line-height: 36px; }
   .player .row-fluid:last-child { margin-top: 2%; }
   .player .row-fluid:last-child .span2 { width: 100%; }
-  .player .row-fluid:last-child .controls .btn { font-size: 12px; width: 41% !important; line-height: 150%; }
+  .player .row-fluid:last-child .controls .btn { font-size: 12px; width: 40% !important; line-height: 150%; }
   .player .row-fluid:last-child .ranking { padding: 2%; font-size: 120%; margin: 2% auto; }
   .ranking { width: 50%: }
+
+  /* Challenge row */
+  .challenge.row-fluid .thumbnail > img { height: 9% !important; }
+  .challenge.row-fluid .vs { margin: auto 1%; }
+  .challenge.row-fluid .vs h1 { font-size: 50px !important; }
 
 }
 
@@ -138,6 +143,14 @@ a.player_email i { margin: 3px; }
     width: 50%;
     margin: auto;
   }
+
+  /* Challenge row */
+  .challenge.row-fluid .span3, .challenge.row-fluid .span6 { float: left; }
+  .challenge.row-fluid .span3 { width: 23.404255317%; }
+  .challenge.row-fluid .span6 { width: 48.93617020799999%; }
+  .challenge.row-fluid .thumbnail > img { height: 13%; }
+  .challenge.row-fluid .vs { margin: auto 2%; }
+  .challenge.row-fluid .vs h1 { font-size: 75px; }
 }
 
 
