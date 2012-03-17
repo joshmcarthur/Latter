@@ -33,7 +33,8 @@ a.player_email i { margin: 3px; }
 #challenges .thumbnail.drawer { background-color: #f89406; }
 
 .sidebar {
-  background-color: #EFEFEF;
+  background-color: #333;
+  color: #FFF;
   margin-bottom: 10px;
   border-radius: 10px;
 }
@@ -81,7 +82,6 @@ a.player_email i { margin: 3px; }
 
 @media (max-width: 480px) {
   /* Current user profile */
-  .sidebar { background: transparent; border-radius: 0; border-bottom: solid 1px #DDD; }
   .profile { padding: 2%; }
   .profile .thumbnail > img { max-height: 100px; }
   .profile h2 { margin: 2% auto; }
@@ -108,7 +108,7 @@ a.player_email i { margin: 3px; }
 @media (max-width: 769px) {
 
   /* Current user profile */
-  .sidebar { background: transparent; border-radius: 0; border-bottom: solid 1px #DDD; }
+  .sidebar { border-radius: 5px !important; margin-bottom: 25px;  }
   .profile { padding: 2%; }
   .profile .thumbnail > img { max-height: 150px; }
   .profile h2 { margin: 5%; auto; }
