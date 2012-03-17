@@ -31,9 +31,7 @@ describe Challenge do
     end
 
     it "should recalculate the ranking of all players when a challenge is completed" do
-      players = Player.all
-      players.each { |p| p.should_receive(:ranking).with(true) }
-      Player.should_receive(:all).and_return(players)
+      Player.should_receive(:recalculate_rankings)
 
       @challenge.set_score_and_winner(
         :from_player_score => 15,
