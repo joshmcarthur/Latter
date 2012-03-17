@@ -53,7 +53,6 @@ describe "Application", :type => :request do
       page.should have_content(@new_player.name)
     end
 
-    #FIXME our CI can't run Selenium specs....
     it "should create a challenge", :js => true do
       visit "/players"
       within '.player:last-child' do
