@@ -132,7 +132,7 @@ class Latter < Sinatra::Base
       :from_player_id => current_player.id,
       :to_player_id => params[:id]
     )
-    
+
     send_mail(
       :to => @challenge.to_player.email,
       :from => @challenge.from_player.email,
@@ -184,6 +184,19 @@ class Latter < Sinatra::Base
     haml :"challenges/index"
   end
 
+  get '/activities.json' do
+    content_type["text/json"]
+    @activities = Activity.all(
+      :created_at => headers['Last-Modified']
+    )
+
+    @activities = Activity.all(
+      :order => 'created_at DESC',
+      :limit => 5
+    ) if @activities.empty?
+
+    @activities.to_json
+  end
 
 
   def send_mail(options)
@@ -197,7 +210,7 @@ class Latter < Sinatra::Base
         :via_options => PONY_OPTIONS
       )
     rescue
-    
+
     end
   end
 
