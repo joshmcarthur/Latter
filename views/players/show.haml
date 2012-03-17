@@ -1,31 +1,33 @@
-.page-header
-  .row
-    .thumbnail.span1
+.row-fluid.player_show
+  .span12.info
+    .thumbnail.player_avatar
       %img{:src => @player.gravatar_url}
-    .span10.player.name
+    .player_name
       %h1= @player.name
-      %a.player.email{:href => "mailto:#{@player.email}"}
+      %a.player_email{:href => "mailto:#{@player.email}"}
         %i.icon-envelope
         = @player.email
+    .clearfix
 
 %section#stats
-  - if @player.challenges.empty?
-    .alert.alert-info
-      %i.icon-info-sign
-      This player hasn't yet competed.
-  .row
+  .row-fluid
+    - if @player.challenges.empty?
+      .span12
+        .alert.alert-info
+          %i.icon-info-sign
+          This player hasn't yet competed.
     .span4
       .thumbnail
         %h1= @player.points
         .caption
           .label.label-success Points
     .span4
-      .thumbnail
+      .thumbnail.hidden-phone
         %h1= @player.initiated_challenges.length
         .caption
           .label.label-success Initiated Challenges
     .span4
-      .thumbnail
+      .thumbnail.hidden-phone
         %h1= @player.challenged_challenges.length
         .caption
           .label.label-success Defended Challenges
