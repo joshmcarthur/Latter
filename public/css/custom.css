@@ -8,9 +8,13 @@
   background: url(/img/latter.png) no-repeat 50% 50%;
 }
 
-.player.name h1 { line-height: 50px; }
-a.player.email { line-height: 30px; font-size: 18px; }
-a.player.email i { margin: 3px; }
+/* Players#show */
+.player_show .player_name { float: left; margin-left: 2%; }
+.player_show .info { clear: both; margin-bottom: 2%; }
+.player_name h1 { line-height: 50px; }
+a.player_email { line-height: 30px; font-size: 17px; }
+a.player_email i { margin: 3px; }
+.player_show .player_avatar { float: left; line-height: 80px; }
 
 #stats .thumbnail h1 { font-size: 50px; text-align: center; line-height: 100px; }
 #stats .thumbnail .label { font-size: 18px; line-height: 25px; text-align: center; }
@@ -113,6 +117,27 @@ a.player.email i { margin: 3px; }
   .player .row-fluid:last-child .controls .btn { font-size: 12px; width: 42%; line-height: 150%; }
   .player .row-fluid:last-child .ranking { padding: 2%; font-size: 120%; margin: 2% auto; }
   .ranking { width: 50%: }
+
+  /* Players#show */
+  #stats .thumbnail {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: solid 1px #DDD;
+    margin: 10px auto;
+  }
+
+  #stats .thumbnail h1 {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  #stats .thumbnail .label {
+    font-size: inherit;
+    line-height: inherit;
+    width: 50%;
+    margin: auto;
+  }
 }
 
 
