@@ -14,6 +14,11 @@ describe Challenge do
     @challenge.save.should_not be_true
   end
 
+  it "should create an activity when a challenge is created" do
+    Activity.should_receive(:new_challenge)
+    @challenge.save
+  end
+
   describe "completion" do
     before(:each) do
       @challenge.set_score_and_winner(
@@ -33,6 +38,14 @@ describe Challenge do
     it "should recalculate the ranking of all players when a challenge is completed" do
       Player.should_receive(:recalculate_rankings)
 
+      @challenge.set_score_and_winner(
+        :from_player_score => 15,
+        :to_player_score => 6
+      )
+    end
+
+    it "should add an activity item when a challenge is completed" do
+      Activity.should_receive(:completed_challenge).with(an_instance_of(Challenge))
       @challenge.set_score_and_winner(
         :from_player_score => 15,
         :to_player_score => 6
