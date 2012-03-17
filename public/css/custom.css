@@ -46,7 +46,7 @@ a.player_email i { margin: 3px; }
 }
 
 .profile { padding: 10%; }
-.profile h2 { text-align: center; margin: 10% auto; }
+.profile .info { text-align: center; margin: 10% auto; }
 .profile .thumbnail { box-shadow: none; border: none;}
 
 .player .ranking, .profile .ranking {
@@ -89,7 +89,7 @@ a.player_email i { margin: 3px; }
   /* Current user profile */
   .profile { padding: 2%; }
   .profile .thumbnail > img { max-height: 100px; }
-  .profile h2 { margin: 2% auto; }
+  .profile .info { margin: 2% auto; }
   .profile .ranking { width: 30%; padding: 1%; font-size: 150%; margin: auto; }
 
   /* A Player row */
@@ -120,7 +120,7 @@ a.player_email i { margin: 3px; }
   .sidebar { border-radius: 5px !important; margin-bottom: 25px;  }
   .profile { padding: 2%; }
   .profile .thumbnail > img { max-height: 150px; }
-  .profile h2 { margin: 5%; auto; }
+  .profile .info { margin: 5%; auto; }
   .profile .ranking { width: 50%; padding: 2%; font-size: 150%; margin: auto; }
 
   /* A Player row */
@@ -177,6 +177,9 @@ a.player_email i { margin: 3px; }
   /* Player row */
   .player .row-fluid:last-child .statistics {
     width: 31.491712705%; /* The width of a .span4 */
+  }
+  .player .row-fluid:last-child .stat-group .label {
+    font-size: 9px;
   }
   .player .row-fluid:last-child .controls {
     width: 48.618784527%; /* The width of a .span6 */

@@ -18,6 +18,11 @@ var challengeButton = function() {
 }
 
 var enterScoreButton = function() {
+  $('#enter_score form').submit(function(event) {
+    $(this).find('button').button('loading');
+    return true;
+  });
+
   $('a.enter_score.btn').click(function(event) {
     event.stopPropagation();
     event.preventDefault();

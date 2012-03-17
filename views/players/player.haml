@@ -12,7 +12,7 @@
         .stat-group.win_percentage
           .progress
             .bar{:style => "width:#{player.winning_percentage}"}
-          .label= "Wins #{player.winning_percentage} of the time"
+          .label= "#{player.points} Points - wins #{player.winning_percentage} of the time"
       .span5.controls
         .btn-group
           %a.btn.btn-large{:href => "/player/#{player.id}"}

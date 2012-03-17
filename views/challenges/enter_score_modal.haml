@@ -2,9 +2,9 @@
   .row-fluid
     .modal-header.span12
       %h3 Complete Match
-  .row-fluid
-    .modal-body
-      %form{:method => "post", :action => "/"}
+  %form{:method => "post", :action => "/"}
+    .row-fluid
+      .modal-body
         %fieldset
           .row-fluid
             .span5
@@ -24,7 +24,7 @@
                   .thumbnail
                     %img
                     %input{:type => 'number', :maxlength => 3, :name => 'challenge[to_player_score]'}
-  .row-fluid
-    .modal-footer
-      %button.btn.btn-primary{:type => "submit"} Submit Score
-      %a.btn{:"data-dismiss" => "modal"} Cancel
+    .row-fluid
+      .modal-footer
+        %button.btn.btn-primary{:"data-loading-text" => "Saving Score...", :type => "submit"} Submit Score
+        %a.btn{:"data-dismiss" => "modal"} Cancel
