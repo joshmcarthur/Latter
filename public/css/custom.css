@@ -34,6 +34,7 @@ a.player_email i { margin: 3px; }
 #enter_score { overflow-x: hidden; }
 #enter_score .vs h3 { line-height: 250px; }
 
+/* Challenges#index */
 #challenges .thumbnail.winner { background-color: #46a546; }
 #challenges .thumbnail.loser  { background-color: #9d261d; }
 #challenges .thumbnail.drawer { background-color: #f89406; }
@@ -59,12 +60,17 @@ a.player_email i { margin: 3px; }
 .player {
   margin-bottom: 2%;
   padding: 1%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .player h3 { line-height: 200%; }
 .player .controls .btn { font-size: 12px; }
 
 .player:nth-child(odd) { background-color: #EDEDED; }
+
+.player.you { background-color: #D9EDF7; }
+
 
 .vs { text-align: center; }
 .vs h1 { font-size: 150px; line-height: 1; }
@@ -196,7 +202,7 @@ a.player_email i { margin: 3px; }
   /* Player row - switch to more block elements */
   .player .statistics { float: none; }
   .player .controls { float: none; margin-top: 10px; margin-left: 0; }
-  .player .controls .btn { width: 41%; font-size: 14px; }
+  .player .controls .btn { width: 40%; font-size: 14px; }
   .player .row-fluid:last-child { position: relative; }
   .player .row-fluid:last-child .span2 { /* Ranking container */
     position: absolute;

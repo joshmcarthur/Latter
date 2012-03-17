@@ -1,11 +1,11 @@
-.row-fluid.player
+.row-fluid{:class => "player #{current_player == player ? 'you' : ''}"}
   .span2
     .thumbnail
       %img{:src => player.gravatar_url(:size => 200)}
   .span10
     .row-fluid
       .span12
-        %h3= player.name
+        %h3= "#{player.name} #{current_player == player ? '(You)' : ''}"
     .row-fluid
       .span5.statistics
         /Statistics go here
