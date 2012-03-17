@@ -17,6 +17,7 @@ class Challenge
   belongs_to :to_player, 'Player'
   belongs_to :winner, 'Player'
 
+  before :create, :log_activity
   before :save, :name_players
 
   validates_with_block do
@@ -27,6 +28,10 @@ class Challenge
         true
       end
     end
+  end
+
+  def log_activity
+    Activity.new_challenge(self)
   end
 
   def name_players
@@ -68,6 +73,7 @@ class Challenge
       self.winner = nil
     end
 
+    Activity.completed_challenge(self)
     Player.recalculate_rankings
 
     self
