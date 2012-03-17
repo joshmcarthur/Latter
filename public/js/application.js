@@ -37,14 +37,3 @@ var numbers_only = function(elem) {
     elem.val(elem.val().replace(/[^0-9]/gi, ""));
 }
 
-var playerRankingHack = function() {
-  console.log('Fired')
-  var resize_ranking = function() {
-    $('.player .ranking-container').each(function(index, element) {
-      $(element).height($(element).parent().find('.thumbnail img').height());
-    });
-  }
-
-  resize_ranking()
-  $(window).resize(resize_ranking)
-}
