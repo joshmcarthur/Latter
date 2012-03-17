@@ -31,6 +31,7 @@ a.player_email i { margin: 3px; }
 #stats .thumbnail .label { font-size: 18px; line-height: 25px; text-align: center; }
 
 #enter_score label { font-weight: bold; }
+#enter_score { overflow-x: hidden; }
 #enter_score .vs h3 { line-height: 250px; }
 
 #challenges .thumbnail.winner { background-color: #46a546; }
