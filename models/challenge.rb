@@ -1,5 +1,3 @@
-require File.join(File.dirname(__FILE__), 'player')
-
 class Challenge
   include DataMapper::Resource
   SCORE_JOINER = " : "
@@ -15,9 +13,9 @@ class Challenge
   property :to_player_score, Integer
   property :created_at, DateTime, :default => lambda { |record, property| Time.now }
 
-  belongs_to :from_player, Player
-  belongs_to :to_player, Player
-  belongs_to :winner, Player
+  belongs_to :from_player, 'Player'
+  belongs_to :to_player, 'Player'
+  belongs_to :winner, 'Player'
 
   before :save, :name_players
 
