@@ -11,6 +11,14 @@
 /* Bootstrap override for login page */
 .input-prepend .add-on, .input-prepend .btn { margin-right: -5px; margin-top: -8px; }
 
+/* Make sure ranking doesn't change on hover */
+.ranking.label-important:hover, .ranking .label-important:hover {
+  background-color: #B94A48;
+}
+
+/* Modal dialog */
+.modal-body .thumbnail input  { display: block; width: 50%; margin: 10px auto; }
+
 /* Players#show */
 .player_show .player_name { float: left; margin-left: 2%; }
 .player_show .info { clear: both; margin-bottom: 2%; }
@@ -23,10 +31,7 @@ a.player_email i { margin: 3px; }
 #stats .thumbnail .label { font-size: 18px; line-height: 25px; text-align: center; }
 
 #enter_score label { font-weight: bold; }
-#enter_score input { width: 50%; margin: 10px 20%; }
-#enter_score .vs h3 { line-height: 200px; }
-.modal-body .span2 { width: 40%; float: left; }
-.modal-body .span1.vs { width: 20%; float:left; }
+#enter_score .vs h3 { line-height: 250px; }
 
 #challenges .thumbnail.winner { background-color: #46a546; }
 #challenges .thumbnail.loser  { background-color: #9d261d; }
@@ -61,7 +66,6 @@ a.player_email i { margin: 3px; }
 .player:nth-child(odd) { background-color: #EDEDED; }
 
 .vs { text-align: center; }
-.modal-body .vs { width: 130px; }
 .vs h1 { font-size: 150px; line-height: 1; }
 
 .stat-group .progress {
@@ -102,6 +106,10 @@ a.player_email i { margin: 3px; }
   .challenge.row-fluid .thumbnail > img { height: 9% !important; }
   .challenge.row-fluid .vs { margin: auto 1%; }
   .challenge.row-fluid .vs h1 { font-size: 50px !important; }
+
+  /* Modal dialog */
+  .modal-body .thumbnail { margin: 2px !important; }
+  .modal-body .thumbnail img { max-height: 90px !important; }
 
 }
 
@@ -154,6 +162,13 @@ a.player_email i { margin: 3px; }
   .challenge.row-fluid .thumbnail > img { height: 13%; }
   .challenge.row-fluid .vs { margin: auto 2%; }
   .challenge.row-fluid .vs h1 { font-size: 75px; }
+
+  /* Modal dialog */
+  .modal-body .row-fluid > [class*="span"] { float: left; }
+  .modal-body .thumbnail { margin: 10px 40px; }
+  .modal-body .thumbnail img { max-height: 250px; }
+
+
 }
 
 
@@ -171,7 +186,6 @@ a.player_email i { margin: 3px; }
 @media (min-width: 980px) {
 
   body { padding-top: 60px; }
-  .modal-body .span1.vs { width: 5%; }
 }
 
 @media (min-width: 1200px) {

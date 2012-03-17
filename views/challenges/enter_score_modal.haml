@@ -1,27 +1,30 @@
 #enter_score.modal{:style => "display:none;"}
-  .modal-header
-    %a.close{:"data-dismiss" => "modal"} x
-    %h3 Complete Match
-  %form{:method => "post", :action => "/"}
+  .row-fluid
+    .modal-header.span12
+      %h3 Complete Match
+  .row-fluid
     .modal-body
-      %fieldset
-        .row
-          .span2
-            .control-group#from_player_score
-              %label{:for => "from_player_score"}
-              .controls
-                .thumbnail
-                  %img
-                  %input{:type => 'number', :maxlength => 3, :name => 'challenge[from_player_score]'}
-          .span1.vs
-            %h3 vs.
-          .span2
-            .control-group#to_player_score
-              %label{:for => "to_player_score"}
-              .controls
-                .thumbnail
-                  %img
-                  %input{:type => 'number', :maxlength => 3, :name => 'challenge[to_player_score]'}
+      %form{:method => "post", :action => "/"}
+        %fieldset
+          .row-fluid
+            .span5
+              .control-group#from_player_score
+                %label{:for => "from_player_score"}
+                .controls
+                  .thumbnail
+                    %img
+                    %input{:type => 'number', :maxlength => 3, :name => 'challenge[from_player_score]'}
+            .span2
+              .hidden-phone.vs
+                %h3 vs.
+            .span5
+              .control-group#to_player_score
+                %label{:for => "to_player_score"}
+                .controls
+                  .thumbnail
+                    %img
+                    %input{:type => 'number', :maxlength => 3, :name => 'challenge[to_player_score]'}
+  .row-fluid
     .modal-footer
       %button.btn.btn-primary{:type => "submit"} Submit Score
       %a.btn{:"data-dismiss" => "modal"} Cancel
