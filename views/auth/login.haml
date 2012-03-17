@@ -1,13 +1,14 @@
 .row
-  %form.well.span6.offset3{:method => "post", :action => "/login"}
-    .control-group
-      %label{:for => 'email'}
-        Email address
-      .controls
-        .input-prepend
-          .add-on
-            %i.icon-envelope
-          %input#email.span5{:type => "email", :name => "email"}
-    .form-actions
-      %button.btn.btn-large.btn-primary{:type => 'submit'} Login
+  .span4.offset4
+    %form.form-vertical.well{:method => "post", :action => "/login"}
+      %fieldset
+        %legend Login to Latter
+        .control-group
+          %label.control-label{:for => "email"} Email address:
+          .controls
+            .input-prepend
+              %span.add-on @
+              %input#email{:size => 16, :type => "text"}
+        %button.btn.btn-large.btn-primary{:type => 'submit'} Login
+        .clearfix
 

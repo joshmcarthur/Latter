@@ -8,6 +8,9 @@
   background: url(/img/latter.png) no-repeat 50% 50%;
 }
 
+/* Bootstrap override for login page */
+.input-prepend .add-on, .input-prepend .btn { margin-right: -5px; margin-top: -8px; }
+
 /* Players#show */
 .player_show .player_name { float: left; margin-left: 2%; }
 .player_show .info { clear: both; margin-bottom: 2%; }
