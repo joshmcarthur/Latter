@@ -108,7 +108,7 @@ describe "Application", :type => :request do
 
     it "should allow passing in a last modified date to filter activities" do
       get '/activities.json', :modified_since => @activities[2..-1].first.created_at
-      last_response.body.should eq @activities[2..-1].to_json
+      last_response.body.should eq @activities[3..-1].to_json
     end
   end
 end

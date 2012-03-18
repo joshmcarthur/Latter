@@ -20,9 +20,9 @@ describe Activity do
   end
 
   it "should generate a message for a new challenge" do
-    challenge = Factory(:challenge)
-    new_challenge = "#{challenge.from_player.name} challenged #{challenge.to_player.name}."
+    challenge_attributes = Factory.attributes_for(:challenge)
+    new_challenge = "#{challenge_attributes[:from_player].name} challenged #{challenge_attributes[:to_player].name}."
     Activity.should_receive(:create).with({:message => new_challenge}).and_return(true)
-    challenge.save
+    Challenge.create(challenge_attributes)
   end
 end

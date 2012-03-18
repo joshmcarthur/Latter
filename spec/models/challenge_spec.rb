@@ -15,8 +15,9 @@ describe Challenge do
   end
 
   it "should create an activity when a challenge is created" do
-    Activity.should_receive(:new_challenge)
-    @challenge.save
+    challenge_attributes = Factory.attributes_for(:challenge)
+    Activity.should_receive(:new_challenge).with(an_instance_of(Challenge))
+    Challenge.create(challenge_attributes)
   end
 
   describe "completion" do
