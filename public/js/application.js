@@ -2,7 +2,6 @@ jQuery(function()
 {
   challengeButton()
   enterScoreButton()
-  //playerRankingHack()
 });
 
 var challengeButton = function() {
@@ -15,6 +14,17 @@ var challengeButton = function() {
 
     return false;
   });
+}
+
+var pollActivity = function() {
+  var polling = setInterval(function() {
+    $.getJSON('/activities.json', {'modified_since': $('#activities').data('latest')}, function(activities) {
+      $.each(activities, function(index, activity) {
+        $('#activities').append($('<li></li>').text(activity.message));
+      });
+      $('#activities').data('latest', activities[activities.length - 1].created_at)
+    });
+  }, 1500);
 }
 
 var enterScoreButton = function() {
