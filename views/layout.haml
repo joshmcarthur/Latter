@@ -56,3 +56,6 @@
     - if current_player
       :javascript
         $(document).ready(pollActivity)
+        fetchActivities(function(data) {
+          addActivities(data);
+        });
