@@ -187,7 +187,7 @@ class Latter < Sinatra::Base
   get '/activities.json' do
     content_type :json
     if params[:modified_since]
-      filter = { :created_at.gte => Time.parse(params[:modified_since]) }
+      filter = { :created_at.gt => Time.parse(params[:modified_since]) }
     else
       filter = { :order => :created_at.desc, :limit => 5 }
     end
