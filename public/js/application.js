@@ -17,14 +17,37 @@ var challengeButton = function() {
 }
 
 var pollActivity = function() {
-  var polling = setInterval(function() {
-    $.getJSON('/activities.json', {'modified_since': $('#activities').data('latest')}, function(activities) {
-      $.each(activities, function(index, activity) {
-        $('#activities').append($('<li></li>').text(activity.message));
-      });
-      $('#activities').data('latest', activities[activities.length - 1].created_at)
+  setTimeout(function() {
+    fetchActivities(function(data) {
+      addActivities(data);
+      pollActivity()
     });
-  }, 1500);
+  }, 5000);
+}
+
+var fetchActivities = function(successCallback) {
+  $.ajax({
+    url: '/activities.json',
+    success: successCallback,
+    dataType: 'json',
+    ifModified: true,
+  })
+}
+
+var addActivities = function(activities) {
+  // Assume first activity is the most recent
+  if (activities.length > 0) {
+    $('#activities').data('latest', activities[0].created_at)
+  }
+
+  $.each(activities, function(index, activity) {
+    $('#activities ul').append($('<li></li>').text(activity.message).slideDown());
+    if ($('#activities ul li').length > 5) {
+      $('#activities ul li:last-child').remove()
+    }
+  });
+
+  $('#activities').addClass('visible-desktop');
 }
 
 var enterScoreButton = function() {
