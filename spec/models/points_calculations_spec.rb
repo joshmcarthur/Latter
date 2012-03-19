@@ -15,7 +15,7 @@ describe "Points" do
     @challenge.save
     # #FIXME - I'm not sure if this is the best approach - it would
     # be better if we had hard numbers here
-    @challenge.from_player.points.should == 150 # <- Player::WIN_POINTS * @challenge.from_player.winning_percentage(false)
+    @challenge.from_player.points.should == 1.5 # <- Player::WIN_POINTS * @challenge.from_player.winning_percentage(false)
   end
 
   it "should award bonus points for a thrashing" do
@@ -25,7 +25,7 @@ describe "Points" do
     )
     @challenge.completed = true
     @challenge.save
-    @challenge.from_player.points.should == 200 # <- Player::WIN_POINTS + Player::THRASH_POINTS * @challenge.from_player.winning_percentage(false)
+    @challenge.from_player.points.should == 2.0 # <- Player::WIN_POINTS + Player::THRASH_POINTS * @challenge.from_player.winning_percentage(false)
   end
 
   it "should award consolation points for a near loss" do
@@ -65,7 +65,7 @@ describe "Points" do
       challenge.completed = true
       challenge.save
     end
-    from_player.points.should == 600 # <- (2 * Player::WIN_POINTS) * @challenge.from_player.winning_percentage(false)
+    from_player.points.should == 6.0 # <- (2 * Player::WIN_POINTS) * @challenge.from_player.winning_percentage(false)
   end
 end
 
