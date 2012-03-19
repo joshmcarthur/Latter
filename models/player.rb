@@ -78,7 +78,7 @@ class Player
       end
     end
 
-    total
+    total * winning_percentage(false)
   end
 
   def winning_percentage(return_string = true)

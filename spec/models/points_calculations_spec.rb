@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "Points" do
   before(:each) do
     @challenge = Factory(:challenge)
+    # Stub out from player's winning percentage to 50%
+    @challenge.from_player.stub!(:winning_percentage).with(false).and_return(50)
   end
   it "should award points for a win" do
     @challenge.set_score_and_winner(
@@ -11,7 +13,9 @@ describe "Points" do
     )
     @challenge.completed = true
     @challenge.save
-    @challenge.from_player.points.should == Player::WIN_POINTS
+    # #FIXME - I'm not sure if this is the best approach - it would
+    # be better if we had hard numbers here
+    @challenge.from_player.points.should == 150 # <- Player::WIN_POINTS * @challenge.from_player.winning_percentage(false)
   end
 
   it "should award bonus points for a thrashing" do
@@ -21,7 +25,7 @@ describe "Points" do
     )
     @challenge.completed = true
     @challenge.save
-    @challenge.from_player.points.should == Player::WIN_POINTS + Player::THRASH_POINTS
+    @challenge.from_player.points.should == 200 # <- Player::WIN_POINTS + Player::THRASH_POINTS * @challenge.from_player.winning_percentage(false)
   end
 
   it "should award consolation points for a near loss" do
@@ -31,7 +35,7 @@ describe "Points" do
     )
     @challenge.completed = true
     @challenge.save
-    @challenge.to_player.points.should == Player::CONSOLATION_POINTS
+    @challenge.to_player.points.should == 0 # <- Player::CONSOLATION_POINTS * @challenge.from_player.winning_percentage(false)
   end
 
   it "should only count recent matches" do
@@ -61,7 +65,7 @@ describe "Points" do
       challenge.completed = true
       challenge.save
     end
-    from_player.points.should == (2 * Player::WIN_POINTS)
+    from_player.points.should == 600 # <- (2 * Player::WIN_POINTS) * @challenge.from_player.winning_percentage(false)
   end
 end
 
