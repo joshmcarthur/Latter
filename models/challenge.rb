@@ -30,6 +30,18 @@ class Challenge
     end
   end
 
+  validates_with_block do
+    # Find the inverse of this challenge
+    challenge = Challenge.first(:completed => false, :from_player => self.to_player, :to_player => self.from_player)
+
+    # If it exists, this challenge is invalid
+    if challenge
+      [false, 'A challenge is already in progress between these two players']
+    else
+      [true]
+    end
+  end
+
   def log_activity
     Activity.new_challenge(self)
   end

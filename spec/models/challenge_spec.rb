@@ -14,6 +14,14 @@ describe Challenge do
     @challenge.save.should_not be_true
   end
 
+  it "should not create a challenge when an inverse one is already in progress" do
+    @challenge.save
+    @inverse_challenge = Factory(:challenge, :to_player => @challenge.from_player, :from_player => @challenge.to_player)
+
+    @inverse_challenge.valid?
+    @inverse_challenge.should_not be_valid
+  end
+
   it "should create an activity when a challenge is created" do
     challenge_attributes = Factory.attributes_for(:challenge)
     Activity.should_receive(:new_challenge).with(an_instance_of(Challenge))
