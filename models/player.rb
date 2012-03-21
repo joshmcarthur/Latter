@@ -78,7 +78,8 @@ class Player
       end
     end
 
-    (total * (winning_percentage(false) / 100.to_f)).round(2)
+    points = (total * winning_percentage(false) / 100.to_f)
+    (points * 100).round.to_f / 100
   end
 
   def winning_percentage(return_string = true)
