@@ -4,6 +4,7 @@
   .info
     %h2= current_player.name
     %h3= "#{current_player.points} Points"
+    %h3.visible-desktop.visible-tablet= "#{current_player.challenges.count} Games"
   .label.label-important.ranking= current_player.ranking
 
 #activities.hidden
