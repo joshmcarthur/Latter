@@ -4,8 +4,9 @@
       .sidebar
         = haml(:"players/profile")
   - else
-    .span3.sidebar
-      %a.btn.large{:href => "/login"} Login to see your Profile here
+    .span3
+      .sidebar
+        = haml(:"sections/about")
   .span9.players
     - @players.each do |player|
       = haml(:"players/player", :locals => {:player => player})

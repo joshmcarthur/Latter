@@ -27,7 +27,7 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-          %a.brand{:href => "/"} Latter
+          %a.pull-right.brand{:href => "/"} Latter
 
           - if current_player
             .nav-collapse
@@ -47,6 +47,10 @@
                   %a{:href => "/pages/rules"} Rules
                 %li
                   %a{:href => "/logout"} Logout
+          - else
+            %ul.nav.pull-left
+              %li
+                %a{:href => '/login'} Login
     .container-fluid
       = yield
 

@@ -15,22 +15,25 @@
           /.label= "#{player.points} Points - wins #{player.winning_percentage} of the time"
       .span5.controls
         .btn-group
-          %a.btn.btn-large{:href => "/player/#{player.id}"}
-            %i.icon-user
-            View Profile
-          - if current_player == player
-            %a.btn.btn-large{:href => "/player/#{player.id}/edit"}
-              %i.icon-edit
-              Edit Profile
-          - else
+          - if current_player
+            %a.btn.btn-large{:href => "/player/#{player.id}"}
+              %i.icon-user
+              View Profile
+            - if current_player == player
+              %a.btn.btn-large{:href => "/player/#{player.id}/edit"}
+                %i.icon-edit
+                Edit Profile
             - if game = game_in_progress?(player)
               %a.enter_score.btn.btn-large.btn-large{:title => 'Enter Score', :"data-challenge-id" => game.id, :href => "#"}
+
                 %i.icon-plus-sign
                 Enter Score
             - else
               %a.challenge.btn.btn-large{:"data-player-id" => player.id, :href => "#"}
                 %i.icon-screenshot
                 Challenge
+          - else
+            &nbsp;
       .span2
         .label.label-important.ranking= player.ranking
 
