@@ -11,31 +11,31 @@
 
 %section#stats
   .row-fluid
-    - if @player.challenges.empty?
+    - if @player.games.empty?
       .span12
         .alert.alert-info
           %i.icon-info-sign
           This player hasn't yet competed.
     .span4
       .thumbnail
-        %h1= @player.points
+        %h1= @player.rating
         .caption
           .label.label-success Points
     .span4
       .thumbnail.hidden-phone
-        %h1= @player.initiated_challenges.length
+        %h1= @player.challenger_games.length
         .caption
-          .label.label-success Initiated Challenges
+          .label.label-success Initiated Games
     .span4
       .thumbnail.hidden-phone
-        %h1= @player.challenged_challenges.length
+        %h1= @player.challenged_games.length
         .caption
           .label.label-success Defended Challenges
 
 %h2 Challenges
 %hr
 #challenges
-  - @player.challenges.select { |c| c.completed? }.each do |challenge|
+  - @player.games.select { |c| c.complete? }.each do |challenge|
     - challenge.reload
-    = haml(:"challenges/challenge_row", :locals => {:challenge => challenge})
+    /= haml(:"challenges/challenge_row", :locals => {:challenge => challenge})
 

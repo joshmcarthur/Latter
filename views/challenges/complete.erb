@@ -1,9 +1,0 @@
-modal = $('#enter_score');
-modal.find('form').attr('action', "<%= "/challenge/#{@challenge.id}/complete" %>");
-modal.find('#from_player_score label').text("<%= "#{@challenge.from_player.name}'s score:" %>");
-modal.find('#to_player_score label').text("<%= "#{@challenge.to_player.name}'s score:" %>");
-modal.find('#from_player_score img').attr('src', "<%= @challenge.from_player.gravatar_url(:size => 170) %>");
-modal.find('#to_player_score img').attr('src', "<%= @challenge.to_player.gravatar_url(:size => 170) %>");
-
-modal.modal()
-

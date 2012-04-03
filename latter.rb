@@ -75,7 +75,7 @@ class Latter < Sinatra::Base
   end
 
   get '/players' do
-    @players = Player.all.sort_by { |player| player.ranking}
+    @players = Player.all(:order => :rating.desc)
     haml :"players/index"
   end
 
@@ -127,60 +127,57 @@ class Latter < Sinatra::Base
   end
 
   get '/player/:id/challenge' do
-    @challenge = Challenge.create(
-      :completed => false,
-      :from_player_id => current_player.id,
-      :to_player_id => params[:id]
+    @game = Game.create(
+      :challenger => current_player,
+      :challenged => Player.get(params[:id])
     )
 
     send_mail(
-      :to => @challenge.to_player.email,
-      :from => @challenge.from_player.email,
+      :to => @game.challenged.email,
+      :from => @game.challenger.email,
       :subject => "You've been challenged!",
       :template => 'new_challenge',
       :locals => {
         :host => settings.host,
-        :challenge => @challenge
+        :game => @game
       }
     )
 
     content_type 'application/javascript'
-    erb :"challenges/create"
+    erb :"games/create"
   end
 
-  get '/challenge/:id/complete' do
-    @challenge = Challenge.get(params[:id])
+  get '/games/:id/complete' do
+    @game = Game.get(params[:id])
     content_type 'application/javascript'
-    erb :"challenges/complete"
+    erb :"games/complete"
   end
 
-  post '/challenge/:id/complete' do
-    @challenge = Challenge.get(params[:id])
-    not_found?(@challenge)
+  post '/games/:id/complete' do
+    @game = Game.get(params[:id])
+    not_found?(@game)
 
-    @challenge.set_score_and_winner(
-      :from_player_score => params[:challenge][:from_player_score],
-      :to_player_score => params[:challenge][:to_player_score]
-    )
-    @challenge.completed = true
-    @challenge.save
+    @game.complete!(params[:game])
+
+    require 'ruby-debug'
+    debugger
 
     send_mail(
-      :to => [@challenge.to_player.email, @challenge.from_player.email],
-      :from => @challenge.from_player.email,
+      :to => [@game.challenged.email, @game.challenger.email],
+      :from => @game.challenger.email,
       :subject => "Challenge completed!",
       :template => 'challenge_updated',
       :locals => {
         :host => settings.host,
-        :challenge => @challenge
+        :game => @game
       }
     )
 
     redirect '/'
   end
 
-  get '/challenges' do
-    @challenges = Challenge.all(:order => [:completed.desc, :created_at.desc])
+  get '/games' do
+    @games = Game.all(:order => [:completed.desc, :created_at.desc])
     haml :"challenges/index"
   end
 
@@ -216,22 +213,26 @@ class Latter < Sinatra::Base
   end
 
   helpers do
-    def challenge_status_of(player, challenge)
-      html_class = ""
-      return html_class unless challenge.completed?
-      if challenge.winner?(player)
-        html_class = "winner"
-      elsif challenge.loser?(player)
-        html_class = "loser"
-      elsif challenge.drawer?(player)
-        html_class = "drawer"
-      end
-
-      html_class
-    end
-
     def current_player
       @current_player ||= Player.get(session[:player_id])
+    end
+
+    def game_in_progress?(other_player)
+      return nil unless other_player.is_a?(Player)
+
+      # Try and find a game between the current player and the previous
+      # player
+      (
+        Game.all(
+        :challenger => current_player,
+        :challenged => other_player,
+        :complete => false
+        ) + Game.all(
+        :challenger => current_player,
+        :challenged => other_player,
+        :complete => false
+        )
+      ).first
     end
   end
 

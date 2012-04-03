@@ -8,22 +8,22 @@
         %fieldset
           .row-fluid
             .span5
-              .control-group#from_player_score
-                %label{:for => "from_player_score"}
+              .control-group#challenger_score
+                %label{:for => "challenger_score"}
                 .controls
                   .thumbnail
                     %img
-                    %input{:type => 'number', :maxlength => 3, :name => 'challenge[from_player_score]'}
+                    %input{:type => 'number', :maxlength => 3, :name => 'game[challenger_score]'}
             .span2
               .hidden-phone.vs
                 %h3 vs.
             .span5
-              .control-group#to_player_score
-                %label{:for => "to_player_score"}
+              .control-group#challenged_score
+                %label{:for => "challenged_score"}
                 .controls
                   .thumbnail
                     %img
-                    %input{:type => 'number', :maxlength => 3, :name => 'challenge[to_player_score]'}
+                    %input{:type => 'number', :maxlength => 3, :name => 'game[challenged_score]'}
     .row-fluid
       .modal-footer
         %button.btn.btn-primary{:"data-loading-text" => "Saving Score...", :type => "submit"} Submit Score

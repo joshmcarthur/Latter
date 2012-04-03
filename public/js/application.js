@@ -61,7 +61,7 @@ var enterScoreButton = function() {
     event.preventDefault();
 
     challenge_id = $(this).attr('data-challenge-id');
-    $.getScript("/challenge/" + challenge_id + "/complete")
+    $.getScript("/games/" + challenge_id + "/complete")
 
     return false;
   });
