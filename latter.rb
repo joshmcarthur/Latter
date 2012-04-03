@@ -58,7 +58,7 @@ class Latter < Sinatra::Base
 
 
   get '/' do
-    current_player ? redirect('/players') : redirect('/login')
+    redirect('/players')
   end
 
   get '/pages/:slug' do
@@ -229,13 +229,15 @@ class Latter < Sinatra::Base
   end
 
   def authenticate!
-    redirect '/' unless current_player
+    redirect '/login' unless current_player
   end
 
   def authenticate?(request)
     path = request.path
     case path
     when /\A\/\Z/
+      return false
+    when/\A\/players\Z/
       return false
     when /\A\/login\Z/
       return false
