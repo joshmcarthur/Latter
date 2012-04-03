@@ -11,11 +11,11 @@ describe "Application", :type => :request do
     end
 
     it "should require login" do
-      visit '/'
+      visit "/players/#{@player.id}"
       current_path.should eq("/login")
     end
 
-    it "should login a valid user" do
+    it "should login a valid user", :js => true do
       visit '/login'
       fill_in 'email', :with => @player.email
       click_on 'Login'
