@@ -61,12 +61,21 @@ a.player_email i { margin: 3px; }
   border-bottom: none;
 }
 
-.profile, #activities {
+.profile, #activities, .about_section {
   padding: 10%;
   background-color: #333;
   color: #FFF;
   border-radius: 10px;
 }
+
+.about_section a {
+  color: whiteSmoke;
+  line-height: 150%;
+  border-bottom: dotted 1px whiteSmoke;
+  text-decoration: none;
+}
+
+.about_section a.btn { width: 90%; margin: auto; border-bottom: inherit; }
 
 
 #activities { background-color: #DDD; color: #222;  }
