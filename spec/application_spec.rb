@@ -68,15 +68,15 @@ describe "Application", :type => :request do
         click_link 'Enter Score'
       end
 
-      fill_in 'challenge[from_player_score]', :with => 15
-      fill_in 'challenge[to_player_score]', :with => 6
+      fill_in 'challenge[challenger_score]', :with => 15
+      fill_in 'challenge[challenged_score]', :with => 6
       click_button 'Submit Score'
 
       page.should_not have_content 'Enter Score'
     end
 
-    it "should list challenges" do
-      visit "/challenges"
+    it "should list games" do
+      visit "/games"
       all('.challenge').should_not be_empty
     end
 

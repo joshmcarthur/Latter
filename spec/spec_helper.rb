@@ -23,7 +23,8 @@ RSpec.configure do |config|
     # Make sure we are testing in a sandbox by deleting
     # existing Players and Challenges
     Player.destroy
-    Challenge.destroy
+    Game.destroy
+    Activity.destroy
   end
 end
 

@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Player do
   before(:all) do
     @player = all_players.first
-    @challenge = Factory.create(
-      :challenge,
-      :from_player => @player,
+    @game = Factory.create(
+      :game,
+      :challenger => @player,
       :winner => @player,
-      :to_player => all_players.last,
-      :completed => true
+      :challenged => all_players.last,
+      :complete => true
     )
   end
 
@@ -29,30 +29,30 @@ describe Player do
     end
   end
 
-  it "should let a player close to another challenge them" do
+  it "should let a player close to another game them" do
     @closest_player = all_players.select { |p| p.ranking == 2 }.first
-    @closest_player.can_challenge?(@player).should be_true
+    @closest_player.can_game?(@player).should be_true
   end
 
-  it "should not let a player far away from another challenge them" do
+  it "should not let a player far away from another game them" do
     @furtherest_player = all_players.select { |p| p.ranking == 3 }.first
-    @furtherest_player.can_challenge?(@player).should_not be_true
+    @furtherest_player.can_game?(@player).should_not be_true
   end
 
   it "should refresh the cache of a ranking" do
     2.times do
-      challenge = Factory.create(
-        :challenge,
-        :from_player => all_players.last,
-        :to_player => @player
+      game = Factory.create(
+        :game,
+        :challenger => all_players.last,
+        :challenged => @player
       )
 
-      challenge.set_score_and_winner(
-        :from_player_score => 21,
-        :to_player_score => 1
+      game.set_score_and_winner(
+        :challenger_score => 21,
+        :challenged_score => 1
       )
-      challenge.completed = true
-      challenge.save
+      game.complete = true
+      game.save
     end
 
     @player.reload
@@ -60,16 +60,16 @@ describe Player do
     @player.ranking.should_not eq(1)
   end
 
-  it "should return in progress challenges where the player is the challenger" do
+  it "should return in progress games where the player is the gamer" do
     @other_player = Factory.create(:player)
-    @challenge = Factory.create(:challenge, :from_player => @player, :to_player => @other_player, :completed => false)
-    @player.in_progress_challenges(@other_player).first.id.should eq(@challenge.id)
+    @game = Factory.create(:game, :challenger => @player, :challenged => @other_player, :complete => false)
+    @player.in_progress_games(@other_player).first.id.should eq(@game.id)
   end
 
-  it "should return in progress challenges where the player is the defender" do
+  it "should return in progress games where the player is the defender" do
     @other_player = Factory.create(:player)
-    @challenge = Factory.create(:challenge, :to_player => @player, :from_player => @other_player, :completed => false)
-    @player.in_progress_challenges(@other_player).first.id.should eq(@challenge.id)
+    @game = Factory.create(:game, :challenged => @player, :challenger => @other_player, :complete => false)
+    @player.in_progress_games(@other_player).first.id.should eq(@game.id)
   end
 
   it "should calculate a winning percentage" do

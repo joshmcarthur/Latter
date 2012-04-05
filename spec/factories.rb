@@ -4,10 +4,10 @@ FactoryGirl.define do
     email { |p| "#{p.name}@3months.com" }
   end
 
-  factory :challenge do
-    from_player { Factory(:player) }
-    to_player { Factory(:player) }
-    completed false
+  factory :game do
+    challenger { Factory(:player) }
+    challenged { Factory(:player) }
+    complete false
   end
 
   factory :activity do

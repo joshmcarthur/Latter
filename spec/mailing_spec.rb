@@ -30,10 +30,10 @@ describe "Mailing" do
       mail.subject.should eq("Challenge completed!")
       mail.body.should_not be_empty
     end
-    post "/challenge/#{Challenge.last.id}/complete", {
+    post "/games/#{Game.last.id}/complete", {
       :challenge => {
-        :from_player_score => 15,
-        :to_player_score => 6
+        :challenger_score => 15,
+        :challenged_score => 6
       }
     }
   end
