@@ -159,9 +159,6 @@ class Latter < Sinatra::Base
 
     @game.complete!(params[:game])
 
-    require 'ruby-debug'
-    debugger
-
     send_mail(
       :to => [@game.challenged.email, @game.challenger.email],
       :from => @game.challenger.email,
