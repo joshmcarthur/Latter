@@ -15,6 +15,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    capybara-webkit (0.11.0)
+      capybara (>= 1.0.0, < 1.2)
+      json
     childprocess (0.3.1)
       ffi (~> 1.0.6)
     columnize (0.3.6)
@@ -154,6 +157,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   capybara
+  capybara-webkit
   data_mapper
   data_objects
   dm-migrations

@@ -27,6 +27,7 @@ group :development, :test do
   gem 'do_sqlite3'
   gem 'rspec', '=2.4.0'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'rack-test', :require => 'rack/test'
   gem 'factory_girl'
 	gem 'awesome_print'
