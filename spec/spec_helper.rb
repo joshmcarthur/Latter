@@ -18,6 +18,7 @@ Dir[File.join(File.dirname(__FILE__), 'support', '*.rb')].each { |file| require 
 RSpec.configure do |config|
   config.before(:all)  do
     Capybara.app = Latter
+    Capybara.javascript_driver = :webkit
     DataMapper.auto_migrate!
 
     # Make sure we are testing in a sandbox by deleting
