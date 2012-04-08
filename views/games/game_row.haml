@@ -1,0 +1,14 @@
+.row-fluid.game
+  .span3
+    .thumbnail{:class => challenge_status_of(game.challenger, game)}
+      %img{:src => game.challenger.gravatar_url(:size => 260)}
+  .span6.vs
+    %h1 vs.
+    - if game.complete?
+      .label.label-info= "Completed (#{game.score})"
+    - else
+      .label To be Played
+  .span3
+    .thumbnail{:class => challenge_status_of(game.challenged, challenge)}
+      %img{:src => game.challenged.gravatar_url(:size => 260)}
+%hr
