@@ -15,6 +15,22 @@ class Game < Elo::Game
     Activity.new_game(self)
   end
 
+  validates_with_block do
+    # Find the inverse of this game
+    game = Game.first(
+      :complete => false,
+      :challenger => self.challenged,
+      :challenged => self.challenger
+    )
+
+    # If it exists, this game is invalid
+    if game
+      [false, 'A game is already in progress between these two players']
+    else
+      [true]
+    end
+  end
+
   # Elo::Game uses :one and :two to reference players
   alias :one :challenger
   alias :two :challenged
@@ -34,6 +50,9 @@ class Game < Elo::Game
 
     self.complete = true
     raise "Record invalid" unless self.valid?
+    Activity.completed_game(self)
+
+    self
   end
 
   def winner?(other_player)
@@ -41,8 +60,15 @@ class Game < Elo::Game
     self.result == 1.0 && other_player == self.challenger
   end
 
+  def winner
+    self.result == 1.0 ? self.challenger : self.challenged
+  end
+
   def loser?(other_player)
     !self.winner?(other_player)
   end
 
+  def loser
+    self.result != 1.0 ? self.challenged : self.challenger
+  end
 end
