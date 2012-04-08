@@ -3,6 +3,7 @@ Bundler.require
 
 # Require RSpec helpers
 require 'capybara/rspec'
+require 'capybara/webkit'
 require 'rack/test'
 require 'factory_girl'
 
