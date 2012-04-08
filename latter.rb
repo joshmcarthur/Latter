@@ -175,7 +175,7 @@ class Latter < Sinatra::Base
 
   get '/games' do
     @games = Game.all(:order => [:completed.desc, :created_at.desc])
-    haml :"challenges/index"
+    haml :"games/index"
   end
 
   get '/activities.json' do
