@@ -10,9 +10,9 @@ describe Activity do
 
   it "should generate a message for a completed game" do
     game = Factory(:game)
-    game.set_score_and_winner({
-      :challenger_score => 21,
-      :challenged_score => 10
+    game.complete!({
+      'challenger_score' => 21,
+      'challenged_score' => 10
     })
     completed_game = "#{game.challenger.name} completed their game against #{game.challenged.name} and won! (#{game.score})"
     Activity.should_receive(:create).with({:message => completed_game}).and_return(true)
@@ -21,8 +21,8 @@ describe Activity do
 
   it "should generate a message for a new game" do
     game_attributes = Factory.attributes_for(:game)
-    new_game = "#{game_attributes[:challenger].name} gamed #{game_attributes[:challenged].name}."
+    new_game = "#{game_attributes[:challenger].name} challenged #{game_attributes[:challenged].name}."
     Activity.should_receive(:create).with({:message => new_game}).and_return(true)
-    game.create(game_attributes)
+    Game.create(game_attributes)
   end
 end

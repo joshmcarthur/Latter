@@ -5,14 +5,14 @@ class Activity
   property :message, Text, :required => true
   property :created_at, DateTime, :default => lambda { |record, property| Time.now }
 
-  def self.completed_challenge(challenge)
+  def self.completed_game(game)
 
-    result = challenge.winner?(challenge.from_player) ? "won!" : "lost!"
-    message = "#{challenge.from_player.name} completed their challenge against #{challenge.to_player.name} and #{result} (#{challenge.score})"
+    result = game.winner?(game.challenger) ? "won!" : "lost!"
+    message = "#{game.challenger.name} completed their game against #{game.challenged.name} and #{result} (#{game.score})"
     self.create(:message => message)
   end
 
-  def self.new_challenge(challenge)
+  def self.new_game(game)
     message = "#{game.challenger.name} challenged #{game.challenged.name}."
     self.create(:message => message)
   end
