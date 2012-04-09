@@ -41,6 +41,15 @@ class Latter < Sinatra::Base
 
   configure do
     DataMapper.auto_upgrade!
+
+    Elo.configure do |config|
+      # Every player starts with a rating of 1000
+      config.default_rating = 1000
+      # A player is considered a pro, when he/she has more than 2400 points
+      config.pro_rating_boundry = 2400
+      # A player is considered a new, when he/she has played less than 30 games
+      config.starter_boundry = 30
+    end
   end
 
   before do
@@ -126,7 +135,7 @@ class Latter < Sinatra::Base
     redirect '/players'
   end
 
-  get '/player/:id/challenge' do
+  post '/player/:id/challenge' do
     @game = Game.create(
       :challenger => current_player,
       :challenged => Player.get(params[:id])
@@ -136,7 +145,7 @@ class Latter < Sinatra::Base
       :to => @game.challenged.email,
       :from => @game.challenger.email,
       :subject => "You've been challenged!",
-      :template => 'new_challenge',
+      :template => 'new_game',
       :locals => {
         :host => settings.host,
         :game => @game
@@ -163,7 +172,7 @@ class Latter < Sinatra::Base
       :to => [@game.challenged.email, @game.challenger.email],
       :from => @game.challenger.email,
       :subject => "Challenge completed!",
-      :template => 'challenge_updated',
+      :template => 'game_completed',
       :locals => {
         :host => settings.host,
         :game => @game
@@ -174,7 +183,7 @@ class Latter < Sinatra::Base
   end
 
   get '/games' do
-    @games = Game.all(:order => [:completed.desc, :created_at.desc])
+    @games = Game.all(:order => [:complete.desc, :created_at.desc])
     haml :"games/index"
   end
 
@@ -191,18 +200,14 @@ class Latter < Sinatra::Base
 
 
   def send_mail(options)
-    begin
-      Pony.mail(
-        :to => options[:to],
-        :from => options[:from],
-        :subject => options[:subject],
-        :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
-        :via => PONY_OPTIONS[:method],
-        :via_options => PONY_OPTIONS
-      )
-    rescue
-
-    end
+    Pony.mail(
+      :to => options[:to],
+      :from => options[:from],
+      :subject => options[:subject],
+      :html_body => erb(:"mail/#{options[:template]}", :locals => options[:locals], :layout => false),
+      :via => PONY_OPTIONS[:method],
+      :via_options => PONY_OPTIONS
+    )
   end
 
   def not_found?(klass = nil)
@@ -219,17 +224,7 @@ class Latter < Sinatra::Base
 
       # Try and find a game between the current player and the previous
       # player
-      (
-        Game.all(
-        :challenger => current_player,
-        :challenged => other_player,
-        :complete => false
-        ) + Game.all(
-        :challenger => current_player,
-        :challenged => other_player,
-        :complete => false
-        )
-      ).first
+      current_player.in_progress_games(other_player).first
     end
   end
 
