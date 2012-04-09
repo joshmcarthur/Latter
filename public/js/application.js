@@ -10,7 +10,11 @@ var challengeButton = function() {
     event.preventDefault();
 
     player_id = $(this).attr('data-player-id');
-    $.getScript("/player/" + player_id + "/challenge")
+    $.ajax({
+      type: "POST",
+      url: "/player/" + player_id + "/challenge",
+      dataType: 'script'
+    });
 
     return false;
   });

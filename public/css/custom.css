@@ -34,10 +34,9 @@ a.player_email i { margin: 3px; }
 #enter_score { overflow-x: hidden; }
 #enter_score .vs h3 { line-height: 250px; }
 
-/* Challenges#index */
-#challenges .thumbnail.winner { background-color: #46a546; }
-#challenges .thumbnail.loser  { background-color: #9d261d; }
-#challenges .thumbnail.drawer { background-color: #f89406; }
+/* Games#index */
+#games .thumbnail.won { background-color: #46a546; }
+#games .thumbnail.lost  { background-color: #9d261d; }
 
 .sidebar {
   margin-bottom: 10px;
@@ -133,10 +132,10 @@ a.player_email i { margin: 3px; }
   .player .row-fluid:last-child .ranking { padding: 2%; font-size: 120%; margin: 2% auto; }
   .ranking { width: 50%: }
 
-  /* Challenge row */
-  .challenge.row-fluid .thumbnail > img { height: 9% !important; }
-  .challenge.row-fluid .vs { margin: auto 1%; }
-  .challenge.row-fluid .vs h1 { font-size: 50px !important; }
+  /* Game row */
+  .game.row-fluid .thumbnail > img { height: 9% !important; }
+  .game.row-fluid .vs { margin: auto 1%; }
+  .game.row-fluid .vs h1 { font-size: 50px !important; }
 
   /* Modal dialog */
   .modal-body .thumbnail { margin: 2px !important; }
@@ -186,13 +185,13 @@ a.player_email i { margin: 3px; }
     margin: auto;
   }
 
-  /* Challenge row */
-  .challenge.row-fluid .span3, .challenge.row-fluid .span6 { float: left; }
-  .challenge.row-fluid .span3 { width: 23.404255317%; }
-  .challenge.row-fluid .span6 { width: 48.93617020799999%; }
-  .challenge.row-fluid .thumbnail > img { height: 13%; }
-  .challenge.row-fluid .vs { margin: auto 2%; }
-  .challenge.row-fluid .vs h1 { font-size: 75px; }
+  /*.game.row */
+  .game.row-fluid .span3, .game.row-fluid .span6 { float: left; }
+  .game.row-fluid .span3 { width: 23.404255317%; }
+  .game.row-fluid .span6 { width: 48.93617020799999%; }
+  .game.row-fluid .thumbnail > img { height: 13%; }
+  .game.row-fluid .vs { margin: auto 2%; }
+  .game.row-fluid .vs h1 { font-size: 75px; }
 
   /* Modal dialog */
   .modal-body .row-fluid > [class*="span"] { float: left; }
