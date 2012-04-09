@@ -473,12 +473,10 @@
                                 <hr />
                                 This challenge has been completed! The result was:
                                 <br />
-                                <% if challenge.winner == challenge.from_player %>
-                                  <h3><%= challenge.from_player.name %> won!</h3>
-                                <% elsif challenge.winner == challenge.to_player %>
-                                  <h3><%= challenge.to_player.name %> won!</h3>
+                                <% if game.winner?(game.challenger) %>
+                                  <h3><%= game.challenger.name %> won!</h3>
                                 <% else %>
-                                  <h3>Draw!</h3>
+                                  <h3><%= game.challenged.name %> won!</h3>
                                 <% end %>
 
                                 <strong>See below for the scores!</strong>
@@ -497,11 +495,11 @@
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr mc:repeatable>
                             <td valign="top">
-                              <img src="<%= challenge.from_player.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
+                              <img src="<%= game.challenger.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
                               <div mc:edit="tiwc300_content00">
-                                <h4 class="h4"><%= challenge.from_player.name %></h4>
+                                <h4 class="h4"><%= game.challenger.name %></h4>
                                 <br />
-                                <h2 class="score" align="center"><%= challenge.from_player_score %></h1>
+                                <h2 class="score" align="center"><%= game.score_for(game.challenger) %></h1>
                               </div>
                             </td>
                           </tr>
@@ -515,11 +513,11 @@
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr mc:repeatable>
                             <td valign="top">
-                              <img src="<%= challenge.to_player.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
+                              <img src="<%= game.challenged.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
                               <div mc:edit="tiwc300_content01">
-                                <h4 class="h4"><%= challenge.to_player.name %></h4>
+                                <h4 class="h4"><%= game.challenged.name %></h4>
                                 <br />
-                                <h2 class="score" align="center"><%= challenge.to_player_score %></h1>
+                                <h2 class="score" align="center"><%= game.score_for(game.challenged) %></h1>
                             </div>
                             </td>
                           </tr>

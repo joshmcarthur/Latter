@@ -3,8 +3,6 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <!-- Facebook sharing information tags -->
-    <meta property="og:title" content="*|MC:SUBJECT|*" />
 
     <title>New Challenge on Latter!</title>
     <style type="text/css">
@@ -426,7 +424,7 @@
                     <tr>
                       <td valign="top">
                         <div mc:edit="std_preheader_content">
-                          You've received a new challenge from <%= challenge.from_player.name %> on Latter! See below for details!
+                          You've received a new challenge from <%= game.challenger.name %> on Latter! See below for details!
                         </div>
                       </td>
                       <!-- *|IFNOT:ARCHIVE_PAGE|* -->
@@ -470,9 +468,9 @@
                             <td valign="top">
                               <div mc:edit="std_content00">
                                 <h1 class="h1">Latter</h1>
-                                <strong>You've been challenged by <%= challenge.from_player.name %> to an epic battle of epic table tennis</strong>
+                                <strong>You've been challenged by <%= game.challenger.name %> to an epic battle of epic table tennis</strong>
                                 <br />
-                                What does this mean? You, <%= challenge.to_player.name %> need to defend yourself against <%= challenge.from_player.name %>, and then the victor can hop onto <a href="<%= host %>">Latter</a> to record their victory!
+                                What does this mean? You, <%= game.challenged.name %> need to defend yourself against <%= game.challenger.name %>, and then the victor can hop onto <a href="<%= host %>">Latter</a> to record their victory!
 
                               </div>
                             </td>
@@ -489,12 +487,12 @@
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr mc:repeatable>
                             <td valign="top">
-                              <img src="<%= challenge.from_player.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
+                              <img src="<%= game.challenger.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
                               <div mc:edit="tiwc300_content00">
-                                <h4 class="h4"><%= challenge.from_player.name %></h4>
-                                <strong>Ranking:</strong> <%= challenge.from_player.ranking %>
+                                <h4 class="h4"><%= game.challenger.name %></h4>
+                                <strong>Ranking:</strong> <%= game.challenger.ranking %>
                                 <br />
-                                <strong>Winning percentage:</strong> <%= challenge.from_player.winning_percentage %>
+                                <strong>Winning percentage:</strong> <%= game.challenger.winning_percentage %>
                               </div>
                             </td>
                           </tr>
@@ -508,12 +506,12 @@
                         <table border="0" cellpadding="20" cellspacing="0" width="100%">
                           <tr mc:repeatable>
                             <td valign="top">
-                              <img src="<%= challenge.to_player.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
+                              <img src="<%= game.challenged.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
                               <div mc:edit="tiwc300_content01">
-                                <h4 class="h4"><%= challenge.to_player.name %></h4>
-                                <strong>Ranking:</strong> <%= challenge.to_player.ranking %>
+                                <h4 class="h4"><%= game.challenged.name %></h4>
+                                <strong>Ranking:</strong> <%= game.challenged.ranking %>
                                 <br />
-                                <strong>Winning percentage:</strong> <%= challenge.to_player.winning_percentage %>                          </div>
+                                <strong>Winning percentage:</strong> <%= game.challenged.winning_percentage %>                          </div>
                             </div>
                             </td>
                           </tr>
