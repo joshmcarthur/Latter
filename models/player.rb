@@ -24,13 +24,26 @@ class Player < Elo::Player
     self.save
   end
 
+  def ranking
+    Player.all(:order => :rating.desc).index(self) + 1
+  end
+
+  def winning_percentage(return_string = true)
+    return_string ? "50%" : 50
+  end
+
+  def result_of(game)
+    if game.winner == self
+      "won"
+    else
+      "lost"
+    end
+  end
+
   def in_progress_games(other_player)
     Game.all(:challenged => self, :challenger => other_player) +
       Game.all(:challenged => other_player, :challenger => self) &
         Game.all(:complete => false)
   end
 
-  def ranking
-    Player.all(:order => :rating.desc).index(self) + 1
-  end
 end

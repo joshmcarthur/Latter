@@ -7,6 +7,8 @@ class Game < Elo::Game
   property :complete, Boolean, :required => true, :default => false
   property :result, Float
   property :score, String
+  property :created_at, DateTime
+  property :updated_at, DateTime
 
   belongs_to :challenger, 'Player'
   belongs_to :challenged, 'Player'
@@ -50,14 +52,19 @@ class Game < Elo::Game
 
     self.complete = true
     raise "Record invalid" unless self.valid?
+    self.save
     Activity.completed_game(self)
 
     self
   end
 
+  def score_for(player)
+    self.winner?(player) ? self.score.split(' : ')[0].strip.to_i : self.score.split(' : ')[1].strip.to_i
+  end
+
   def winner?(other_player)
     # If result is 1.0, then the challenger won
-    self.result == 1.0 && other_player == self.challenger
+    other_player == self.winner
   end
 
   def winner
