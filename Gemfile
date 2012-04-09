@@ -12,6 +12,7 @@ gem 'pony'
 
 group :production do
   gem 'dm-postgres-adapter'
+  gem 'rack-rewrite', :require => 'rack/rewrite'
 end
 
 group :development, :test do
