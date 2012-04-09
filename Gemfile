@@ -22,6 +22,10 @@ group :guard do
   gem 'growl', '1.0.3'
 end
 
+group :development do
+  gem 'ruby-debug19'
+end
+
 group :development, :test do
   gem 'data_objects'
   gem 'do_sqlite3'
@@ -31,5 +35,4 @@ group :development, :test do
   gem 'rack-test', :require => 'rack/test'
   gem 'factory_girl'
 	gem 'awesome_print'
-  gem 'ruby-debug19'
 end
