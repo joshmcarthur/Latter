@@ -1,6 +1,6 @@
 .row-fluid.game
   .span3
-    .thumbnail{:class => challenge_status_of(game.challenger, game)}
+    .thumbnail{:class => game.challenger.result_of(game)}
       %img{:src => game.challenger.gravatar_url(:size => 260)}
   .span6.vs
     %h1 vs.
@@ -9,6 +9,6 @@
     - else
       .label To be Played
   .span3
-    .thumbnail{:class => challenge_status_of(game.challenged, challenge)}
+    .thumbnail{:class => game.challenged.result_of(game)}
       %img{:src => game.challenged.gravatar_url(:size => 260)}
 %hr
