@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Mailing" do
   before(:all) do
     Pony.stub!(:deliver)
+    Factory.create(:game)
     @current_player = Factory.create(:player)
     @opponent = Factory.create(:player)
 
@@ -20,7 +21,7 @@ describe "Mailing" do
       mail.subject.should eq("You've been Challenged!")
       mail.body.should_not be_empty
     end
-    get "/player/#{@opponent.id}/challenge"
+    post "/player/#{@opponent.id}/challenge"
   end
 
   it "should send a completed challenge notification" do
@@ -31,7 +32,7 @@ describe "Mailing" do
       mail.body.should_not be_empty
     end
     post "/games/#{Game.last.id}/complete", {
-      :challenge => {
+      :game => {
         :challenger_score => 15,
         :challenged_score => 6
       }
