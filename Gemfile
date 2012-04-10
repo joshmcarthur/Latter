@@ -24,6 +24,8 @@ end
 
 group :development do
   gem 'ruby-debug19'
+  gem 'taps', :git => 'https://github.com/joshmcarthur/taps.git'
+  gem 'heroku'
 end
 
 group :development, :test do
