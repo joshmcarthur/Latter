@@ -33,7 +33,7 @@ class Player < Elo::Player
   end
 
   def result_of(game)
-    if game.winner == self
+    if game.winner?(self)
       "won"
     else
       "lost"
