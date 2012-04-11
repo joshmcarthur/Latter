@@ -34,8 +34,7 @@ describe Game do
         'challenger_score' => 15,
         'challenged_score' => 6
       )
-      @game.complete = true # This is normally set from the controller
-      @game.save
+      @game = Game.get(@game.id)
     end
 
     it "should complete a game" do
@@ -47,8 +46,8 @@ describe Game do
     it "should add an activity item when a game is completed" do
       Activity.should_receive(:completed_game).with(an_instance_of(Game))
       @game.complete!(
-        'challenger_score' => 15,
-        'challenged_score' => 6
+        'challenger_score' => 6,
+        'challenged_score' => 15
       )
     end
 
