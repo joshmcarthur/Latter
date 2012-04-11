@@ -37,6 +37,17 @@ class Game < Elo::Game
   alias :one :challenger
   alias :two :challenged
 
+  # The below is from the Elo source code - we need to override it
+  # to properly set the database attribute
+  # Every time a result is set, it tells the Elo::Player
+  # objects to update their scores.
+  def result=(result)
+    super(result).tap do
+      calculate
+    end
+  end
+  alias process_result result=
+
 
   def complete!(scores = {})
     raise "Missing scores" unless scores.has_key?('challenger_score') and scores.has_key?('challenged_score')
