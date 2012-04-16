@@ -13,6 +13,7 @@ gem 'elo'
 
 group :production do
   gem 'dm-postgres-adapter'
+  gem 'rack-rewrite', :require => 'rack/rewrite'
 end
 
 group :guard do
