@@ -111,4 +111,18 @@ describe "Application", :type => :request do
       last_response.body.should eq @activities[3..-1].to_json
     end
   end
+
+  describe "Misc" do
+    it "sets a host" do
+      Latter.settings.host.should eq "http://latter.dev"
+    end
+
+    it "sets a database" do
+      DataMapper.repository(:default).adapter.options[:path].should eq ":memory:"
+    end
+
+    it "sets mailing options" do
+      Latter::PONY_OPTIONS.should be_a(Hash)
+    end
+  end
 end

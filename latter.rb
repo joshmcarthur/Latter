@@ -11,7 +11,7 @@ class Latter < Sinatra::Base
       :method => :test,
     }
     DataMapper.setup(:default, "sqlite3::memory:")
-    set :host, 'http://localhost:9292'
+    set :host, 'http://latter.dev'
   end
 
   configure :development do
