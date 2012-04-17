@@ -1,5 +1,10 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'bundler/setup'
 Bundler.require
+
+require 'simplecov'
+SimpleCov.start
 
 # Require RSpec helpers
 require 'capybara/rspec'

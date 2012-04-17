@@ -31,6 +31,7 @@ end
 group :development, :test do
   gem 'data_objects'
   gem 'do_sqlite3'
+  gem 'simplecov', :require => false
   gem 'rspec', '=2.4.0'
   gem 'capybara'
   gem 'capybara-webkit'
