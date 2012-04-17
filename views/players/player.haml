@@ -25,10 +25,9 @@
                 Edit Profile
             - if game = game_in_progress?(player)
               %a.enter_score.btn.btn-large.btn-large{:title => 'Enter Score', :"data-challenge-id" => game.id, :href => "#"}
-
                 %i.icon-plus-sign
                 Enter Score
-            - else
+            - elsif player != current_player
               %a.challenge.btn.btn-large{:"data-player-id" => player.id, :href => "#"}
                 %i.icon-screenshot
                 Challenge
