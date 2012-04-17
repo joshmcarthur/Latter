@@ -18,14 +18,14 @@ describe "Application", :type => :request do
     it "should login a valid user", :js => true do
       visit '/login'
       fill_in 'email', :with => @player.email
-      click_on 'Login'
+      click_button 'Login'
       current_path.should_not eq("/login")
     end
 
     it "should not login an invalid user" do
       visit "/login"
       fill_in "email", :with => "user@fake.com"
-      click_on 'Login'
+      click_button 'Login'
       current_path.should eq('/login')
     end
   end
@@ -35,7 +35,7 @@ describe "Application", :type => :request do
       visit "/logout"
       visit "/login"
       fill_in "email", :with => @player.email
-      click_on "Login"
+      click_button "Login"
     end
 
     it "should load a list of players" do
@@ -83,6 +83,28 @@ describe "Application", :type => :request do
     it "should display a profile page for a player" do
       visit "/player/#{@player.id}"
       page.should have_content(@player.name)
+    end
+  end
+
+  describe "Logged out" do
+    it "can access the players index" do
+      visit '/players'
+      page.should have_selector('.players')
+    end
+
+    it "cannot access a players page" do
+      visit "/players/#{@player.id}"
+      current_path.should eq "/login"
+    end
+
+    it "cannot see a list of games" do
+      visit "/games"
+      current_path.should eq "/login"
+    end
+
+    it "cannot create a challenge" do
+      post "/players/#{@player.id}/challenge"
+      last_response.should be_redirect
     end
   end
 
