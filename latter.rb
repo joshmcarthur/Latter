@@ -1,4 +1,3 @@
-
 class Latter < Sinatra::Base
   # Setup our root paths
   set :root, File.dirname(__FILE__)
@@ -237,7 +236,7 @@ class Latter < Sinatra::Base
     case path
     when /\A\/\Z/
       return false
-    when/\A\/players\Z/
+    when /\A\/players\Z/
       return false
     when /\A\/login\Z/
       return false
