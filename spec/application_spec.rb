@@ -84,10 +84,30 @@ describe "Application", :type => :request do
       visit "/player/#{@player.id}"
       page.should have_content(@player.name)
     end
+
+    it "should show an edit page for the current player" do
+      visit '/player/edit'
+      page.should have_content @player.name
+    end
+
+    it "should update the player" do
+      visit '/player/edit'
+      fill_in 'player[email]', :with => 'testing@latter.dev'
+      click_button 'Save'
+
+      @player.reload
+      @player.email.should eq "testing@latter.dev"
+    end
+
+    it "should logout" do
+      visit '/logout'
+      current_path.should eq '/login'
+    end
   end
 
   describe "Activity Stream" do
     before(:all) do
+      logout
       login_as(all_players.first)
       @activities = []
       5.times do
@@ -109,6 +129,28 @@ describe "Application", :type => :request do
     it "should allow passing in a last modified date to filter activities" do
       get '/activities.json', :modified_since => @activities[2..-1].first.created_at
       last_response.body.should eq @activities[3..-1].to_json
+    end
+  end
+
+  describe "Pages" do
+    before :each do
+      logout
+      login_as(all_players.first)
+    end
+
+    it "should get the 'about' page" do
+      get '/pages/rules'
+      last_response.should be_ok
+    end
+
+    it "should not allow POST requests to pages" do
+      post '/pages/rules'
+      last_response.status.should be 404
+    end
+
+    it "should 404 when a page is not found" do
+      get '/pages/fake'
+      last_response.status.should be 404
     end
   end
 
