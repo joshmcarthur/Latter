@@ -93,17 +93,13 @@ class Latter < Sinatra::Base
     haml :"players/form"
   end
 
-  get '/player/:id/edit' do
-    @player = Player.get(params[:id])
-    not_found?(@player)
-
+  get '/player/edit' do
+    @player = current_player
     haml :"players/form"
   end
 
-  post '/player/:id/update' do
-    @player = Player.get(params[:id])
-    not_found?(@player)
-
+  post '/player/update' do
+    @player = current_player
     @player.update!(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form")
   end
 
@@ -119,21 +115,6 @@ class Latter < Sinatra::Base
     @player.saved? ? redirect("/player/#{@player.id}") : error(400, I18N[:record_not_saved])
   end
 
-  post '/player/:id' do
-    @player = Player.get(params[:id])
-    not_found?(@player)
-
-    updated = @player.update! params[:player]
-    updated ? redirect("/player/#{params[:id]}") : error(400, I18N[:record_not_saved])
-  end
-
-  post '/player/:id/delete' do
-    @player = Player.get(params[:id])
-    not_found?(@player)
-
-    @player.destroy
-    redirect '/players'
-  end
 
   post '/player/:id/challenge' do
     @game = Game.create(
