@@ -1,5 +1,5 @@
 .row
-  %form.span6.well.offset3{:method => 'post', :action => !@player.new? ? "/player/#{@player.id}/update" : "/player"}
+  %form.span6.well.offset3{:method => 'post', :action => !@player.new? ? "/player/update" : "/player"}
     %fieldset
       %legend= !@player.new? ? "Editing #{@player.name}" : "New Player"
       .control-group
