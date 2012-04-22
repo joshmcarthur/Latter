@@ -86,7 +86,4 @@ class Game < Elo::Game
     !self.winner?(other_player)
   end
 
-  def loser
-    self.result != 1.0 ? self.challenged : self.challenger
-  end
 end

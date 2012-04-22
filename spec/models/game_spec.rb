@@ -59,5 +59,10 @@ describe Game do
       @game.loser?(@game.challenged).should be_true
     end
 
+    it "should return the correct score for each player" do
+      @game.score_for(@game.challenger).should eq 15
+      @game.score_for(@game.challenged).should eq 6
+    end
+
   end
 end
