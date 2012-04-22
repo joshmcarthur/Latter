@@ -225,7 +225,7 @@ a.player_email i { margin: 3px; }
   /* Player row - switch to more block elements */
   .player .statistics { float: none; }
   .player .controls { float: none; margin-top: 10px; margin-left: 0; }
-  .player .controls .btn { width: 40%; font-size: 14px; }
+  .player .controls .btn { width: 39%; font-size: 14px; }
   .player .row-fluid:last-child { position: relative; }
   .player .row-fluid:last-child .span2 { /* Ranking container */
     position: absolute;
