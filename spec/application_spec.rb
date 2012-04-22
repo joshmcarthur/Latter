@@ -101,6 +101,7 @@ describe "Application", :type => :request do
 
     it "should logout" do
       visit '/logout'
+      visit '/games' # <- This page needs a login
       current_path.should eq '/login'
     end
   end
