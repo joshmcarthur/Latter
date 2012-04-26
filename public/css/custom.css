@@ -198,7 +198,7 @@ a.player_email i { margin: 3px; }
   .game.row-fluid .span3, .game.row-fluid .span6 { float: left; }
   .game.row-fluid .span3 { width: 23.404255317%; }
   .game.row-fluid .span6 { width: 48.93617020799999%; }
-  .game.row-fluid .thumbnail > img { height: 13%; }
+  /*.game.row-fluid .thumbnail > img { height: 13%; }*/
   .game.row-fluid .vs { margin: auto 2%; }
   .game.row-fluid .vs h1 { font-size: 75px; }
 
