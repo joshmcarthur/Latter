@@ -17,7 +17,7 @@
     %title Latter
 
     %script{:type => 'text/javascript', :src => '/js/modernizr.min.js'}
-    
+
     - if ENV['GA_TRACKING_CODE']
       :javascript
         var _gaq = _gaq || [];
@@ -28,7 +28,7 @@
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
-    
+
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
@@ -70,7 +70,7 @@
     %script{:type => 'text/javascript', :src => '/js/application.js'}
     - if current_player
       :javascript
-        $(document).ready(pollActivity)
-        fetchActivities(function(data) {
-          addActivities(data);
-        });
+        //$(document).ready(pollActivity)
+        //fetchActivities(function(data) {
+        //  addActivities(data);
+        //});
