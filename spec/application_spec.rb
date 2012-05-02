@@ -99,6 +99,23 @@ describe "Application", :type => :request do
       @player.email.should eq "testing@latter.dev"
     end
 
+    it "should open the live stream modal", :js => true do
+      visit '/players'
+      click_link 'Watch'
+      page.should have_selector '.modal#live_stream'
+    end
+
+    it "should close the live stream modal and delete the node", :js => true do
+      visit '/players'
+      click_link 'Watch'
+      page.should have_selector '.modal#live_stream'
+      within '.modal#live_stream' do
+        click_button 'x'
+      end
+
+      page.should_not have_selector '.modal#live_stream'
+    end
+
     it "should logout" do
       visit '/logout'
       visit '/games' # <- This page needs a login
