@@ -2,6 +2,7 @@ jQuery(function()
 {
   challengeButton()
   enterScoreButton()
+  watchButton()
 });
 
 var challengeButton = function() {
@@ -15,6 +16,38 @@ var challengeButton = function() {
       url: "/player/" + player_id + "/challenge",
       dataType: 'script'
     });
+
+    return false;
+  });
+}
+
+var watchButton = function() {
+  $('a#watch').click(function(event) {
+    $(this).attr('href', null)
+    event.stopPropagation();
+    event.preventDefault();
+    var player = $("<div class='modal' id='live_stream'>");
+    var header = $("<div class='modal-header'>");
+    header.append($("<button class='close' data-dismiss='modal'>x</button>"));
+    header.append($("<h3>Live Stream</h3>"));
+
+    player.append(header)
+
+    var body = $("<div class='modal-body'></div>")
+
+    player.append(body)
+
+    body.append("<object type='application/x-shockwave-flash' height='400' width='530' id='jtv_flash' data='http://www.justin.tv/widgets/live_embed_player.swf?auto_play=false&amp;backgroundImage=&amp;channel=sudojosh&amp;hostname=www.justin.tv&amp;start_volume=0.0' bgcolor='#000000'>    <param name='allowFullScreen' value='true' />    <param name='allowScriptAccess' value='always' />    <param name='allowNetworking' value='all' />    <param name='movie' value='http://www.justin.tv/widgets/live_embed_player.swf' />    <param name='flashvars' value='auto_play=false&amp;backgroundImage=&amp;channel=sudojosh&amp;hostname=www.justin.tv&amp;start_volume=0.0' /></object>")
+
+    player.on('hidden', function() {
+      player.remove()
+    });
+
+    $('body').append(player)
+
+
+    player.modal('show');
+
 
     return false;
   });
