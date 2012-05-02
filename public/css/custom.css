@@ -9,7 +9,7 @@
 }
 
 /* Bootstrap override for login page */
-.input-prepend .add-on, .input-prepend .btn { margin-right: -5px; margin-top: -8px; }
+.input-prepend .add-on, .input-prepend .btn { margin-right: -5px;  }
 
 /* Make sure ranking doesn't change on hover */
 .ranking.label-important:hover, .ranking .label-important:hover {
