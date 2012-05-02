@@ -5,7 +5,7 @@ class Latter < Sinatra::Base
   enable :sessions
   enable :static
 
-  set :session_secret, ENV['SESSION_SECRET']
+
 
   configure :test do
     PONY_OPTIONS = {
@@ -38,6 +38,7 @@ class Latter < Sinatra::Base
     }
     DataMapper.setup(:default, ENV['DATABASE_URL'])
     set :host, ENV['HOST']
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   configure do
