@@ -2,10 +2,12 @@ class Latter < Sinatra::Base
   # Setup our root paths
   set :root, File.dirname(__FILE__)
   Dir[File.join(settings.root, 'models', '*.rb')].each { |rb| require rb }
-  enable :sessions
+
+  use Rack::Session::Cookie,  :key => 'latter_session',
+    :path => '/',
+    :secret => ENV['SESSION_SECRET']
+
   enable :static
-
-
 
   configure :test do
     PONY_OPTIONS = {
