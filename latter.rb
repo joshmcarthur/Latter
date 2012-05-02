@@ -5,6 +5,8 @@ class Latter < Sinatra::Base
   enable :sessions
   enable :static
 
+  set :session_secret, ENV['SESSION_SECRET']
+
   configure :test do
     PONY_OPTIONS = {
       :method => :test,
