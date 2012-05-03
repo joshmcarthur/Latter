@@ -72,7 +72,7 @@
     %script{:type => 'text/javascript', :src => '/js/application.js'}
     - if current_player
       :javascript
-        //$(document).ready(pollActivity)
-        //fetchActivities(function(data) {
-        //  addActivities(data);
-        //});
+        $(document).ready(pollActivity)
+        fetchActivities(function(data) {
+          addActivities(data);
+        });
