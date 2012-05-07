@@ -163,7 +163,7 @@ a.player_email i { margin: 3px; }
 
   /* A Player row */
   .player { border-radius: 5px; }
-  .player .stat-group { display: none; }
+  .player .stat-group { text-align: center; }
   .player .thumbnail { float: left; }
   .player .thumbnail > img { max-height: 48px; }
   .player h3 { float: left; margin-left: 5%; line-height: 48px; }
