@@ -194,6 +194,21 @@ describe "Application", :type => :request do
     end
   end
 
+  describe "Players" do
+    before :each do
+      logout
+      login_as(all_players.first)
+    end
+
+    it "should show each players points", :js => true do
+      visit '/players'
+      within '.players .player:first' do
+        page.should have_content "Points: #{all_players.first.ranking}"
+      end
+
+    end
+  end
+
   describe "Misc" do
     it "sets a host" do
       Latter.settings.host.should eq "http://latter.dev"
