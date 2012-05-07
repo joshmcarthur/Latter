@@ -13,6 +13,7 @@
           /.progress
           /  .bar{:style => "width:#{player.winning_percentage}"}
           /.label= "#{player.points} Points - wins #{player.winning_percentage} of the time"
+          = "Points: #{player.rating}"
       .span5.controls
         .btn-group
           - if current_player
