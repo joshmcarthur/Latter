@@ -192,20 +192,30 @@ describe "Application", :type => :request do
       get '/pages/fake'
       last_response.status.should be 404
     end
+
   end
 
   describe "Players" do
-    before :each do
-      logout
-      login_as(all_players.first)
-    end
-
     it "should show each players points", :js => true do
       visit '/players'
       within '.players .player:first' do
         page.should have_content "Points: #{all_players.first.ranking}"
       end
+    end
+  end
 
+  describe "Statistics" do
+    before(:each) do
+      visit "/logout"
+      visit "/login"
+      fill_in "email", :with => @player.email
+      click_button "Login"
+    end
+
+    it "should show table of users", :js => true do
+      visit '/statistics'
+      page.should have_selector 'table#statistics'
+      page.should have_selector('table#statistics tbody tr', :count => all_players.count)
     end
   end
 
