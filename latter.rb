@@ -115,7 +115,7 @@ class Latter < Sinatra::Base
 
   get '/player/:id' do
     @player = Player.get(params[:id])
-    #not_found?(@player)
+    not_found?(@player)
 
     haml :"players/show"
   end
@@ -155,7 +155,7 @@ class Latter < Sinatra::Base
 
   post '/games/:id/complete' do
     @game = Game.get(params[:id])
-    #not_found?(@game)
+    not_found?(@game)
 
     @game.complete!(params[:game])
 
@@ -201,9 +201,9 @@ class Latter < Sinatra::Base
     )
   end
 
-  #def not_found?(klass = nil)
-  #  error(404, "Record not found") unless klass
-  #end
+  def not_found?(klass = nil)
+    error(404, "Record not found") unless klass
+  end
 
   helpers do
     def current_player
