@@ -196,11 +196,6 @@ describe "Application", :type => :request do
   end
 
   describe "Players" do
-    before :each do
-      logout
-      login_as(all_players.first)
-    end
-
     it "should show each players points", :js => true do
       visit '/players'
       within '.players .player:first' do
@@ -210,18 +205,17 @@ describe "Application", :type => :request do
   end
 
   describe "Statistics" do
-    before :each do
-      logout
-      login_as(all_players.first)
+    before(:each) do
+      visit "/logout"
+      visit "/login"
+      fill_in "email", :with => @player.email
+      click_button "Login"
     end
 
     it "should show table of users", :js => true do
       visit '/statistics'
       page.should have_selector 'table#statistics'
-
-      within 'table#statistics tbody' do
-        page.should have_selector('tr', :count => all_players.count)
-      end
+      page.should have_selector('table#statistics tbody tr', :count => all_players.count)
     end
   end
 
