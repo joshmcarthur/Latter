@@ -18,17 +18,21 @@ class Player < Elo::Player
     challenger_games + challenged_games
   end
 
-  def games_won
-    count = 0
-    count += challenger_games.count(:conditions => ["result = 1.0"])
-    count += challenged_games.count(:conditions => ["result != 1.0"])
-    count
-  end
+  def games_count(status = :total)
+    challenger_condition = ["complete = 't'"]
+    challenged_condition = ["complete = 't'"]
 
-  def games_lost
-    count = 0
-    count += challenger_games.count(:conditions => ["result != 1.0"])
-    count += challenged_games.count(:conditions => ["result = 1.0"])
+    case status
+    when :won
+      challenger_condition += ["result = 1.0"]
+      challenged_condition += ["result != 1.0"]
+    when :lost
+      challenger_condition += ["result != 1.0"]
+      challenged_condition += ["result = 1.0"]
+    end
+
+    count =  challenger_games.count(:conditions => [challenger_condition.join(" AND ")])
+    count += challenged_games.count(:conditions => [challenged_condition.join(" AND ")])
     count
   end
 
