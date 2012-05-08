@@ -114,7 +114,7 @@ class Latter < Sinatra::Base
 
   get '/player/:id' do
     @player = Player.get(params[:id])
-    not_found?(@player)
+    #not_found?(@player)
 
     haml :"players/show"
   end
@@ -154,7 +154,7 @@ class Latter < Sinatra::Base
 
   post '/games/:id/complete' do
     @game = Game.get(params[:id])
-    not_found?(@game)
+    #not_found?(@game)
 
     @game.complete!(params[:game])
 
