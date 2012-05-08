@@ -1,0 +1,25 @@
+.page-header
+  %h1 Statistics
+
+.row-fluid
+  .span12
+
+    %table#statistics.table.table-bordered.table-striped
+      %thead
+        %tr
+          %th Player
+          %th Rank
+          %th Points
+          %th Wins
+          %th Losses
+          %th Played
+
+      %tbody
+        - @players.each do |player|
+          %tr
+            %td= player.name
+            %td= player.ranking
+            %td= player.rating
+            %td= player.games_won
+            %td= player.games_lost
+            %td= player.games.count

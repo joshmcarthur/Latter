@@ -18,6 +18,20 @@ class Player < Elo::Player
     challenger_games + challenged_games
   end
 
+  def games_won
+    count = 0
+    count += challenger_games.count(:conditions => ["result == 1.0"])
+    count += challenged_games.count(:conditions => ["result != 1.0"])
+    count
+  end
+
+  def games_lost
+    count = 0
+    count += challenger_games.count(:conditions => ["result != 1.0"])
+    count += challenged_games.count(:conditions => ["result == 1.0"])
+    count
+  end
+
   def played(game)
     self.rating = game.ratings[self].new_rating
     self.pro    = true if pro_rating?
