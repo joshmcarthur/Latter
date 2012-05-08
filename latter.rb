@@ -200,9 +200,9 @@ class Latter < Sinatra::Base
     )
   end
 
-  def not_found?(klass = nil)
-    error(404, "Record not found") unless klass
-  end
+  #def not_found?(klass = nil)
+  #  error(404, "Record not found") unless klass
+  #end
 
   helpers do
     def current_player
