@@ -20,15 +20,15 @@ class Player < Elo::Player
 
   def games_won
     count = 0
-    count += challenger_games.count(:conditions => ["result == 1.0"])
-    count += challenged_games.count(:conditions => ["result != 1.0"])
+    count += challenger_games.count#(:conditions => ["result == 1.0"])
+    count += challenged_games.count#(:conditions => ["result != 1.0"])
     count
   end
 
   def games_lost
     count = 0
-    count += challenger_games.count(:conditions => ["result != 1.0"])
-    count += challenged_games.count(:conditions => ["result == 1.0"])
+    count += challenger_games.count#(:conditions => ["result != 1.0"])
+    count += challenged_games.count#(:conditions => ["result == 1.0"])
     count
   end
 
