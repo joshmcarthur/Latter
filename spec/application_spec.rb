@@ -214,8 +214,7 @@ describe "Application", :type => :request do
 
     it "should show table of users", :js => true do
       visit '/statistics'
-      page.should have_selector 'table#statistics'
-      page.should have_selector('table#statistics tbody tr', :count => all_players.count)
+      page.should have_selector('table#statistics tbody tr')
     end
   end
 
