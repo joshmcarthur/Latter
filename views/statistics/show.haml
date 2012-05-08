@@ -20,6 +20,6 @@
             %td= player.name
             %td= player.ranking
             %td= player.rating
-            %td= player.games_won
-            %td= player.games_lost
-            %td= player.games.count
+            %td= player.games_count(:won)
+            %td= player.games_count(:lost)
+            %td= player.games_count(:total)
