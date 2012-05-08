@@ -122,6 +122,10 @@ a.player_email i { margin: 3px; }
   line-height: 20px;
 }
 
+table#statistics {
+  width: 100%;
+}
+
 
 @media (max-width: 480px) {
   /* Current user profile */

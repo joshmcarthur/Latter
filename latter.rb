@@ -65,6 +65,11 @@ class Latter < Sinatra::Base
     redirect('/players')
   end
 
+  get '/statistics' do
+    @players = Player.all(:order => :rating.desc)
+    haml :"statistics/show"
+  end
+
   get '/pages/:slug' do
     haml :"pages/#{params[:slug]}"
   end
