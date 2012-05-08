@@ -2,6 +2,7 @@ source :rubygems
 
 gem 'sinatra'
 gem 'data_mapper'
+gem 'dm-aggregates'
 gem 'dm-observer'
 gem 'dm-migrations'
 gem 'dm-validations'

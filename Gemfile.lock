@@ -189,6 +189,7 @@ DEPENDENCIES
   capybara-webkit
   data_mapper
   data_objects
+  dm-aggregates
   dm-migrations
   dm-observer
   dm-postgres-adapter
