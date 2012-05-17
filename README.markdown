@@ -19,7 +19,7 @@ Tests:
 
 Tests are a mixture of Rack::Test and Capybara/Selenium. Selenium requires Firefox be installed and accessible somewhere on your path, everything else should be fine.
 
-You can run the tests by executing `bundle exec rake spec` from within the project directory.
+You can run the tests by executing `bundle exec rake spec` from within the project directory (you'll need to have a SQLite3 or PostgreSQL app set up.
 
 License:
 ---
