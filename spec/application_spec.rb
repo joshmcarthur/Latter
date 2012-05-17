@@ -49,6 +49,8 @@ describe "Application", :type => :request do
       visit "/players/new"
       fill_in 'player[name]', :with => @new_player.name
       fill_in 'player[email]', :with => @new_player.email
+      fill_in 'player[password]', :with => @new_player.password
+      fill_in 'player[password_confirmation]', :with => @new_player.password
       click_on 'Save'
       page.should have_content(@new_player.name)
     end
@@ -93,6 +95,9 @@ describe "Application", :type => :request do
     it "should update the player" do
       visit '/player/edit'
       fill_in 'player[email]', :with => 'testing@latter.dev'
+      fill_in 'player[password]', :with => @player.password
+      fill_in 'player[password_confirmation]', :with => @player.password
+
       click_button 'Save'
 
       @player.reload

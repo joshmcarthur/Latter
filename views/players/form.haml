@@ -13,6 +13,15 @@
             .add-on
               %i.icon-envelope
             %input{:type => 'email', :name => 'player[email]', :value => @player.email}
+      .control-group
+        %label{:for => 'player[password]'} Password
+        .controls
+          %input{:type => 'password', :name => 'player[password]'}
+      .control-group
+        %label{:for => 'player[password_confirmation]'} Password Confirmation
+        .controls
+          %input{:type => 'password', :name => 'player[password_confirmation]'}
+
       .form-actions
         %button.btn.btn-primary.btn-large{:type => 'submit'} Save
         %button.btn.btn-large{:type => 'reset'} Clear

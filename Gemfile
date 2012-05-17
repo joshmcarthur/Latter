@@ -11,6 +11,8 @@ gem 'haml'
 gem 'gravtastic'
 gem 'pony'
 gem 'elo'
+gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'warden'
 
 group :production do
   gem 'dm-postgres-adapter'

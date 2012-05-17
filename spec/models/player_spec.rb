@@ -22,6 +22,8 @@ describe Player do
 
   it "should return in progress games where the player is the gamer" do
     @other_player = Factory.create(:player)
+    require 'ruby-debug'
+    debugger
     @game = Factory.create(:game, :challenger => @player, :challenged => @other_player, :complete => false)
     @player.in_progress_games(@other_player).first.id.should eq(@game.id)
   end
@@ -34,6 +36,18 @@ describe Player do
 
   it "should have a gravatar" do
     @player.gravatar_url.should include("gravatar.com")
+  end
+
+  describe "Authentication" do
+    subject do
+      Factory.create(:player, :password => 'test123')
+    end
+
+    it "should authenticate a player with a valid password" do
+      Player.authenticate(subject.email, subject.password).should eq subject
+    end
+
+    it "should not authenticate a player with an invalid password"
   end
 end
 

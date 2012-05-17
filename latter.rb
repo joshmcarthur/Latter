@@ -1,12 +1,16 @@
 class Latter < Sinatra::Base
   # Setup our root paths
   set :root, File.dirname(__FILE__)
+
+  # Require models
   Dir[File.join(settings.root, 'models', '*.rb')].each { |rb| require rb }
+
 
   use Rack::Session::Cookie,  :key => 'latter_session',
     :path => '/',
     :secret => ENV['SESSION_SECRET']
 
+  # Serve static files from ./public
   enable :static
 
   configure :test do
