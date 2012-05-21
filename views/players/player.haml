@@ -21,7 +21,7 @@
               %i.icon-user
               View Profile
             - if current_player == player
-              %a.btn.btn-large{:href => "/player/#{player.id}/edit"}
+              %a.btn.btn-large{:href => "/player/edit"}
                 %i.icon-edit
                 Edit Profile
             - if game = game_in_progress?(player)
