@@ -6,7 +6,7 @@ class Player < Elo::Player
   property :id, Serial
   property :name, String, :required => true
   property :email, String, :required => true, :unique_index => true
-  property :encrypted_password, String, :length => 255, :required => true
+  property :encrypted_password, String, :length => 255, :required => true, :default => ''
   property :rating, Integer, :required => true, :default => Elo.config.default_rating
   property :pro, Boolean, :required => true, :default => false
   property :starter, Boolean, :required => true, :default => true
@@ -81,8 +81,13 @@ class Player < Elo::Player
   end
 
   def self.authenticate(email, password)
-    player = Player.get(:email => email)
-    Password.new(player.encrypted_password).is_password? password if player
+    player = Player.first(:email => email)
+
+    if player and Password.new(player.encrypted_password).is_password?(password)
+      return player
+    else
+      return nil
+    end
   end
 
 end

@@ -23,7 +23,7 @@ describe Game do
   end
 
   it "should create an activity when a game is created" do
-    game_attributes = Factory.attributes_for(:game)
+    game_attributes = FactoryGirl.attributes_for(:game)
     Activity.should_receive(:new_game).with(an_instance_of(Game))
     Game.create(game_attributes)
   end

@@ -18,6 +18,7 @@ describe "Application", :type => :request do
     it "should login a valid user", :js => true do
       visit '/login'
       fill_in 'email', :with => @player.email
+      fill_in 'password', :with => @player.password
       click_button 'Login'
       current_path.should_not eq("/login")
     end
@@ -25,6 +26,7 @@ describe "Application", :type => :request do
     it "should not login an invalid user" do
       visit "/login"
       fill_in "email", :with => "user@fake.com"
+      fill_in "password", :with => "password"
       click_button 'Login'
       current_path.should eq('/login')
     end
@@ -35,6 +37,7 @@ describe "Application", :type => :request do
       visit "/logout"
       visit "/login"
       fill_in "email", :with => @player.email
+      fill_in "password", :with => @player.password
       click_button "Login"
     end
 
@@ -45,7 +48,7 @@ describe "Application", :type => :request do
     end
 
     it "should allow a new player to be created" do
-      @new_player = Factory.build(:player)
+      @new_player = FactoryGirl.build(:player)
       visit "/players/new"
       fill_in 'player[name]', :with => @new_player.name
       fill_in 'player[email]', :with => @new_player.email
@@ -94,9 +97,11 @@ describe "Application", :type => :request do
 
     it "should update the player" do
       visit '/player/edit'
-      fill_in 'player[email]', :with => 'testing@latter.dev'
-      fill_in 'player[password]', :with => @player.password
-      fill_in 'player[password_confirmation]', :with => @player.password
+      fill_in 'Email', :with => 'testing@latter.dev'
+      fill_in 'Password', :with => @player.password
+      fill_in 'Password Confirmation', :with => @player.password
+
+      save_and_open_page
 
       click_button 'Save'
 
@@ -156,7 +161,7 @@ describe "Application", :type => :request do
       login_as(all_players.first)
       @activities = []
       5.times do
-        @activities << Factory.create(:activity)
+        @activities << FactoryGirl.create(:activity)
         sleep 1
       end
     end
@@ -214,6 +219,7 @@ describe "Application", :type => :request do
       visit "/logout"
       visit "/login"
       fill_in "email", :with => @player.email
+      fill_in "password", :with => @player.password
       click_button "Login"
     end
 

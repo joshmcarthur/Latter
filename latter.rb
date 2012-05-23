@@ -84,7 +84,7 @@ class Latter < Sinatra::Base
   end
 
   post '/login' do
-    if current_player = Player.first(:email => params[:email].downcase)
+    if current_player = Player.authenticate(params[:email], params[:password])
       session[:player_id] = current_player.id
       redirect '/players'
     else

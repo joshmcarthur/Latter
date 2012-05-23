@@ -5,22 +5,22 @@
       .control-group
         %label{:for => 'player[name]'} Name
         .controls
-          %input{:type => 'text', :name => 'player[name]', :value => @player.name}
+          %input#player_name{:type => 'text', :name => 'player[name]', :value => @player.name}
       .control-group
         %label{:for => 'player[email]'} Email
         .controls
           .input-prepend
             .add-on
               %i.icon-envelope
-            %input{:type => 'email', :name => 'player[email]', :value => @player.email}
+            %input#player_email{:type => 'email', :name => 'player[email]', :value => @player.email}
       .control-group
         %label{:for => 'player[password]'} Password
         .controls
-          %input{:type => 'password', :name => 'player[password]'}
+          %input#player_password{:type => 'password', :name => 'player[password]'}
       .control-group
         %label{:for => 'player[password_confirmation]'} Password Confirmation
         .controls
-          %input{:type => 'password', :name => 'player[password_confirmation]'}
+          %input#player_password_confirmation{:type => 'password', :name => 'player[password_confirmation]'}
 
       .form-actions
         %button.btn.btn-primary.btn-large{:type => 'submit'} Save

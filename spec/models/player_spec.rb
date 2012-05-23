@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Player do
   before(:all) do
     @player = all_players.first
-    @game = Factory.create(
+    @game = FactoryGirl.create(
       :game,
       :challenger => @player,
       :winner => @player,
@@ -21,16 +21,14 @@ describe Player do
 
 
   it "should return in progress games where the player is the gamer" do
-    @other_player = Factory.create(:player)
-    require 'ruby-debug'
-    debugger
-    @game = Factory.create(:game, :challenger => @player, :challenged => @other_player, :complete => false)
+    @other_player = FactoryGirl.create(:player)
+    @game = FactoryGirl.create(:game, :challenger => @player, :challenged => @other_player, :complete => false)
     @player.in_progress_games(@other_player).first.id.should eq(@game.id)
   end
 
   it "should return in progress games where the player is the defender" do
-    @other_player = Factory.create(:player)
-    @game = Factory.create(:game, :challenged => @player, :challenger => @other_player, :complete => false)
+    @other_player = FactoryGirl.create(:player)
+    @game = FactoryGirl.create(:game, :challenged => @player, :challenger => @other_player, :complete => false)
     @player.in_progress_games(@other_player).first.id.should eq(@game.id)
   end
 
@@ -40,14 +38,16 @@ describe Player do
 
   describe "Authentication" do
     subject do
-      Factory.create(:player, :password => 'test123')
+      FactoryGirl.create(:player, :password => 'test123')
     end
 
     it "should authenticate a player with a valid password" do
       Player.authenticate(subject.email, subject.password).should eq subject
     end
 
-    it "should not authenticate a player with an invalid password"
+    it "should not authenticate a player with an invalid password" do
+      Player.authenticate(subject.email, "password").should_not eq subject
+    end
   end
 end
 

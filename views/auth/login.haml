@@ -9,6 +9,12 @@
             .input-prepend
               %span.add-on @
               %input#email{:size => 16, :name => 'email', :type => "email"}
+        .control-group
+          %label.control-label{:for => "password"} Password:
+          .controls
+            .input-prepend
+              %span.add-on #
+              %input#password{:size => 16, :name => 'password', :type => 'password'}
         %button.btn.btn-large.btn-primary{:type => 'submit'} Login
         .clearfix
 

@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "Mailing" do
   before(:all) do
     Pony.stub!(:deliver)
-    Factory.create(:game)
-    @current_player = Factory.create(:player)
-    @opponent = Factory.create(:player)
+    FactoryGirl.create(:game)
+    @current_player = FactoryGirl.create(:player)
+    @opponent = FactoryGirl.create(:player)
 
     login_as @current_player
   end
