@@ -113,7 +113,7 @@ class Latter < Sinatra::Base
 
   post '/player/update' do
     @player = current_player
-    @player.update!(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form")
+    @player.update(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form")
   end
 
   get '/player/:id' do
