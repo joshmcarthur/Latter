@@ -97,13 +97,13 @@ describe "Application", :type => :request do
 
     it "should update the player" do
       visit '/player/edit'
-      fill_in 'Email', :with => 'testing@latter.dev'
-      fill_in 'Password', :with => @player.password
-      fill_in 'Password Confirmation', :with => @player.password
-
-      save_and_open_page
-
+      fill_in 'player[email]', :with => 'testing@latter.dev'
+      fill_in 'player[password]', :with => @player.password
+      fill_in 'player[password_confirmation]', :with => @player.password
       click_button 'Save'
+
+      # We need to wait for the application to process and save the record
+      sleep 1
 
       @player.reload
       @player.email.should eq "testing@latter.dev"
