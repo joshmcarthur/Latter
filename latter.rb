@@ -70,7 +70,6 @@ class Latter < Sinatra::Base
   end
 
   get '/statistics' do
-    puts "Hit statistics"
     @players = Player.all(:order => :rating.desc)
     haml :"statistics/show"
   end
