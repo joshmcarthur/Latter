@@ -20,7 +20,7 @@ describe Activity do
   end
 
   it "should generate a message for a new game" do
-    game_attributes = Factory.attributes_for(:game)
+    game_attributes = FactoryGirl.attributes_for(:game)
     new_game = "#{game_attributes[:challenger].name} challenged #{game_attributes[:challenged].name}."
     Activity.should_receive(:create).with({:message => new_game}).and_return(true)
     Game.create(game_attributes)
