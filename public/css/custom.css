@@ -8,6 +8,10 @@
   background: url(/img/latter.png) no-repeat 50% 50%;
 }
 
+.thumbnail {
+  background: #FFF;
+}
+
 /* Bootstrap override for login page */
 .input-prepend .add-on, .input-prepend .btn { margin-right: -5px;  }
 
