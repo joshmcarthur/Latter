@@ -113,6 +113,9 @@ class Latter < Sinatra::Base
 
   post '/player/update' do
     @player = current_player
+    if params[:player][:current_password].blank?
+      redirect '/player/edit' and return
+    end
     @player.update(params[:player]) ? redirect("/player/#{@player.id}") : haml(:"players/form")
   end
 
@@ -134,6 +137,9 @@ class Latter < Sinatra::Base
       :challenger => current_player,
       :challenged => Player.get(params[:id])
     )
+
+    require 'ruby-debug'
+    debugger
 
     send_mail(
       :to => @game.challenged.email,

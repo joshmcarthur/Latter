@@ -98,6 +98,7 @@ describe "Application", :type => :request do
     it "should update the player" do
       visit '/player/edit'
       fill_in 'player[email]', :with => 'testing@latter.dev'
+      fill_in 'player[current_password]'
       fill_in 'player[password]', :with => @player.password
       fill_in 'player[password_confirmation]', :with => @player.password
       click_button 'Save'
@@ -108,6 +109,8 @@ describe "Application", :type => :request do
       @player.reload
       @player.email.should eq "testing@latter.dev"
     end
+
+    it "should not update the player if their password is not provided"
 
     it "should open the live stream modal", :js => true do
       visit '/players'

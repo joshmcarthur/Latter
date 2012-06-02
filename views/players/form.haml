@@ -14,6 +14,10 @@
               %i.icon-envelope
             %input#player_email{:type => 'email', :name => 'player[email]', :value => @player.email}
       .control-group
+        %label{:for => 'player[current_password]'} Current Password
+        .controls
+          %input#player_password{:type => 'password', :name => 'player[current_password]'}
+      .control-group
         %label{:for => 'player[password]'} Password
         .controls
           %input#player_password{:type => 'password', :name => 'player[password]'}

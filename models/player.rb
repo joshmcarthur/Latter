@@ -12,7 +12,7 @@ class Player < Elo::Player
   property :starter, Boolean, :required => true, :default => true
 
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :current_password
 
   has_gravatar
   has n, :challenger_games, 'Game', :child_key => [:challenger_id], :parent_key => [:id]
@@ -21,6 +21,18 @@ class Player < Elo::Player
   validates_with_block do
     if self.password != self.password_confirmation
       [false, "Password and password confirmation must match."]
+    else
+      [true]
+    end
+  end
+
+  validates_with_block do
+    if self.current_password
+      if self.password.blank? || self.password_confirmation.blank?
+        [false, "Password and password confirmation must not be empty."]
+      else
+        [true]
+       end
     else
       [true]
     end
