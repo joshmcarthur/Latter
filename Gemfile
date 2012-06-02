@@ -13,6 +13,27 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'growl'
+  gem 'capybara'
+  gem 'factory_girl_rails', '1.1.rc1'
+  gem 'database_cleaner'
+
+  # DRb server for testing frameworks
+  gem 'spork', '1.0.0rc'
+  gem 'simplecov', :require => false
+  gem "capybara-webkit"
+
+  # command line tool to easily handle events on file system modifications
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rspec'
+  gem 'heroku'
+  gem 'taps'
+  gem 'guard-spork'
+end
+
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'rack-pjax'
