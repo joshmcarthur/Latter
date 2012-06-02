@@ -34,7 +34,10 @@ group :development, :test do
   gem 'guard-spork'
 end
 
+group :development do
+  gem 'debugger'
+end
+
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'rack-pjax'
-gem 'debugger'
