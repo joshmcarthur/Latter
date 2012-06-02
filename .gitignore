@@ -1,5 +1,0 @@
-*.sqlite3
-coverage
-.DS_Store
-.sass-cache
-.rvmrc
