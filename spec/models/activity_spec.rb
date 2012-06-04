@@ -19,7 +19,7 @@ describe Activity do
   it "creates an activity for a new game" do
     game_attributes = FactoryGirl.attributes_for(:game)
     new_game = "#{game_attributes[:challenger].name} challenged #{game_attributes[:challenged].name}."
-    Activity.should_receive(:create).with({:message => new_game}).and_return(true)
+    Activity.should_receive(:create).with({:message => new_game}).at_least(1).times.and_return(true)
     Game.create(game_attributes)
   end
 
@@ -30,7 +30,7 @@ describe Activity do
       :challenged_score => 10
     })
     completed_game = "#{game.challenger.name} completed their game against #{game.challenged.name} and won! (#{game.score})"
-    Activity.should_receive(:create).with({:message => completed_game}).and_return(true)
+    Activity.should_receive(:create).with({:message => completed_game}).at_least(1).times.and_return(true)
     Activity.completed_game(game)
   end
 end
