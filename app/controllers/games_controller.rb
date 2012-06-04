@@ -53,6 +53,23 @@ class GamesController < ApplicationController
     end
   end
 
+  # POST /games/1/complete
+  # POST /games/1/complete.json
+  def complete
+    @game = current_player.games.find(params[:id])
+    @game.complete!(params[:game])
+
+    respond_to do |format|
+      if @game.save
+        format.html { redirect_to @game, notice: 'Game was completed.' }
+        format.json { render json: @game, status: :created, location: @game }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @game.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /games/1
   # DELETE /games/1.json
