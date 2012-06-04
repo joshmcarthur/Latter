@@ -7,7 +7,6 @@
 # Ignore bundler config
 /.bundle
 /.rvmrc
-/config/database.yml
 /coverage
 
 # Ignore the default SQLite database.
