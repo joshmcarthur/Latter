@@ -17,6 +17,11 @@ class Game < ActiveRecord::Base
   validates_numericality_of :result, :minimum => -1.0, :maximum => 1.0, :allow_nil => true
   validate :inverse_game_does_not_exist?
 
+  # Add a new game activity when a game is created
+  before_create do
+    Activity.new_game(self)
+  end
+
   # Public - result setter
   #
   # Every time a result is set, it tells the Player
