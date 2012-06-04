@@ -102,4 +102,14 @@ describe Player do
     end
   end
 
+  describe "Ranking" do
+    it "should change the ranking when a game is completed" do
+      game = FactoryGirl.build(:game, :challenged => subject)
+      game.complete!(:challenged_score => 21, :challenger_score => 15)
+      expect {
+        subject.send(:played, game)
+      }.to change(subject, :ranking)
+    end
+  end
+
 end

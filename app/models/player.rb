@@ -54,22 +54,6 @@ class Player < ActiveRecord::Base
     Player.order(:rating).select(:id).map(&:id).index(self.id) + 1
   end
 
-  # Public - Calculates a players rating when a game is completed
-  #
-  # This method is called by the Elo library and is used to update
-  # the player records when a game is completed. It also checks
-  # player ratings, starter, and pro values and updates these
-  # if necessary
-  #
-  # game - the completed game
-  #
-  # Returns true or false if the record has been saved
-  def played(game)
-    self.rating = game.ratings[self].new_rating
-    self.pro = true if pro_rating?
-
-    self.save
-  end
 
   # Public - Calculate whether this player is a rookie
   #
