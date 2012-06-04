@@ -8,6 +8,7 @@
 /.bundle
 /.rvmrc
 /config/database.yml
+/coverage
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

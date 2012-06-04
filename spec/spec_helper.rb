@@ -5,6 +5,7 @@ Spork.prefork do
     require 'simplecov'
     SimpleCov.start 'rails'
   end
+
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
@@ -14,19 +15,20 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'capybara/rails'
+  Dir[Rails.root.join('spec', 'support', '*.rb')].each { |f| require f }
 
   RSpec.configure do |config|
     config.include Devise::TestHelpers, :type => :controller
+    config.extend ControllerMacros, :type => :controller
 
     config.mock_with :rspec
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.start
-      OmniAuth.config.test_mode = true
     end
 
-    config.after(:suite) do
+    config.after(:each) do
       DatabaseCleaner.clean
     end
 

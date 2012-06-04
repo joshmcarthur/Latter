@@ -41,3 +41,7 @@ end
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'rack-pjax'
+gem 'elo'
+gem 'gravtastic'
+gem 'devise'
+gem 'object2module'
