@@ -6,4 +6,6 @@ Latter::Application.routes.draw do
   end
 
   resources :players
+
+  root :to => 'players#index'
 end
