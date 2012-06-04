@@ -2,6 +2,7 @@ class Player < ActiveRecord::Base
 
   PRO_K_FACTOR = 10
   STARTER_K_FACTOR = 25
+  DEFAULT_K_FACTOR = 15
 
   # 30 games
   STARTER_BOUNDARY = 30
@@ -23,6 +24,10 @@ class Player < ActiveRecord::Base
     :rating,
     :pro,
     :starter
+
+  validates_presence_of :name, :allow_blank => false
+  validates_numericality_of :rating, :minimum => 0
+  validates_inclusion_of :pro, :starter, :in => [true, false, nil]
 
   has_many :challenged_games, :class_name => 'Game', :foreign_key => 'challenged_id'
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id'
@@ -123,7 +128,7 @@ class Player < ActiveRecord::Base
     elsif starter?
       Player::STARTER_K_FACTOR
     else
-      0
+      Player::DEFAULT_K_FACTOR
     end
   end
 
