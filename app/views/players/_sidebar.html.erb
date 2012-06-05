@@ -1,5 +1,5 @@
 <% if current_player %>
-  <% cache cache_key_for(player, "profile") do %>
+  <% cache cache_key_for(current_player, "profile") do %>
     <%= render 'profile' %>
   <% end %>
 <% else %>

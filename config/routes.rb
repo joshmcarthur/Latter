@@ -8,5 +8,5 @@ Latter::Application.routes.draw do
   resources :players
 
   root :to => 'players#index'
-  match "/pages/*slug" => "pages#show"
+  match "/pages/*slug" => "pages#show", :as => 'page'
 end
