@@ -1,0 +1,9 @@
+<% if current_player %>
+  <% cache cache_key_for(player, "profile") do %>
+    <%= render 'profile' %>
+  <% end %>
+<% else %>
+  <% cache cache_key_for("sections", "about") do %>
+    <%= render 'pages/sections/about' %>
+  <% end %>
+<% end %>

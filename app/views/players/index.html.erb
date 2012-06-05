@@ -1,21 +1,7 @@
-<h1>Listing players</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @players.each do |player| %>
-  <tr>
-    <td><%= link_to 'Show', player %></td>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :sidebar do %>
+  <%= render 'sidebar' %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Player', new_player_path %>
+<ul id="players">
+  <%= render @players %>
+</ul>

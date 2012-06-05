@@ -20,29 +20,25 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Latter</a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/navigation' %>
+
+
 
     <div class="container">
       <div class="content" data-pjax-container>
-        <%= yield %>
+        <% if content_for?(:sidebar) %>
+          <div class="row-fluid">
+            <div class="span3">
+              <%= yield :sidebar %>
+            </div>
+        <% else %>
+          <div class="row-fluid">
+        <% end %>
+
+        <div class="span9">
+          <%= yield %>
+        </div>
+      </div>
       </div><!--/content-->
 
       <footer>
