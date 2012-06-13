@@ -1,0 +1,49 @@
+a.latter.brand {
+  padding-right: 0;
+  padding-left: 70px;
+  margin-left: 20px;
+  float: right;
+  font-weight: bold;
+  color: white;
+  background-image: image-url('latter.png');
+  background-repeat: no-repeat;
+}
+
+.ranking {
+  display: block;
+  padding: 15%;
+  font-size: 200%;
+  text-align: center;
+}
+
+.sidebar .profile,
+.sidebar .about {
+  background-color: #333;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10%;
+}
+
+.about {
+  a {
+    color: whiteSmoke;
+    line-height: 150%;
+    border-bottom: dotted 1px whiteSmoke;
+    text-decoration: none;
+  }
+
+  a.btn {
+    width: 90%;
+    margin: auto;
+    border-bottom: inherit;
+  }
+}
+
+#activities {
+  margin-top: 20px;
+  background-color: #ddd;
+  color: #222;
+  border-radius: 10px;
+  padding: 10%;
+}
+

@@ -7,5 +7,47 @@
   margin: auto;
 }
 
+.player {
+  margin-bottom: 2%;
+  padding: 1%;
+  border-radius: 5px;
+
+  &:nth-child(odd) {
+    background-color: #ededed;
+  }
+
+  .data_and_actions {
+    position: relative;
+  }
+
+  .points_display {
+    float: none;
+  }
+
+  .ranking_display {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    float: none;
+  }
+
+  h3 {
+    line-height: 200%;
+  }
+}
+
+
+.profile {
+  .thumbnail {
+    box-shadow: none;
+    border: none;
+  }
+
+  .info {
+    text-align: center;
+    margin: 10% auto;
+  }
+}
+
 
 
