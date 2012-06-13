@@ -36,18 +36,16 @@ describe GamesController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested game as @game" do
-      game = FactoryGirl.create :game
-      get :show, {:id => game.to_param}
-      assigns(:game).should eq(game)
-    end
-  end
 
   describe "GET new" do
     it "assigns a new game as @game" do
       get :new, {}
       assigns(:game).should be_a_new(Game)
+    end
+
+    it "renders the new game template" do
+      get :new, {}
+      response.should render_template 'new'
     end
   end
 
