@@ -13,7 +13,7 @@ class Player < ActiveRecord::Base
   include Gravtastic
 
   has_gravatar
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessible :email,

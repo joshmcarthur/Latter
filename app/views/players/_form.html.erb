@@ -1,17 +1,9 @@
-<%= form_for(@player) do |f| %>
-  <% if @player.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h2>
+<fieldset>
+  <legend><%= form.object.new_record? ? "New Player" : "Edit Player" %></legend>
 
-      <ul>
-      <% @player.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render :partial => 'shared/form_errors', :locals => {:form => form} %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit "Save Player", :class => 'btn btn-primary' %>
   </div>
-<% end %>
+</fieldset>

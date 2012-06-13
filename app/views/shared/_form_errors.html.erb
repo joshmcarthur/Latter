@@ -1,0 +1,15 @@
+<% if form.object.errors.any? %>
+  <div class="control-group"></div>
+  <div class="alert alert-error">
+
+    <h3 class="alert-heading"><%= pluralize(form.object.errors.count, "error") %> prohibited this <%= form.object.class.name.humanize %> from being saved:</h3>
+
+    <p>
+      <ul>
+        <% form.object.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
+<% end %>

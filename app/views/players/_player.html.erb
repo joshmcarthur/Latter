@@ -14,13 +14,15 @@
           <h4><%= I18n.t('player.points', :points => player.rating) %></h4>
         </div>
         <div class="span5">
-          <div class="btn-group">
-            <%= link_to player, :class => 'btn btn-large' do %>
-              <i class='icon-user'></i>
-              <%= I18n.t('player.view_profile') %>
-            <% end %>
-            <%= primary_action_button_for(player) %>
-          </div>
+          <% if current_player %>
+            <div class="btn-group controls">
+              <%= link_to player, :class => 'btn btn-large' do %>
+                <i class='icon-user'></i>
+                <%= I18n.t('player.view_profile') %>
+              <% end %>
+              <%= primary_action_button_for(player) %>
+            </div>
+          <% end %>
         </div>
         <div class="span2 ranking_display">
           <%= ranking(player) %>
