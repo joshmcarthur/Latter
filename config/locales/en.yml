@@ -2,4 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  player:
+    points: "Points: %{points}"
+    edit_profile: 'Edit Profile'
+    challenge: 'Challenge'
+    complete_challenge: 'Enter Score'
+    view_profile: 'View Profile'
