@@ -25,7 +25,7 @@ describe PlayersController do
   # Player. As you add validations to Player, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    FactoryGirl.attributes_for(:player)
+    FactoryGirl.attributes_for(:player).except(:confirmed_at, :changed_password)
   end
 
   # This should return the minimal set of values that should be in the session
