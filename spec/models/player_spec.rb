@@ -17,6 +17,12 @@ describe Player do
     subject.should_not be_persisted
   end
 
+  it "should set a default password when the player is created" do
+    subject.password.should be_blank
+    subject.save
+    subject.password.should_not be_blank
+  end
+
   describe "Gravatar" do
     it "should have a gravatar url" do
       subject.gravatar_url.should include "gravatar.com"
