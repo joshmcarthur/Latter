@@ -3,7 +3,18 @@
 
   <%= render :partial => 'shared/form_errors', :locals => {:form => form} %>
 
+  <div class="control-group">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="control-group">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+
   <div class="form-actions">
-    <%= f.submit "Save Player", :class => 'btn btn-primary' %>
+    <%= form.submit "Save Player", :class => 'btn btn-primary' %>
   </div>
 </fieldset>
