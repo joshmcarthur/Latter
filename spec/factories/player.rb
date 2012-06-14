@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :player do
     sequence(:name) { |num| "player_#{num}"}
     email { |p| "#{p.name}@3months.com" }
-    password "test123"
-    password_confirmation "test123"
+    confirmed_at Time.now
+    changed_password true
   end
 end
