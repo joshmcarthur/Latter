@@ -10,6 +10,7 @@
 .player {
   margin-bottom: 2%;
   padding: 1%;
+  width: 98%;
   border-radius: 5px;
 
   &:nth-child(odd) {
@@ -21,7 +22,13 @@
   }
 
   .controls {
+    margin-left: 0;
+
     .btn {
+      i[class^="icon-"] {
+        padding-right: 5px;
+      }
+
       width: 39%;
       font-size: 14px;
     }
