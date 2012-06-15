@@ -127,6 +127,16 @@ class Game < ActiveRecord::Base
     self.result == 1.0 ? self.challenger : self.challenged
   end
 
+  # Public - Return the loser of a game
+  #
+  # This method returns the loser of the game, and operates
+  # in the inverse way to the winner method.
+  #
+  # Returns the loser of the game
+  def loser
+    self.result != 1.0 ? self.challenger : self.challenged
+  end
+
   # Public - Return the ratings for each player in the game
   #
   # Returns a hash structure containing players and their ratings:
