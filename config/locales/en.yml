@@ -4,8 +4,14 @@
 en:
   player:
     points: "Points: %{points}"
-    edit_profile: 'Edit Profile'
-    challenge: 'Challenge'
-    challenge_loading: 'Challenging...'
-    complete_challenge: 'Enter Score'
-    view_profile: 'View Profile'
+    edit: 'Edit Profile'
+    view: 'View Profile'
+  game:
+    new:
+      link: 'Challenge'
+      link_loading: 'Challenging...'
+    complete:
+      link: 'Enter Score'
+    index:
+      challenged: 'Challenged'
+      completed: 'Completed (%{score})'

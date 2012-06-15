@@ -1,14 +1,18 @@
 <div class="row-fluid game">
-  <div class="span3">
+  <div class="span4">
     <div class="thumbnail">
       <%= image_tag game.winner.gravatar_url(:size => '260') %>
     </div>
+  </div>
 
-    <div class='span6 vs'>
-      <h1>vs.</h1>
-      <div class="label label-info"><%= game.complete_status %></div>
+  <div class='span4 vs'>
+    <h1>vs.</h1>
+    <div class="label label-info">
+      <%= game.complete? ? I18n.t('game.index.completed', :score => game.score) : I18n.t('game.index.challenged') %>
     </div>
+  </div>
 
+  <div class="span4">
     <div class="thumbnail">
       <%= image_tag game.loser.gravatar_url(:size => '260') %>
     </div>
