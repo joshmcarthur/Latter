@@ -1,6 +1,7 @@
 
 class GamesController < ApplicationController
   before_filter :authenticate_player!
+  respond_to :html, :js, :json
 
   # GET /games
   # GET /games.json
@@ -31,6 +32,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+      format.js # new.js.erb
       format.json { render json: @game }
     end
   end
@@ -44,7 +46,8 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to Player, notice: 'Game was successfully created.' }
+        format.js   { render }
         format.json { render json: @game, status: :created, location: @game }
       else
         format.html { render action: "new" }

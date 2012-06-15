@@ -63,9 +63,9 @@ describe GamesController do
         assigns(:game).should be_persisted
       end
 
-      it "redirects to the created game" do
+      it "redirects to the players page" do
         post :create, {:game => valid_attributes}
-        response.should redirect_to(Game.last)
+        response.should redirect_to(Player)
       end
     end
 
