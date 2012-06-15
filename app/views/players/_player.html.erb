@@ -13,9 +13,9 @@
         <div class="span5 points_display">
           <h4><%= I18n.t('player.points', :points => player.rating) %></h4>
         </div>
-        <div class="span5">
+        <div class="span5 controls">
           <% if current_player %>
-            <div class="btn-group controls">
+            <div class="btn-group">
               <%= link_to player, :class => 'btn btn-large' do %>
                 <i class='icon-user'></i>
                 <%= I18n.t('player.view_profile') %>

@@ -11,12 +11,19 @@ module PlayersHelper
           I18n.t('player.edit_profile')
       end
     elsif current_player and !current_player.in_progress_games(player).empty?
-      link_to complete_challenge_path(current_player.in_progress_games(player).first), :class => 'btn btn-large' do
+      link_to complete_game_path(current_player.in_progress_games(player).first), :class => 'btn btn-large' do
         content_tag(:i, '', :class => 'icon-plus-sign') +\
           I18n.t('player.complete_challenge')
       end
     elsif current_player
-      link_to '', :class => 'btn btn-large' do
+      challenge_link_options = {
+        :method => :post,
+        :remote => true,
+        :'data-loading-text' => I18n.t('player.challenge_loading'),
+        :class => 'btn btn-large btn-with-loading challenge'
+      }
+
+      link_to games_path(:game => {:challenged_id => player.id}), challenge_link_options do
         content_tag(:i, '', :class => 'icon-screenshot') +\
           I18n.t('player.challenge')
       end
