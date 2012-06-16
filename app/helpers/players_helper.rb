@@ -11,7 +11,7 @@ module PlayersHelper
           I18n.t('player.edit')
       end
     elsif current_player and !current_player.in_progress_games(player).empty?
-      link_to complete_game_path(current_player.in_progress_games(player).first), :class => 'btn btn-large' do
+      link_to new_game_score_path(current_player.in_progress_games(player).first), :class => 'btn btn-large' do
         content_tag(:i, '', :class => 'icon-plus-sign') +\
           I18n.t('game.complete.link')
       end
