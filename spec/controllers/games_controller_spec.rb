@@ -88,14 +88,14 @@ describe GamesController do
 
   describe "DELETE destroy" do
     it "destroys the requested game" do
-      game = FactoryGirl.create :game
+      game = FactoryGirl.create :game, :challenged => controller.current_player
       expect {
         delete :destroy, {:id => game.to_param}
       }.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
-      game = FactoryGirl.create(:game)
+      game = FactoryGirl.create(:game, :challenged => controller.current_player)
       delete :destroy, {:id => game.to_param}
       response.should redirect_to(games_url)
     end
