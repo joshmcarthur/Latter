@@ -36,19 +36,6 @@ describe GamesController do
     end
   end
 
-
-  describe "GET new" do
-    it "assigns a new game as @game" do
-      get :new, {}
-      assigns(:game).should be_a_new(Game)
-    end
-
-    it "renders the new game template" do
-      get :new, {}
-      response.should render_template 'new'
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Game" do
