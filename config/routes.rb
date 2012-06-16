@@ -3,6 +3,7 @@ Latter::Application.routes.draw do
 
   resources :games, :except => [:edit, :update] do
     post :complete, :on => :member
+    resource :score, :controller => 'scores', :only => [:new, :create]
   end
 
   resources :players
