@@ -1,0 +1,6 @@
+var game_form = "<%= escape_javascript(render(:template => 'scores/new', :formats => [:html], :layout => nil)) %>"
+
+new GameModal({
+  header: null,
+  content: game_form
+})

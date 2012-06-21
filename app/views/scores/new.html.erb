@@ -1,0 +1,35 @@
+<%= form_for @game, :url => game_score_path(@game) do |f| %>
+  <fieldset>
+    <legend>Enter score:</legend>
+
+    <div class="control-group"></div>
+    <div class="row-fluid">
+      <div class="span5">
+        <div class="thumbnail">
+          <%= image_tag @game.challenger.gravatar_url(:size => '200') %>
+        </div>
+        <div class="control-group">
+          <%= f.number_field :challenger_score %>
+        </div>
+      </div>
+
+      <div class="span2">
+        <h1 class="vs">vs.</h1>
+      </div>
+
+      <div class="span5">
+        <div class="thumbnail">
+          <%= image_tag @game.challenged.gravatar_url(:size => '200') %>
+        </div>
+
+        <div class="control-group">
+          <%= f.number_field :challenged_score %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions modal-footer">
+      <%= f.submit 'Save Score', :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', players_path, :class => 'btn', :'data-dismiss' => 'modal' %>
+  </fieldset>
+<% end %>
