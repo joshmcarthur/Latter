@@ -11,7 +11,13 @@ module PlayersHelper
           I18n.t('player.edit')
       end
     elsif current_player and !current_player.in_progress_games(player).empty?
-      link_to new_game_score_path(current_player.in_progress_games(player).first), :remote => true, :class => 'btn btn-large' do
+      enter_score_options = {
+        :remote => true,
+        :'data-loading-text' => I18n.t('game.complete.link_loading'),
+        :class => 'btn btn-large btn-with-loading'
+      }
+
+      link_to new_game_score_path(current_player.in_progress_games(player).first), enter_score_options do
         content_tag(:i, '', :class => 'icon-plus-sign') +\
           I18n.t('game.complete.link')
       end

@@ -12,6 +12,7 @@ en:
       link_loading: 'Challenging...'
     complete:
       link: 'Enter Score'
+      link_loading: 'Completing...'
     index:
       challenged: 'Challenged'
       completed: 'Completed (%{score})'
