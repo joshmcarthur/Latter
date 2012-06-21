@@ -1,3 +1,20 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.modal {
+  form {
+    margin: 0;
+
+    h1.vs {
+      text-align: center;
+      padding-top: 70px;
+    }
+
+    #game_challenger_score, #game_challenged_score {
+      display: block;
+      width: 35%;
+      margin: 10px auto;
+    }
+  }
+}
