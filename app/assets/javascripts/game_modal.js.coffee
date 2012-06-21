@@ -19,9 +19,9 @@ class GameModal
     header.append $('<button></button>').attr('data-dismiss', 'modal').addClass('close').text('x')
     header.append $('<h3></h3>').text(@options.header)
 
-    @container.append header
-    body = $('<div></div>').addClass('modal-body').html(@options.content)
+    @container.append header if @options.header
 
+    body = $('<div></div>').addClass('modal-body').html(@options.content)
     @container.append body
 
     $('body').append @container
@@ -29,3 +29,4 @@ class GameModal
   openModal: ->
     @container.modal('show')
 
+window.GameModal = GameModal
