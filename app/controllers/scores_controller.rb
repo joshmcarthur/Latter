@@ -16,12 +16,11 @@ class ScoresController < ApplicationController
     @game.complete!(params[:game])
 
     respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was completed.' }
-        format.js   { render }
+      if @game.complete?
+        format.html { redirect_to root_path, notice: I18n.t('game.complete.saved') }
+        format.js   { render  }
       else
-        format.html { render action: "index" }
-        format.js   { render }
+        render :action => "new"
       end
     end
   end

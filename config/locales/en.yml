@@ -11,6 +11,7 @@ en:
       link: 'Challenge'
       link_loading: 'Challenging...'
     complete:
+      saved: 'Game was completed.'
       link: 'Enter Score'
       link_loading: 'Completing...'
     index:
