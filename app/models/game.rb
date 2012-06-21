@@ -68,6 +68,8 @@ class Game < ActiveRecord::Base
   #
   # Returns the completed game
   def complete!(scores = {})
+    return false unless scores and scores.has_key?(:challenger_score) and scores.has_key?(:challenged_score)
+
     if scores[:challenger_score].to_i > scores[:challenged_score].to_i
       self.winner = challenger
       self.result = 1.0
