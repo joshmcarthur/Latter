@@ -1,0 +1,7 @@
+<% unless @game.valid? %>
+  alert("<%= escape_javascript(I18n.t('games.complete.failed')) %>");
+<% else %>
+  $("#<%= dom_id(@game.challenged) %>").replaceWith("<%= render :partial => 'players/player', :locals => {:player => @game.challenged}, :layout => nil %>")
+  $("#<%= dom_id(@game.challenger) %>").replaceWith("<%= render :partial => 'players/player', :locals => {:player => @game.challenger}, :layout => nil %>")
+  $('.modal').modal('hide').remove()
+<% end %>
