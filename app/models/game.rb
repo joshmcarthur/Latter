@@ -10,6 +10,10 @@ class Game < ActiveRecord::Base
   alias :one :challenger
   alias :two :challenged
 
+  # Add accessors to temporarily hold scores for players
+  attr_accessor :challenger_score
+  attr_accessor :challenged_score
+
   validates_presence_of :challenger, :challenged
   validates_associated  :challenger, :challenged
   validates_inclusion_of :complete, :in => [true, false]
@@ -149,6 +153,13 @@ class Game < ActiveRecord::Base
       challenger => challenger_rating,
       challenged => challenged_rating
     }
+  end
+
+  # Public - Return a string representation of the game
+  #
+  # Returns a string in the format id-player 1 name-vs-player 2 name
+  def to_param
+    "#{self.id}-#{self.challenger.name.parameterize}-vs-#{self.challenged.name.parameterize}"
   end
 
   private
