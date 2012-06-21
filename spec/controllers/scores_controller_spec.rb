@@ -4,6 +4,7 @@ describe ScoresController do
 
   let(:player) { FactoryGirl.create(:player) }
   let(:game) { FactoryGirl.create(:game, :challenger => player) }
+  let(:score_attributes) { {:game => {:challenged_score => 21, :challenger_score => 15 } } }
 
   before :each do
     sign_in player
@@ -28,13 +29,33 @@ describe ScoresController do
 
   describe "POST /games/1/score" do
     describe "success" do
-      it "should assign the game as @game"
-      it "should render the create template if requesting with JS"
-      it "should redirect to the main players page with a flash message"
+      it "should assign the game as @game" do
+        post :create, {:game_id => game.id}.merge(score_attributes)
+        assigns(:game).should eq game
+      end
+
+      it "should render the create template if requesting with JS" do
+        post :create, {:format => 'js', :game_id => game.id}.merge(score_attributes)
+        response.should render_template 'create'
+      end
+
+      it "should redirect to the main players page with a flash message if requesting with HTML" do
+        post :create, {:game_id => game.id}.merge(score_attributes)
+        response.should redirect_to root_path
+        flash[:notice].should eq I18n.t('game.complete.saved')
+      end
     end
 
     describe "failure" do
-      it "should render the new template"
+      it "should assign the game as @game" do
+        post :create, {:game_id => game.id}
+        assigns(:game).should eq game
+      end
+
+      it "should render the new template" do
+        post :create, {:game_id => game.id}
+        response.should render_template "new"
+      end
     end
   end
 end
