@@ -6,6 +6,7 @@ Latter::Application.routes.draw do
     resource :score, :controller => 'scores', :only => [:new, :create]
   end
 
+  resources :activities, :controller => 'activity', :only => :index
   resources :players
 
   root :to => 'players#index'
