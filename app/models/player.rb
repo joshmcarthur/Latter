@@ -57,7 +57,7 @@ class Player < ActiveRecord::Base
   # This value can then be used to display the player's position
   # in the ladder.
   def ranking
-    Player.order(:rating).select(:id).map(&:id).index(self.id) + 1
+    Player.order('rating DESC').select(:id).map(&:id).index(self.id) + 1
   end
 
   # Public - A hook called by devise after a password reset
