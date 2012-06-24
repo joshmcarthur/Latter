@@ -85,6 +85,8 @@ class Game < ActiveRecord::Base
     self.complete = true
     self.save!
 
+    Activity.completed_game(self)
+
     self
   end
 

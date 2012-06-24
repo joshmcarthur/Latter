@@ -35,6 +35,18 @@ describe Game do
     end
   end
 
+  describe "activities" do
+    it "should make a new challenge activity when the game is created" do
+      Activity.should_receive(:new_game).with(subject).at_least(1).times
+      subject.save
+    end
+
+    it "should make a completed game activity when the game is completed" do
+      Activity.should_receive(:completed_game).with(subject)
+      subject.complete! :challenger_score => 15, :challenged_score => 6
+    end
+  end
+
   describe "completion" do
     before :each do
       subject.complete! :challenger_score => 15, :challenged_score => 6
