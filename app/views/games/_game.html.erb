@@ -1,21 +1,23 @@
-<div class="row-fluid game">
-  <div class="span4">
-    <div class="thumbnail">
-      <%= image_tag game.winner.gravatar_url(:size => '260') %>
+<% cache cache_key_for(game, 'listing') do %>
+  <div class="row-fluid game">
+    <div class="span4">
+      <div class="thumbnail">
+        <%= image_tag game.winner.gravatar_url(:size => '260') %>
+      </div>
     </div>
-  </div>
 
-  <div class='span4 vs'>
-    <h1>vs.</h1>
-    <div class="label label-info">
-      <%= game.complete? ? I18n.t('game.index.completed', :score => game.score) : I18n.t('game.index.challenged') %>
+    <div class='span4 vs'>
+      <h1>vs.</h1>
+      <div class="label label-info">
+        <%= game.complete? ? I18n.t('game.index.completed', :score => game.score) : I18n.t('game.index.challenged') %>
+      </div>
     </div>
-  </div>
 
-  <div class="span4">
-    <div class="thumbnail">
-      <%= image_tag game.loser.gravatar_url(:size => '260') %>
+    <div class="span4">
+      <div class="thumbnail">
+        <%= image_tag game.loser.gravatar_url(:size => '260') %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 

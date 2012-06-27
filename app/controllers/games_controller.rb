@@ -1,12 +1,18 @@
 
 class GamesController < ApplicationController
   before_filter :authenticate_player!
+  caches_action :index, :expires_in => 5.minutes
+
   respond_to :html, :js, :json
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game\
+      .includes(:challenged, :challenger)\
+      .where(:complete => true)\
+      .order(:created_at)\
+      .page(params[:page])\
 
     respond_to do |format|
       format.html # index.html.erb

@@ -22,10 +22,7 @@ class Game < ActiveRecord::Base
   validate :inverse_game_does_not_exist?
 
   # Add a new game activity after a game is created
-  after_create do
-    GameNotifier.new_game(self).deliver!
-    Activity.new_game(self)
-  end
+  after_create :notify_player, :log_activity
 
   # Public - result setter
   #
@@ -214,6 +211,15 @@ class Game < ActiveRecord::Base
     )
   end
 
+  # Private - Notify the challenged player that they have a pending game
+  def notify_player
+    GameNotifier.new_game(self).deliver!
+  end
 
+  # Private - Log the 'created game' activity
+  #
+  def log_activity
+    Activity.new_game(self)
+  end
 
 end
