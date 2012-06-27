@@ -1,0 +1,58 @@
+<!-- // Begin Template Body \\ -->
+<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
+  <tr>
+    <td colspan="3" valign="top" class="bodyContent">
+
+      <!-- // Begin Module: Standard Content \\ -->
+      <table border="0" cellpadding="20" cellspacing="0" width="100%">
+        <tr>
+          <td valign="top">
+            <div mc:edit="std_content00">
+              <h1 class="h1">Latter</h1>
+              <strong>You've been challenged by <%= @game.challenger.name %> to an epic battle of epic table tennis</strong>
+              <br />
+              What does this mean? You, <%= @game.challenged.name %> need to defend yourself against <%= @game.challenger.name %>, and then the victor can hop onto <%= link_to 'Latter', root_path %> to record their victory!
+
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- // End Module: Standard Content \\ -->
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="280" class="leftColumnContent">
+
+      <!-- // Begin Module: Top Image with Content \\ -->
+      <table border="0" cellpadding="20" cellspacing="0" width="100%">
+        <tr mc:repeatable>
+          <td valign="top">
+            <img src="<%= @game.challenger.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
+            <div mc:edit="tiwc300_content00">
+              <h4 class="h4"><%= @game.challenger.name %></h4>
+              <strong>Ranking:</strong> <%= @game.challenger.ranking %>
+              <br />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </td>
+
+  <td valign="top" width="280" class="rightColumnContent">
+    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+      <tr>
+        <td valign="top">
+          <img src="<%= @game.challenged.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
+          <div mc:edit="tiwc300_content01">
+            <h4 class="h4"><%= @game.challenged.name %></h4>
+            <strong>Ranking:</strong> <%= @game.challenged.ranking %>
+            <br />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  </table>
+

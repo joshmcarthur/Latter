@@ -21,8 +21,9 @@ class Game < ActiveRecord::Base
   validates_numericality_of :result, :minimum => -1.0, :maximum => 1.0, :allow_nil => true
   validate :inverse_game_does_not_exist?
 
-  # Add a new game activity when a game is created
-  before_create do
+  # Add a new game activity after a game is created
+  after_create do
+    GameNotifier.new_game(self).deliver!
     Activity.new_game(self)
   end
 
@@ -85,6 +86,7 @@ class Game < ActiveRecord::Base
     self.complete = true
     self.save!
 
+    GameNotifier.completed_game(self).deliver!
     Activity.completed_game(self)
 
     self

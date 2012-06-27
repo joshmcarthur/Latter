@@ -1,0 +1,69 @@
+<!-- // Begin Template Body \\ -->
+<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
+  <tr>
+    <td colspan="3" valign="top" class="bodyContent">
+
+      <!-- // Begin Module: Standard Content \\ -->
+      <table border="0" cellpadding="20" cellspacing="0" width="100%">
+        <tr>
+          <td valign="top">
+            <div mc:edit="std_content00">
+              <h1 class="h1">Latter</h1>
+              <hr />
+              This challenge has been completed! The result was:
+              <br />
+              <% if @game.winner?(@game.challenger) %>
+                <h3><%= @game.challenger.name %> won!</h3>
+              <% else %>
+                <h3><%= @game.challenged.name %> won!</h3>
+              <% end %>
+
+              <strong>See below for the scores!</strong>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- // End Module: Standard Content \\ -->
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="280" class="leftColumnContent">
+
+      <!-- // Begin Module: Top Image with Content \\ -->
+      <table border="0" cellpadding="20" cellspacing="0" width="100%">
+        <tr mc:repeatable>
+          <td valign="top">
+            <img src="<%= @game.challenger.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image00" />
+            <div mc:edit="tiwc300_content00">
+              <h4 class="h4"><%= @game.challenger.name %></h4>
+              <br />
+              <h2 class="score" align="center"><%= @game.score_for(@game.challenger) %></h1>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- // End Module: Top Image with Content \\ -->
+
+    </td>
+    <td valign="top" width="280" class="rightColumnContent">
+
+      <!-- // Begin Module: Top Image with Content \\ -->
+      <table border="0" cellpadding="20" cellspacing="0" width="100%">
+        <tr mc:repeatable>
+          <td valign="top">
+            <img src="<%= @game.challenged.gravatar_url(:size => 260) %>" style="max-width:260px;" mc:label="image" mc:edit="tiwc300_image01" />
+            <div mc:edit="tiwc300_content01">
+              <h4 class="h4"><%= @game.challenged.name %></h4>
+              <br />
+              <h2 class="score" align="center"><%= @game.score_for(@game.challenged) %></h1>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- // End Module: Top Image with Content \\ -->
+
+    </td>
+  </tr>
+</table>
+<!-- // End Template Body \\ -->

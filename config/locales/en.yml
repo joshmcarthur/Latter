@@ -7,6 +7,10 @@ en:
     edit: 'Edit Profile'
     view: 'View Profile'
   game:
+    notifications:
+      new_game:
+        subject: 'New Challenge on Latter!'
+        preview_text: "You've received a new challenge from %{challenger} on Latter! See below for details!"
     new:
       link: 'Challenge'
       link_loading: 'Challenging...'
