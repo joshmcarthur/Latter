@@ -6,6 +6,12 @@ en:
     points: "Points: %{points}"
     edit: 'Edit Profile'
     view: 'View Profile'
+    attributes:
+      current_password: 'Current password'
+      current_password_help: 'We need your current password to confirm your changes.'
+      password_help: "Leave this field blank if you don't want to change your password"
+      new_password: 'New password'
+      confirm_new_password: 'Confirm new password'
   game:
     notifications:
       new_game:

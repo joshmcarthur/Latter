@@ -47,7 +47,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to Player, notice: 'Player was successfully created.' }
         format.json { render json: @player, status: :created, location: @player }
       else
         format.html { render action: "new" }
@@ -62,8 +62,8 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     respond_to do |format|
-      if @player.update_attributes(params[:player])
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
+      if @player.update_with_password(params[:player])
+        format.html { redirect_to Player, notice: 'Player was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

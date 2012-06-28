@@ -13,8 +13,27 @@
     <%= form.email_field :email %>
   </div>
 
+  <% unless form.object.new_record? %>
+    <div class="control-group">
+      <%= form.label :password, I18n.t('player.attributes.new_password') %>
+      <%= form.password_field :password, :autocomplete => 'off' %>
+      <span class="help-block"><%= I18n.t('player.attributes.password_help') %></span>
+    </div>
+
+    <div class="control-group">
+      <%= form.label :password_confirmation, I18n.t('player.attributes.confirm_new_password') %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div class="control-group">
+      <%= form.label :current_password, I18n.t('player.attributes.current_password') %>
+      <%= form.password_field :current_password %>
+      <span class="help-block"><%= I18n.t('player.attributes.current_password_help') %></span>
+    </div>
+  <% end %>
 
   <div class="form-actions">
     <%= form.submit "Save Player", :class => 'btn btn-primary' %>
+    <%= link_to "Cancel", root_path, :class => 'btn' %>
   </div>
 </fieldset>
