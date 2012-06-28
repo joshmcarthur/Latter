@@ -30,7 +30,7 @@ describe GamesController do
 
   describe "GET index" do
     it "assigns all games as @games" do
-      game = FactoryGirl.create :game
+      game = FactoryGirl.create :game, :complete => true
       get :index, {}
       assigns(:games).should eq([game])
     end
@@ -64,11 +64,12 @@ describe GamesController do
         assigns(:game).should be_a_new(Game)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to the root page with an error message" do
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
         post :create, {:game => {}}
-        response.should render_template("new")
+        response.should redirect_to root_path
+        flash[:alert].should_not be_blank
       end
     end
   end

@@ -34,7 +34,7 @@ class GamesController < ApplicationController
         format.js   { render }
         format.json { render json: @game, status: :created, location: @game }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to root_path, :alert => "Could not create game." }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
