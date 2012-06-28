@@ -4,12 +4,12 @@
 #
 #= require jquery.periodicalupdater
 
-if $('#activities')
+if $('#activities').length > 0
   Activity = {}
   Activity.poll = ->
     $.PeriodicalUpdater '/activities.json', {
       method: 'get',
-      data: {modified_since: $('#activities').data().lastModified},
+      data: {modified_since: if $('#activities').data() then $('#activities').data().lastModified else null},
       autoStop: true,
       type: 'json'
     }, (activities, success, xhr, handle) ->
