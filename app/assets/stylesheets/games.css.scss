@@ -25,3 +25,18 @@
     text-align: center;
   }
 }
+
+#infscr-loading {
+  img { display: none; }
+  div {
+    width: 100%;
+    background-color: #FFF;
+    color: #222;
+    opacity: 0.8;
+    line-height: 100px;
+    text-align: center;
+    font-size: 200%;
+    position: fixed;
+    bottom: 0px
+  }
+}

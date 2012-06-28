@@ -4,9 +4,16 @@
 #
 #= require jquery.infinitescroll
 
-if $('#games')
+if $('#games').length > 0
   $('#games').infinitescroll(
-    navSelector: 'div.navigation',
-    nextSelector: 'div.navigation a[rel=next]',
-    itemSelector: '#games div.game'
+    navSelector: 'div.pagination',
+    nextSelector: 'div.pagination a[rel=next]',
+    itemSelector: '.game',
+    bufferPx: 200,
+    loading: {
+      img: null,
+      finishedMsg: "No more games to display",
+      msgText: "Loading the next set of games..."
+    }
   )
+
