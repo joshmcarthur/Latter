@@ -25,7 +25,7 @@ describe PlayersController do
   # Player. As you add validations to Player, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    FactoryGirl.attributes_for(:player).except(:confirmed_at, :changed_password)
+    attributes = FactoryGirl.attributes_for(:player).except(:confirmed_at, :changed_password)
   end
 
   # This should return the minimal set of values that should be in the session
@@ -82,7 +82,7 @@ describe PlayersController do
 
       it "redirects to the created player" do
         post :create, {:player => valid_attributes}
-        response.should redirect_to(Player.last)
+        response.should redirect_to(Player)
       end
     end
 
@@ -111,8 +111,8 @@ describe PlayersController do
         # specifies that the Player created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Player.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => player.to_param, :player => {'these' => 'params'}}
+        Player.any_instance.should_receive(:update_with_password).with({'name' => 'Tester'})
+        put :update, {:id => player.to_param, :player => {'name' => 'Tester'}}
       end
 
       it "assigns the requested player as @player" do
@@ -121,11 +121,7 @@ describe PlayersController do
         assigns(:player).should eq(player)
       end
 
-      it "redirects to the player" do
-        player = Player.create! valid_attributes
-        put :update, {:id => player.to_param, :player => valid_attributes}
-        response.should redirect_to(player)
-      end
+
     end
 
     describe "with invalid params" do

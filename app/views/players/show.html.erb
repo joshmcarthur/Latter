@@ -1,5 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="show_player">
+    <div>
+      <div class="thumbnail avatar pull-left">
+        <%= image_tag @player.gravatar_url %>
+      </div>
+
+      <div class="name pull-left">
+        <h1><%= @player.name %></h1>
+        <%= link_to "mailto:#{@player.email}" do %>
+          <i class="icon-envelope"></i>
+          <%= @player.email %>
+        <% end %>
+      </div>
+
+      <div class="clearfix"></div>
+  </div>
 
 
-<%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Back', players_path %>
+  <div class="page-header">
+    <h2>Last 20 Games</h2>
+  </div>
+
+  <div id="games">
+    <%= render @player.games.limit(20) %>
+  </div>
+</div>
+
