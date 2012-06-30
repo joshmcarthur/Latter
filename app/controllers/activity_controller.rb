@@ -4,7 +4,7 @@ class ActivityController < ApplicationController
 
   def index
     scope = params[:modified_since] ?
-             Activity.where('created_at > ?',  DateTime.parse(params[:modified_since])) : Activity.limit(25)
+             Activity.where('created_at < ?',  DateTime.parse(params[:modified_since])) : Activity.limit(25)
     respond_with scope
   end
 
