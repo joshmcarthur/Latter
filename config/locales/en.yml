@@ -14,6 +14,9 @@ en:
       confirm_new_password: 'Confirm new password'
   game:
     notifications:
+      completed_game:
+        subject: 'Game Completed!'
+        preview_text: 'Game completed on Latter - see below for details'
       new_game:
         subject: 'New Challenge on Latter!'
         preview_text: "You've received a new challenge from %{challenger} on Latter! See below for details!"
