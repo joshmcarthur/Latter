@@ -62,7 +62,7 @@ describe PlayersController do
     it "assigns the requested player as @player" do
       player = Player.create! valid_attributes
       get :edit, {:id => player.to_param}
-      assigns(:player).should eq(player)
+      assigns(:player).should eq(controller.current_player)
     end
   end
 
@@ -118,7 +118,7 @@ describe PlayersController do
       it "assigns the requested player as @player" do
         player = Player.create! valid_attributes
         put :update, {:id => player.to_param, :player => valid_attributes}
-        assigns(:player).should eq(player)
+        assigns(:player).should eq(controller.current_player)
       end
 
 
@@ -130,7 +130,7 @@ describe PlayersController do
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
         put :update, {:id => player.to_param, :player => {}}
-        assigns(:player).should eq(player)
+        assigns(:player).should eq(controller.current_player)
       end
 
       it "re-renders the 'edit' template" do
@@ -142,20 +142,4 @@ describe PlayersController do
       end
     end
   end
-
-  describe "DELETE destroy" do
-    it "destroys the requested player" do
-      player = Player.create! valid_attributes
-      expect {
-        delete :destroy, {:id => player.to_param}
-      }.to change(Player, :count).by(-1)
-    end
-
-    it "redirects to the players list" do
-      player = Player.create! valid_attributes
-      delete :destroy, {:id => player.to_param}
-      response.should redirect_to(players_url)
-    end
-  end
-
 end
