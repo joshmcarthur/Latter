@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'sqlite3'
+gem 'thin'
+gem 'dalli'
 
 
 # Gems used only for assets and not required
