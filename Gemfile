@@ -4,6 +4,7 @@ gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'thin'
 gem 'dalli'
+gem 'airbrake'
 
 
 # Gems used only for assets and not required
