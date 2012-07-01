@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2'
 gem 'pg'
-gem 'sqlite3'
 gem 'thin'
 gem 'dalli'
 
@@ -35,6 +34,7 @@ group :development, :test do
   gem 'heroku'
   gem 'taps'
   gem 'guard-spork'
+  gem 'sqlite3'
 end
 
 group :development do
