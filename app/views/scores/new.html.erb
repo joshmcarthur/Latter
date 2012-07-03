@@ -8,6 +8,7 @@
         <div class="thumbnail">
           <%= image_tag @game.challenger.gravatar_url(:size => '200') %>
         </div>
+        <h3><%= @game.challenger.name %></h3>
         <div class="control-group">
           <%= f.number_field :challenger_score %>
         </div>
@@ -21,7 +22,7 @@
         <div class="thumbnail">
           <%= image_tag @game.challenged.gravatar_url(:size => '200') %>
         </div>
-
+        <h3><%= @game.challenged.name %></h3>
         <div class="control-group">
           <%= f.number_field :challenged_score %>
         </div>
