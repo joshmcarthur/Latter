@@ -204,7 +204,7 @@ class Game < ActiveRecord::Base
   # Private - Build a rating object for the challenged player
   def challenged_rating
     Rating.new(
-      :result => result,
+      :result => (1.0 - result),
       :old_rating => challenged.rating,
       :other_rating => challenger.rating,
       :k_factor => challenged.k_factor
