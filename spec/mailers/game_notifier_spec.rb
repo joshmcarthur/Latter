@@ -34,6 +34,20 @@ describe GameNotifier do
       @mail.to.should eq [@game.challenged.email, @game.challenger.email]
     end
 
+    it "should not send email to a player who has opted out" do
+      @game.challenger.wants_challenge_completed_notifications = false
+      @mail = GameNotifier.completed_game(@game)
+      @mail.to.should_not include @game.challenger.email
+    end
+
+    it "should not send email if both players have opted out" do
+      @game.challenger.wants_challenge_completed_notifications = false
+      @game.challenged.wants_challenge_completed_notifications = false
+
+      GameNotifier.should_not_receive(:mail)
+      @mail = GameNotifier.completed_game(@game)
+    end
+
     it "should contain both scores" do
       @mail.body.should include "21"
       @mail.body.should include "15"
