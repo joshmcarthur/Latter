@@ -7,6 +7,8 @@ en:
     edit: 'Edit Profile'
     view: 'View Profile'
     attributes:
+      wants_challenge_completed_notifications: "Receive challenged completed emails?"
+      wants_challenge_completed_notifications_help: "If you don't care about confirming the result of a game, uncheck this box to opt-out of 'Challenge Completed on Latter' emails"
       current_password: 'Current password'
       current_password_help: 'We need your current password to confirm your changes.'
       password_help: "Leave this field blank if you don't want to change your password"

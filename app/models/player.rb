@@ -25,6 +25,7 @@ class Player < ActiveRecord::Base
   attr_accessible :email,
     :password,
     :password_confirmation,
+    :wants_challenge_completed_notifications,
     :remember_me,
     :name,
     :rating,
