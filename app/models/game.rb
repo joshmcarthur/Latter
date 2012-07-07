@@ -129,13 +129,19 @@ class Game < ActiveRecord::Base
   #
   # Returns a hash of counts
   def self.statistics
-    @all = Game.select("DATE_TRUNC('week', created_at) AS week, count(*) AS games").
+    @by_week = Game.select("DATE_TRUNC('week', created_at) AS week, count(*) AS games").
       group('week').
       where(:complete => true).
       where('created_at > ?', DateTime.now - 3.months)
 
+    @by_day = Game.select("DATE_TRUNC('day', created_at) AS day, count(*) AS games").
+      group('day').
+      where(:complete => true).
+      where('created_at > ?', DateTime.now - 3.months)
+
     {
-      :all => @all
+      :by_week => @by_week,
+      :by_day  => @by_day
     }
   end
 
