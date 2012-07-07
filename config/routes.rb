@@ -7,6 +7,7 @@ Latter::Application.routes.draw do
   end
 
   resources :activities, :controller => 'activity', :only => :index
+  resources :statistics, :only => [:index]
   resources :players
 
   root :to => 'players#index'

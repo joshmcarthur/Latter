@@ -122,6 +122,29 @@ class Game < ActiveRecord::Base
     !winner?(other_player)
   end
 
+  # Public - Find game counts for the last 3 months, by week
+  #
+  # Uses a PostgreSQL date technique to efficiently query counts
+  # from the database.
+  #
+  # Returns a hash of counts
+  def self.statistics
+    @by_week = Game.select("DATE_TRUNC('week', created_at) AS week, count(*) AS games").
+      group('week').
+      where(:complete => true).
+      where('created_at > ?', DateTime.now - 3.months)
+
+    @by_day = Game.select("DATE_TRUNC('day', created_at) AS day, count(*) AS games").
+      group('day').
+      where(:complete => true).
+      where('created_at > ?', DateTime.now - 3.months)
+
+    {
+      :by_week => @by_week,
+      :by_day  => @by_day
+    }
+  end
+
 
   # Public - Return the winner of a game
   #
