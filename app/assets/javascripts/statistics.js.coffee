@@ -3,18 +3,60 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
 #= require raphael
-#= require g.raphael-min
-#= require g.bar-min
+#= require ico
+
+weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+]
 
 $ ->
   $.getJSON '/statistics.json', (stats) ->
-    chart_data = []
-    chart_labels = []
+    weekly_chart_data = []
+    weekly_chart_labels = []
 
-    $.each stats.all, (index, item) ->
-      chart_data.push(item.games)
-      chart_labels.push(item.week)
+    $.each stats.by_week, (index, item) ->
+      weekly_chart_data.push(parseInt(item.games))
+      weekly_chart_labels.push(
+        "Week of #{new Date(Date.parse(item.week)).toDateString()}"
+      )
 
-    canvas = Raphael("all_games_chart")
-    canvas.barchart(10, 10, 300, 250, [chart_data], {stacked: true, type: 'soft'})
-    Raphael.g.axis(85, 260, 310, null, null, 4, 2, chart_labels, "|", 0, canvas)
+      null
+
+    new Ico.BarGraph(
+      $('#weekly_games_chart').get(0),
+      {one: weekly_chart_data},
+      {
+        colours: {one: '#51a351'},
+        show_vertical_labels: false,
+        labels: weekly_chart_labels
+      }
+    )
+
+    daily_chart_data = []
+    daily_chart_labels = []
+
+    $.each stats.by_day, (index, item) ->
+      daily_chart_data.push(parseInt(item.games))
+      daily_chart_labels.push(
+        weekdays[new Date(Date.parse(item.day)).getDay()]
+      )
+
+      null
+
+    new Ico.BarGraph(
+      $("#daily_games_chart").get(0),
+      {one: daily_chart_data},
+      {
+        colours: {one: '#51a351'},
+        show_vertical_labels: false,
+        labels: daily_chart_labels
+      }
+    )
+
+
