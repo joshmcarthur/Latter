@@ -1,4 +1,6 @@
 class Activity < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+
   attr_accessible :message
 
   validates_presence_of :message
@@ -12,5 +14,18 @@ class Activity < ActiveRecord::Base
   def self.new_game(game)
     message = "#{game.challenger.name} challenged #{game.challenged.name}."
     self.create(:message => message)
+  end
+
+  # Override the json representation of this object to include the time_ago method result
+  def as_json(args)
+    super(args.merge(:methods => 'time_ago'))
+  end
+
+
+  # Public - Return how long ago this activity occurred in a nice format
+  #
+  # Returns a string representing the human time elapsed (e.g. 1 day ago)
+  def time_ago
+    I18n.t('activities.attributes.time_ago', :distance => distance_of_time_in_words_to_now(self.created_at))
   end
 end
