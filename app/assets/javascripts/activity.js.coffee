@@ -9,12 +9,12 @@ if $('#activities').length > 0
   Activity.poll = ->
     $.PeriodicalUpdater '/activities.json', {
       method: 'get',
-      data: {modified_since: if $('#activities').data() then $('#activities').data().lastModified else null},
+      data: {last: if $('#activities').data() then $('#activities').data().last else null},
       autoStop: true,
       type: 'json'
     }, (activities, success, xhr, handle) ->
       if success and activities and activities.length > 0
-        $('#activities').data('lastModified', activities[0].created_at)
+        $('#activities').data('last', activities[0].id)
 
         for activity in activities
           do (activity) ->

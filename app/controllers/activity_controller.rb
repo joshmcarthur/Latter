@@ -3,9 +3,9 @@ class ActivityController < ApplicationController
   respond_to :json
 
   def index
-    scope = params[:modified_since] ?
-             Activity.where('created_at < ?',  DateTime.parse(params[:modified_since])) : Activity.limit(25)
-    respond_with scope
+    scope = params[:last] ?
+             Activity.where('id > ?', params[:last]) : Activity
+    respond_with scope.order('created_at DESC').limit(10)
   end
 
 end
