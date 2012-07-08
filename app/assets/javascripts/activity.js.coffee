@@ -18,7 +18,10 @@ if $('#activities').length > 0
 
         for activity in activities
           do (activity) ->
-            $('#activities ul').append($('<li></li>').text(activity.message))
+            list_item = $('<li></li>').text(activity.message)
+            list_item.append($("<span class='time_ago'></span>").text(activity.time_ago))
+
+            $('#activities ul').append(list_item)
 
         handle.stop()
         setTimeout(Activity.poll, 3000)
