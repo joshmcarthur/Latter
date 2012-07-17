@@ -1,7 +1,9 @@
 
 class GamesController < ApplicationController
   before_filter :authenticate_player!
-  caches_action :index, :expires_in => 5.minutes
+  caches_action :index,
+    :expires_in => 5.minutes,
+    :cache_path => proc { |c| c.params }
 
   respond_to :html, :js, :json
 
