@@ -105,23 +105,23 @@ describe PlayersController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before :each do
+        @player = Player.create! valid_attributes
+      end
+
       it "updates the requested player" do
-        player = Player.create! valid_attributes
         # Assuming there are no other players in the database, this
         # specifies that the Player created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Player.any_instance.should_receive(:update_with_password).with({'name' => 'Tester'})
-        put :update, {:id => player.to_param, :player => {'name' => 'Tester'}}
+        put :update, {:id => @player.to_param, :player => {'name' => 'Tester'}}
       end
 
       it "assigns the requested player as @player" do
-        player = Player.create! valid_attributes
-        put :update, {:id => player.to_param, :player => valid_attributes}
+        put :update, {:id => @player.to_param, :player => valid_attributes}
         assigns(:player).should eq(controller.current_player)
       end
-
-
     end
 
     describe "with invalid params" do
