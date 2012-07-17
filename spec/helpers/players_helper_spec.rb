@@ -37,7 +37,7 @@ describe PlayersHelper do
       game = FactoryGirl.build(:game, :updated_at => DateTime.now - 1.hour, :challenged => @player)
       game.complete!(:challenged_score => 21, :challenger_score => 15)
 
-      helper.distance_of_last_game_for(@player).should match "1 hour ago"
+      helper.distance_of_last_game_for(@player).should match "about 1 hour"
     end
 
     it "should handle the player having no games" do

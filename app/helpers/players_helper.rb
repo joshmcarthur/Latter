@@ -31,9 +31,15 @@ module PlayersHelper
 
   def distance_of_last_game_for(player)
     last_game = player.games.order('updated_at DESC').first
-    I18n.t('player.game_last_played', :distance =>
-           distance_of_time_in_words_to_now(last_game.updated_at)
-    ) if last_game
+
+    if last_game
+      element = content_tag(
+        :span,
+        distance_of_time_in_words_to_now(last_game.updated_at),
+        :title => last_game.updated_at.strftime("%c")
+      )
+      I18n.t('player.game_last_played', :distance => element).html_safe
+    end
   end
 
   def primary_action_button_for(player)
