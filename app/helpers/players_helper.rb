@@ -1,7 +1,32 @@
 module PlayersHelper
 
   def ranking(player)
-    content_tag(:div, player.ranking, :class => 'label label-important ranking')
+    content_tag(:div, :class => 'label label-important ranking') do
+      (player.ranking.to_s + "&nbsp;" + trend(player)).html_safe
+    end
+  end
+
+  def trend(player)
+    case player.trend
+    when :up
+      content_tag(
+        :a,
+        '',
+        :rel => 'tooltip',
+        :title => 'Improving in the last 48 hours',
+        :class => 'icon-chevron-up trend'
+      )
+    when :down
+      content_tag(
+        :a,
+        '',
+        :rel => 'tooltip',
+        :title => 'Worsening in the last 48 hours',
+        :class => 'icon-chevron-down trend'
+      )
+    else
+      ""
+    end
   end
 
   def primary_action_button_for(player)
