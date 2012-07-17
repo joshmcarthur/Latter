@@ -118,4 +118,24 @@ describe Player do
     end
   end
 
+  describe "Trends" do
+    it "should calculate an improving trend" do
+      game = FactoryGirl.build(:game, :challenged => subject)
+      game.complete!(:challenged_score => 21, :challenger_score => 15)
+
+      subject.trend.should eq :up
+    end
+
+    it "should calculate a worsening trend" do
+      game = FactoryGirl.build(:game, :challenger => subject)
+      game.complete!(:challenged_score => 21, :challenger_score => 15)
+
+      subject.trend.should eq :down
+    end
+
+    it "should calculate a same trend" do
+      subject.trend.should eq :same
+    end
+  end
+
 end

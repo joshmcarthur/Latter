@@ -138,6 +138,33 @@ class Player < ActiveRecord::Base
     end
   end
 
+  # Public - Calcualte the trend of the player in the last 48 hours
+  #
+  # This method does a basic game count comparison to work out whether
+  # a player is improving, unimproving, or unchanged.
+  #
+  # Returns:
+  # - :up if the player is improving
+  # - :down if the player is not improving
+  # - :same if the player is neither improving nor unimproving
+  def trend
+    won_games_in_last_48_hours = self.won_games.
+      where('updated_at > ?', DateTime.now - 48.hours).
+      count
+    lost_games_in_last_48_hours = self.games.
+      where('updated_at > ?', DateTime.now - 48.hours).count -
+      won_games_in_last_48_hours
+
+    if won_games_in_last_48_hours > lost_games_in_last_48_hours
+      return :up
+    elsif lost_games_in_last_48_hours > won_games_in_last_48_hours
+      return :down
+    else
+      return :same
+    end
+  end
+
+
   private
 
   # Private - Set a default password for the user
