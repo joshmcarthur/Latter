@@ -31,4 +31,19 @@ describe PlayersHelper do
       helper.trend(@player).should be_blank
     end
   end
+
+  describe "#distance_of_last_game_for" do
+    it "should return the correct time representation of the last game" do
+      game = FactoryGirl.build(:game, :updated_at => DateTime.now - 1.hour, :challenged => @player)
+      game.complete!(:challenged_score => 21, :challenger_score => 15)
+
+      helper.distance_of_last_game_for(@player).should match "1 hour ago"
+    end
+
+    it "should handle the player having no games" do
+      expect {
+        helper.distance_of_last_game_for(@player)
+      }.to_not raise_error
+    end
+  end
 end

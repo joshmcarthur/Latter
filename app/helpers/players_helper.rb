@@ -29,6 +29,13 @@ module PlayersHelper
     end
   end
 
+  def distance_of_last_game_for(player)
+    last_game = player.games.order('updated_at DESC').first
+    I18n.t('player.game_last_played', :distance =>
+           distance_of_time_in_words_to_now(last_game.updated_at)
+    ) if last_game
+  end
+
   def primary_action_button_for(player)
     if current_player == player
       link_to edit_player_path(player), :class => 'btn btn-large' do

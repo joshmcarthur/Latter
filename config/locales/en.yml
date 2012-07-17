@@ -6,6 +6,7 @@ en:
     attributes:
       time_ago: "%{distance} ago"
   player:
+    game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
     edit: 'Edit Profile'
     view: 'View Profile'
