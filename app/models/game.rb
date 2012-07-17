@@ -133,13 +133,13 @@ class Game < ActiveRecord::Base
       group('week').
       order('week').
       where(:complete => true).
-      where('created_at > ?', DateTime.now - 3.months)
+      where('created_at > ?', DateTime.now.beginning_of_month)
 
     @by_day = Game.select("DATE_TRUNC('day', created_at) AS day, count(*) AS games").
       group('day').
       order('day').
       where(:complete => true).
-      where('created_at > ?', DateTime.now - 3.months)
+      where('created_at > ?', DateTime.now.beginning_of_week)
 
     {
       :by_week => @by_week,
