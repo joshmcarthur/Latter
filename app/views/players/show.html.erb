@@ -17,7 +17,10 @@
 
 
   <div class="page-header">
-    <h2>Last 20 Games</h2>
+    <h2>
+      Last 20 Games
+      <small><%= distance_of_last_game_for(@player) %></small>
+    </h2>
   </div>
 
   <div id="games">
