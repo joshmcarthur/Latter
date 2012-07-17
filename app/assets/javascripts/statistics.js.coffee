@@ -23,7 +23,7 @@ $ ->
     $.each stats.by_week, (index, item) ->
       weekly_chart_data.push(parseInt(item.games))
       weekly_chart_labels.push(
-        "Week of #{new Date(Date.parse(item.week)).toDateString()}"
+        "#{new Date(Date.parse(item.week)).toDateString()}"
       )
 
       null
@@ -33,7 +33,6 @@ $ ->
       {one: weekly_chart_data},
       {
         colours: {one: '#51a351'},
-        show_vertical_labels: false,
         labels: weekly_chart_labels
       }
     )
@@ -54,7 +53,6 @@ $ ->
       {one: daily_chart_data},
       {
         colours: {one: '#51a351'},
-        show_vertical_labels: false,
         labels: daily_chart_labels
       }
     )
