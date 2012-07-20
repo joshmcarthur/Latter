@@ -1,0 +1,115 @@
+@baseFontFamily: "Bradley Hand ITC TT", "Comic Sans MS"; //I just trolled you all.
+@altFontFamily: "Helvetica";
+body {
+  .box-shadow(0 0 100px black inset);
+  font-weight:bold;
+}
+
+.avatar-wrapper {
+  float:left;
+  .taped(10px);
+  margin-bottom:20px; //to account for the tape & rotation
+}
+.avatar {
+  float:left;
+  img {
+    // while loading
+    background:lighten(@bodyBackground, 25%);
+
+    //removes space underneath
+    display:block;
+  }
+}
+a.avatar {text-decoration:none;}
+.avatar i {
+  position:absolute;
+  text-align:center;
+  top:0;
+  left:0;
+  opacity:0.01;
+  display:block;
+  .transition(opacity 0.3s ease-out);
+  background:rgba(200,0,50,50%);
+  color:white;
+}
+
+.avatar span {
+  font-size: 9px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  background: ;
+  color: white;
+  overflow: hidden;
+  text-transform: uppercase;
+  height:16px;
+  display:block;
+  opacity:0.01;
+  .transition(opacity 0.3s ease-out);
+}
+.avatar:hover i,
+.avatar:hover span,
+.challenged .avatar span {
+  opacity:1;
+}
+.avatar64 {
+  .curl(64px);
+  width:64px;
+  height:64px;
+}
+.avatar64 i {
+  font-size:48px;
+  width:64px;
+  height:64px;
+  line-height:60px;
+
+}
+
+.avatar i {
+
+}
+.player {border-bottom:2px solid @textColor;}
+
+
+
+//pseudo scatter the avatars
+li:nth-child(2n+0) .avatar-wrapper { .rotate( 1deg);}
+li:nth-child(2n+1) .avatar-wrapper { .rotate(-2deg);}
+li:nth-child(3n+2) .avatar-wrapper { .rotate( 2deg);}
+li:nth-child(4n+3) .avatar-wrapper { .rotate(-3deg);}
+li:nth-child(5n+4) .avatar-wrapper { .rotate( 3deg);}
+li:nth-child(6n+5) .avatar-wrapper { .rotate(-1deg);}
+li:nth-child(2n+0) .avatar-wrapper::before { .rotate(-3deg);}
+li:nth-child(2n+1) .avatar-wrapper::before { .rotate( 3deg);}
+li:nth-child(3n+2) .avatar-wrapper::before { .rotate(-3deg);}
+li:nth-child(4n+3) .avatar-wrapper::before { .rotate( 5deg);}
+li:nth-child(5n+4) .avatar-wrapper::before { .rotate(-2deg);}
+
+.player .rank {
+  .circle(32px, 2px);
+  margin-top:16px;
+  border:2px solid @textColor;
+  font-family:@altFontFamily;
+}
+.player .name {
+  margin-top:16px;
+  line-height:32px;
+  height:32px;
+  font-size:22px;
+}
+
+.player .points {
+  float:right;
+  margin-top:20px;
+}
+.label {
+  font-family:@altFontFamily;
+  text-transform:uppercase;
+  font-size:9px;
+  background:transparent;
+  margin-bottom:0;
+  color:fade(@textColor, 50%)
+}
+
+a.trend {color:white;text-decoration:none;}

@@ -1,0 +1,77 @@
+.transform(@value) {
+  -webkit-transform: @value;
+     -moz-transform: @value;
+      -ms-transform: @value;
+       -o-transform: @value;
+          transform: @value;
+}
+.transition(@value) {
+    -webkit-transition: @value;
+       -moz-transition: @value;
+        -ms-transition: @value;
+         -o-transition: @value;
+            transition: @value;
+}
+
+.circle(@diameter, @border-width:0) {
+  .border-radius((@diameter+@border-width)/2);
+  width:@diameter;
+  height:@diameter;
+  text-align:center;
+  line-height:@diameter;
+  border-width:@border-width;
+}
+.curl(@value) {
+  //* @value: the primary dimension of the box
+  //* creates a drop shadow indicating the corner has curled slightly
+
+  /* curl (using before & after) - inspired by but heavily edited from http://matthamm.com/box-shadow-curl.html */
+  z-index:1;
+  position: relative;
+  & > * {
+    .box-shadow(2px 2px @value/30 rgba(0, 0, 0, 0.1));
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    width: 70%;
+    height: 55%;
+    .box-shadow(0 @value/20 @value/10 rgba(0, 0, 0, 0.2));
+  }
+  &&::before {
+    left: 5.5%;
+    bottom:4%;
+    .transform(skew(-12deg) rotate(-5deg));
+  }
+  &::after {
+    right: 4.5%;
+    bottom:3.5%;
+    .transform(skew(12deg) rotate(5deg));
+  }
+}
+
+.taped(@thickness) {
+  //* @thickness: the thickness of the tape
+
+  position:relative;
+  z-index:1;
+  &::before {
+    content:'';
+    z-index:5;
+    position:absolute;
+    top:-@thickness*3/4;
+    left:50%;
+    width:@thickness*3;
+    margin-left:-@thickness*3/2;
+    height:@thickness;
+    background:#cca;
+    border:1px dotted white;
+    border-top:1px solid #aa9;
+    border-bottom:1px solid white;
+    .opacity(20);
+    .rotate(-3deg);
+  }
+}

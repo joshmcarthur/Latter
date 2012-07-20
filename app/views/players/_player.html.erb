@@ -1,14 +1,26 @@
 <%# cache cache_key_for(player, "listing-#{current_player ? 'logged-in' : 'anonymous'}") do %>
-  <div class="row-fluid player" id="<%= dom_id(player) %>">
-    <div class="span2">
-      <div class="thumbnail">
-        <%= image_tag player.gravatar_url(:size => 200) %>
+  <li class="row-fluid player <%= player_class(player) %>" id="<%= dom_id(player) %>">
+    <div class="spanX rank-wrapper">
+      <div class="rank">
+        <%= player.ranking %>
       </div>
     </div>
+    <div class="spanX">
+      <div class="avatar-wrapper">
+        <%= link_to_primary_action_for player, :class => 'avatar avatar64' do %>
+          <%= image_tag player.gravatar_url(:size => 64) %>
+        <% end %>
+      </div>
+    </div>
+    <h3 class="name spanX"><%= player.name %></h3>
+    <div class="points span2">
 
-    <div class="span10">
-      <h3><%= player.name %></h3>
-
+      <div class="value"><%= player.rating %><%= trend(player) %></div>
+      <div class="label">
+        Points
+      </div>
+    </div>
+    <!--
       <div class="row-fluid data_and_actions">
         <div class="span5 points_display">
           <h4><%= I18n.t('player.points', :points => player.rating) %></h4>
@@ -20,7 +32,7 @@
                 <i class='icon-user'></i>
                 <%= I18n.t('player.view') %>
               <% end %>
-              <%= primary_action_button_for(player) %>
+              <%= link_to_primary_action_for(player, :class => 'btn btn-large') %>
             </div>
           <% end %>
         </div>
@@ -28,7 +40,7 @@
           <%= ranking(player) %>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+  </li>
 <%# end %>
 
