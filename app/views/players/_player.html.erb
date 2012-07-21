@@ -6,19 +6,22 @@
       </div>
     </div>
     <div class="spanX">
+
+    </div>
+    <div class="spanX">
       <div class="avatar-wrapper">
-        <%= link_to_primary_action_for player, :class => 'avatar avatar64' do %>
+        <%= link_to player, :class => 'avatar avatar64' do %>
           <%= image_tag player.gravatar_url(:size => 64) %>
         <% end %>
       </div>
     </div>
-    <h3 class="name spanX"><%= player.name %></h3>
-    <div class="points span2">
-
+    <div class="name spanX">
+      <div class="label">Name</div>
+      <h3 class="value"><%= link_to player.name, player %></h3>
+    </div>
+    <div class="points right spanX">
+      <div class="label">Points</div>
       <div class="value"><%= player.rating %><%= trend(player) %></div>
-      <div class="label">
-        Points
-      </div>
     </div>
     <!--
       <div class="row-fluid data_and_actions">

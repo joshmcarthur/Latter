@@ -21,54 +21,51 @@ body {
   }
 }
 a.avatar {text-decoration:none;}
-.avatar i {
-  position:absolute;
-  text-align:center;
-  top:0;
-  left:0;
-  opacity:0.01;
-  display:block;
-  .transition(opacity 0.3s ease-out);
-  background:rgba(200,0,50,50%);
-  color:white;
-}
+// .avatar i {
+//   position:absolute;
+//   text-align:center;
+//   top:0;
+//   left:0;
+//   opacity:0.01;
+//   display:block;
+//   .transition(opacity 0.3s ease-out);
+//   background:rgba(200,0,50,50%);
+//   color:white;
+// }
 
-.avatar span {
-  font-size: 9px;
-  position: absolute;
-  bottom: 0;
-  text-align: center;
-  width: 100%;
-  background: ;
-  color: white;
-  overflow: hidden;
-  text-transform: uppercase;
-  height:16px;
-  display:block;
-  opacity:0.01;
-  .transition(opacity 0.3s ease-out);
-}
-.avatar:hover i,
-.avatar:hover span,
-.challenged .avatar span {
-  opacity:1;
-}
+// .avatar span {
+//   font-size: 9px;
+//   position: absolute;
+//   bottom: 0;
+//   text-align: center;
+//   width: 100%;
+//   background: ;
+//   color: white;
+//   overflow: hidden;
+//   text-transform: uppercase;
+//   height:16px;
+//   display:block;
+//   opacity:0.01;
+//   .transition(opacity 0.3s ease-out);
+// }
+// .avatar:hover i,
+// .avatar:hover span,
+// .challenged .avatar span {
+//   opacity:1;
+// }
 .avatar64 {
   .curl(64px);
   width:64px;
   height:64px;
 }
-.avatar64 i {
-  font-size:48px;
-  width:64px;
-  height:64px;
-  line-height:60px;
+// .avatar64 i {
+//   font-size:48px;
+//   width:64px;
+//   height:64px;
+//   line-height:60px;
 
-}
+// }
 
-.avatar i {
-
-}
 .player {border-bottom:2px solid @textColor;}
 
 
@@ -92,24 +89,31 @@ li:nth-child(5n+4) .avatar-wrapper::before { .rotate(-2deg);}
   border:2px solid @textColor;
   font-family:@altFontFamily;
 }
+
+.player .points,
 .player .name {
+  position:relative;
+}
+.value {
   margin-top:16px;
-  line-height:32px;
   height:32px;
+  line-height:32px;
+}
+.player .name .value {
   font-size:22px;
 }
 
-.player .points {
-  float:right;
-  margin-top:20px;
-}
 .label {
+  position:absolute;
+  top:2px;
   font-family:@altFontFamily;
   text-transform:uppercase;
   font-size:9px;
   background:transparent;
-  margin-bottom:0;
-  color:fade(@textColor, 50%)
+  color:fade(@textColor, 50%);
+  margin:0;
+  padding:0;
+  left:0;
 }
 
 a.trend {color:white;text-decoration:none;}

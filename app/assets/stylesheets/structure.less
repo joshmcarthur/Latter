@@ -24,4 +24,25 @@ li.row-fluid {
 .row-fluid .spanX {
   width:auto;
 }
-li.player {margin-bottom:@fluidGridGutterWidth;}
+li.player {
+  padding-bottom:@fluidGridGutterWidth;
+  margin-bottom:@fluidGridGutterWidth;
+  height:64px;
+}
+
+[class*="span"].right {
+  float:right;
+  text-align:right;
+  .label {
+    right:0;
+  }
+}
+
+.points .trend {
+  width:16px;
+  text-align:right;
+}
+
+.player .points .label {
+  right:16px;
+}

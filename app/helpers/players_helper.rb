@@ -16,8 +16,7 @@ module PlayersHelper
         :title => 'Improving in the last 48 hours',
         :class => 'icon-chevron-up trend'
       )
-    #when :down
-    else
+    when :down
       content_tag(
         :a,
         '',
@@ -25,8 +24,8 @@ module PlayersHelper
         :title => 'Worsening in the last 48 hours',
         :class => 'icon-chevron-down trend'
       )
-    # else
-    #   ""
+    else
+      content_tag(:span, '', :class => 'icon-chevron-left trend a')
     end
   end
 
