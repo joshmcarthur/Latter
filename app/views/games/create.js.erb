@@ -1,2 +1,4 @@
-$("#<%= dom_id(@game.challenged) %> .btn.challenge").button('reset')
-window.location.reload()
+$('#<%= dom_id(@game.challenged) %> .controls').html(
+	"<%= escape_javascript(render(:partial => 'players/controls', :locals => {:player => @game.challenged})) %>"
+);
+
