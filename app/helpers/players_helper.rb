@@ -25,7 +25,13 @@ module PlayersHelper
         :class => 'icon-chevron-down trend'
       )
     else
-      content_tag(:span, '', :class => 'icon-chevron-left trend a')
+      content_tag(
+        :a, 
+        '', 
+        :rel => 'tooltip',
+        :title => 'Unchanged in the last 48 hours',
+        :class => 'icon-chevron-left trend a'
+      )
     end
   end
 

@@ -28,7 +28,7 @@ describe PlayersHelper do
 
     it "should not render anything if the player trend has not changed" do
       @player.should_receive(:trend).and_return(:same)
-      helper.trend(@player).should be_blank
+      helper.trend(@player).should include "Unchanged"
     end
   end
 
