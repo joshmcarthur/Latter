@@ -16,6 +16,7 @@ weekdays = [
 ]
 
 $ ->
+  return unless window.location.pathname == "/statistics"
   $.getJSON '/statistics.json', (stats) ->
     weekly_chart_data = []
     weekly_chart_labels = []
