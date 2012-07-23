@@ -44,6 +44,23 @@ describe Player do
       game = FactoryGirl.create(:game, :challenger => subject, :winner => subject)
       subject.won_games.should eq [game]
     end
+    
+    it "should show all badges" do
+      # TODO: check this approach
+      badge1 =FactoryGirl.create(:badge)
+    
+      badge1.save
+      
+      # implement assign! for badge
+      badge1.assign!(subject)
+    
+      # implement :awarded? for player
+      it { should be_awarded(badge1) }
+      
+      # implement :badges for player
+      its (:badges) { should include(badge1) }
+       
+    end
 
     it "should show all completed games" do
       FactoryGirl.create_list(:game, 5, :complete => true, :challenged => subject)

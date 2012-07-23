@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20120723092950) do
   end
 
   create_table "awards", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "badge_id"
+    t.integer  "player_id",  :null => false
+    t.integer  "badge_id",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
