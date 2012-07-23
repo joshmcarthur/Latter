@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120722192921) do
+ActiveRecord::Schema.define(:version => 20120723092950) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "awards", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "badge_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "awards", ["badge_id", "player_id"], :name => "index_awards_on_badge_id_and_player_id", :unique => true
+  add_index "awards", ["badge_id"], :name => "index_awards_on_badge_id"
+  add_index "awards", ["player_id"], :name => "index_awards_on_player_id"
 
   create_table "badges", :force => true do |t|
     t.string   "name"
