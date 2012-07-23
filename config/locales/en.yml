@@ -2,7 +2,23 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  navbar: 
+    links: 
+      login: 'Login'
+      players: 'Players'
+      all_players: 'All Players'
+      edit_account: Edit your account
+      new_player: New Player
+      games: Games
+      rules: Rules
+      statistics: Statistics
+      log_out: Logout
+  brand:
+    title: Latter
   activities:
+    heading: Activity
+    game_complete: "%{challenger} completed their game against %{challenged} and %{result} (%{score})"
+    new_game: "%{challenger} challenged %{challenged}."
     attributes:
       time_ago: "%{distance} ago"
   page:
@@ -50,5 +66,9 @@ en:
       link: 'Enter Score'
       link_loading: 'Completing...'
     index:
+      heading: All Games
       challenged: 'Challenged'
       completed: 'Completed (%{score})'
+    result:
+      won: 'won!'
+      lost: 'lost!'
