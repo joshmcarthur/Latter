@@ -32,6 +32,8 @@ en:
         subject: 'New Challenge on Latter!'
         preview_text: "You've received a new challenge from %{challenger} on Latter! See below for details!"
     new:
+      success: 'Game was successfully created.'
+      failure: 'Could not create game'
       link: 'Challenge'
       link_loading: 'Challenging...'
     complete:
