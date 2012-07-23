@@ -1,3 +1,3 @@
 $ ->
-  $('.btn-with-loading').click ->
+  $('.btn-with-loading').live 'click', ->
     $(this).button('loading')
