@@ -18,6 +18,11 @@ en:
       password_help: "Leave this field blank if you don't want to change your password"
       new_password: 'New password'
       confirm_new_password: 'Confirm new password'
+  score:
+    new:
+      heading: Enter Score
+      submit: Save Score
+      submit_loading: Saving score...
   game:
     notifications:
       completed_game:

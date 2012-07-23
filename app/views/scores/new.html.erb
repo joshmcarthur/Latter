@@ -1,7 +1,7 @@
 <%= form_for @game, :url => game_score_path(@game), :method => :post, :remote => true do |f| %>
   <div class="modal">
     <div class="modal-header">
-      <h3>Enter Score</h3>
+      <h3><%= I18n.t('score.new.heading') %></h3>
     </div>
 
     <div class="modal-body">
@@ -36,7 +36,10 @@
     </div>
 
     <div class="modal-footer">
-      <%= f.submit 'Save Score', :class => 'btn btn-primary' %>
+      <%= f.submit I18n.t('score.new.submit'),
+        :class => 'btn btn-with-loading btn-primary',
+        :'data-loading-text' => I18n.t('score.new.submit_loading')
+      %>
     </div>
   </div>
 <% end %>
