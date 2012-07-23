@@ -5,7 +5,13 @@ en:
   activities:
     attributes:
       time_ago: "%{distance} ago"
+  page:
+    not_found: 'Page not found'
   player:
+    create:
+      success: 'Player was successfully created.'
+    update:
+      success: 'Player was successfully updated.'
     game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
     edit: 'Edit Profile'
@@ -18,6 +24,9 @@ en:
       password_help: "Leave this field blank if you don't want to change your password"
       new_password: 'New password'
       confirm_new_password: 'Confirm new password'
+  trend:
+    improving: 'Improving in the last 48 hours'
+    worsening: 'Worsening in the last 48 hours'
   score:
     new:
       heading: Enter Score

@@ -13,7 +13,7 @@ module PlayersHelper
         :a,
         '',
         :rel => 'tooltip',
-        :title => 'Improving in the last 48 hours',
+        :title => I18n.t('trend.improving'),
         :class => 'icon-chevron-up trend'
       )
     when :down
@@ -21,7 +21,7 @@ module PlayersHelper
         :a,
         '',
         :rel => 'tooltip',
-        :title => 'Worsening in the last 48 hours',
+        :title => I18n.t('trend.worsening'),
         :class => 'icon-chevron-down trend'
       )
     else
