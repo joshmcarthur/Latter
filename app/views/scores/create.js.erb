@@ -1,2 +1,2 @@
-$('#players').html("<%= escape_javascript(render(Player.all)) %>");
+$('#players').html("<%= escape_javascript(render(Player.order('rating DESC'))) %>");
 $('.modal').modal('hide').remove()
