@@ -4,7 +4,7 @@
 en:
   navbar: 
     links: 
-      login: 'Login'
+      login: 'Log in'
       players: 'Players'
       all_players: 'All Players'
       edit_account: Edit your account
@@ -12,7 +12,7 @@ en:
       games: Games
       rules: Rules
       statistics: Statistics
-      log_out: Logout
+      log_out: Log out
   brand:
     title: Latter
   activities:
