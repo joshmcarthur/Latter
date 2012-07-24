@@ -1,0 +1,93 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+mi:
+  navbar: 
+    links: 
+      login: 'Rōku Tomo'
+      players: 'Kaitākaro'
+      all_players: 'Rāua Kaitākaro'
+      edit_account: Ētita ā kōrua Rēhita
+      new_player: Niu Kaitākaro
+      games: Kēmu
+      rules: Tikanga
+      statistics: Tatauranga
+      log_out: 'Rōku Puta'
+  brand:
+    title: Latter
+  activities:
+    heading: Mahinga
+    game_complete: "%{challenger} whakakapi tō rāua kēmu mautohe %{challenged} %{result} (%{score})"
+    new_game: "%{challenger} whakatara %{challenged}."
+    attributes:
+      time_ago: "%{distance} nō nakua tonu nei  "
+  page:
+    not_found: 'Whārangi kore'
+  player:
+    games:
+      heading: Whakamutunga 20 Kēmu
+    form:
+      save: 'Tiaki Rerekē'
+      cancel: 'Whakakore'
+    new:
+      heading: Niu Kaitākaro
+    create:
+      success: 'Kaitākaro angitu hangaia.'
+    update:
+      success: 'Kaitākaro angitu pupuri.'
+    game_last_played: "- whakamutunga perei %{distance} nō nakua tonu nei"
+    points: "Kaute: %{points}"
+    edit: 
+      link: Ētita Rēhita
+      heading: Ētita Rēhita
+
+    view: 'Tiro Rēhita'
+    attributes:
+      wants_challenge_completed_notifications: "Receive challenged completed emails?"
+      wants_challenge_completed_notifications_help: "If you don't care about confirming the result of a game, uncheck this box to opt-out of 'Challenge Completed on Latter' emails"
+      current_password: 'Current password'
+      current_password_help: 'We need your current password to confirm your changes.'
+      password_help: "Leave this field blank if you don't want to change your password"
+      new_password: 'New password'
+      confirm_new_password: 'Confirm new password'
+  trend:
+    improving: 'Improving in the last 48 hours'
+    worsening: 'Worsening in the last 48 hours'
+  score:
+    new:
+      heading: Tomo Kaute
+      submit: Kaitiaki Kaute
+      submit_loading: Tiaki Kaute...
+  game:
+    notifications:
+      completed_game:
+        subject: 'Game Completed!'
+        preview_text: 'Game completed on Latter - see below for details'
+      new_game:
+        subject: 'New Challenge on Latter!'
+        preview_text: "You've received a new challenge from %{challenger} on Latter! See below for details!"
+    new:
+      success: 'Game was successfully created.'
+      failure: 'Could not create game'
+      link: 'Challenge'
+      link_loading: 'Challenging...'
+    complete:
+      saved: 'Game was completed.'
+      link: 'Enter Score'
+      link_loading: 'Completing...'
+    index:
+      heading: All Games
+      challenged: 'Challenged'
+      completed: 'Completed (%{score})'
+    result:
+      won: 'won!'
+      lost: 'lost!'
+  statistics:
+    monthly_games:
+      heading: Games this Month
+    weekly_games:
+      heading: Games this Week
+  shared:
+    form_errors:
+      heading:
+        "%{prefix} prevented this %{name} from being saved"
