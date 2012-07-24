@@ -24,13 +24,23 @@ en:
   page:
     not_found: 'Page not found'
   player:
+    games:
+      heading: Last 20 Games
+    form:
+      save: 'Save Changes'
+      cancel: 'Cancel'
+    new:
+      heading: New Player
     create:
       success: 'Player was successfully created.'
     update:
       success: 'Player was successfully updated.'
     game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
-    edit: 'Edit Profile'
+    edit: 
+      link: 'Edit Profile'
+      heading: 'Edit Profile'
+
     view: 'View Profile'
     attributes:
       wants_challenge_completed_notifications: "Receive challenged completed emails?"
@@ -72,3 +82,12 @@ en:
     result:
       won: 'won!'
       lost: 'lost!'
+  statistics:
+    monthly_games:
+      heading: Games this Month
+    weekly_games:
+      heading: Games this Week
+  shared:
+    form_errors:
+      heading:
+        "%{prefix} prevented this %{name} from being saved"

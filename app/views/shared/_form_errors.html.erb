@@ -2,7 +2,13 @@
   <div class="control-group"></div>
   <div class="alert alert-error">
 
-    <h3 class="alert-heading"><%= pluralize(form.object.errors.count, "error") %> prohibited this <%= form.object.class.name.humanize %> from being saved:</h3>
+    <h3 class="alert-heading">
+      <%= I18n.t(
+        'shared.form_errors.heading', 
+        :prefix => pluralize(form.object.errors.count, "error"), 
+        :name => form.object.class.name.humanize)
+      %>
+    </h3>
 
     <p>
       <ul>
