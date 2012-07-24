@@ -40,7 +40,7 @@ class Player < ActiveRecord::Base
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id'
   has_many :won_games, :class_name => 'Game', :foreign_key => 'winner_id'
   
-  has_many :awards, foreign_key: "player_id", dependent: :destroy
+  has_many :awards # foreign_key: "player_id", dependent: :destroy
   has_many :badges, through: :awards
 
   # Public - Return all games that a player has participated in

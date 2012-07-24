@@ -45,22 +45,32 @@ describe Player do
       subject.won_games.should eq [game]
     end
     
-    it "should show all badges" do
-      # TODO: check this approach
-      badge1 =FactoryGirl.create(:badge)
     
-      badge1.save
-      
-      # implement assign! for badge
-      badge1.assign!(subject)
     
-      # implement :awarded? for player
-      it { should be_awarded(badge1) }
+    # Tests for badge awarding
+    
+      it { should respond_to (:badges) }
+      it { should respond_to (:awards) }
+
+      describe "assigning badges" do
+
+        let(:badge1) { FactoryGirl.create(:badge) }
+        let(:badge2) { FactoryGirl.create(:badge) }
+
+        before do  
+          subject.save
+          subject.awards.create!(badge_id: badge1.id)
+          subject.awards.create!(badge_id: badge2.id)
+        end
+
+        # implement :badges for player
+        its(:badges) do
+          should include (badge1) 
+          should include (badge2)
+        end
+
+      end
       
-      # implement :badges for player
-      its (:badges) { should include(badge1) }
-       
-    end
 
     it "should show all completed games" do
       FactoryGirl.create_list(:game, 5, :complete => true, :challenged => subject)
