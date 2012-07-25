@@ -45,36 +45,6 @@ describe Player do
       subject.won_games.should eq [game]
     end
     
-    it "should have assigned badges" do
-      award = FactoryGirl.create(:player => subject)
-      
-    end
-    
-    # Working badge test
-    
-      # it { should respond_to (:badges) }
-      #     it { should respond_to (:awards) }
-      # 
-      #     describe "assigning badges" do
-      # 
-      #       let(:badge1) { FactoryGirl.create(:badge) }
-      #       let(:badge2) { FactoryGirl.create(:badge) }
-      # 
-      #       before do  
-      #         subject.save
-      #         subject.awards.create!(badge_id: badge1.id)
-      #         subject.awards.create!(badge_id: badge2.id)
-      #       end
-      # 
-      #       # implement :badges for player
-      #       its(:badges) do
-      #         should include (badge1) 
-      #         should include (badge2)
-      #       end
-      # 
-      #     end
-      
-
     it "should show all completed games" do
       FactoryGirl.create_list(:game, 5, :complete => true, :challenged => subject)
       subject.games(true).size.should eq 5
@@ -90,6 +60,28 @@ describe Player do
       game = FactoryGirl.create(:game, :complete => false, :challenged => player, :challenger => subject)
       subject.in_progress_games(player).should eq [game]
     end
+  end
+
+  describe "Badges" do
+
+    before do
+       subject.save
+       @badge = FactoryGirl.create(:badge)
+       @award = FactoryGirl.create(:award, :player => subject, :badge => @badge)
+    end
+    
+    it "should be able to be assigned correctly" do
+      @award.should be_valid
+      subject.badges.should include { @badge }
+      subject.awards.should include { @award }
+    end
+    
+    it "should be removed when awards are destroyed" do
+      @award.destroy
+      subject.badges.should_not include { @badge }
+      subject.awards.should_not include { @award }
+    end
+      
   end
 
   describe "Pro rating" do
