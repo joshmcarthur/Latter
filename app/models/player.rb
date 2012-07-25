@@ -167,6 +167,12 @@ class Player < ActiveRecord::Base
     end
   end
 
+  # Award a badge
+  # Assign the badge to a player via an award
+  # Player.award!(badge)
+  def award! (badge)
+    Award.create!(player_id:self.id, badge_id:badge.id)
+  end
 
   private
 
