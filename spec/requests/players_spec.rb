@@ -2,27 +2,25 @@ require 'spec_helper'
 
 describe "Players" do
   
-  # it "Should display a players' badges on user profile" do
-  #     player=FactoryGirl.create(:player, name: "a player", email:"aplayer@sample.com")
-  #     sign_in(player)
-  # 
-  #     badge1 = FactoryGirl.create(:badge)
-  #     badge2 = FactoryGirl.create(:badge)
-  #     badge1.save
-  #     badge2.save
-  # 
-  #     player.award!(badge1)
-  #     player.award!(badge2)
-  # 
-  #     visit players_path
-  # 
-  #     # page.should have_content ("a player")
-  # 
-  #     player.badges.each do |item|
-  #       page.should have_selector('img', src: item.name)
-  #     end
-
-  # end
+  before do
+     @player1 = FactoryGirl.create(:player)
+     @player2 = FactoryGirl.create(:player)
+  end
+  
+  it "should all be shown on the players page before and after logging in" do
+    visit players_path
+    
+    Player.all.each do |item|
+      page.should have_selector("h3", text:item.name )
+    end
+    
+    sign_in(@player1)
+    
+    Player.all.each do |item|
+      page.should have_selector("h3", text:item.name )
+    end
+    
+  end
     
 end
 
