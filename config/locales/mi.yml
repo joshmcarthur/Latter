@@ -1,0 +1,106 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+mi:
+  activerecord:
+    models:
+      player: Player
+    attributes:
+      player:
+        email: Īmēra
+        password: Kupuhipa
+        remember_me: Manatu māua ko
+  sessions:
+    new:
+      heading: Rōku Tomo te Latter
+      submit_button: Rōku Tomo
+  navbar: 
+    links: 
+      login: 'Rōku Tomo'
+      players: 'Kaitākaro'
+      all_players: 'Rāua Kaitākaro'
+      edit_account: Ētita ā kōrua Rēhita
+      new_player: Niu Kaitākaro
+      games: Kēmu
+      rules: Tikanga
+      statistics: Tatauranga
+      log_out: 'Rōku Puta'
+  brand:
+    title: Latter
+  activities:
+    heading: Mahinga
+    game_complete: "%{challenger} whakakapi tō rāua kēmu mautohe %{challenged} %{result} (%{score})"
+    new_game: "%{challenger} whakatara %{challenged}."
+    attributes:
+      time_ago: "%{distance} nō nakua tonu nei  "
+  page:
+    not_found: 'Whārangi kore'
+  player:
+    games:
+      heading: Whakamutunga 20 Kēmu
+    form:
+      save: 'Tiaki Rerekē'
+      cancel: 'Whakakore'
+    new:
+      heading: Niu Kaitākaro
+    create:
+      success: 'Kaitākaro angitu hangaia.'
+    update:
+      success: 'Kaitākaro angitu pupuri.'
+    game_last_played: "- whakamutunga perei %{distance} nō nakua tonu nei"
+    points: "Kaute: %{points}"
+    edit: 
+      link: Ētita Rēhita
+      heading: Ētita Rēhita
+
+    view: 'Tiro Rēhita'
+    attributes:
+      email: Īmēra
+      wants_challenge_completed_notifications: "Whakahoki whakatara whakakapi īmēra?"
+      wants_challenge_completed_notifications_help: ""
+      current_password: 'Nāianei kupu muna'
+      current_password_help: 'Māua māua hiahia ā kōrua nāianei kupu muna pūrua ā kōrua whakarerekē.'
+      password_help: "Hape te mokowā wātea kāpātaua koe aua hiahia panoni ā kōrua kupu muna"
+      new_password: 'Kupuhipa Hōu'
+      confirm_new_password: 'Whakaū Kupuhipa Hōu'
+  trend:
+    improving: 'Improving in the last 48 hours'
+    worsening: 'Worsening in the last 48 hours'
+  score:
+    new:
+      heading: Tomo Kaute
+      submit: Kaitiaki Kaute
+      submit_loading: Tiaki Kaute...
+  game:
+    notifications:
+      completed_game:
+        subject: 'Game Completed!'
+        preview_text: 'Game completed on Latter - see below for details'
+      new_game:
+        subject: 'New Challenge on Latter!'
+        preview_text: "You've received a new challenge from %{challenger} on Latter! See below for details!"
+    new:
+      success: 'Kēmu te angitu waihanga.'
+      failure: 'Kāore i waihanga kēmu'
+      link: 'Whakatara'
+      link_loading: 'Whakatara...'
+    complete:
+      saved: 'I kēmu te whakaoti.'
+      link: 'Uru Tāpeke'
+      link_loading: 'Whakaoti...'
+    index:
+      heading: Rārangi Kēmu
+      challenged: 'Whakatara'
+      completed: 'Tutuki (%{score})'
+    result:
+      won: 'wini!'
+      lost: 'hinga!'
+  statistics:
+    monthly_games:
+      heading: Kēmu te Marama
+    weekly_games:
+      heading: Kēmu te Wiki
+  shared:
+    form_errors:
+      heading:
+        "%{prefix} ārai te %{name} mai i pupuri"

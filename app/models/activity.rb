@@ -6,13 +6,19 @@ class Activity < ActiveRecord::Base
   validates_presence_of :message
 
   def self.completed_game(game)
-    result = game.winner?(game.challenger) ? "won!" : "lost!"
-    message = "#{game.challenger.name} completed their game against #{game.challenged.name} and #{result} (#{game.score})"
+    result = game.winner?(game.challenger) ? I18n.t('game.result.won') : I18n.t('game.result.lost')
+    message = I18n.t(
+      'activities.game_complete', 
+      :challenger => game.challenger.name, 
+      :challenged => game.challenged.name, 
+      :result => result, 
+      :score => game.score
+    )
     self.create(:message => message)
   end
 
   def self.new_game(game)
-    message = "#{game.challenger.name} challenged #{game.challenged.name}."
+    message = I18n.t('activities.new_game', :challenger => game.challenger.name, :challenged => game.challenged.name)
     self.create(:message => message)
   end
 

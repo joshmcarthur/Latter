@@ -32,11 +32,11 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to Player, notice: 'Game was successfully created.' }
+        format.html { redirect_to Player, notice: I18n.t('game.new.success') }
         format.js   { render }
         format.json { render json: @game, status: :created, location: @game }
       else
-        format.html { redirect_to root_path, :alert => "Could not create game." }
+        format.html { redirect_to root_path, :alert => I18n.t('game.new.failure') }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end

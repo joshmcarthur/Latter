@@ -1,6 +1,6 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
-en:
+mi:
   errors:
     messages:
       expired: "has expired, please request a new one"
@@ -13,24 +13,25 @@ en:
 
   devise:
     links:
-      forgot_password: Forgotten your password? 
-      resend_confirmation: Didn't receive confirmation instructions? 
+      forgot_password: Wareware ā mātou kupuhipa
+      resend_confirmation: Kāore ia i whakahoki whakaū ngā tohutohu?
+
     failure:
-      already_authenticated: 'You are already signed in.'
-      unauthenticated: 'You need to sign in or sign up before continuing.'
+      already_authenticated: 'Kua rōku tomo kē.'
+      unauthenticated: 'Kua hiahia rōku tomo rēhita rānei nō mua atu tonu.'
       unconfirmed: 'You have to confirm your account before continuing.'
       locked: 'Your account is locked.'
-      invalid: 'Invalid email or password.'
+      invalid: 'Pape īmēra kupu muna rānei.'
       invalid_token: 'Invalid authentication token.'
-      timeout: 'Your session expired, please sign in again to continue.'
+      timeout: 'Your session expired, please sign in again haere.'
       inactive: 'Your account was not activated yet.'
     sessions:
-      signed_in: 'Signed in successfully.'
-      signed_out: 'Signed out successfully.'
+      signed_in: 'Kua takiurutia tika.'
+      signed_out: 'Kua takiputa tika.'
     passwords:
       new:
-        heading: Forgot your password?
-        submit_button: "Send password reset instructions"
+        heading: Wareware ā mātou kupuhipa?
+        submit_button: "Īmēra kupuhipa whakahou tohutohu"
       edit:
         heading: Change your password
         submit_button: 'Change Password'

@@ -1,5 +1,5 @@
 <fieldset>
-  <legend><%= form.object.new_record? ? "New Player" : "Edit Player" %></legend>
+  <legend><%= form.object.new_record? ? I18n.t('player.new.heading') : I18n.t('player.edit.heading') %></legend>
 
   <%= render :partial => 'shared/form_errors', :locals => {:form => form} %>
 
@@ -43,7 +43,7 @@
   <% end %>
 
   <div class="form-actions">
-    <%= form.submit "Save Player", :class => 'btn btn-primary' %>
-    <%= link_to "Cancel", root_path, :class => 'btn' %>
+    <%= form.submit I18n.t('player.form.save'), :class => 'btn btn-primary' %>
+    <%= link_to I18n.t('player.form.cancel'), root_path, :class => 'btn' %>
   </div>
 </fieldset>

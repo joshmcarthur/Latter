@@ -1,10 +1,28 @@
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <%= player_navigation %>
-      <%= anonymous_navigation %>
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<%= player_navigation %>
+			<%= anonymous_navigation %>
 
-      <%= link_to 'Latter', root_url, :class => 'pull-right latter brand' %>
-    </div>
-  </div>
+			<div class="pull-right">
+				<ul class='nav'>
+					<li class="dropdown">
+						<%= link_to '#', :"data-toggle" => 'dropdown' do %>
+						<%= I18n.locale.to_s.upcase %> 
+						<b class="caret"></b>
+						<% end %>
+
+						<ul class="dropdown-menu">
+							<% I18n.available_locales.each do |locale| %>
+								<li>
+									<%= link_to locale.to_s.upcase, {:locale => locale.to_s} %>
+								</li>
+							<% end %>
+						</ul>
+					</li>
+				</ul>
+				<%= link_to I18n.t('brand.title'), root_url, :class => 'latter brand' %>
+			</div>
+		</div>
+	</div>
 </div>

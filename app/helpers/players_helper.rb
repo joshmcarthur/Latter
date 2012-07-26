@@ -13,7 +13,7 @@ module PlayersHelper
         :a,
         '',
         :rel => 'tooltip',
-        :title => 'Improving in the last 48 hours',
+        :title => I18n.t('trend.improving'),
         :class => 'icon-chevron-up trend'
       )
     when :down
@@ -21,7 +21,7 @@ module PlayersHelper
         :a,
         '',
         :rel => 'tooltip',
-        :title => 'Worsening in the last 48 hours',
+        :title => I18n.t('trend.worsening'),
         :class => 'icon-chevron-down trend'
       )
     else
@@ -46,7 +46,7 @@ module PlayersHelper
     if current_player == player
       link_to edit_player_path(player), :class => 'btn btn-large' do
         content_tag(:i, '', :class => 'icon-user') +\
-          I18n.t('player.edit')
+          I18n.t('player.edit.link')
       end
     elsif current_player and !current_player.in_progress_games(player).empty?
       enter_score_options = {

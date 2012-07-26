@@ -53,7 +53,7 @@ describe "Authentication" do
 
     fill_in 'New password', :with => 'test123'
     fill_in 'Confirm new password', :with => 'test123'
-    click_on 'Change my password'
+    click_on 'Change Password'
 
     current_path.should eq root_path
     page.should have_content 'Log out'
