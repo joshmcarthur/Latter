@@ -5,6 +5,14 @@
 
   <div class="info">
     <h2><%= current_player.name %></h2>
+	<% if current_player.badges.any? %>
+		<% @badges = current_player.badges %>
+		<%= render @badges %>
+		
+		<!--  Like this: <%= render partial: 'shared/feed_item', collection: @feed_items %> -->
+		<!-- Use the generic @badges partial here and change the one in the badge list -->
+		
+	<% end %>
     <h3><%= current_player.rating %> points </h3>
 
     <h3 class="visible-tablet visible-desktop"><%= current_player.games.count %></h3>

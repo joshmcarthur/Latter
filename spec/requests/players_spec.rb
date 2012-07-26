@@ -1,10 +1,29 @@
 require 'spec_helper'
 
 describe "Players" do
-  describe "GET /players" do
-    it "works! (now write some real specs)" do
-      get players_path
-      response.status.should be(200)
-    end
-  end
+  
+  # it "Should display badges on user profile" do
+  #     player=FactoryGirl.create(:player, name: "a player", email:"aplayer@sample.com")
+  #     sign_in(player)
+  # 
+  #     badge1 = FactoryGirl.create(:badge)
+  #     badge2 = FactoryGirl.create(:badge)
+  #     badge1.save
+  #     badge2.save
+  # 
+  #     player.award!(badge1)
+  #     player.award!(badge2)
+  # 
+  #     visit players_path
+  # 
+  #     # page.should have_content ("a player")
+  # 
+  #     player.badges.each do |item|
+  #       page.should have_content(item.name)
+  #     end
+  # 
+  #   end
+    
 end
+
+
