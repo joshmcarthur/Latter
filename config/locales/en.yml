@@ -13,6 +13,7 @@ en:
       rules: Rules
       statistics: Statistics
       log_out: Log out
+      language: Language
   sessions:
     new:
       heading: Log in to Latter
