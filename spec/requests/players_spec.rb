@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Players" do
   
-  # it "Should display badges on user profile" do
+  # it "Should display a players' badges on user profile" do
   #     player=FactoryGirl.create(:player, name: "a player", email:"aplayer@sample.com")
   #     sign_in(player)
   # 
@@ -19,10 +19,10 @@ describe "Players" do
   #     # page.should have_content ("a player")
   # 
   #     player.badges.each do |item|
-  #       page.should have_content(item.name)
+  #       page.should have_selector('img', src: item.name)
   #     end
-  # 
-  #   end
+
+  # end
     
 end
 
