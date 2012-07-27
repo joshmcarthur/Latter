@@ -143,15 +143,17 @@ class Game < ActiveRecord::Base
 
     @by_challenger = Game.group('challenger_id').
       count.
-      map do |player_id, count| 
-        [Player.select('name').find(player_id).name, count]
-      end
+      map do |player_id, count|
+        [Player.select('name').find(player_id).name, count] rescue nil
+      end.
+      compact
 
     @by_challenged = Game.group('challenged_id').
       count.
-      map do |player_id, count| 
-        [Player.select('name').find(player_id).name, count]
-      end
+      map do |player_id, count|
+        [Player.select('name').find(player_id).name, count] rescue nil
+      end.
+      compact
 
     {
       :by_week => @by_week,
