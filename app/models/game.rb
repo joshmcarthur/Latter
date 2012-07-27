@@ -141,9 +141,23 @@ class Game < ActiveRecord::Base
       where(:complete => true).
       where('created_at > ?', DateTime.now.beginning_of_week)
 
+    @by_challenger = Game.group('challenger_id').
+      count.
+      map do |player_id, count| 
+        [Player.select('name').find(player_id).name, count]
+      end
+
+    @by_challenged = Game.group('challenged_id').
+      count.
+      map do |player_id, count| 
+        [Player.select('name').find(player_id).name, count]
+      end
+
     {
       :by_week => @by_week,
-      :by_day  => @by_day
+      :by_day  => @by_day,
+      :by_challenger => @by_challenger,
+      :by_challenged => @by_challenged
     }
   end
 
