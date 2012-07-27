@@ -98,6 +98,10 @@ mi:
       won: 'wini!'
       lost: 'hinga!'
   statistics:
+    challenged_count:
+      heading: Papare Kēmu ā Kaitākaro
+    challenger_count:
+      heading: Kōkiri Kēmu ā Kaitākaro
     monthly_games:
       heading: Kēmu te Marama
     weekly_games:

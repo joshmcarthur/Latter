@@ -88,6 +88,10 @@ en:
       won: 'won!'
       lost: 'lost!'
   statistics:
+    challenged_count:
+      heading: Offensive Games per Player
+    challenger_count:
+      heading: Defensive Games per Player
     monthly_games:
       heading: Games this Month
     weekly_games:
