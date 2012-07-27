@@ -15,6 +15,10 @@ weekdays = [
   "Saturday"
 ]
 
+formatChartDate = (date_string) ->
+  date = new Date(Date.parse(date_string))
+  "#{date.getDate()}/#{date.getMonth() + 1}"
+
 $ ->
   return unless window.location.pathname == "/statistics"
   $.getJSON '/statistics.json', (stats) ->
@@ -23,9 +27,7 @@ $ ->
 
     $.each stats.by_week, (index, item) ->
       weekly_chart_data.push(parseInt(item.games))
-      weekly_chart_labels.push(
-        "#{new Date(Date.parse(item.week)).toDateString()}"
-      )
+      weekly_chart_labels.push(formatChartDate(item.week))
 
       null
 
@@ -58,4 +60,38 @@ $ ->
       }
     )
 
+    challenged_count_chart_data = []
+    challenged_count_chart_labels = []
 
+    $.each stats.by_challenged, (index, item) ->
+      challenged_count_chart_data.push(parseInt(item[1]))
+      challenged_count_chart_labels.push(item[0])
+
+      null
+
+    new Ico.HorizontalBarGraph(
+      $('#challenged_count_chart').get(0),
+      {one: challenged_count_chart_data},
+      {
+        colours: {one: '#51a351'},
+        labels: challenged_count_chart_labels
+      }
+    )
+
+    challenger_count_chart_data = []
+    challenger_count_chart_labels = []
+
+    $.each stats.by_challenger, (index, item) ->
+      challenger_count_chart_data.push(parseInt(item[1]))
+      challenger_count_chart_labels.push(item[0])
+
+      null
+
+    new Ico.HorizontalBarGraph(
+      $('#challenger_count_chart').get(0),
+      {one: challenger_count_chart_data},
+      {
+        colours: {one: '#51a351'},
+        labels: challenger_count_chart_labels
+      }
+    )
