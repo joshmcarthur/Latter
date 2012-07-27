@@ -26,7 +26,6 @@ group :development, :test do
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
   gem 'simplecov', :require => false
-  gem "capybara-webkit"
 
   # command line tool to easily handle events on file system modifications
   gem 'guard'
