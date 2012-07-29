@@ -2,6 +2,33 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 mi:
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 'tata 1 hāora'
+        other: 'tata %{count} hāora'
+      about_x_months:
+        one: 'tata 1 month'
+        other: 'tata %{count} marama'
+      about_x_years:
+        one: 'tata 1 tau'
+        other: 'tata %{count} tau'
+      less_than_x_minutes: 
+        one: 'iti 1 meneti'
+        other: 'Iti iho %{count} nga meneti'
+      less_than_x_seconds:
+        one: 'iti 1 hēkena'
+        other: 'Iti iho %{count} nga hēkena'
+      x_hours:
+        one: '1 hāora'
+        other: "%{count} nga hāora"
+      x_minutes:
+        one: '1 meneti'
+        other: "%{count} nga meneti"
+      x_days: 
+        one: "1 rā"
+        other: "%{count} nga rā"
+
   activerecord:
     models:
       player: Player
