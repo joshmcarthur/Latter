@@ -5,19 +5,19 @@ mi:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: 'tata 1 hāora'
-        other: 'tata %{count} hāora'
+        one: 'Tata 1 hāora'
+        other: 'Tata %{count} hāora'
       about_x_months:
-        one: 'tata 1 month'
-        other: 'tata %{count} marama'
+        one: 'Tata 1 month'
+        other: 'Tata %{count} marama'
       about_x_years:
-        one: 'tata 1 tau'
-        other: 'tata %{count} tau'
+        one: 'Tata 1 tau'
+        other: 'Tata %{count} tau'
       less_than_x_minutes: 
-        one: 'iti 1 meneti'
+        one: 'Iti 1 meneti'
         other: 'Iti iho %{count} nga meneti'
       less_than_x_seconds:
-        one: 'iti 1 hēkena'
+        one: 'Iti 1 hēkena'
         other: 'Iti iho %{count} nga hēkena'
       x_hours:
         one: '1 hāora'
