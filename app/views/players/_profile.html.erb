@@ -6,11 +6,13 @@
   <div class="info">
 	
     <h2><%= current_player.name %></h2>
-		<%= render partial: 'badges/badge', collection: current_player.badges %>
     <h3><%= current_player.rating %> points </h3>
-
+	<%= render partial: 'badges/badge', collection: current_player.badges %>
+	
     <h3 class="visible-tablet visible-desktop"><%= current_player.games.count %></h3>
   </div>
   <div class="label label-important ranking"><%= current_player.ranking %></div>
+
+
 </div>
 

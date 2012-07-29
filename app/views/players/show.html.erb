@@ -1,8 +1,8 @@
 <div class="show_player">
     <div>
       <div class="thumbnail avatar pull-left">
-        <%= image_tag @player.gravatar_url %>
-      </div>
+        <%= gravatar_for(@player, size:64) %> 
+      </div> 
 
       <div class="name pull-left">
         <h1><%= @player.name %></h1>
@@ -15,16 +15,30 @@
       <div class="clearfix"></div>
   </div>
 
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#Last20Games" data-toggle="tab">Last 20 Games</a></li>
+	  <li><a href="#Badges" data-toggle="tab">Badges</a></li>
+	</ul>
+	
+	<div class="tab-content">
+	  <div class="tab-pane active" id="Last20Games">
+		<div class="page-header">
+		    <h2>
+		      Last 20 Games
+		      <small><%= distance_of_last_game_for(@player) %></small>
+		    </h2>
+		  </div>
 
-  <div class="page-header">
-    <h2>
-      Last 20 Games
-      <small><%= distance_of_last_game_for(@player) %></small>
-    </h2>
-  </div>
+		  <div id="games">
+		    <%= render @player.games.limit(20) %>
+		  </div>  	
+	  </div>
+	  <div class="tab-pane" id="Badges">
+		<%= render partial: 'badges/player_badge_list' %>  	
+	  </div>
+	</div>
 
-  <div id="games">
-    <%= render @player.games.limit(20) %>
-  </div>
+
+  
 </div>
 
