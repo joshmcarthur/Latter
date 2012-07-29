@@ -38,6 +38,8 @@ Latter::Application.configure do
   config.action_mailer.default_url_options = { :host => 'latter.dev' }
   config.action_mailer.asset_host = "http://localhost:3000"
 
+  config.i18n.default_locale = :en
+
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.smtp_settings = {
   #  :address => 'localhost',
