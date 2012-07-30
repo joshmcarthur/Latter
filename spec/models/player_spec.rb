@@ -44,7 +44,7 @@ describe Player do
       game = FactoryGirl.create(:game, :challenger => subject, :winner => subject)
       subject.won_games.should eq [game]
     end
-
+    
     it "should show all completed games" do
       FactoryGirl.create_list(:game, 5, :complete => true, :challenged => subject)
       subject.games(true).size.should eq 5
@@ -60,6 +60,28 @@ describe Player do
       game = FactoryGirl.create(:game, :complete => false, :challenged => player, :challenger => subject)
       subject.in_progress_games(player).should eq [game]
     end
+  end
+
+  describe "Badges" do
+
+    before do
+       subject.save
+       @badge = FactoryGirl.create(:badge)
+       @award = FactoryGirl.create(:award, :player => subject, :badge => @badge)
+    end
+    
+    it "should be able to be assigned correctly" do
+      @award.should be_valid
+      subject.badges.should include { @badge }
+      subject.awards.should include { @award }
+    end
+    
+    it "should be removed when awards are destroyed" do
+      @award.destroy
+      subject.badges.should_not include { @badge }
+      subject.awards.should_not include { @award }
+    end
+      
   end
 
   describe "Pro rating" do

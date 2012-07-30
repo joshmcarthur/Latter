@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Authentication" do
+  
   let(:player) { FactoryGirl.create(:player, :confirmed_at => nil, :changed_password => false) }
   let(:logged_in_player) do
     player.confirmed_at = Time.now
