@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def cache_key_for(object, scope = nil)
-    [Latter::Application.config.version, object, scope].compact
+  def cache_key_for(object, scope = nil, locale=I18n.locale)
+    [Latter::Application.config.version, object, scope, locale].compact
   end
 
   def player_navigation
