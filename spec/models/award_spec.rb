@@ -22,5 +22,8 @@ describe Award do
       it { should_not be_valid }
     end
   
-  
+    describe "default award_date should be set correctly" do
+       award.award_date.should eq award.created_at.to_date
+    end 
+    
 end

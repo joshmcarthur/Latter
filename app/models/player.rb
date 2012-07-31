@@ -169,9 +169,13 @@ class Player < ActiveRecord::Base
 
   # Award a badge
   # Assign the badge to a player via an award
+  # Default is for the award_date datetime to be nil
+  # Which means it gets set in the model to created_at
   # Player.award!(badge)
-  def award! (badge)
-    Award.create!(player_id:self.id, badge_id:badge.id)
+  # To award on the 1st June 2012, do
+  # Player.award!(badge, Date.new(2012, 6, 1))
+  def award! (badge, award_date = nil)
+    Award.create!(player_id:self.id, badge_id:badge.id, award_date:award_date)
   end
 
   private
