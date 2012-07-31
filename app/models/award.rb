@@ -13,7 +13,7 @@ class Award < ActiveRecord::Base
   
     def set_award_date
       
-      if self.award_date == nil
+      if self.award_date.blank?
          self.award_date = self.created_at.to_date
       end
       
