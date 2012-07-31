@@ -15,6 +15,7 @@ class Award < ActiveRecord::Base
       
       if self.award_date.blank?
          self.award_date = self.created_at.to_date
+         self.save
       end
       
     end
