@@ -177,8 +177,7 @@ class Player < ActiveRecord::Base
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
   def award!(badge, award_date = nil)
-    #self.awards.create(:badge => badge)
-    Award.create!(:player_id => self.id, :badge_id => badge.id, :award_date => award_date)
+    self.awards.create(:badge_id => badge)
   end
 
   private
