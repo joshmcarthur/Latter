@@ -27,9 +27,6 @@ ActiveRecord::Schema.define(:version => 20120801210456) do
     t.date     "award_date"
   end
 
-  add_index "awards", ["badge_id"], :name => "index_awards_on_badge_id"
-  add_index "awards", ["player_id"], :name => "index_awards_on_player_id"
-
   create_table "badges", :force => true do |t|
     t.string   "name"
     t.text     "description"
