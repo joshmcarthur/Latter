@@ -1,30 +1,46 @@
 <div class="show_player">
-    <div>
-      <div class="thumbnail avatar pull-left">
-        <%= image_tag @player.gravatar_url %>
-      </div>
+	<div>
+		<div class="thumbnail avatar pull-left">
+			<%= image_tag @player.gravatar_url(:size => '200'), :size => '200x200' %>
+		</div> 
 
-      <div class="name pull-left">
-        <h1><%= @player.name %></h1>
-        <%= link_to "mailto:#{@player.email}" do %>
-          <i class="icon-envelope"></i>
-          <%= @player.email %>
-        <% end %>
-      </div>
+		<div class="name pull-left">
+			<h1><%= @player.name %></h1>
+			<%= link_to "mailto:#{@player.email}" do %>
+			<i class="icon-envelope"></i>
+			<%= @player.email %>
+			<% end %>
+		</div>
 
-      <div class="clearfix"></div>
-  </div>
+		<div class="clearfix"></div>
+	</div>
 
-
-  <div class="page-header">
-    <h2>
-      <%= I18n.t('player.games.heading') %>
-      <small><%= distance_of_last_game_for(@player) %></small>
-    </h2>
-  </div>
-
-  <div id="games">
-    <%= render @player.games.limit(20) %>
-  </div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#last_20_games" data-toggle="tab">Last 20 Games</a></li>
+		<li><a href="#badges" data-toggle="tab">Badges</a></li>
+	</ul>
+	
+	<div class="tab-content">
+	  <div class="tab-pane active" id="last_20_games">
+		<div class="page-header">
+		    <h2>
+		      <%= I18n.t('player.games.heading') %>
+		      <small><%= distance_of_last_game_for(@player) %></small>
+		    </h2>
+		  </div>
+		
+		  <div id="games">
+		    <%= render @player.games.limit(20) %>
+		  </div>  	
+	  </div>
+	
+	  <div class="tab-pane" id="badges">
+		<% if current_player.awards.any? %>
+		<%= render partial: 'badges/player_award_list' %>  
+		<% else %>
+		None yet.	
+		<% end %>
+	  </div>
+	</div>
 </div>
 
