@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20120731054109) do
   create_table "badges", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "imageURL"
+    t.string   "image_url"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

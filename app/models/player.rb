@@ -31,6 +31,8 @@ class Player < ActiveRecord::Base
     :rating,
     :pro,
     :starter
+    :badges
+    :awards
 
   validates_presence_of :name, :allow_blank => false
   validates_numericality_of :rating, :minimum => 0
@@ -175,7 +177,8 @@ class Player < ActiveRecord::Base
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
   def award!(badge, award_date = nil)
-    awards.create(:badge => badge)
+    #self.awards.create(:badge => badge)
+    Award.create!(:player_id => self.id, :badge_id => badge.id, :award_date => award_date)
   end
 
   private
