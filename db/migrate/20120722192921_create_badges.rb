@@ -3,7 +3,7 @@ class CreateBadges < ActiveRecord::Migration
     create_table :badges do |t|
       t.string :name
       t.text :description
-      t.string :image_url
+      t.string :imageURL
 
       t.timestamps
     end
