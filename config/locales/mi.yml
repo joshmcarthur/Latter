@@ -50,12 +50,22 @@ mi:
       edit_account: Ētita ā kōrua Rēhita
       new_player: Niu Kaitākaro
       games: Kēmu
+      badges: Nga Paraihe
       rules: Tikanga
       statistics: Tatauranga
       language: Reo
       log_out: 'Rōku Puta'
   brand:
     title: Latter
+  badges:
+    index:
+      heading: Nga Paraihe
+      table_headings:
+        badge_image: Pakoko
+        name: Ingoa
+        details: Mokamoka
+        awarded_to: Whakawhiwhi
+
   activities:
     heading: Mahinga
     game_complete: "%{challenger} whakakapi tō rāua kēmu mautohe %{challenged} %{result} (%{score})"

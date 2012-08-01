@@ -1,16 +1,24 @@
 <tr>
-	<td><%= image_tag badge.image_url %></td>
-	<td><h3><%= badge.name %></h3></td>
-	<td><%= badge.description %></td>
+	<td>
+		<%= image_tag badge.image_url %>
+	</td>
+	<td>
+		<h3>
+			<%= badge.name %>
+		</h3>
+	</td>
+	<td>
+		<%= badge.description %>
+	</td>
 	<td>
 		<% if badge.players.any? %>
-			<ul>
+		<ul>
 			<% badge.players.each do |item| %>
 				<li><%= item.name %></li>
 			<% end %>
-			</ul>
+		</ul>
 		<% else %>
-		No-one yet.
+			No-one yet.
 		<% end %>
 	</td>
 </tr>

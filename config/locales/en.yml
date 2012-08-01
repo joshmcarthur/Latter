@@ -11,6 +11,7 @@ en:
       new_player: New Player
       games: Games
       rules: Rules
+      badges: Badges
       statistics: Statistics
       log_out: Log out
       language: Language
@@ -20,6 +21,14 @@ en:
       submit_button: Sign in
   brand:
     title: Latter
+  badges:
+    index:
+      heading: Badges
+      table_headings:
+        badge_image: Badge Image
+        name: Name
+        details: Details
+        awarded_to: Awarded To
   activities:
     heading: Activity
     game_complete: "%{challenger} completed their game against %{challenged} and %{result} (%{score})"
