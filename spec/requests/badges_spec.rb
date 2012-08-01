@@ -27,7 +27,7 @@ describe "Badges" do
     visit players_path
 
     @player.badges.each do |item|
-      page.should have_xpath("//img[@src='"+item.imageURL+"']" )
+      page.should have_xpath("//img[@src='"+item.image_url+"']" )
     end
   end
   
@@ -35,7 +35,7 @@ describe "Badges" do
     visit player_path(@player)
 
     @player.badges.each do |item|
-      page.should have_xpath("//img[@src='"+item.imageURL+"']" )
+      page.should have_xpath("//img[@src='"+item.image_url+"']" )
     end
   end
 
