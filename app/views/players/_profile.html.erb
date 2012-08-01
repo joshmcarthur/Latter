@@ -9,7 +9,9 @@
     <h3><%= I18n.t('player.points', :points => current_player.rating) %></h3>
     <%= ranking(current_player) %>
     <h3 class="visible-tablet visible-desktop"><%= current_player.games.count %></h3>
-    <%= render partial: 'badges/badge', collection: current_player.badges %>
+	<% if current_player.badges.any? %>
+    	<%= render partial: 'badges/player_badge', collection: current_player.badges %>
+ 	<% end %>
   </div>
 </div>
 

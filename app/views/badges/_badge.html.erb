@@ -1,1 +1,16 @@
-<%= image_tag (badge.imageURL) %>
+<tr>
+	<td><%= image_tag badge.imageURL %></td>
+	<td><h3><%= badge.name %></h3></td>
+	<td><%= badge.description %></td>
+	<td>
+		<% if badge.players.any? %>
+			<ul>
+			<% badge.players.each do |item| %>
+				<li><%= item.name %></li>
+			<% end %>
+			</ul>
+		<% else %>
+		No-one yet.
+		<% end %>
+	</td>
+</tr>

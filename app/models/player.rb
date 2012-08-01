@@ -40,8 +40,8 @@ class Player < ActiveRecord::Base
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id'
   has_many :won_games, :class_name => 'Game', :foreign_key => 'winner_id'
   
-  has_many :awards, dependent: :destroy
-  has_many :badges, through: :awards
+  has_many :awards, :dependent => :destroy
+  has_many :badges, :through => :awards
 
   # Public - Return all games that a player has participated in
   #
@@ -174,8 +174,8 @@ class Player < ActiveRecord::Base
   # Player.award!(badge)
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
-  def award! (badge, award_date = nil)
-    Award.create!(player_id:self.id, badge_id:badge.id, award_date:award_date)
+  def award!(badge, award_date = nil)
+    awards.create(:badge => badge)
   end
 
   private

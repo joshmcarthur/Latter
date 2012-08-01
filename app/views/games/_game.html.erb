@@ -2,7 +2,7 @@
   <div class="row-fluid game">
     <div class="span3">
       <div class="thumbnail">
-        <%= gravatar_for(game.winner, size:180) %> 
+       <%= image_tag game.winner.gravatar_url(:size => '180'), :size => '180x180' %>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
 
     <div class="span3">
       <div class="thumbnail">
-        <%= gravatar_for(game.loser, size:180) %> 
+       <%= image_tag game.loser.gravatar_url(:size => '180'), :size => '180x180' %>
       </div>
     </div>
   </div>
