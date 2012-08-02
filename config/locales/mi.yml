@@ -88,6 +88,8 @@ mi:
       success: 'Kaitākaro angitu pupuri.'
     game_last_played: "- whakamutunga perei %{distance} nō nakua tonu nei"
     points: "Kaute: %{points}"
+    profile:
+      games: "Kēmu: %{count}"
     edit: 
       link: Ētita Rēhita
       heading: Ētita Rēhita

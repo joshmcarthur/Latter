@@ -12,13 +12,17 @@
 	</td>
 	<td>
 		<% if badge.players.any? %>
-		<ul>
-			<% badge.players.each do |item| %>
-				<li><%= item.name %></li>
+		<ul class="player-list">
+			<% badge.players.each do |player| %>
+				<li>
+					<%= link_to player do %>
+						<%= image_tag(player.gravatar_url(:size => '24')) %>
+					<% end %>
+				</li>
 			<% end %>
 		</ul>
 		<% else %>
-			No-one yet.
+			<em>No-one yet.</em>
 		<% end %>
 	</td>
 </tr>

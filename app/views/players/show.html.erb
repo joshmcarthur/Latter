@@ -1,7 +1,7 @@
 <div class="show_player">
 	<div>
 		<div class="thumbnail avatar pull-left">
-			<%= image_tag @player.gravatar_url(:size => '200'), :size => '200x200' %>
+			<%= image_tag @player.gravatar_url(:size => '80'), :size => '80x80' %>
 		</div> 
 
 		<div class="name pull-left">
@@ -17,7 +17,9 @@
 
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#last_20_games" data-toggle="tab">Last 20 Games</a></li>
-		<li><a href="#badges" data-toggle="tab">Badges</a></li>
+		<% if @player.awards.any? %>
+			<li><a href="#badges" data-toggle="tab">Badges</a></li>
+		<% end %>
 	</ul>
 	
 	<div class="tab-content">
@@ -35,7 +37,7 @@
 	  </div>
 	
 	  <div class="tab-pane" id="badges">
-		<% if current_player.awards.any? %>
+		<% if @player.awards.any? %>
 		<%= render partial: 'badges/player_award_list' %>  
 		<% else %>
 		None yet.	

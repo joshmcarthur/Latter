@@ -1,1 +1,5 @@
-<%= image_tag player_badge.image_url %>
+<%= image_tag player_badge.image_url, 
+	:title => player_badge.name, 
+	:rel => 'popover',
+	:'data-content' => player_badge.description
+%>
