@@ -64,6 +64,18 @@
   .info {
     text-align: center;
     margin: 10% auto;
+
+    h3 {
+      padding-top: 5px;
+    }
+  }
+
+  .ranking {
+    margin: 5% auto;
+  }
+
+  .badges {
+    padding-top: 20px;
   }
 
   .trend { 
@@ -90,6 +102,10 @@
     margin-left: 2%;
   }
 
+
+  .nav-tabs {
+    margin-top: 20px;
+  }
 
 }
 

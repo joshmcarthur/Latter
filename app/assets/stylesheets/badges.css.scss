@@ -1,0 +1,27 @@
+
+@mixin badge-line {
+	line-height: 48px;
+}
+
+table.badge-table {
+	td {
+		@include badge-line;
+
+		h3 { 
+			@include badge-line;
+		}
+	}
+
+	.player-list {
+		padding: 0; 
+		margin: 0;
+		
+		li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			float: left;
+		}
+	}
+}
+
