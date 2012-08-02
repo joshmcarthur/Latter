@@ -1,10 +1,27 @@
 require 'spec_helper'
 
 describe "Players" do
-  describe "GET /players" do
-    it "works! (now write some real specs)" do
-      get players_path
-      response.status.should be(200)
-    end
+  
+  before do
+     @player1 = FactoryGirl.create(:player)
+     @player2 = FactoryGirl.create(:player)
   end
+  
+  it "should all be shown on the players page before and after logging in" do
+    visit players_path
+    
+    Player.all.each do |item|
+      page.should have_selector("h3", :text => item.name )
+    end
+    
+    sign_in(@player1)
+    
+    Player.all.each do |item|
+      page.should have_selector("h3", :text => item.name )
+    end
+    
+  end
+    
 end
+
+
