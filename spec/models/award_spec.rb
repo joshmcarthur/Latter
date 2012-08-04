@@ -31,5 +31,10 @@ describe Award do
       before { award.badge_id = nil }
       it { should_not be_valid }
     end
-  
+
+    it "should create an activity when the record is saved" do
+      Activity.should_receive(:awarded_badge).with(award).at_least(1).times
+      award.save
+    end
+    
 end
