@@ -22,6 +22,12 @@ class Activity < ActiveRecord::Base
     self.create(:message => message)
   end
 
+  def self.awarded_badge(award)
+    message = I18n.t('activities.awarded_badge', :player => award.player.name, :name => award.badge.name)
+    self.create(:message => message)
+  end
+
+
   # Override the json representation of this object to include the time_ago method result
   def as_json(args)
     super(args.merge(:methods => 'time_ago'))
