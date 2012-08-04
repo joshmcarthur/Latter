@@ -70,6 +70,7 @@ mi:
     heading: Mahinga
     game_complete: "%{challenger} whakakapi tō rāua kēmu mautohe %{challenged} %{result} (%{score})"
     new_game: "%{challenger} whakatara %{challenged}."
+    awarded_badge: "%{player} whakawhiwhi te %{name} paraihe."
     attributes:
       time_ago: "%{distance} nō nakua tonu nei  "
   page:

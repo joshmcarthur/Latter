@@ -33,6 +33,7 @@ en:
     heading: Activity
     game_complete: "%{challenger} completed their game against %{challenged} and %{result} (%{score})"
     new_game: "%{challenger} challenged %{challenged}."
+    awarded_badge: "%{player} was awarded the %{name} badge."
     attributes:
       time_ago: "%{distance} ago"
   page:
