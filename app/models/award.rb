@@ -7,10 +7,16 @@ class Award < ActiveRecord::Base
   
   belongs_to :badge
   belongs_to :player, :touch => true
+
+  after_create :create_activity
   
   attr_accessible :badge_id, :player_id, :award_date, :badge
   
   private
+
+    def create_activity
+      Activity.awarded_badge(self)
+    end
   
     def set_award_date
       
