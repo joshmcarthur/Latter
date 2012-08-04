@@ -32,7 +32,7 @@
 		  </div>
 		
 		  <div id="games">
-		    <%= render @player.games.limit(20) %>
+		    <%= render @player.games.order(:updated_at).limit(20) %>
 		  </div>  	
 	  </div>
 	
