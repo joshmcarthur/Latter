@@ -35,17 +35,28 @@
       </p>
 
       <fieldset id="javascript_notification_config">
-        <legend><%= I18n.t('player.javascript_notifications.form.heading') %></legend>
+        <div class="supported">
+          <legend><%= I18n.t('player.javascript_notifications.form.heading') %></legend>
 
-        <button id="notifications_permissions" type="button" class="btn btn-primary btn-large">
-          <%= I18n.t('player.javascript_notifications.form.permissions_button') %>
-        </button>
+          <button id="notifications_permissions" type="button" class="btn btn-primary btn-large">
+            <%= I18n.t('player.javascript_notifications.form.permissions_button') %>
+          </button>
 
-        <button id="notifications_test" type="button" class="btn btn-large">
-          <%= I18n.t('player.javascript_notifications.form.test_button') %>
-        </button>
+          <button id="notifications_test" type="button" class="btn btn-large">
+            <%= I18n.t('player.javascript_notifications.form.test_button') %>
+          </button>
 
-        <hr />
+          <hr />
+        </div>
+
+        <div class="unsupported">
+          <div class="alert alert-error">
+            <h3 class="alert-heading">Notifications are not supported in this browser</h3>
+            <p>
+              Sorry, but notifications are not supported in this browser. Try <a href="http://google.com/chrome">Chrome</a>.
+            </p>
+          </div>
+        </div>
       </fieldset>
     </div>
 
