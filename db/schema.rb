@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801210456) do
+ActiveRecord::Schema.define(:version => 20120806080653) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120801210456) do
     t.datetime "confirmation_sent_at"
     t.boolean  "changed_password",                        :default => false, :null => false
     t.boolean  "wants_challenge_completed_notifications", :default => true,  :null => false
+    t.boolean  "wants_javascript_notifications",          :default => true,  :null => false
   end
 
   add_index "players", ["confirmation_token"], :name => "index_players_on_confirmation_token", :unique => true
