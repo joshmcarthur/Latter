@@ -26,6 +26,7 @@ class Player < ActiveRecord::Base
     :password,
     :password_confirmation,
     :wants_challenge_completed_notifications,
+    :wants_javascript_notifications,
     :remember_me,
     :name,
     :rating,
