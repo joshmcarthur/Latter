@@ -52,8 +52,6 @@ en:
       success: 'Player was successfully updated.'
     game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
-    profile:
-      games: "Games: %{count}"
     edit: 
       link: 'Edit Profile'
       heading: 'Edit Profile'
