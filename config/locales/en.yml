@@ -52,6 +52,11 @@ en:
       success: 'Player was successfully updated.'
     game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
+    javascript_notifications:
+      form:
+        heading: Configure HTML5 Notifications
+        permissions_button: 'Allow HTML5 Notifications'
+        test_button: 'Test Notification'
     edit: 
       link: 'Edit Profile'
       heading: 'Edit Profile'
@@ -60,6 +65,8 @@ en:
     attributes:
       wants_challenge_completed_notifications: "Receive challenged completed emails?"
       wants_challenge_completed_notifications_help: "If you don't care about confirming the result of a game, uncheck this box to opt-out of 'Challenge Completed on Latter' emails"
+      wants_javascript_notifications: 'Use HTML5 live notifications?'
+      wants_javascript_notifications_help: 'Instead of, or as well as, email notifications, you can also receive notifications from the browser when you are challenged!'
       current_password: 'Current password'
       current_password_help: 'We need your current password to confirm your changes.'
       password_help: "Leave this field blank if you don't want to change your password"
