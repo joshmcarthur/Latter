@@ -9,7 +9,7 @@ Latter::Application.routes.draw do
   resources :activities, :controller => 'activity', :only => :index
   resources :statistics, :only => [:index]
   resources :players
-  resources :badges, :only => [:index]
+  resources :badges, :only => [:index, :show]
 
   root :to => 'players#index'
   match "/pages/*slug" => "pages#show", :as => 'page'
