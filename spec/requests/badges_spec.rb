@@ -3,15 +3,14 @@ require 'spec_helper'
 describe "Badges" do
 
   before do
-    badge1 = FactoryGirl.create(:badge)
-    badge2 = FactoryGirl.create(:badge)
-    badge1.save
-    badge2.save
-
+    @badge1 = FactoryGirl.create(:badge)
+    @badge2 = FactoryGirl.create(:badge)
+    @badge3 = FactoryGirl.create(:badge)
+   
     @player = FactoryGirl.create(:player, name: "a player", email:"aplayer@sample.com")
 
-    @player.award!(badge1)
-    @player.award!(badge2)
+    @player.award!(@badge1)
+    @player.award!(@badge2)
     
     sign_in(@player)
   end
@@ -37,6 +36,11 @@ describe "Badges" do
     @player.badges.each do |item|
       page.should have_xpath("//img[@src='"+item.image_url+"']" )
     end
+  end
+
+  it "should be correctly identifed as awarded_to in model" do
+    Badge.first.awarded_to?(@player).should be_true
+    Badge.last.awarded_to?(@player).should be_false
   end
 
 end

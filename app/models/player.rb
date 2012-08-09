@@ -170,7 +170,9 @@ class Player < ActiveRecord::Base
   end
 
   # Award a badge
+  #
   # Assign the badge to a player via an award
+  # 
   # Default is for the award_date datetime to be nil
   # Which means it gets set in the model to created_at
   # Player.award!(badge)

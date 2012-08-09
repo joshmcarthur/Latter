@@ -9,4 +9,18 @@ class Badge < ActiveRecord::Base
   has_many :awards, :dependent => :destroy
   has_many :players, :through => :awards
   
+  # Check to see if this badge has been awarded to a player
+  def awarded_to?(player)
+  	if player.awards.where(badge_id: self.id).count > 0
+  		return true
+  	else
+  		return false
+  	end
+  end
+
+  # Check whether a player is eligible to receive this badge
+  def available_to?(player)
+
+  end
+
 end
