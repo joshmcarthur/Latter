@@ -12,6 +12,14 @@
         <%= game.complete? ? I18n.t('game.index.completed', :score => game.score) : I18n.t('game.index.challenged') %>
         <br />
       </div>
+      <% if game.can_rollback? %>
+        <%= link_to game, 
+            I18n.t('game.rollback.link_to'), 
+            :method => :delete, 
+            :class => 'btn btn-danger',
+            :confirm => I18n.t('game.rollback.confirm')
+        %>
+      <% end %>
     </div>
 
     <div class="span3">
