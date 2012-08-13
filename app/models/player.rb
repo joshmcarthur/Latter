@@ -52,6 +52,7 @@ class Player < ActiveRecord::Base
   def games(complete = nil)
     games_scope = Game.where('challenger_id = ? OR challenged_id = ?', self.id, self.id)
     games_scope.where('complete = ?', complete) if complete
+    games_scope.order('updated_at DESC')
 
     games_scope
   end
