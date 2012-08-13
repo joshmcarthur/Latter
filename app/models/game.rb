@@ -81,10 +81,14 @@ class Game < ActiveRecord::Base
     end
 
     self.complete = true
+
+    self.set_rating_changes
+
     self.save!
 
     GameNotifier.completed_game(self).deliver!
     Activity.completed_game(self)
+
 
     self
   end
@@ -163,6 +167,17 @@ class Game < ActiveRecord::Base
     }
   end
 
+  # Public: Determine whether this game can be rolled back.
+  #
+  # The game may only be rolled back if the game is in the last 3
+  # games each player played, and if both of the score change attributes
+  # are set (since they can't be retrofitted to existing records)
+  #
+  # Returns true if the game CAN be rolled back, or false if not
+  def can_rollback?
+    return false unless challenged_rating_change && challenger_rating_change
+    return challenged.games.limit(3).includes?(game) && challenger.games.limit(3).includes?(game)
+  end
 
   # Public - Return the winner of a game
   #
@@ -206,6 +221,40 @@ class Game < ActiveRecord::Base
     "#{self.id}-#{self.challenger.name.parameterize}-vs-#{self.challenged.name.parameterize}"
   end
 
+  protected
+
+  # Protected - Set the change in ratings for each player, so that
+  # the game may be rolled back if necessary.
+  def set_rating_changes
+    self.challenged_rating_change = self.challenged_rating.send(:change)
+    self.challenger_rating_change = self.challenger_rating.send(:change)
+  end
+
+  # Protected - Build a rating object for the challenging player
+  #
+  # The rating is used to calculate the ranking for each player
+  #
+  # Returns a rating object
+  def challenger_rating
+    Rating.new(
+      :result => result,
+      :old_rating => challenger.rating,
+      :other_rating => challenged.rating,
+      :k_factor => challenger.k_factor
+    )
+  end
+
+  # Protected - Build a rating object for the challenged player
+  # See Game#challenger_rating
+  def challenged_rating
+    Rating.new(
+      :result => (1.0 - result),
+      :old_rating => challenged.rating,
+      :other_rating => challenger.rating,
+      :k_factor => challenged.k_factor
+    )
+  end
+
   private
 
   # Private - Checks for the existence of an inverse game
@@ -228,29 +277,7 @@ class Game < ActiveRecord::Base
     end
   end
 
-  # Private - Build a rating object for the challenging player
-  #
-  # The rating is used to calculate the ranking for each player
-  #
-  # Returns a rating object
-  def challenger_rating
-    Rating.new(
-      :result => result,
-      :old_rating => challenger.rating,
-      :other_rating => challenged.rating,
-      :k_factor => challenger.k_factor
-    )
-  end
 
-  # Private - Build a rating object for the challenged player
-  def challenged_rating
-    Rating.new(
-      :result => (1.0 - result),
-      :old_rating => challenged.rating,
-      :other_rating => challenger.rating,
-      :k_factor => challenged.k_factor
-    )
-  end
 
   # Private - Notify the challenged player that they have a pending game
   def notify_player

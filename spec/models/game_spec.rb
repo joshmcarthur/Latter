@@ -79,5 +79,13 @@ describe Game do
     it "should create ratings for each player" do
       subject.ratings.length.should eq 2
     end
+
+    it "should save the change in rating for the challenged player" do
+      subject.challenger_rating_change.should eq subject.send(:challenger_rating).send(:change)
+    end
+
+    it "should save the change in rating for the challenger player" do
+      subject.challenged_rating_change.should eq subject.send(:challenged_rating).send(:change)
+    end
   end
 end
