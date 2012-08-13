@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     @games = Game\
       .includes(:challenged, :challenger)\
       .where(:complete => true)\
-      .order(:created_at)\
+      .order('created_at DESC')\
       .page(params[:page])\
 
     respond_to do |format|
