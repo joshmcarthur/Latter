@@ -13,10 +13,10 @@
         <br />
       </div>
       <% if game.can_rollback? %>
-        <%= link_to game, 
-            I18n.t('game.rollback.link_to'), 
+        <%= link_to I18n.t('game.rollback.link_to'), 
+            game,
             :method => :delete, 
-            :class => 'btn btn-danger',
+            :class => 'btn btn-danger rollback-btn',
             :confirm => I18n.t('game.rollback.confirm')
         %>
       <% end %>
