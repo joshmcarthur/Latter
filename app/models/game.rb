@@ -176,7 +176,7 @@ class Game < ActiveRecord::Base
   # Returns true if the game CAN be rolled back, or false if not
   def can_rollback?
     return false unless challenged_rating_change && challenger_rating_change
-    return challenged.games.limit(3).includes?(game) && challenger.games.limit(3).includes?(game)
+    return challenged.games.limit(1).include?(self) || challenger.games.limit(1).include?(self)
   end
 
   # Public - Return the winner of a game
@@ -219,6 +219,20 @@ class Game < ActiveRecord::Base
   # Returns a string in the format id-player 1 name-vs-player 2 name
   def to_param
     "#{self.id}-#{self.challenger.name.parameterize}-vs-#{self.challenged.name.parameterize}"
+  end
+
+  # Public: Rollback this game.
+  #
+  # This method applies the score changes back to the players, before
+  # destroying the game. It effectively 'reverses' any points changes
+  # that this game resulted in
+  #
+  # Returns the destroyed game
+  def rollback!
+    self.challenged.rating += self.challenged_rating_change if self.challenged_rating_change
+    self.challenger.rating += self.challenger_rating_change if self.challenger_rating_change
+
+    self.destroy
   end
 
   protected
