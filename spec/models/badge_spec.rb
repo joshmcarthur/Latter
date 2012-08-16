@@ -7,10 +7,17 @@ describe Badge do
   end
 
   before do
+    @player1 = FactoryGirl.build(:player, :name => "Player1")
+    @player2 = FactoryGirl.build(:player, :name => "Player2")
     
+    @player1.save
+    @player2.save
+
+    FactoryGirl.create(:game, :challenger => @player1, :challenged => @player2 )
+
   end
   
-  it { should respond_to (:awards) }
+  it { should respond_to (:awards) } 
   it { should respond_to (:players) }
   
   it "creates a valid badge type given valid attributes" do
@@ -24,14 +31,20 @@ describe Badge do
     subject.should_not be_persisted
   end
 
-  it "should be correctly awarded and verified in the model" do
-    @player = FactoryGirl.build(:player)
-    @player.save
+  it "should be correctly awarded and verified as awarded_to? in the model" do
+
     subject.save
-    subject.awarded_to?(@player).should be_false
-    @player.award!(subject)
-    subject.awarded_to?(@player).should be_true
+    subject.awarded_to?(@player1).should be_false
+    @player1.award!(subject)
+    subject.awarded_to?(@player1).should be_true
   end
+
+  it "should have the award_rule correctly tested" do
+
+    subject.award_rule = { :challenger_name_eq => "Player1"}
+    subject.save
+    subject.qualifies?(@player1).should be_true
+  end 
 
   
 end

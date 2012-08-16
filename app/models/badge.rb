@@ -19,12 +19,11 @@ class Badge < ActiveRecord::Base
   end
 
   # Check whether a player is eligible to receive this badge
-  def gained_by?(player)
-      @validate = Player.search(self.award_rule)
-      if @validate.count > 0 then
+  def qualifies?(player)
+      if player.games.search(self.award_rule).result.count > 0 then
         return true
       else
-        return false
+        return false 
       end
   end
 
