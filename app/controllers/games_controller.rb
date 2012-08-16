@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     @games = Game\
       .includes(:challenged, :challenger)\
       .where(:complete => true)\
-      .order(:created_at)\
+      .order('created_at DESC')\
       .page(params[:page])\
 
     respond_to do |format|
@@ -46,7 +46,7 @@ class GamesController < ApplicationController
   # DELETE /games/1.json
   def destroy
     @game = current_player.games.find(params[:id])
-    @game.destroy
+    @game.rollback!
 
     respond_to do |format|
       format.html { redirect_to games_url }

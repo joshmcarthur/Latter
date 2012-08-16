@@ -47,6 +47,38 @@ describe Game do
     end
   end
 
+  describe "rollback" do
+    before :each do
+      subject.save!
+
+      @challenged = subject.challenged
+      @challenger = subject.challenger
+
+      @before_challenger_score = @challenger.rating
+      @before_challenged_score = @challenged.rating
+    end
+
+    it "should rollback correctly when the challenger won" do
+      subject.complete! :challenger_score => 21, :challenged_score => 15
+      subject.rollback!
+
+      @challenger.reload
+      @challenged.reload
+      @challenged.rating.should eq @before_challenged_score
+      @challenger.rating.should eq @before_challenger_score
+    end
+
+    it "should rollback correctly when the challenged won" do
+      subject.complete! :challenger_score => 15, :challenged_score => 21
+      subject.rollback!
+
+      @challenger.reload
+      @challenged.reload
+      @challenged.rating.should eq @before_challenged_score
+      @challenger.rating.should eq @before_challenger_score
+    end
+  end
+
   describe "completion" do
     before :each do
       subject.complete! :challenger_score => 15, :challenged_score => 6
@@ -78,6 +110,14 @@ describe Game do
 
     it "should create ratings for each player" do
       subject.ratings.length.should eq 2
+    end
+
+    it "should save the change in rating for the challenged player" do
+      subject.challenger_rating_change.should eq subject.send(:challenger_rating).send(:change)
+    end
+
+    it "should save the change in rating for the challenger player" do
+      subject.challenged_rating_change.should eq subject.send(:challenged_rating).send(:change)
     end
   end
 end
