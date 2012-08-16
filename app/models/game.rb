@@ -229,8 +229,19 @@ class Game < ActiveRecord::Base
   #
   # Returns the destroyed game
   def rollback!
-    self.challenged.rating += self.challenged_rating_change if self.challenged_rating_change
-    self.challenger.rating += self.challenger_rating_change if self.challenger_rating_change
+    if self.challenged_rating_change and self.challenger_rating_change
+
+      if self.winner?(self.challenged)
+        self.challenged.rating += -self.challenged_rating_change.round
+        self.challenger.rating += self.challenger_rating_change.round.abs + 1
+      else
+        self.challenger.rating += -self.challenger_rating_change.round
+        self.challenged.rating += self.challenged_rating_change.round.abs + 1
+      end
+
+      self.challenged.save
+      self.challenger.save
+    end
 
     self.destroy
   end
