@@ -1,4 +1,5 @@
 <% cache cache_key_for(game, 'listing') do %>
+  <% if game.challenger and game.challenged %>
   <div class="row-fluid game">
     <div class="span3">
       <div class="thumbnail">
@@ -20,5 +21,6 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
 
