@@ -14,6 +14,7 @@ describe Badge do
     @player2.save
 
     FactoryGirl.create(:game, :challenger => @player1, :challenged => @player2 )
+    FactoryGirl.create(:game, :challenger => @player1, :challenged => @player2 )    
 
   end
   
@@ -31,19 +32,35 @@ describe Badge do
     subject.should_not be_persisted
   end
 
-  it "should be correctly awarded and verified as awarded_to? in the model" do
-
+  it "should be able to be awarded and verified as awarded_to? in the model" do
     subject.save
     subject.awarded_to?(@player1).should be_false
     @player1.award!(subject)
     subject.awarded_to?(@player1).should be_true
   end
 
-  it "should have the award_rule correctly tested" do
+  it "should qualify correctly a badge for a non-numeric condition" do
+    subject.award_rule = { :challenger_name_eq => "Player1"}
+    subject.qualifies?(@player1).should be_true
+  end 
+
+  it "should qualify correctly a badge for greater than n condition" do
+    subject.award_rule = { :challenger_name_eq => "Player1"}
+    subject.award_rule_count = 1 # more than one challenged game
+    subject.qualifies?(@player1).should be_true
+
+    subject.award_rule_count = 3 # more than three challenged games
+    subject.qualifies?(@player1).should be_false
+  end 
+
+  it "should qualify correctly for a badge for less than n condition" do
+    subject.award_rule = { :challenger_name_eq => "Player1"}
+    subject.award_rule_count = -5 # less than 5 challenged games
+    subject.qualifies?(@player1).should be_true
 
     subject.award_rule = { :challenger_name_eq => "Player1"}
-    subject.save
-    subject.qualifies?(@player1).should be_true
+    subject.award_rule_count = -2 # less than 2 challenged games
+    subject.qualifies?(@player1).should be_false
   end 
 
   

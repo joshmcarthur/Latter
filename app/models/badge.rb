@@ -19,12 +19,35 @@ class Badge < ActiveRecord::Base
   end
 
   # Check whether a player is eligible to receive this badge
+  #
+  # The hash of conditions is from Badge.award_rule
+  #
+  # An award_rule_count of > 0 means award the badge if more than
+  # award_rule_count results are returned.
+  #
+  # A negative award rule means the badge should be awarded if
+  # less than the absolute value of the award_rule_count is returned
+  # i.e. specified the operator and the value
+  #
+  # A zero award_rule_count means award the badge if any matches
+  # are found to the condition.
+  #
   def qualifies?(player)
-      if player.games.search(self.award_rule).result.count > 0 then
-        return true
-      else
-        return false 
+      award_count = self.award_rule_count
+      result_count = player.games.search(self.award_rule).result.count
+      qualifies = false
+
+      case
+      when award_count < 0
+          qualifies = true if result_count < (-award_count)
+      when award_count > 0
+          qualifies = true if result_count > award_count
+      when award_count == 0
+          qualifies = true if result_count > 0
       end
+
+      qualifies
+
   end
 
 end
