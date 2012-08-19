@@ -39,6 +39,8 @@ en:
   page:
     not_found: 'Page not found'
   player:
+    profile:
+      games: Games: %{games}
     games:
       heading: Last 20 Games
     form:
