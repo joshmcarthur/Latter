@@ -27,7 +27,7 @@ describe "Badges" do
 
     @player.badges.each do |item|
       page.should have_xpath("//img[@src='"+item.image_url+"']" )
-    endt
+    end
   end
   
   it "should display on the players' profile page" do
