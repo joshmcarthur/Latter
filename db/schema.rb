@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20120811103220) do
     t.datetime "confirmation_sent_at"
     t.boolean  "changed_password",                        :default => false, :null => false
     t.boolean  "wants_challenge_completed_notifications", :default => true,  :null => false
-    t.boolean  "wants_javascript_notifications",          :default => true,  :null => false
   end
 
   add_index "players", ["confirmation_token"], :name => "index_players_on_confirmation_token", :unique => true
