@@ -87,7 +87,7 @@ class Game < ActiveRecord::Base
     Activity.completed_game(self)
 
     # Check all badges to see whether this result awards badges
-    award_badges()
+    self.award_badges()
 
     self
   end
@@ -209,6 +209,26 @@ class Game < ActiveRecord::Base
     "#{self.id}-#{self.challenger.name.parameterize}-vs-#{self.challenged.name.parameterize}"
   end
 
+
+  # Check the challenger and challenged players for new badge awards
+    def award_badges
+      Badge.all do |the_badge|
+        [self.challenger,self.challenged].each do |the_player|
+
+          logger.debug "Checking #{the_badge.name} against #{@the_player.name}"
+          debugger
+          
+            if the_badge.qualifies?(the_player)
+              the_player.award!(the_badge)
+              # Notify the player
+              # Create an activity
+            end
+         end
+      end
+    end
+
+
+
   private
 
   # Private - Checks for the existence of an inverse game
@@ -266,20 +286,5 @@ class Game < ActiveRecord::Base
     Activity.new_game(self)
   end
 
-  # Private - Check the challenger and challenged players for new badge awards
-  def award_badges
-    Badge.all do |the_badge|
-      [self.challenger,self.challenged].each do |the_player|
-
-        logger.debug "Checking #{the_badge.name} against #{@the_player.name}"
-        
-          if the_badge.qualifies?(the_player)
-            the_player.award!(the_badge)
-            # Notify the player
-            # Create an activity
-          end
-       end
-    end
-  end
-
+  
 end
