@@ -4,9 +4,9 @@ describe Award do
 
     let(:player) { FactoryGirl.create(:player) }
     let(:badge) { FactoryGirl.create(:badge) }
-    let(:award) { FactoryGirl.create(:award, badge_id:badge, player_id:player) }
+    let(:award) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player) }
     let(:datetoday) { Date.new(2011,1,1) }
-    let(:datedaward) { FactoryGirl.create(:award, badge_id:badge, player_id:player, award_date:datetoday) }
+    let(:datedaward) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player, :award_date => datetoday) }
 
     subject { award }
 
