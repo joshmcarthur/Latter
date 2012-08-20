@@ -99,6 +99,9 @@ en:
     result:
       won: 'won!'
       lost: 'lost!'
+    rollback:
+      link_to: 'Rollback'
+      confirm: Are you sure you want to rollback this game?
   statistics:
     challenged_count:
       heading: Offensive Games per Player
