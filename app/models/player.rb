@@ -51,7 +51,9 @@ class Player < ActiveRecord::Base
   # was challenged
   def games(complete = nil)
     games_scope = Game.where('challenger_id = ? OR challenged_id = ?', self.id, self.id)
+    games_scope.includes(:challenged, :challenger)
     games_scope.where('complete = ?', complete) if complete
+    games_scope = games_scope.order('created_at DESC')
 
     games_scope
   end

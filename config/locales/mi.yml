@@ -137,6 +137,9 @@ mi:
     result:
       won: 'wini!'
       lost: 'hinga!'
+    rollback:
+      link_to: 'Whakakore'
+      confirm: Are you sure you want to rollback this game?
   statistics:
     challenged_count:
       heading: Papare Kēmu ā Kaitākaro

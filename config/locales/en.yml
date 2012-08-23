@@ -39,6 +39,8 @@ en:
   page:
     not_found: 'Page not found'
   player:
+    profile:
+      games: 'Games: %{count}'
     games:
       heading: Last 20 Games
     form:
@@ -97,6 +99,9 @@ en:
     result:
       won: 'won!'
       lost: 'lost!'
+    rollback:
+      link_to: 'Rollback'
+      confirm: Are you sure you want to rollback this game?
   statistics:
     challenged_count:
       heading: Offensive Games per Player

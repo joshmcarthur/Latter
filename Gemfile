@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'thin'
@@ -17,6 +18,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'bullet'
   gem 'rspec-rails'
   gem 'growl'
   gem 'capybara'
