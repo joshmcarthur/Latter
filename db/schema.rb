@@ -38,14 +38,16 @@ ActiveRecord::Schema.define(:version => 20120816191347) do
   end
 
   create_table "games", :force => true do |t|
-    t.integer  "challenger_id",                    :null => false
-    t.integer  "challenged_id",                    :null => false
-    t.boolean  "complete",      :default => false, :null => false
+    t.integer  "challenger_id",                               :null => false
+    t.integer  "challenged_id",                               :null => false
+    t.boolean  "complete",                 :default => false, :null => false
     t.float    "result"
     t.string   "score"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "winner_id"
+    t.decimal  "challenger_rating_change"
+    t.decimal  "challenged_rating_change"
   end
 
   add_index "games", ["challenged_id"], :name => "index_games_on_challenged_id"

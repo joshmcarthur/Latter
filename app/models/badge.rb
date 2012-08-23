@@ -33,16 +33,20 @@ class Badge < ActiveRecord::Base
   # are found to the condition.
   #
   def qualifies?(player)
+
+      debugger
+
+      return false if self.award_rule.blank?
+
       award_count = self.award_rule_count
       result_count = player.games.search(self.award_rule).result.count
       qualifies = false
 
-      case
-      when award_count < 0
+      if award_count < 0
           qualifies = true if result_count < (-award_count)
-      when award_count > 0
+      elsif award_count > 0
           qualifies = true if result_count > award_count
-      when award_count == 0
+      else
           qualifies = true if result_count > 0
       end
 
