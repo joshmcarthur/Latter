@@ -1,6 +1,8 @@
 Latter::Application.routes.draw do
   devise_for :players
 
+  match '/games/search', :controller => 'games', :action => 'search'
+
   resources :games, :except => [:edit, :update] do
     post :complete, :on => :member
     resource :score, :controller => 'scores', :only => [:new, :create]
@@ -13,4 +15,5 @@ Latter::Application.routes.draw do
 
   root :to => 'players#index'
   match "/pages/*slug" => "pages#show", :as => 'page'
+
 end

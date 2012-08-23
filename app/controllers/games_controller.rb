@@ -53,4 +53,14 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # POST /gamesearch
+  def search
+    @search = Game.search(params[:q])
+    @games  = params[:distinct].to_i.zero? ? @search.result : @search.result(distinct: true)
+
+    respond_with @games
+  end
+
+
 end
