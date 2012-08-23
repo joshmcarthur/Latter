@@ -13,7 +13,7 @@
         <%= game.complete? ? I18n.t('game.index.completed', :score => game.score) : I18n.t('game.index.challenged') %>
         <br />
       </div>
-      <% if game.can_rollback? %>
+      <% if [game.challenged, game.challenger].include?(current_player) && game.can_rollback? %>
         <%= link_to I18n.t('game.rollback.link_to'), 
             game,
             :method => :delete, 
