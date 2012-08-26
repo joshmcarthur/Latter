@@ -57,8 +57,8 @@ class GamesController < ApplicationController
   # POST /gamesearch
   def search
     @search = Game.search(params[:q])
+    @searchquery = params[:q]
     @games  = params[:distinct].to_i.zero? ? @search.result : @search.result(distinct: true)
-
     respond_with @games
   end
 
