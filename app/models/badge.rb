@@ -30,17 +30,31 @@ class Badge < ActiveRecord::Base
   # i.e. specified the operator and the value
   #
   # A zero award_rule_count means award the badge if any matches
-  # are found to the condition.
+  # are found to the condition regardless of number.
+  #
+  # If a created_at_gt parameter is in the award_rule then we 
+  # treat it as a number of hours prior to the current time
+  # and substitute in the correct date value
   #
   def qualifies?(player)
+      
+      return false if self.award_rule.nil?
+      
+      @award_rule = self.award_rule.dup
 
-      debugger
-
-      return false if self.award_rule.blank?
+      # swap the created_at parameter to a date offset assumed to be in hours
+      
+      if @award_rule[:created_at_gt].present?
+         @date_offset = @award_rule[:created_at_gt].to_i
+         @award_rule[:created_at_gt] = DateTime.now.ago(@date_offset*60*60)
+      end
 
       award_count = self.award_rule_count
-      result_count = player.games.search(self.award_rule).result.count
+
+      result_count = player.games.search(@award_rule).result.count
       qualifies = false
+
+      debugger
 
       if award_count < 0
           qualifies = true if result_count < (-award_count)
@@ -51,6 +65,10 @@ class Badge < ActiveRecord::Base
       end
 
       qualifies
+
+  # rescue
+
+      # return false
 
   end
 

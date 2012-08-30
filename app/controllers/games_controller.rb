@@ -55,16 +55,32 @@ class GamesController < ApplicationController
   end
 
   # POST /gamesearch
+  # parameters are: 
+  # :q => the ransack search query
+  # :player => the player whose games to search
+  # :dateoffset => the date range to filter (hours prior to the current time)
+
   def search
 
-      @player = !params[:q].blank? ? Player.find(params[:q][:player]) : Player.first
+    if params[:q].present?
 
-      debugger
+      # get the player parameter
+      @player = Player.find(params[:q][:player])
+      
+      # swap the created_at parameter to a date offset (hours)
+      @date_offset = params[:q][:created_at_gt].to_i
+      params[:q][:created_at_gt] = DateTime.now.ago(@date_offset*60*60)
+      # params[:q].merge!(:created_at_gt => DateTime.now.ago(60*60*24*@dateoffset))
 
-      @search = @player.games.search(params[:q])
-      # @search = Game.search(params[:q])
-      @games  = params[:distinct].to_i.zero? ? @search.result : @search.result(distinct: true)
-      respond_with @games
+    else
+      # set defaults
+        @player = Player.first
+    end
+
+    @search = @player.games.search(params[:q])
+    # @search = Game.search(params[:q])
+    @games  = params[:distinct].to_i.zero? ? @search.result : @search.result(distinct: true)
+    respond_with @games
     
   end
 
