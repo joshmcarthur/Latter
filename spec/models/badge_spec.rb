@@ -35,7 +35,7 @@ describe Badge do
   it "should be able to be awarded and verified as awarded_to? in the model" do
     subject.save
     subject.awarded_to?(@player1).should be_false
-    @player1.award!(subject)
+    @player1.badges << subject
     subject.awarded_to?(@player1).should be_true
   end
 

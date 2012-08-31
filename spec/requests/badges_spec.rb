@@ -9,8 +9,8 @@ describe "Badges" do
    
     @player = FactoryGirl.create(:player, name: "a player", email:"aplayer@sample.com")
 
-    @player.award!(@badge1)
-    @player.award!(@badge2)
+    @player.badges << @badge1
+    @player.badges << @badge2
     
     sign_in(@player)
   end

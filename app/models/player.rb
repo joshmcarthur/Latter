@@ -171,19 +171,6 @@ class Player < ActiveRecord::Base
     end
   end
 
-  # Award a badge
-  #
-  # Assign the badge to a player via an award
-  # 
-  # Default is for the award_date datetime to be nil
-  # Which means it gets set in the model to created_at
-  # Player.award!(badge)
-  # To award on the 1st June 2012, do
-  # Player.award!(badge, Date.new(2012, 6, 1))
-  def award!(badge, award_date = nil)
-    self.awards.create(:badge_id => badge)
-  end
-
   private
 
   # Private - Set a default password for the user
