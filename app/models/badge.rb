@@ -54,8 +54,6 @@ class Badge < ActiveRecord::Base
       result_count = player.games.search(@award_rule).result.count
       qualifies = false
 
-      debugger
-
       if award_count < 0
           qualifies = true if result_count < (-award_count)
       elsif award_count > 0

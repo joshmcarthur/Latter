@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816191347) do
+ActiveRecord::Schema.define(:version => 20120831094616) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(:version => 20120816191347) do
     t.string   "name"
     t.text     "description"
     t.string   "image_url"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.text     "award_rule"
     t.integer  "award_rule_count", :default => 0
+    t.boolean  "allow_duplicates", :default => false
   end
 
   create_table "games", :force => true do |t|

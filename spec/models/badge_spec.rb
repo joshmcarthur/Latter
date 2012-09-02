@@ -15,11 +15,10 @@ describe Badge do
 
     FactoryGirl.create(:game, :challenger => @player1, :challenged => @player2 )
     FactoryGirl.create(:game, :challenger => @player1, :challenged => @player2 )    
-
   end
   
-  it { should respond_to (:awards) } 
-  it { should respond_to (:players) }
+  it { should respond_to(:awards) } 
+  it { should respond_to(:players) }
   
   it "creates a valid badge type given valid attributes" do
     subject.save
@@ -35,12 +34,12 @@ describe Badge do
   it "should be able to be awarded and verified as awarded_to? in the model" do
     subject.save
     subject.awarded_to?(@player1).should be_false
-    @player1.badges << subject
+    @player1.award!(subject)
     subject.awarded_to?(@player1).should be_true
   end
 
-  it "should qualify correctly a badge for a non-numeric condition" do
-    subject.award_rule = { :challenger_name_eq => "Player1"}
+  it "should qualify correctly a badge for condition with no numeric component" do
+    subject.award_rule = {:challenger_name_eq => "Player1"}
     subject.qualifies?(@player1).should be_true
   end 
 
@@ -63,5 +62,11 @@ describe Badge do
     subject.qualifies?(@player1).should be_false
   end 
 
-  
+  it "should set the award date correctly if specified" do
+    subject.save
+    @player1.award!(subject,1.week.ago)
+    subject.awarded_to?(@player1).should be_true
+    subject.awards.where(:player_id => @player1.id).first.award_date should be < 6.days.ago
+  end
+
 end
