@@ -66,7 +66,7 @@ describe Badge do
     subject.save
     @player1.award!(subject,1.week.ago)
     subject.awarded_to?(@player1).should be_true
-    subject.awards.where(:player_id => @player1.id).first.award_date should be < 6.days.ago
+    (subject.awards.where(:player_id => @player1.id).first.award_date < 6.days.ago).should be_true
   end
 
 end
