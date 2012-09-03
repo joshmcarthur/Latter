@@ -4,9 +4,9 @@ describe Award do
 
     let(:player) { FactoryGirl.create(:player) }
     let(:badge) { FactoryGirl.create(:badge) }
-    let(:award) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player) }
+    let(:award) { player.award!(badge) }
     let(:datelastmonth) { 1.month.ago }
-    let(:datedaward) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player, :award_date => datelastmonth) }
+    let(:datedaward) { player.award!(badge, datelastmonth) }
 
     subject { award }
 
@@ -20,6 +20,10 @@ describe Award do
     
     it "should have a correctly specified award_date" do
        datedaward.award_date.should eq datelastmonth
+    end
+
+    it "should have a correctly specified expiry" do
+    
     end
   
     describe "when player id is not present" do

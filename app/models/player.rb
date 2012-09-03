@@ -180,9 +180,11 @@ class Player < ActiveRecord::Base
   # Player.award!(badge)
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
-  def award!(badge, award_date = nil)
+  # TODO: fix award expiry date assignment
+  def award!(badge, award_date = nil, expiry = 0)
     if !badge.awarded_to?(self) or badge.allow_duplicates then
-      self.awards.create(:badge_id => badge.id, :award_date => award_date) 
+      award_expiry_date = expiry > 0 ? DateTime.now.advance(:days =>expiry) : nil
+      self.awards.create(:badge_id => badge.id, :award_date => award_date, :expiry_date => award_expiry_date ) 
     end
   end
 
