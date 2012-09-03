@@ -181,7 +181,9 @@ class Player < ActiveRecord::Base
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
   def award!(badge, award_date = nil)
-    self.awards.create(:badge_id => badge.id, :award_date => award_date)
+    if !badge.awarded_to?(self) or badge.allow_duplicates then
+      self.awards.create(:badge_id => badge.id, :award_date => award_date) 
+    end
   end
 
 

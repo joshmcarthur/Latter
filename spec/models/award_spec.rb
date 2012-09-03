@@ -5,8 +5,8 @@ describe Award do
     let(:player) { FactoryGirl.create(:player) }
     let(:badge) { FactoryGirl.create(:badge) }
     let(:award) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player) }
-    let(:datetoday) { Date.new(2011,1,1) }
-    let(:datedaward) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player, :award_date => datetoday) }
+    let(:datelastmonth) { 1.month.ago }
+    let(:datedaward) { FactoryGirl.create(:award, :badge_id => badge, :player_id => player, :award_date => datelastmonth) }
 
     subject { award }
 
@@ -15,12 +15,12 @@ describe Award do
     end
   
     it "should have a correct default award_date" do
-       award.award_date.should eq award.created_at.to_date
+       award.award_date.should eq award.created_at
     end
     
-      it "should have a correctly specified award_date" do
-         datedaward.award_date.should eq datetoday
-      end
+    it "should have a correctly specified award_date" do
+       datedaward.award_date.should eq datelastmonth
+    end
   
     describe "when player id is not present" do
       before { award.player_id = nil }
