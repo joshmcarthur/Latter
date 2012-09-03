@@ -228,7 +228,7 @@ class Game < ActiveRecord::Base
       Badge.all.each do |the_badge|
         [challenger,challenged].each do |the_player|
             if the_badge.qualifies?(the_player)
-              the_player.badges << the_badge
+              the_player.award!(the_badge)
               # Notify the player
             end
          end
