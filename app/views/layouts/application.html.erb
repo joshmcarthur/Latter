@@ -33,19 +33,6 @@
         <% end %>
 
         <div class="span9">
-
-          <div class="alert alert-success">
-            <h3 class="alert-heading">Comic Sans Day!</h3>
-            <p>
-              Welcome to Latter! Today, as a special and ironic tilt-o-the-hat to that
-              venerated font face, <strong>Comic Sans</strong>, Latter is in 'comic-sans mode'!
-            </p>
-
-            <p>
-              Enjoy!
-            </p>
-          </div>
-
           <% flash.each do |key, value| %>
             <%= content_tag :div, :class => "alert alert-#{key}" do %>
               <button class="close" data-dismiss="alert">×</button>
