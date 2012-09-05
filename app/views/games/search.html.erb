@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>Search Games</h1>
+</div>
+
+<div id="games">
+  
+<%= search_form_for @search, :url => games_search_path do |f| %>
+  <fieldset>
+    <legend>Player</legend>
+        <%= collection_select(:q, :player, Player.all, :id, :name) %>
+  </fieldset>
+ <fieldset>
+    <legend>Against</legend>
+        <%= collection_select(:q, :challenger_id_or_challenged_id_eq, Player.all, :id, :name) %>
+  </fieldset>
+
+ <fieldset>
+    <legend>Date</legend>
+        <%= f.text_field :created_at_gt %>
+  </fieldset>
+
+  <%= f.submit %>
+
+<% end %>
+
+<h3>Matching games: <%= @games.count %></h3>
+<h4>Search query:</h4>
+<p><%= params[:q] %></p>
+<h4>SQL:</h4>
+<p><%= @search.result.to_sql %></p>
+
+<table class = "table table-striped table-condensed">
+<%= render :collection => @games, :partial => "game_detail"%>
+</table>
+
+
+</div>
+
