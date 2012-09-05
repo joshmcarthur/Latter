@@ -1,7 +1,8 @@
 Latter::Application.routes.draw do
   devise_for :players
 
-  match '/games/search', :controller => 'games', :action => 'search'
+  # Used only for testing the badge search
+  # match '/games/search', :controller => 'games', :action => 'search'
 
   resources :games, :except => [:edit, :update] do
     post :complete, :on => :member
