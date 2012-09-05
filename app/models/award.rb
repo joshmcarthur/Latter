@@ -1,7 +1,9 @@
 class Award < ActiveRecord::Base
   
+  # default_scope to ignore expired awards
+  default_scope lambda { where('expiry >= ? or expiry is null', DateTime.now.midnight) }
+
   after_create :set_award_date
-  
 
   validates_presence_of :badge_id, :player_id
   
@@ -10,7 +12,7 @@ class Award < ActiveRecord::Base
 
   after_create :create_activity
   
-  attr_accessible :badge_id, :player_id, :award_date, :badge
+  attr_accessible :badge_id, :player_id, :award_date, :expiry, :badge
   
   private
 

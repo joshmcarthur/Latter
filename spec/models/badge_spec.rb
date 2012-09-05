@@ -69,4 +69,8 @@ describe Badge do
     (subject.awards.where(:player_id => @player1.id).first.award_date < 6.days.ago).should be_true
   end
 
+  it "should correctly expire awards" do
+    
+  end
+
 end

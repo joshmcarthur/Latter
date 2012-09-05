@@ -4,6 +4,7 @@ describe Award do
 
     let(:player) { FactoryGirl.create(:player) }
     let(:badge) { FactoryGirl.create(:badge) }
+    let(:expiring_badge) {FactoryGirl.create(:badge, :expire_in_days => 1, :allow_duplicates => true)}
     let(:award) { player.award!(badge) }
     let(:datelastmonth) { 1.month.ago }
     let(:datedaward) { player.award!(badge, datelastmonth) }
@@ -22,8 +23,14 @@ describe Award do
        datedaward.award_date.should eq datelastmonth
     end
 
-    it "should have a correctly specified expiry" do
-    
+    it "should not be listed after it has expired" do
+       player.award!(expiring_badge,2.days.ago)
+       player.badges.should_not include expiring_badge
+    end
+
+     it "should be listed before it has expired" do
+       player.award!(expiring_badge,0.days.ago)
+       player.badges.should include expiring_badge
     end
   
     describe "when player id is not present" do
