@@ -45,6 +45,13 @@ class Player < ActiveRecord::Base
   has_many :awards, :dependent => :destroy
   has_many :badges, :through => :awards
 
+
+  #### CHRIS MODE #####
+
+  def name
+    "Chris"
+  end
+
   # Public - Return all games that a player has participated in
   #
   # Returns an array of games where the player was either a challenger or
