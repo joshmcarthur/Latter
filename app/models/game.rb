@@ -90,7 +90,7 @@ class Game < ActiveRecord::Base
     Activity.completed_game(self)
 
     # Check all badges to see whether this result awards badges
-    self.award_badges()
+    self.award_badges
 
     self
   end
@@ -224,16 +224,15 @@ class Game < ActiveRecord::Base
   end
 
   # Check the challenger and challenged players for new badge awards
-    def award_badges
-      Badge.all.each do |the_badge|
-        [challenger,challenged].each do |the_player|
-            if the_badge.qualifies?(the_player)
-              the_player.award!(the_badge)
-              # Notify the player
-            end
-         end
-      end
+  def award_badges
+    Badge.all.each do |the_badge|
+      [challenger,challenged].each do |the_player|
+        if the_badge.qualifies?(the_player)
+          the_player.award!(the_badge)
+        end
+       end
     end
+  end
 
   # Public: Rollback this game.
   #
