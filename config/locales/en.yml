@@ -39,6 +39,9 @@ en:
   page:
     not_found: 'Page not found'
   player:
+    none:
+      heading: No players
+      message: There aren't any players in the database right now. You can add an account for yourself in the Rails console, and then log in to add players.
     profile:
       games: 'Games: %{count}'
     games:
@@ -102,6 +105,9 @@ en:
     rollback:
       link_to: 'Rollback'
       confirm: Are you sure you want to rollback this game?
+    none:
+      heading: No games
+      message: There are no games in the database right now. They'll show up here when challenges are completed.
   statistics:
     challenged_count:
       heading: Offensive Games per Player

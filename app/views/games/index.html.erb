@@ -4,6 +4,7 @@
 
 <div id="games">
   <%= render @games %>
+  <%= render 'none' if @games.empty? %>
 </div>
 
 <%= paginate @games %>
