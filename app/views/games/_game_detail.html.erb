@@ -1,0 +1,14 @@
+  <% if game_detail.challenger and game_detail.challenged %>
+    <tr>
+      <td>
+           <%= game_detail.winner.name %> v. <%= game_detail.loser.name %>
+      </td>
+      <td>
+          <%= game_detail.complete? ? game_detail.score : "(Challenged)" %>
+      </td>
+      <td>
+        <%= game_detail.created_at.to_formatted_s(:rfc822) %>
+      </td>
+    </tr>
+  <% end %>
+

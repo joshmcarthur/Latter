@@ -1,0 +1,28 @@
+<table class="table table-condensed">
+	<tr>
+	<td>
+		<%= image_tag @badge.image_url %>
+	</td>
+	<td>
+		<h3>
+			<%= @badge.name %>
+		</h3>
+	</td>
+	<td>
+		<%= @badge.description %>
+	</td>
+	<td>
+		<% if @badge.award_rule.present? %>
+		<ul>
+			<% @badge.award_rule.each do |rule| %>
+				<li>
+					<%= rule %>
+				</li>
+			<% end %>
+		</ul>
+		<% else %>
+			<em>No conditions for awarding.</em>
+		<% end %>
+	</td>
+</tr>
+</table>

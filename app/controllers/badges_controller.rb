@@ -6,8 +6,12 @@ caches_action :index,
 		controller.params.merge(:last_modified => Badge.last.try(:created_at))
 	}
 
- def index
-   @badges = Badge.all
- end
- 
+def index
+	@badges = Badge.all
+end
+
+def show
+	@badge = Badge.find(params[:id])
+end
+
 end

@@ -175,15 +175,31 @@ class Player < ActiveRecord::Base
   end
 
   # Award a badge
-  # Assign the badge to a player via an award
+  #
+  # Award the badge to a player via an award
+  # 
   # Default is for the award_date datetime to be nil
   # Which means it gets set in the model to created_at
   # Player.award!(badge)
+  #
   # To award on the 1st June 2012, do
   # Player.award!(badge, Date.new(2012, 6, 1))
+  #
+  # Expiry is a number of days from the award_date for the badge to expire
   def award!(badge, award_date = nil)
-    self.awards.create(:badge_id => badge)
+    if !badge.awarded_to?(self) or badge.allow_duplicates
+
+      if badge.expire_in_days != 0
+        base_date = award_date.present? ? award_date : DateTime.now
+        abs_expiry = base_date.advance(:days => badge.expire_in_days)
+      else
+        abs_expiry = nil
+      end
+
+      self.awards.create(:badge_id => badge.id, :award_date => award_date, :expiry => abs_expiry ) 
+    end
   end
+
 
   private
 
