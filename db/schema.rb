@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120811103220) do
+ActiveRecord::Schema.define(:version => 20120903065201) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
@@ -24,15 +24,20 @@ ActiveRecord::Schema.define(:version => 20120811103220) do
     t.integer  "badge_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.date     "award_date"
+    t.datetime "award_date"
+    t.datetime "expiry"
   end
 
   create_table "badges", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.string   "image_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.text     "award_rule"
+    t.integer  "award_rule_count", :default => 0
+    t.boolean  "allow_duplicates", :default => false
+    t.integer  "expire_in_days",   :default => 0
   end
 
   create_table "games", :force => true do |t|
