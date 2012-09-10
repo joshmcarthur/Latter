@@ -160,4 +160,20 @@ describe Player do
     end
   end
 
+  describe "Default scope" do
+    before :each do
+      subject.save
+    end
+
+    it "should find an active player" do
+      expect(Player.all).to include(subject)
+    end
+
+    it "should not find an inactive player" do
+      subject.active = false
+      subject.save
+
+      expect(Player.all).to_not include subject
+    end
+  end
 end

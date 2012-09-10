@@ -12,6 +12,8 @@ class Player < ActiveRecord::Base
 
   include Gravtastic
 
+  default_scope where(:active => true)
+
   has_gravatar
   devise :database_authenticatable,
          :confirmable,
@@ -37,6 +39,7 @@ class Player < ActiveRecord::Base
   validates_presence_of :name, :allow_blank => false
   validates_numericality_of :rating, :minimum => 0
   validates_inclusion_of :pro, :starter, :in => [true, false, nil]
+  validates_inclusion_of :active, :in => [true, false]
 
   has_many :challenged_games, :class_name => 'Game', :foreign_key => 'challenged_id', :dependent => :destroy
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id', :dependent => :destroy
