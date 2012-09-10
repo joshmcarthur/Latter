@@ -1,6 +1,8 @@
 Latter!
 ====
 
+[![Build Status](https://secure.travis-ci.org/joshmcarthur/Latter.png)](http://travis-ci.org/#!/joshmcarthur/latter)
+
 > Latter is a table-tennis ladder web application used at [3months](http://3months.com). It uses the [Elo](http://en.wikipedia.org/wiki/Elo_rating_system) rating system to keep track of players' ratings and is fast and easy to use.
 
 ### History
