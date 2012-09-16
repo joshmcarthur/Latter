@@ -1,29 +1,35 @@
+<% content_for :flashes do %>
+  &nbsp;
+<% end %>
 
-
-<div class="player_sign_in well">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <fieldset>
+<div class="row">
+    <div class="span4 offset4 well">
       <legend><%= I18n.t('sessions.new.heading') %></legend>
+      <%= render :partial => 'layouts/common/flashes' %>
 
-      <div class="control-group">
-        <%= f.label :email %>
-        <%= f.email_field :email %>
-      </div>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <%= f.email_field :email, 
+        :class => 'span12', 
+        :placeholder => I18n.t('activerecord.attributes.player.email') 
+        %>
 
-      <% if devise_mapping.rememberable? -%>
-        <%= f.label :remember_me, :class => 'checkbox' do %>
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        <% end %>
-      <% end -%>
+        <%= f.password_field :password, 
+        :class => 'span12',
+        :placeholder => I18n.t('activerecord.attributes.player.password') 
+        %>
 
-      <div class="form-actions">
-        <%= f.submit I18n.t('sessions.new.submit_button'), :class => 'btn btn-primary' %>
-      </div>
+        <% if devise_mapping.rememberable? -%>
+          <%= f.label :remember_me, :class => 'checkbox' do %>
+            <%= f.check_box :remember_me %>
+            Remember Me
+          <% end %>
+        <% end -%>
 
+        <%= f.submit I18n.t('sessions.new.submit_button'), :class => 'span12 btn btn-primary btn-block' %>
+      <% end %>
+
+      <hr />
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
         <%= link_to I18n.t('devise.links.forgot_password'), new_password_path(resource_name) %><br />
       <% end -%>
@@ -31,6 +37,5 @@
       <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
         <%= link_to I18n.t('devise.links.resend_confirmation'), new_confirmation_path(resource_name) %><br />
       <% end -%>
-    </fieldset>
-  <% end %>
+    </div>
 </div>

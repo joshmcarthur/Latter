@@ -1,25 +1,30 @@
-<div class="player_sign_in well">
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-    <fieldset>
+<% content_for :flashes do %>
+  &nbsp;
+<% end %>
+
+<div class="row">
+    <div class="span4 offset4 well">
       <legend><%= I18n.t('devise.passwords.edit.heading') %></legend>
+      <%= render :partial => 'layouts/common/flashes' %>
+
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+        <%= f.password_field :password, 
+        :class => 'span12', 
+        :placeholder => I18n.t('activerecord.attributes.player.new_password') 
+        %>
+
+        <%= f.password_field :password_confirmation, 
+        :class => 'span12',
+        :placeholder => I18n.t('activerecord.attributes.player.new_password_confirmation') 
+        %>
 
 
-      <div class="control-group">
-        <%= f.label :password, 'New password' %>
-        <%= f.password_field :password %>
-      </div>
+        <%= f.hidden_field :reset_password_token %>
 
-      <div class="control-group">
-        <%= f.label :password_confirmation, 'Confirm new password' %>
-        <%= f.password_field :password_confirmation %>
-      </div>
-
-      <%= f.hidden_field :reset_password_token %>
-
-      <div class="form-actions">
-        <%= f.submit I18n.t('devise.passwords.edit.submit_button'), :class => 'btn btn-primary' %>
-      </div>
-    </fieldset>
-  <% end %>
+        <%= f.submit I18n.t('devise.passwords.edit.submit_button'), :class => 'span12 btn btn-primary btn-block' %>
+      <% end %>
+    </div>
 </div>
+
 

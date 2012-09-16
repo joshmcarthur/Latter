@@ -2,6 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      player:
+        email: Email
+        password: Password
+        new_password: New Password
+        new_password_confirmation: Confirm New Password
   navbar: 
     links: 
       login: 'Log in'

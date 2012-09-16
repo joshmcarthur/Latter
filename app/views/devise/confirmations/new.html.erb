@@ -1,12 +1,20 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
+<% content_for :flashes do %>
+  &nbsp;
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<div class="row">
+    <div class="span4 offset4 well">
+      <legend><%= I18n.t('devise.confirmations.heading') %></legend>
+      <%= render :partial => 'layouts/common/flashes' %>
+
+	  <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+
+        <%= f.email_field :email, 
+        :class => 'span12', 
+        :placeholder => I18n.t('activerecord.attributes.player.email') 
+        %>
+
+        <%= f.submit I18n.t('devise.confirmations.submit_button'), :class => 'span12 btn btn-primary btn-block' %>
+      <% end %>
+    </div>
+</div>
