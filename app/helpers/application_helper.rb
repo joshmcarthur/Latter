@@ -13,7 +13,8 @@ module ApplicationHelper
   end
 
   def render_alerts
-    render(:partial => 'alerts/alert', :collection => Alert.current) if request.url == root_url
+    return if request.url != root_url
+    render(:partial => 'alerts/alert', :collection => Alert.current)
   end
 
 end
