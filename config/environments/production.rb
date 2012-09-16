@@ -49,8 +49,7 @@ Latter::Application.configure do
   #  :allow_reload => false
   #}
 
-  #config.cache_store = :dalli_store
-  config.cache_store = :memory_store
+  config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -75,8 +74,8 @@ Latter::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'latter.herokuapp.com' }
-  config.action_mailer.asset_host = "http://latter.herokuapp.com"
+  config.action_mailer.default_url_options = { :host => 'latter.3months.com' }
+  config.action_mailer.asset_host = "http://latter.3months.com"
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
