@@ -12,4 +12,8 @@ module ApplicationHelper
     render(:partial => 'layouts/navigation/anonymous_navigation') unless current_player
   end
 
+  def render_alerts
+    render Alert.current
+  end
+
 end

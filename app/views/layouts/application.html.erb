@@ -35,6 +35,9 @@
           <% unless content_for?(:flashes)  %>
             <%= render :partial => 'layouts/common/flashes' %>
           <% end %>
+
+          <%= render_alerts %>
+
           <%= yield %>
         </div>
       </div>

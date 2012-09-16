@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910090841) do
+ActiveRecord::Schema.define(:version => 20120916050613) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "alerts", :force => true do |t|
+    t.string   "title"
+    t.text     "message",                         :null => false
+    t.datetime "expire_at"
+    t.datetime "activate_at",                     :null => false
+    t.string   "category",    :default => "info", :null => false
   end
 
   create_table "awards", :force => true do |t|
