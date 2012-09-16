@@ -5,8 +5,8 @@ def sign_in(player)
       player.save!
   
       visit new_player_session_path
-      fill_in 'Email', :with => player.email
-      fill_in 'Password', :with => player.password
+      fill_in 'player_email', :with => player.email
+      fill_in 'player_password', :with => player.password
       click_on 'Sign in'
     
 end

@@ -14,8 +14,8 @@ describe "Authentication" do
   it "should log in a player" do
 
     visit new_player_session_path
-    fill_in 'Email', :with => logged_in_player.email
-    fill_in 'Password', :with => logged_in_player.password
+    fill_in 'player_email', :with => logged_in_player.email
+    fill_in 'player_password', :with => logged_in_player.password
     click_on 'Sign in'
 
     page.should have_content 'Log out'
@@ -23,8 +23,8 @@ describe "Authentication" do
 
   it "should require a player confirm their account before logging in" do
     visit new_player_session_path
-    fill_in 'Email', :with => player.email
-    fill_in 'Password', :with => player.password
+    fill_in 'player_email', :with => player.email
+    fill_in 'player_password', :with => player.password
     click_on 'Sign in'
 
     current_path.should eq new_player_session_path
@@ -36,8 +36,8 @@ describe "Authentication" do
     player.save
 
     visit new_player_session_path
-    fill_in 'Email', :with => player.email
-    fill_in 'Password', :with => player.password
+    fill_in 'player_email', :with => player.email
+    fill_in 'player_password', :with => player.password
     click_on 'Sign in'
 
     current_path.should eq edit_player_password_path
@@ -48,12 +48,12 @@ describe "Authentication" do
     player.save
 
     visit new_player_session_path
-    fill_in 'Email', :with => player.email
-    fill_in 'Password', :with => player.password
+    fill_in 'player_email', :with => player.email
+    fill_in 'player_password', :with => player.password
     click_on 'Sign in'
 
-    fill_in 'New password', :with => 'test123'
-    fill_in 'Confirm new password', :with => 'test123'
+    fill_in 'player_password', :with => 'test123'
+    fill_in 'player_password_confirmation', :with => 'test123'
     click_on 'Change Password'
 
     current_path.should eq root_path
@@ -62,8 +62,8 @@ describe "Authentication" do
 
   it "should log out a player" do
     visit new_player_session_path
-    fill_in 'Email', :with => logged_in_player.email
-    fill_in 'Password', :with => logged_in_player.password
+    fill_in 'player_email', :with => logged_in_player.email
+    fill_in 'player_password', :with => logged_in_player.password
     click_on 'Sign in'
 
     page.should have_content 'Log out'
