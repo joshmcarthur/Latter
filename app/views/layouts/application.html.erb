@@ -17,28 +17,23 @@
   </head>
   <body>
 
-    <%= render 'layouts/navigation' %>
-
-
-
     <div class="container">
+      <%= render 'layouts/navigation' %>
       <div class="content" data-pjax-container>
         <% if content_for?(:sidebar) %>
           <div class="row-fluid">
             <div class="span3 sidebar">
               <%= yield :sidebar %>
             </div>
+
+            <div class="span9">
         <% else %>
           <div class="row-fluid">
+            <div class="span12">
         <% end %>
 
-        <div class="span9">
-          <% flash.each do |key, value| %>
-            <%= content_tag :div, :class => "alert alert-#{key}" do %>
-              <button class="close" data-dismiss="alert">×</button>
-              <strong><%= key.to_s.humanize %>:</strong>
-              <%= value %>
-            <% end %>
+          <% unless content_for?(:flashes)  %>
+            <%= render :partial => 'layouts/common/flashes' %>
           <% end %>
           <%= yield %>
         </div>
