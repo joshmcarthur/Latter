@@ -3,6 +3,8 @@
 <% end %>
 
 <div id="players">
-  <%= render @players %>
+  <% cache "players-listing-#{Player.maximum(:updated_at).to_i}" do %>
+  	<%= render @players %>
+  <% end %>
   <%= render 'players/none' if @players.empty? %>
 </div>
