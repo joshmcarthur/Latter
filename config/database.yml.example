@@ -3,12 +3,8 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: latter_development
+  database: latter
   pool: 5
-
-legacy:
-  adapter: sqlite3
-  database: db/latter_deprecated.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
