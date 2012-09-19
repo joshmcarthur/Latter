@@ -7,5 +7,5 @@ before_script:
   - "psql -c 'create database latter_test;' -U postgres"
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - "ln -s config/database.yml.example config/database.yml"
+  - "ln -s /home/travis/builds/joshmcarthur/Latter/config/database.yml.example /home/travis/builds/joshmcarthur/Latter/config/database.yml"
 script: RAILS_ENV=test bundle exec rake db:migrate:reset spec
