@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id                       :integer          not null, primary key
+#  challenger_id            :integer          not null
+#  challenged_id            :integer          not null
+#  complete                 :boolean          default(FALSE), not null
+#  result                   :float
+#  score                    :string(255)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  winner_id                :integer
+#  challenger_rating_change :decimal(, )
+#  challenged_rating_change :decimal(, )
+#
+
 class Game < ActiveRecord::Base
 
   attr_accessible :complete, :result, :score, :challenger, :challenged, :challenged_id

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: alerts
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  message     :text             not null
+#  expire_at   :datetime
+#  activate_at :datetime         not null
+#  category    :string(255)      default("info"), not null
+#
+
 class Alert < ActiveRecord::Base
   attr_accessible :title, :activate_at, :expire_at, :message, :category
 

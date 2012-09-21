@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id         :integer          not null, primary key
+#  message    :text             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Activity do

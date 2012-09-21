@@ -24,6 +24,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails', '1.1.rc1'
   gem 'database_cleaner'
+  gem 'annotate', '~>2.5.0'
 
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
