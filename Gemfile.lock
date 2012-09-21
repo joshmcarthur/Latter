@@ -32,6 +32,8 @@ GEM
     airbrake (3.1.2)
       activesupport
       builder
+    annotate (2.5.0)
+      rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.3)
@@ -254,6 +256,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  annotate (~> 2.5.0)
   bullet
   capybara
   coffee-rails (~> 3.2.1)

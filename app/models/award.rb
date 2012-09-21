@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: awards
+#
+#  id         :integer          not null, primary key
+#  player_id  :integer
+#  badge_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  award_date :datetime
+#  expiry     :datetime
+#
+
 class Award < ActiveRecord::Base
   
   # default_scope to ignore expired awards

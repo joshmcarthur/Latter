@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: badges
+#
+#  id               :integer          not null, primary key
+#  name             :string(255)
+#  description      :text
+#  image_url        :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  award_rule       :text
+#  award_rule_count :integer          default(0)
+#  allow_duplicates :boolean          default(FALSE)
+#  expire_in_days   :integer          default(0)
+#
+
 class Badge < ActiveRecord::Base
   
   attr_accessible :description, :image_url, :name
