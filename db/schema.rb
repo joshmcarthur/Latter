@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20121202062610) do
 
   create_table "web_hooks", :force => true do |t|
     t.string   "destination", :limit => 300
-    t.string   "event",       :limit => 10
+    t.string   "event",       :limit => 25
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
