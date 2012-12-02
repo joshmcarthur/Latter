@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
   validate :inverse_game_does_not_exist?
 
   # Add a new game activity after a game is created
-  after_create :notify_player, :log_activity
+  after_create :notify_player, :log_activity, :webhooks_for_create
 
   # Public - result setter
   #
@@ -88,6 +88,7 @@ class Game < ActiveRecord::Base
 
     GameNotifier.completed_game(self).deliver!
     Activity.completed_game(self)
+    self.webhooks_for_complete
 
     # Check all badges to see whether this result awards badges
     self.award_badges
@@ -293,6 +294,12 @@ class Game < ActiveRecord::Base
     )
   end
 
+
+  # Private: Transmit this game data to any listening web hooks.
+  def webhooks_for_complete
+    WebHook.for(:game_completed).each { |wh| wh.post!(self) }
+  end
+
   private
 
   # Private - Checks for the existence of an inverse game
@@ -327,5 +334,11 @@ class Game < ActiveRecord::Base
   def log_activity
     Activity.new_game(self)
   end
+
+  # Private: Transmit this game data to any listening web hooks.
+  def webhooks_for_create
+    WebHook.for(:game_created).each { |wh| wh.post!(self) }
+  end
+
 
 end
