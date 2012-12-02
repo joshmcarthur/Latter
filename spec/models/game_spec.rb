@@ -47,6 +47,37 @@ describe Game do
     end
   end
 
+  describe "webhooks" do
+
+    context "when game is created" do
+      let(:web_hook) { FactoryGirl.create(:web_hook, :event => 'game_created') }
+
+      before do
+        WebHook.stub(:for).and_return []
+        WebHook.stub(:for).with(:game_created).and_return([web_hook])
+      end
+
+      it "should call the web hook" do
+        web_hook.should_receive(:post!).with(subject)
+        subject.save
+      end
+    end
+
+    context "when game is completed" do
+      let(:web_hook) { FactoryGirl.create(:web_hook, :event => 'game_completed') }
+
+      before do
+        WebHook.stub(:for).and_return []
+        WebHook.stub(:for).with(:game_completed).and_return([web_hook])
+      end
+
+      it "should call the web hook" do
+        web_hook.should_receive(:post!).with(subject)
+        subject.complete! :challenger_score => 15, :challenged_score => 6
+      end
+    end     
+  end
+
   describe "rollback" do
     before :each do
       subject.save!
