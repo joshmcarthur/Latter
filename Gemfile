@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'thin'
 gem 'dalli'
-
+gem 'bundler'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,6 +35,7 @@ group :development, :test do
   gem 'taps'
   gem 'guard-spork'
   gem 'sqlite3'
+  gem 'shoulda'
 end
 
 group :development do
