@@ -2,7 +2,7 @@ class CreateWebHooks < ActiveRecord::Migration
   def change
     create_table :web_hooks do |t|
       t.string :destination, :limit => 300
-      t.string :event, :limit => 10
+      t.string :event, :limit => 25
 
       t.timestamps
     end
