@@ -19,7 +19,8 @@ class Player < ActiveRecord::Base
          :confirmable,
          :recoverable,
          :trackable,
-         :validatable
+         :validatable,
+         :token_authenticatable
 
   before_validation :set_default_password, :on => :create
 

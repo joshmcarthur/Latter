@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120916050613) do
+ActiveRecord::Schema.define(:version => 20121213022523) do
 
   create_table "activities", :force => true do |t|
     t.text     "message",    :null => false
@@ -89,11 +89,22 @@ ActiveRecord::Schema.define(:version => 20120916050613) do
     t.boolean  "changed_password",                        :default => false, :null => false
     t.boolean  "wants_challenge_completed_notifications", :default => true,  :null => false
     t.boolean  "active",                                  :default => true,  :null => false
+    t.string   "authentication_token",                    :default => "",    :null => false
   end
 
   add_index "players", ["active"], :name => "index_players_on_active"
+  add_index "players", ["authentication_token"], :name => "index_players_on_authentication_token", :unique => true
   add_index "players", ["confirmation_token"], :name => "index_players_on_confirmation_token", :unique => true
   add_index "players", ["email"], :name => "index_players_on_email", :unique => true
   add_index "players", ["reset_password_token"], :name => "index_players_on_reset_password_token", :unique => true
+
+  create_table "web_hooks", :force => true do |t|
+    t.string   "destination", :limit => 300
+    t.string   "event",       :limit => 25
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "web_hooks", ["destination", "event"], :name => "index_web_hooks_on_destination_and_event", :unique => true
 
 end
