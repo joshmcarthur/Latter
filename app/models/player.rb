@@ -23,6 +23,7 @@ class Player < ActiveRecord::Base
          :token_authenticatable
 
   before_validation :set_default_password, :on => :create
+  before_save :ensure_authentication_token
 
   attr_accessible :email,
     :password,
