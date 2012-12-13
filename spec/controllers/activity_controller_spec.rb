@@ -21,5 +21,11 @@ describe ActivityController do
       # Should only include the last item
       response.body.should eq [activities.first].to_json
     end
+
+    it "should allow token authentication to get a list of activities" do
+      sign_out :player
+      activities
+      get :index, :format => :json, :auth_token => FactoryGirl.create(:player).authentication_token
+    end
   end
 end

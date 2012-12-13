@@ -23,6 +23,12 @@ describe Player do
     subject.password.should_not be_blank
   end
 
+  it "should set an authentication token when the player is saved" do
+    subject.authentication_token.should be_blank
+    subject.save
+    subject.authentication_token.should_not be_blank
+  end
+
   describe "Gravatar" do
     it "should have a gravatar url" do
       subject.gravatar_url.should include "gravatar.com"
