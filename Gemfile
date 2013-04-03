@@ -38,9 +38,6 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :development do
-  gem 'debugger'
-end
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
