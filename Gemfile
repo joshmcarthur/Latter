@@ -21,7 +21,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'growl'
   gem 'capybara'
-  gem 'factory_girl_rails', '1.1.rc1'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
 
   # DRb server for testing frameworks
@@ -32,16 +32,12 @@ group :development, :test do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rspec'
-  gem 'heroku'
-  gem 'taps'
   gem 'guard-spork'
-  gem 'sqlite3'
 end
 
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
-gem 'rack-pjax'
 gem 'elo'
 gem 'gravtastic'
 gem 'devise'
