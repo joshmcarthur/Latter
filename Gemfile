@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'unicorn'
 gem 'dalli'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,12 +15,11 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'bullet'
   gem 'rspec-rails'
-  gem 'growl'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'dotenv'
 
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
@@ -43,3 +40,5 @@ gem 'gravtastic'
 gem 'devise'
 gem 'kaminari'
 gem 'ransack'
+gem 'faye'
+gem 'sync'
