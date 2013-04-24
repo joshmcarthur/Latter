@@ -11,6 +11,8 @@
 /.sass-cache
 .DS_Store
 config/database.yml
+config/sync.yml
+.env
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
