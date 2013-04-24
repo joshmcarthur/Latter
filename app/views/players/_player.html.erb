@@ -1,4 +1,4 @@
-  <div class="row-fluid player" id="<%= dom_id(player) %>">
+  <div class="row-fluid player" id="<%= dom_id(player) %>" data-rating="<%= player.rating %>">
     <div class="span2">
       <div class="thumbnail">
         <%= image_tag player.gravatar_url(:size => 200) %>
