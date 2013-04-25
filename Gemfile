@@ -20,6 +20,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'dotenv'
+  gem 'foreman'
 
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
@@ -41,4 +42,5 @@ gem 'devise'
 gem 'kaminari'
 gem 'ransack'
 gem 'faye'
+gem 'thin'
 gem 'sync'
