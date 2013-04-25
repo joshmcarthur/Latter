@@ -13,6 +13,8 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
+<%= javascript_include_tag Sync.adapter_javascript_url %>    <%= javascript_include_tag Sync.adapter_javascript_url %>
+    <%= javascript_include_tag "application" %>
     <%= favicon_link_tag %>
   </head>
   <body>
@@ -45,16 +47,6 @@
 
     </div> <!-- /container -->
 
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-
-    <script>
-      $(function(){
-        $('a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
-      })
-    </script>
 
   </body>
 </html>
