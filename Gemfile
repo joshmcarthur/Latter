@@ -19,7 +19,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'dotenv'
+  gem 'dotenv-rails'
   gem 'foreman'
 
   # DRb server for testing frameworks

@@ -60,6 +60,8 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.1.3)
     dotenv (0.7.0)
+    dotenv-rails (0.7.0)
+      dotenv (= 0.7.0)
     elo (0.1.0)
     em-http-request (1.0.3)
       addressable (>= 2.2.3)
@@ -253,7 +255,7 @@ DEPENDENCIES
   dalli
   database_cleaner
   devise
-  dotenv
+  dotenv-rails
   elo
   factory_girl_rails
   faye
