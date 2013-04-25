@@ -19,17 +19,20 @@ Latter is a standard Rails application, based around ActiveRecord. It is 97% cov
 
 ### Set up
 
-The set up for the application is very simple, and standard for a Ruby on Rails application:
+The set up for the application is very simple, and standard for a Ruby on Rails application. The only point that you probably havent' done before is the set up for the websockets updates, using [sync](https://github.com/chrismccord/sync)
 
 * Clone the repository
 * Run bundle install
 * Run rake db:setup
-* Start the Rails server
+* Copy the database YAML file: `cp config/database.yml.example config/database.yml`
+* Copy the Sync YAML file: `cp config/sync.yml.example config/sync.yml`
+* Assuming you're using Faye (which you should in development): `cp Procfile.faye Procfile`
+* Start the Rails server: `foreman start`
 
 
 ### Deployment
 
-The application will run quite happily on Heroku - that's where it's deployed for 3months. It should also run just fine on any other standard Rails deploy targets.
+The application will run quite happily on Heroku - that's where it's deployed for 3months. It should also run just fine on any other standard Rails deploy targets. The main non-railsy dependencies is either [Faye](http://faye.jcoglan.com/) or [Pusher](http://pusher.com/) - see `config/sync.yml.example` for details of how to configure for each of these.
 
 ### Author
 
