@@ -29,6 +29,10 @@ describe ScoresController do
 
   describe "POST /games/1/score" do
     describe "success" do
+      before do
+        controller.stub(:sync_update).twice().and_return(true)
+      end
+
       it "should assign the game as @game" do
         post :create, {:game_id => game.id}.merge(score_attributes)
         assigns(:game).should eq game
@@ -37,6 +41,16 @@ describe ScoresController do
       it "should render the create template if requesting with JS" do
         post :create, {:format => 'js', :game_id => game.id}.merge(score_attributes)
         response.should render_template 'create'
+      end
+
+      it "should sync an update to clients for the challenger" do
+        controller.should_receive(:sync_update).with(game.challenger).and_return(true)
+        post :create, {:format => 'js', :game_id => game.id}.merge(score_attributes)
+      end
+
+      it "should sync an update to clients for the challenged" do
+        controller.should_receive(:sync_update).with(game.challenged).and_return(true)
+        post :create, {:format => 'js', :game_id => game.id}.merge(score_attributes)
       end
 
       it "should redirect to the main players page with a flash message if requesting with HTML" do
