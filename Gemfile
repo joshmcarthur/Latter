@@ -33,6 +33,14 @@ group :development, :test do
   gem 'guard-spork'
 end
 
+group :faye do
+  gem 'faye'
+  gem 'thin'
+end
+
+group :pusher do
+  gem 'pusher'
+end
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
@@ -41,6 +49,4 @@ gem 'gravtastic'
 gem 'devise'
 gem 'kaminari'
 gem 'ransack'
-gem 'faye'
-gem 'thin'
 gem 'sync'
