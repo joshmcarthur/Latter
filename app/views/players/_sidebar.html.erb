@@ -1,6 +1,6 @@
 <% if current_player %>
   <% cache cache_key_for(current_player, "profile") do %>
-    <%= render 'profile' %>
+    <%= sync :partial => 'profile', :resource => current_player %>
     <%= render :partial => 'activities/activity_stream' %>
   <% end %>
 <% else %>
