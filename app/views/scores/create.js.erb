@@ -1,1 +1,4 @@
+$('#<%= dom_id(@game.challenged) %> .controls').html(
+  "<%= escape_javascript(render(:partial => 'players/controls', :locals => {:player => @game.challenged})) %>"
+)
 $('.modal').modal('hide').remove()
