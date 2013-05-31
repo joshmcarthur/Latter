@@ -16,6 +16,7 @@ class Player < ActiveRecord::Base
 
   has_gravatar
   devise :database_authenticatable,
+         :token_authenticatable,
          :confirmable,
          :recoverable,
          :trackable,
@@ -45,7 +46,7 @@ class Player < ActiveRecord::Base
   has_many :challenged_games, :class_name => 'Game', :foreign_key => 'challenged_id', :dependent => :destroy
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id', :dependent => :destroy
   has_many :won_games, :class_name => 'Game', :foreign_key => 'winner_id'
-  
+
   has_many :awards, :dependent => :destroy
   has_many :badges, :through => :awards
 
@@ -178,7 +179,7 @@ class Player < ActiveRecord::Base
   # Award a badge
   #
   # Award the badge to a player via an award
-  # 
+  #
   # Default is for the award_date datetime to be nil
   # Which means it gets set in the model to created_at
   # Player.award!(badge)
@@ -197,7 +198,7 @@ class Player < ActiveRecord::Base
         abs_expiry = nil
       end
 
-      self.awards.create(:badge_id => badge.id, :award_date => award_date, :expiry => abs_expiry ) 
+      self.awards.create(:badge_id => badge.id, :award_date => award_date, :expiry => abs_expiry )
     end
   end
 
