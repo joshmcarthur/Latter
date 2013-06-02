@@ -21,6 +21,8 @@ class Game < ActiveRecord::Base
   validates_numericality_of :result, :minimum => -1.0, :maximum => 1.0, :allow_nil => true
   validate :inverse_game_does_not_exist?
 
+  scope :complete, where(:complete => true)
+
   # Add a new game activity after a game is created
   after_create :notify_player, :log_activity
 
