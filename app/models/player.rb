@@ -202,6 +202,13 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def serializable_hash(options={})
+    options = {
+      :methods => [:gravatar_url],
+    }.update(options)
+    super(options)
+  end
+
 
   private
 
