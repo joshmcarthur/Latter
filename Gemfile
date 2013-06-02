@@ -4,6 +4,7 @@ gem 'rails', '~> 3.2'
 gem 'pg'
 gem 'unicorn'
 gem 'dalli'
+gem 'jbuilder'
 
 # Gems used only for assets and not required
 # in production environments by default.
