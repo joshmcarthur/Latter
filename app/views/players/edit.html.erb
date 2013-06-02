@@ -3,6 +3,6 @@
 <% end %>
 
 <%= content_for :sidebar do %>
-  <%= render :partial => 'profile' %>
+  <%= render :partial => 'profile', :locals => {:player => @player} %>
 <% end %>
 
