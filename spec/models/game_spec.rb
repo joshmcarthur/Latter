@@ -5,6 +5,7 @@ describe Game do
     FactoryGirl.build(:game)
   end
 
+
   it "should create a game given valid attributes" do
     subject.save
     subject.should be_persisted
@@ -25,6 +26,11 @@ describe Game do
   it "should re-calculate the player scores when a result is set" do
     subject.should_receive(:calculate)
     subject.result = 1.0
+  end
+
+  describe "complete scope" do
+    it { subject.save; Game.complete.should_not include subject }
+    it { subject.complete = true; subject.save; Game.complete.should include subject }
   end
 
   describe "calculation" do
