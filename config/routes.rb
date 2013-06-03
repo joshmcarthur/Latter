@@ -4,7 +4,9 @@ Latter::Application.routes.draw do
   scope :constraints => {:protocol => (Rails.env.production? ? 'https://' : 'http://')} do
     namespace :api do
       namespace :v1 do
-        resources :players, :only => :index
+        resources :players, :only => :index do
+          resources :games, :only => :index
+        end
       end
     end
   end
