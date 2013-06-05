@@ -12,6 +12,20 @@ describe Api::V1::PlayersController do
     Player.stub(:order).and_return(players)
   end
 
+  describe "GET show" do
+    context "logged in" do
+      before do
+        player
+        get :show, valid_attributes
+      end
+
+      it { response.should be_ok }
+      it { response.content_type.should eq "application/json" }
+      it { assigns(:player).should eq controller.current_player }
+      it { response.should render_template :show }
+    end
+  end
+
   describe "GET index" do
     context "logged in" do
       before do

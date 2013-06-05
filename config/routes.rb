@@ -5,6 +5,7 @@ Latter::Application.routes.draw do
     namespace :api do
       namespace :v1 do
         resources :players, :only => :index
+        resource  :player, :only => :show
         resources :games, :only => :index
       end
     end

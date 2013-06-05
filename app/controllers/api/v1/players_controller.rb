@@ -8,4 +8,12 @@ class Api::V1::PlayersController < API::V1::BaseController
       format.json { render }
     end
   end
+
+  def show
+    @player = current_player
+
+    respond_to do |format|
+      format.json { render }
+    end
+  end
 end
