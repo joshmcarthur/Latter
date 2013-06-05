@@ -21,6 +21,17 @@ describe Api::V1::GamesController do
       it { assigns(:games).should have(5).games }
     end
 
+    context "filtering games by non-complete" do
+      before do
+        player
+        games
+        get :index, valid_attributes.merge(:complete => false)
+      end
+
+      it { assigns(:games).should have(0).games }
+      it { response.should render_template :index }
+    end
+
     context "not logged in" do
       before do
         get :index, valid_attributes.except(:auth_token)

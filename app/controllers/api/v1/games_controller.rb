@@ -1,6 +1,6 @@
 class Api::V1::GamesController < API::V1::BaseController
   def index
-    @games = Game.complete
+    @games = Game.where(:complete => params.fetch(:complete, true))
                  .includes(:challenged, :challenger)
                  .order(:updated_at)
                  .page(params[:page])
