@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::GamesController do
   let(:player) { FactoryGirl.create(:player, :authentication_token => "123abc") }
-  let(:games) { FactoryGirl.create_list(:game, 5, :challenger => player, :complete => true) }
+  let(:games) { FactoryGirl.create_list(:game, 5, :complete => true) }
 
   def valid_attributes
     {:auth_token => player.authentication_token, :format => :json, :player_id => player.id}

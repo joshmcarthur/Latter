@@ -1,8 +1,11 @@
 class Api::V1::GamesController < API::V1::BaseController
   def index
-    @games = Rails.cache.fetch "api-v1-#{player.id}-games", :expires_in => 1.minute do
-      player.games.complete.order(:updated_at)
-    end
+    @games = Game.complete
+                 .includes(:challenged, :challenger)
+                 .order(:updated_at)
+                 .page(params[:page])
+                 .per(params[:per_page] || 100)
+
 
     respond_to do |format|
       format.json { render }
