@@ -36,6 +36,14 @@ describe GamesController do
     end
   end
 
+  describe "GET index with JSON" do
+    it "renders the correct template" do
+      get :index
+      response.should render_template :index
+    end
+  end
+
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Game" do
@@ -54,6 +62,12 @@ describe GamesController do
         post :create, {:game => valid_attributes}
         response.should redirect_to(Player)
       end
+
+      it "renders JSON template if requesting with JSON" do
+        post :create, {:game => valid_attributes, :format => :json}
+        response.should render_template :show
+      end
+
     end
 
     describe "with invalid params" do
