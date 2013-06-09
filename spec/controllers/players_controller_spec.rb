@@ -43,11 +43,40 @@ describe PlayersController do
     end
   end
 
+  describe "GET index format JSON" do
+    it "renders the correct template" do
+      get :index, :format => :json
+      response.should render_template "index"
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested player as @player" do
       player = Player.create! valid_attributes
       get :show, {:id => player.to_param}
       assigns(:player).should eq(player)
+    end
+  end
+
+  describe "GET show format JSON" do
+    it "renders the correct template" do
+      player = Player.create! valid_attributes
+      get :show, :id => player.to_param, :format => :json
+      response.should render_template "show"
+    end
+  end
+
+  describe "GET current " do
+    it "should not find a route" do
+      get :current
+      response.should_not be_ok
+    end
+  end
+
+  describe "GET current format JSON" do
+    it "renders the correct template" do
+      get :current, :format => :json
+      response.should render_template "show"
     end
   end
 

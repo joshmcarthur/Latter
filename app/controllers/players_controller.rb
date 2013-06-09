@@ -9,7 +9,18 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @players }
+      format.json { render }
+    end
+  end
+
+  def current
+    head :bad_request and return unless request.format == :json
+
+    @player = current_player
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :show }
     end
   end
 
@@ -20,7 +31,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @player }
+      format.json { render }
     end
   end
 
@@ -71,6 +82,6 @@ class PlayersController < ApplicationController
       end
     end
   end
-  
-  
+
+
 end
