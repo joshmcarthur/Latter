@@ -1,16 +1,6 @@
 Latter::Application.routes.draw do
   devise_for :players
 
-  scope :constraints => {:protocol => (Rails.env.production? ? 'https://' : 'http://')} do
-    namespace :api do
-      namespace :v1 do
-        resources :players, :only => :index
-        resource  :player, :only => :show
-        resources :games, :only => :index
-      end
-    end
-  end
-
   resources :games, :except => [:edit, :update] do
     post :complete, :on => :member
     resource :score, :controller => 'scores', :only => [:new, :create]
@@ -19,6 +9,8 @@ Latter::Application.routes.draw do
   resources :activities, :controller => 'activity', :only => :index
   resources :statistics, :only => [:index]
   resources :players
+  get "/player" => "players#current", :constraints => {:format => :json}
+
   resources :badges, :only => [:index, :show]
 
   root :to => 'players#index'
