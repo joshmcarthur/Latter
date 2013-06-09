@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Private: Save the locale that is passed in the URL to the 
+  # Private: Save the locale that is passed in the URL to the
   # current request.
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
