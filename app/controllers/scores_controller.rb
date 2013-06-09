@@ -20,7 +20,8 @@ class ScoresController < ApplicationController
         sync_update @game.challenged
         sync_update @game.challenger
         format.html { redirect_to root_path, notice: I18n.t('game.complete.saved') }
-        format.js   { render  }
+        format.js { render }
+        format.json  { render :template => 'games/show' }
       else
         render :action => "new"
       end
