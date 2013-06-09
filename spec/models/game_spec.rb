@@ -23,6 +23,26 @@ describe Game do
     }.to raise_exception
   end
 
+  it "should not create a game when an identical one is already is progress" do
+    subject.save
+    new_game = FactoryGirl.build(:game, :challenger => subject.challenger, :challenged => subject.challenged)
+    new_game.should_not be_valid
+    new_game.errors[:base].should_not be_empty
+  end
+
+  it "should allow saving the game once the previous game is complete" do
+    subject.save
+    subject.complete!({challenged_score: 21, challenger_score: 10})
+    new_game = FactoryGirl.build(:game, :challenger => subject.challenger, :challenged => subject.challenged)
+    new_game.should be_valid
+  end
+
+  it "should not create a game when the challenger and challenged players are the same" do
+    subject.challenger = subject.challenged
+    subject.should_not be_valid
+    subject.errors[:challenger].should_not be_blank
+  end
+
   it "should re-calculate the player scores when a result is set" do
     subject.should_receive(:calculate)
     subject.result = 1.0

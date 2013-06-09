@@ -16,10 +16,13 @@ class Game < ActiveRecord::Base
 
   validates_presence_of :challenger, :challenged
   validates_associated  :challenger, :challenged
+
   validates_inclusion_of :complete, :in => [true, false]
   validates_format_of :score, :with => /\A[\d]+[\s]*:[\s]*[\d]+\Z/, :allow_nil => true
   validates_numericality_of :result, :minimum => -1.0, :maximum => 1.0, :allow_nil => true
   validate :inverse_game_does_not_exist?
+  validate :in_progress_game_does_not_exist?, :on => :create
+  validate :challenger_and_challenged_are_not_the_same
 
   scope :complete, where(:complete => true)
 
@@ -297,6 +300,20 @@ class Game < ActiveRecord::Base
 
   private
 
+  # Private - Ensures that the challenger is not challenging themselves to boost their
+  # score. This is not possible from the webview, but is possible via the API
+  #
+  # Adds an error message if the challenger and challenged is the same,
+  # returns boolean flag indicating whether the validation passed or failed.
+  def challenger_and_challenged_are_not_the_same
+    if challenger == challenged
+      errors.add(:challenger, :same_as_challenged)
+      return false
+    else
+      return true
+    end
+  end
+
   # Private - Checks for the existence of an inverse game
   # and does not allow a game to be created if this is the case.
   #
@@ -317,7 +334,25 @@ class Game < ActiveRecord::Base
     end
   end
 
-
+  # Private: Checks for the existence of a game already in progress.
+  #
+  # Any given player can only have one challenge with another player
+  # on at any one time. This validation enforces this rule by performing a database
+  # query, looking for incomplete games with this model's challenger and challenged players.
+  #
+  # If a matching record is found, this record is invalid and an error message is added to the
+  # base object. Returns false.
+  #
+  # If a matching record is not found, this record is valid - returns true.
+  def in_progress_game_does_not_exist?
+    if self.challenger && self.challenged
+      Game.where(
+        :complete => false,
+        :challenger_id => self.challenger.id,
+        :challenged_id => self.challenged.id
+      ).first.nil? ? true : errors.add(:base, :in_progress_game); false
+    end
+  end
 
   # Private - Notify the challenged player that they have a pending game
   def notify_player
