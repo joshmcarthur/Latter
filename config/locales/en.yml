@@ -9,8 +9,8 @@ en:
         password: Password
         new_password: New Password
         new_password_confirmation: Confirm New Password
-  navbar: 
-    links: 
+  navbar:
+    links:
       login: 'Log in'
       players: 'Players'
       all_players: 'All Players'
@@ -45,6 +45,9 @@ en:
       time_ago: "%{distance} ago"
   page:
     not_found: 'Page not found'
+  authentication_token:
+    delete:
+      confirm: "This will re-generate your authentication token, which will disable access for anything using this token, including mobile apps (until you re-install). Are you sure?"
   player:
     none:
       heading: No players
@@ -64,7 +67,7 @@ en:
       success: 'Player was successfully updated.'
     game_last_played: "- last played %{distance} ago"
     points: "Points: %{points}"
-    edit: 
+    edit:
       link: 'Edit Profile'
       heading: 'Edit Profile'
 
