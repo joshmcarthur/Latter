@@ -8,7 +8,10 @@ Latter::Application.routes.draw do
 
   resources :activities, :controller => 'activity', :only => :index
   resources :statistics, :only => [:index]
-  resources :players
+  resources :players do
+    resource :authentication_token, :only => [:show, :destroy]
+  end
+
   get "/player" => "players#current", :constraints => {:format => :json}
 
   resources :badges, :only => [:index, :show]
