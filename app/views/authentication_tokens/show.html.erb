@@ -1,0 +1,27 @@
+
+<div class="row">
+  <div class="span6 offset3">
+    <div class="alert alert-success">
+      <h4>Your authentication token is:</h4>
+
+      <hr />
+      <h1 style="text-align:center;"><%= current_player.authentication_token %></h1>
+      <hr />
+      <p>
+        <strong>Important:</strong> Your authentication token grants complete
+        access to your Latter account. Be careful where and how you share it.
+      </p>
+
+      <p>
+        If your token has been lost or compromised, you can generate a new token:
+      </p>
+
+      <p>
+        <%= link_to [current_player, :authentication_token], :method => :delete, :class => 'btn btn-danger', :confirm => I18n.t('authentication_token.delete.confirm') do %>
+        <%= content_tag :i, '', :class => 'icon-random' %>
+        Regenerate Token
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
