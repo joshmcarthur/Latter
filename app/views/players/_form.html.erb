@@ -15,7 +15,11 @@
 
   <% unless form.object.new_record? %>
     <div class="control-group">
-      <%= link_to 'Manage your API authentication token', player_authentication_token_path(form.object), :class => 'btn' %>
+      <%= form.label :authentication_token %>
+      <div class="input-append">
+        <%= form.text_field :authentication_token, :disabled => 'disabled' %>
+        <%= link_to 'Manage', player_authentication_token_path(form.object), :class => 'btn' %>
+      </div>
     </div>
     <div class="control-group">
       <%= form.label :wants_challenge_completed_notifications, :class => 'checkbox' do %>
