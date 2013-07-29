@@ -25,4 +25,10 @@ class ScoresController < ApplicationController
       end
     end
   end
+
+  private
+
+    def score_params
+      params.require(:game).permit(:challenged_score, :challenger_score)
+    end
 end

@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = current_player.challenger_games.new.tap do |game|
-      game.challenged = Player.find(params[:game][:challenged_id]) rescue nil
+      game.challenged = Player.find(game_params[:challenged_id]) rescue nil
     end
 
     respond_to do |format|
@@ -49,4 +49,10 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def game_params
+      params.require(:game).permit(:challenged_id)
+    end
 end

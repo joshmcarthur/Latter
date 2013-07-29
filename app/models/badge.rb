@@ -1,14 +1,12 @@
 class Badge < ActiveRecord::Base
-  
-  attr_accessible :description, :image_url, :name
-  
+
   validates_presence_of :name, :image_url
 
   serialize :award_rule
-  
+
   has_many :awards, :dependent => :destroy
   has_many :players, :through => :awards
-  
+
   # Check to see if this badge has been awarded to a player
   def awarded_to?(player)
   	if player.awards.where(badge_id: self.id).count > 0
@@ -32,18 +30,18 @@ class Badge < ActiveRecord::Base
   # A zero award_rule_count means award the badge if any matches
   # are found to the condition regardless of number.
   #
-  # If a created_at_gt parameter is in the award_rule then we 
+  # If a created_at_gt parameter is in the award_rule then we
   # treat it as a number of hours prior to the current time
   # and substitute in the correct date value
   #
   def qualifies?(player)
-      
+
       return false if self.award_rule.nil?
-      
+
       @award_rule = self.award_rule.dup
 
       # swap the created_at parameter to a date offset assumed to be in hours
-      
+
       if @award_rule[:created_at_gt].present?
          @date_offset = @award_rule[:created_at_gt].to_i
          @award_rule[:created_at_gt] = DateTime.now.ago(@date_offset*60*60)

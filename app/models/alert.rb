@@ -1,6 +1,4 @@
 class Alert < ActiveRecord::Base
-  attr_accessible :title, :activate_at, :expire_at, :message, :category
-
   validates_presence_of :activate_at, :message, :category
   validates_inclusion_of :category, :in => ['info', 'error', 'warning']
 

@@ -1,7 +1,5 @@
 class Game < ActiveRecord::Base
 
-  attr_accessible :complete, :result, :score, :challenger, :challenged, :challenged_id
-
   belongs_to :challenger, :class_name => 'Player', :touch => true
   belongs_to :challenged, :class_name => 'Player', :touch => true
   belongs_to :winner,     :class_name => 'Player'
@@ -24,7 +22,7 @@ class Game < ActiveRecord::Base
   validate :in_progress_game_does_not_exist?, :on => :create
   validate :challenger_and_challenged_are_not_the_same
 
-  scope :complete, where(:complete => true)
+  scope :complete, -> { where(:complete => true) }
 
   # Add a new game activity after a game is created
   after_create :notify_player, :log_activity

@@ -1,17 +1,15 @@
 class Activity < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
 
-  attr_accessible :message
-
   validates_presence_of :message
 
   def self.completed_game(game)
     result = game.winner?(game.challenger) ? I18n.t('game.result.won') : I18n.t('game.result.lost')
     message = I18n.t(
-      'activities.game_complete', 
-      :challenger => game.challenger.name, 
-      :challenged => game.challenged.name, 
-      :result => result, 
+      'activities.game_complete',
+      :challenger => game.challenger.name,
+      :challenged => game.challenged.name,
+      :result => result,
       :score => game.score
     )
     self.create(:message => message)

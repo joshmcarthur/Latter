@@ -54,7 +54,7 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(params[:player])
+    @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
@@ -73,7 +73,7 @@ class PlayersController < ApplicationController
     @player = current_player
 
     respond_to do |format|
-      if @player.update_with_password(params[:player])
+      if @player.update_with_password(player_params)
         format.html { redirect_to Player, notice: I18n.t('player.update.success') }
         format.json { head :no_content }
       else
@@ -83,5 +83,16 @@ class PlayersController < ApplicationController
     end
   end
 
+  private
+
+    def player_params
+      params.require(:player).permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :wants_challenge_completed_notifications,
+        :name
+      )
+    end
 
 end
