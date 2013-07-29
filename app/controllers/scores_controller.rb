@@ -22,7 +22,7 @@ class ScoresController < ApplicationController
         format.json  { render :template => 'games/show' }
       else
         format.html { redirect_to root_path, notice: I18n.t('game.complete.unsaved') }
-        format.js { render }
+        format.js { render "new" }
       end
     end
   end
