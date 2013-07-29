@@ -12,7 +12,7 @@ class Player < ActiveRecord::Base
 
   include Gravtastic
 
-  default_scope -> { where(:active => true) }
+  default_scope { where(:active => true) }
 
   has_gravatar
   devise :database_authenticatable,
