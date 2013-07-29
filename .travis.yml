@@ -2,7 +2,6 @@ language: ruby
 bundler_args: --without development
 rvm:
   - 2.0
-  - 1.9.3
   - ruby-head
 before_script:
   - "cp config/database.yml.example config/database.yml"
