@@ -10,12 +10,12 @@ gem 'gravtastic'
 gem 'devise', '3.0.0.rc'
 gem 'kaminari'
 gem 'ransack', github: 'ernie/ransack', ref: 'rails-4'
-gem 'sass-rails'
 gem 'coffee-rails'
-gem 'therubyracer', :platforms => :ruby
 gem 'uglifier'
 gem 'jquery-rails'
-gem 'twitter-bootstrap-rails'
+gem "sass-rails"
+gem 'bootstrap-sass', '~> 2.3.2.1'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'rspec-rails'

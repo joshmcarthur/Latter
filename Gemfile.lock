@@ -38,6 +38,8 @@ GEM
     arel (4.0.0)
     atomic (1.1.10)
     bcrypt-ruby (3.1.1)
+    bootstrap-sass (2.3.2.1)
+      sass (~> 3.2)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -76,6 +78,8 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.9.0)
+    font-awesome-rails (3.2.1.2)
+      railties (>= 3.2, < 5.0)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -109,7 +113,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    libv8 (3.11.8.17)
     listen (1.2.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -157,7 +160,6 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
-    ref (1.0.5)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -193,9 +195,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
-      ref
     thor (0.18.1)
     thread_safe (0.1.2)
       atomic
@@ -203,11 +202,6 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails (2.2.7)
-      actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
-      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.1.2)
       execjs (>= 0.3.0)
@@ -225,6 +219,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (~> 2.3.2.1)
   capybara
   coffee-rails
   dalli
@@ -233,6 +228,7 @@ DEPENDENCIES
   dotenv-rails
   elo
   factory_girl_rails
+  font-awesome-rails
   foreman
   gravtastic
   guard
@@ -249,7 +245,5 @@ DEPENDENCIES
   sass-rails
   simplecov
   spork (= 1.0.0rc)
-  therubyracer
-  twitter-bootstrap-rails
   uglifier
   unicorn
