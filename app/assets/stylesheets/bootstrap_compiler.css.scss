@@ -1,0 +1,16 @@
+@import "bootstrap";
+@import "font-awesome";
+
+body { padding-top: 20px; }
+.thumbnail { background-color: white; }
+.navbar .btn-navbar { float: left; }
+
+// Add Rails-specific flash names for Bootstrap alert styling
+.alert-notice {
+	@extend .alert-info;
+}
+
+.alert-alert {
+	@extend .alert-error;
+}
+
