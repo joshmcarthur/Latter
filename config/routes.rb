@@ -17,6 +17,6 @@ Latter::Application.routes.draw do
   resources :badges, :only => [:index, :show]
 
   root :to => 'players#index'
-  match "/pages/*slug" => "pages#show", :as => 'page'
+  get "/pages/*slug" => "pages#show", :as => 'page'
 
 end
