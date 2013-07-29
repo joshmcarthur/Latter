@@ -52,9 +52,15 @@ describe ScoresController do
         assigns(:game).should eq game
       end
 
-      it "should render the new template" do
-        post :create, {:game_id => game.id}
+      it "should render the new template if requesting with JS" do
+        post :create, {:format => 'js', :game_id => game.id}
         response.should render_template "new"
+      end
+
+      it "should redirect to the main players page with a flash message if requesting with HTML" do
+        post :create, {:game_id => game.id}
+        response.should redirect_to root_path
+        flash[:alert].should eq I18n.t('game.complete.unsaved')
       end
     end
   end
