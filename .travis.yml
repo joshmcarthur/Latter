@@ -7,6 +7,5 @@ rvm:
   - ruby-head
 before_script:
   - "cp config/database.yml.example config/database.yml"
-  - "cp config/sync.yml.example config/sync.yml"
   - "psql -c 'create database latter_test;' -U postgres"
 script: RAILS_ENV=test bundle exec rake db:migrate db:test:prepare spec
