@@ -1,5 +1,5 @@
 $ ->
-  $('.btn-with-loading').live 'click', ->
+  $('.btn-with-loading').on 'click', ->
     $(this).button('loading')
 
    $('.profile .badges img[rel=popover]').popover()
