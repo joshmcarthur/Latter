@@ -103,6 +103,7 @@ en:
       link_loading: 'Challenging...'
     complete:
       saved: 'Game was completed.'
+      unsaved: 'Game could not be saved. Please try again.'
       link: 'Enter Score'
       link_loading: 'Completing...'
     index:
