@@ -30,7 +30,7 @@ describe ScoresController do
   describe "POST /games/1/score" do
     describe "success" do
       it "should assign the game as @game" do
-        post :create, {:game_id => game.id}.merge(score_attributes)
+        post :create, {:format => 'html', :game_id => game.id}.merge(score_attributes)
         assigns(:game).should eq game
       end
 
@@ -48,12 +48,12 @@ describe ScoresController do
 
     describe "failure" do
       it "should assign the game as @game" do
-        post :create, {:game_id => game.id}
+        post :create, {:format => 'html', :game_id => game.id}
         assigns(:game).should eq game
       end
 
       it "should render the new template" do
-        post :create, {:game_id => game.id}
+        post :create, {:format => 'html', :game_id => game.id}
         response.should render_template "new"
       end
     end

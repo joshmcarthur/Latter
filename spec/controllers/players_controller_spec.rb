@@ -119,14 +119,14 @@ describe PlayersController do
       it "assigns a newly created but unsaved player as @player" do
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
-        post :create, {:player => {}}
+        post :create, {:player => {:name => "Test"}}
         assigns(:player).should be_a_new(Player)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
-        post :create, {:player => {}}
+        post :create, {:player => {:name => "Test"}}
         response.should render_template("new")
       end
     end
@@ -158,7 +158,7 @@ describe PlayersController do
         player = Player.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
-        put :update, {:id => player.to_param, :player => {}}
+        put :update, {:id => player.to_param, :player => {:name => "Test"}}
         assigns(:player).should eq(controller.current_player)
       end
 
@@ -166,7 +166,7 @@ describe PlayersController do
         player = Player.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
-        put :update, {:id => player.to_param, :player => {}}
+        put :update, {:id => player.to_param, :player => {:name => "Test"}}
         response.should render_template("edit")
       end
     end
