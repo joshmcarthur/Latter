@@ -50,7 +50,7 @@ describe Player do
       game = FactoryGirl.create(:game, :challenger => subject, :winner => subject)
       subject.won_games.should eq [game]
     end
-    
+
     it "should show all completed games" do
       FactoryGirl.create_list(:game, 5, :complete => true, :challenged => subject)
       subject.games(true).size.should eq 5
@@ -76,7 +76,7 @@ describe Player do
        @award = subject.award!(@badge)
        # @award = FactoryGirl.create(:award, :player => subject, :badge => @badge)
     end
-    
+
     it "should be able to be assigned correctly" do
       @award.should be_valid
       subject.badges.should include { @badge }
@@ -90,7 +90,7 @@ describe Player do
       subject.award!(@badge)
       subject.badges.count.should eq 2
     end
-    
+
     it "should be removed when awards are destroyed" do
       @award.destroy
       subject.badges.should_not include { @badge }
@@ -115,13 +115,13 @@ describe Player do
   describe "Starter rating" do
     it "should be a starter if the player has played less than 30 games" do
       games = FactoryGirl.build_list(:game, 29, :challenger => subject)
-      subject.stub!(:games).and_return(games)
+      subject.stub(:games).and_return(games)
       subject.starter?.should be_true
     end
 
     it "should not be a starter if the player has played more than 30 games" do
       games = FactoryGirl.build_list(:game, 31, :challenger => subject)
-      subject.stub!(:games).and_return(games)
+      subject.stub(:games).and_return(games)
       subject.starter?.should_not be_true
     end
   end
@@ -133,14 +133,14 @@ describe Player do
     end
 
     it "should return the correct k-factor for a starter player" do
-      subject.stub!(:starter?).and_return(true)
+      subject.stub(:starter?).and_return(true)
       subject.k_factor.should eq Player::STARTER_K_FACTOR
     end
 
     it "should return the default k-factor otherwise" do
       # A player only gets the default when they ARE
       # a starter, but ARE NOT a pro
-      subject.stub!(:starter?).and_return(false)
+      subject.stub(:starter?).and_return(false)
       subject.k_factor.should eq Player::DEFAULT_K_FACTOR
     end
   end
