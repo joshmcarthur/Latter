@@ -4,7 +4,7 @@
 
 <div id="players">
   <% cache "players-listing-#{Player.maximum(:updated_at).to_i}-#{current_player.try(:id)}" do %>
-    <%= sync :partial => 'player', :collection => @players %>
+    <%= render @players %>
   <% end %>
   <%= render 'players/none' if @players.empty? %>
 </div>
