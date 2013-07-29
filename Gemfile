@@ -6,6 +6,11 @@ gem 'pg'
 gem 'unicorn'
 gem 'dalli'
 gem 'jbuilder'
+gem 'elo'
+gem 'gravtastic'
+gem 'devise'
+gem 'kaminari'
+gem 'ransack'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -14,6 +19,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-rails'
+  gem 'twitter-bootstrap-rails'
 end
 
 group :development, :test do
@@ -35,10 +42,4 @@ group :development, :test do
   gem 'guard-spork'
 end
 
-gem 'jquery-rails'
-gem 'twitter-bootstrap-rails'
-gem 'elo'
-gem 'gravtastic'
-gem 'devise'
-gem 'kaminari'
-gem 'ransack'
+
