@@ -1,11 +1,13 @@
-<div class="alert alert-<%= alert.category %>">
-	<% if alert.title %>
-		<h4 class="alert-heading"><%= alert.title %></h4>
-	<% end %>
+<% cache alert do %>
+  <div class="alert alert-<%= alert.category %>">
+  	<% if alert.title %>
+    <h4 class="alert-heading"><%= alert.title %></h4>
+    <% end %>
 
-	<p>
-		<%= simple_format(alert.message) %>
-		<small>(This message will self-destruct in <%= distance_of_time_in_words_to_now(alert.expire_at) %>)</small>
-	</p>
+    <p>
+      <%= simple_format(alert.message) %>
+      <small>(This message will self-destruct in <%= distance_of_time_in_words_to_now(alert.expire_at) %>)</small>
+    </p>
 
-</div>
+  </div>
+<% end %>
