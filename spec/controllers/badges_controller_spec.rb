@@ -3,7 +3,8 @@ require 'spec_helper'
 describe BadgesController do
   login_player
 
-  let(:badge) { FactoryGirl.create(:badge) }
+  let(:badge) { FactoryGirl.build_stubbed(:badge) }
+  before { Badge.stub(find: badge) }
 
   describe "GET index" do
     before do

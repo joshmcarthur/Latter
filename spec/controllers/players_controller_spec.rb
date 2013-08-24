@@ -21,6 +21,8 @@ require 'spec_helper'
 describe PlayersController do
   login_player
 
+  let(:player) { FactoryGirl.create(:player) }
+
   # This should return the minimal set of attributes required to create a valid
   # Player. As you add validations to Player, be sure to
   # update the return value of this method accordingly.
@@ -37,7 +39,7 @@ describe PlayersController do
 
   describe "GET index" do
     it "assigns all players as @players" do
-      player = Player.create! valid_attributes
+      player
       get :index, {}
       assigns(:players).should include player
     end
@@ -51,8 +53,9 @@ describe PlayersController do
   end
 
   describe "GET show" do
+    let(:player) { FactoryGirl.build_stubbed(:player) }
+    before { Player.stub(find: player) }
     it "assigns the requested player as @player" do
-      player = Player.create! valid_attributes
       get :show, {:id => player.to_param}
       assigns(:player).should eq(player)
     end
@@ -60,7 +63,6 @@ describe PlayersController do
 
   describe "GET show format JSON" do
     it "renders the correct template" do
-      player = Player.create! valid_attributes
       get :show, :id => player.to_param, :format => :json
       response.should render_template "show"
     end
@@ -89,7 +91,6 @@ describe PlayersController do
 
   describe "GET edit" do
     it "assigns the requested player as @player" do
-      player = Player.create! valid_attributes
       get :edit, {:id => player.to_param}
       assigns(:player).should eq(controller.current_player)
     end
@@ -134,28 +135,23 @@ describe PlayersController do
 
   describe "PUT update" do
     describe "with valid params" do
-      before :each do
-        @player = Player.create! valid_attributes
-      end
-
       it "updates the requested player" do
         # Assuming there are no other players in the database, this
         # specifies that the Player created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Player.any_instance.should_receive(:update_with_password).with({'name' => 'Tester'})
-        put :update, {:id => @player.to_param, :player => {'name' => 'Tester'}}
+        put :update, {:id => player.to_param, :player => {'name' => 'Tester'}}
       end
 
       it "assigns the requested player as @player" do
-        put :update, {:id => @player.to_param, :player => valid_attributes}
+        put :update, {:id => player.to_param, :player => valid_attributes}
         assigns(:player).should eq(controller.current_player)
       end
     end
 
     describe "with invalid params" do
       it "assigns the player as @player" do
-        player = Player.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
         put :update, {:id => player.to_param, :player => {:name => "Test"}}
@@ -163,7 +159,6 @@ describe PlayersController do
       end
 
       it "re-renders the 'edit' template" do
-        player = Player.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Player.any_instance.stub(:save).and_return(false)
         put :update, {:id => player.to_param, :player => {:name => "Test"}}
