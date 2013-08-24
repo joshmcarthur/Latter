@@ -73,8 +73,8 @@ Latter::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => ENV['HEROKU_URL'] }
-  config.action_mailer.asset_host = "http://latter.3months.com"
+  config.action_mailer.default_url_options = { :host => ENV['APPLICATION_HOST'] }
+  config.action_mailer.asset_host = "http://#{ENV['APPLICATION_HOST']}"
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
