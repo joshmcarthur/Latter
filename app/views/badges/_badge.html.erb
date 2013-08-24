@@ -1,28 +1,30 @@
-<tr>
-	<td>
-		<%= image_tag badge.image_url %>
-	</td>
-	<td>
-		<h3>
-			<%= badge.name %>
-		</h3>
-	</td>
-	<td>
-		<%= badge.description %>
-	</td>
-	<td>
-		<% if badge.players.any? %>
-		<ul class="player-list">
-			<% badge.players.each do |player| %>
-				<li>
-					<%= link_to player do %>
-						<%= image_tag(player.gravatar_url(:size => '24')) %>
-					<% end %>
-				</li>
+<% cache badge do %>
+	<tr>
+		<td>
+			<%= image_tag badge.image_url %>
+		</td>
+		<td>
+			<h3>
+				<%= badge.name %>
+			</h3>
+		</td>
+		<td>
+			<%= badge.description %>
+		</td>
+		<td>
+			<% if badge.players.any? %>
+			<ul class="player-list">
+				<% badge.players.each do |player| %>
+					<li>
+						<%= link_to player do %>
+							<%= image_tag(player.gravatar_url(:size => '24')) %>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+			<% else %>
+				<em>No-one yet.</em>
 			<% end %>
-		</ul>
-		<% else %>
-			<em>No-one yet.</em>
-		<% end %>
-	</td>
-</tr>
+		</td>
+	</tr>
+<% end %>

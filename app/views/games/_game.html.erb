@@ -1,4 +1,4 @@
-<% cache cache_key_for(game, 'listing') do %>
+<% cache games do %>
   <% if game.challenger and game.challenged %>
   <div class="row-fluid game">
     <div class="span3">
@@ -14,9 +14,9 @@
         <br />
       </div>
       <% if [game.challenged, game.challenger].include?(current_player) && game.can_rollback? %>
-        <%= link_to I18n.t('game.rollback.link_to'), 
+        <%= link_to I18n.t('game.rollback.link_to'),
             game,
-            :method => :delete, 
+            :method => :delete,
             :class => 'btn btn-danger rollback-btn',
             :confirm => I18n.t('game.rollback.confirm')
         %>

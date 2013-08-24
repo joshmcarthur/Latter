@@ -1,4 +1,4 @@
-<% cache cache_key_for(player) do %>
+<% cache [player, "profile"] do %>
 <div class="profile">
   <div class="thumbnail">
     <%= image_tag player.gravatar_url(:size => 300), :title => player.name %>
