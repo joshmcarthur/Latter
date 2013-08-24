@@ -8,7 +8,7 @@ Latter::Application.configure do
 
   config.eager_load = false
 
-  config.cache_store = :memory_store
+  config.cache_store = :dalli_store
   config.action_controller.perform_caching = true
 
   # Show full error reports and disable caching
