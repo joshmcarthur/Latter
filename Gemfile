@@ -29,12 +29,6 @@ group :development, :test do
   # DRb server for testing frameworks
   gem 'spork', '1.0.0rc'
   gem 'simplecov', :require => false
-
-  # command line tool to easily handle events on file system modifications
-  gem 'guard'
-  gem 'guard-bundler'
-  gem 'guard-rspec'
-  gem 'guard-spork'
 end
 
 
