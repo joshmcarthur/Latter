@@ -11,8 +11,7 @@ Latter::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
-  config.static_cache_control = "public, max-age=2592000"
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -74,7 +73,7 @@ Latter::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'latter.3months.com' }
+  config.action_mailer.default_url_options = { :host => ENV['HEROKU_URL'] }
   config.action_mailer.asset_host = "http://latter.3months.com"
 
   ActionMailer::Base.smtp_settings = {
@@ -83,7 +82,7 @@ Latter::Application.configure do
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com'
+    :domain         => ENV['SENDGRID_DOMAIN']
   }
   ActionMailer::Base.delivery_method = :smtp
 end
