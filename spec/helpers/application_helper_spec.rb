@@ -21,4 +21,26 @@ describe ApplicationHelper do
       cache_key_for(@object).should_not eq [@version, @object, :en]
     end
   end
+
+  describe "#valid_html_badge" do
+    before { helper.stub(request: OpenStruct.new(original_url: 'http://test.dev')) }
+    subject { helper.valid_html_badge }
+
+    it { subject.should include "validator.w3.org" }
+    it { subject.should include Rack::Utils.escape("http://test.dev") }
+    it { subject.should include "<img" }
+    it { subject.should include "html5_badge.svg" }
+  end
+
+  describe "#travis_badge" do
+    before { Latter::Application.config.travis_ci_id = "joshmcarthur/Latter" }
+    subject { helper.travis_badge }
+    it { subject.should include "href=\"https://travis-ci.org/joshmcarthur/Latter\"" }
+  end
+
+  describe "#application_version" do
+    subject { helper.application_version }
+    it { subject.should include "class=\"label\"" }
+  end
+
 end
