@@ -14,7 +14,7 @@
 
 						<ul class="dropdown-menu">
 							<% I18n.available_locales.each do |locale| %>
-								<li class=<%= I18n.locale == locale ? 'active' : ''%>>
+								<li class=<%= I18n.locale == locale ? 'active' : 'inactive'%>>
 									<%= link_to locale.to_s.upcase, {:locale => locale.to_s} %>
 								</li>
 							<% end %>
