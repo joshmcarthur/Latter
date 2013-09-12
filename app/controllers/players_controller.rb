@@ -5,7 +5,9 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.order('rating DESC')
+    @players = Player
+              .includes(:challenged_games, :challenger_games, :won_games)
+              .order('rating DESC')
 
     respond_to do |format|
       format.html # index.html.erb
