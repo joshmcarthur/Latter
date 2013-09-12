@@ -129,6 +129,7 @@ en:
     weekly_games:
       heading: Games this Week
   shared:
+    version: 'Version: %{version}'
     form_errors:
       heading:
         "%{prefix} prevented this %{name} from being saved"
