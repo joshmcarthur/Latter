@@ -12,17 +12,15 @@ module PlayersHelper
       content_tag(
         :a,
         '',
-        :rel => 'tooltip',
         :title => I18n.t('trend.improving'),
-        :class => 'icon-chevron-up trend'
+        :class => 'tooltip icon-chevron-up trend'
       )
     when :down
       content_tag(
         :a,
         '',
-        :rel => 'tooltip',
         :title => I18n.t('trend.worsening'),
-        :class => 'icon-chevron-down trend'
+        :class => 'tooltip icon-chevron-down trend'
       )
     else
       ""
@@ -73,5 +71,5 @@ module PlayersHelper
       end
     end
   end
-  
+
 end
