@@ -11,16 +11,16 @@ module PlayersHelper
     when :up
       content_tag(
         :a,
-        '',
+        content_tag(:i, '', class: 'icon-chevron-up'),
         :title => I18n.t('trend.improving'),
-        :class => 'tooltip icon-chevron-up trend'
+        :class => 'tooltip trend'
       )
     when :down
       content_tag(
         :a,
-        '',
+        content_tag(:i, '', class: 'icon-chevron-down'),
         :title => I18n.t('trend.worsening'),
-        :class => 'tooltip icon-chevron-down trend'
+        :class => 'tooltip trend'
       )
     else
       ""
