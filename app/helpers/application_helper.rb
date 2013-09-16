@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def valid_html_badge
-    url = "https://validator.w3.org/check?uri=#{u(request.original_url)}"
+    url = "http://validator.w3.org/check?uri=#{u(request.original_url)}"
     link_to url do
       image_tag(asset_url('html5_badge.svg'), size: '32x32')
     end
