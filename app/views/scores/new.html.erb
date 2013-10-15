@@ -38,7 +38,7 @@
     <div class="modal-footer">
       <%= f.submit I18n.t('score.new.submit'),
         :class => 'btn btn-with-loading btn-primary',
-        :'data-loading-text' => I18n.t('score.new.submit_loading')
+        :data => {:disable_with => I18n.t('score.new.submit_loading')}
       %>
     </div>
   </div>

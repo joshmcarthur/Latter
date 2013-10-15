@@ -49,7 +49,7 @@ module PlayersHelper
     elsif current_player and !current_player.in_progress_games(player).empty?
       enter_score_options = {
         :remote => true,
-        :'data-loading-text' => I18n.t('game.complete.link_loading'),
+        :data => {:disable_with => I18n.t('game.complete.link_loading')},
         :class => 'btn btn-large btn-with-loading'
       }
 
@@ -61,7 +61,7 @@ module PlayersHelper
       challenge_link_options = {
         :method => :post,
         :remote => true,
-        :'data-loading-text' => I18n.t('game.new.link_loading'),
+        :data => {:disable_with => I18n.t('game.new.link_loading')},
         :class => 'btn btn-large btn-with-loading challenge'
       }
 
