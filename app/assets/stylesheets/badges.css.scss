@@ -3,19 +3,23 @@
 	line-height: 48px;
 }
 
+.sidebar .popover {
+	color: #333;
+}
+
 table.badge-table {
 	td {
 		@include badge-line;
 
-		h3 { 
+		h3 {
 			@include badge-line;
 		}
 	}
 
 	.player-list {
-		padding: 0; 
+		padding: 0;
 		margin: 0;
-		
+
 		li {
 			list-style: none;
 			padding: 0;
