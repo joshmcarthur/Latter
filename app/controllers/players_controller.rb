@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
               .order('rating DESC')
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render stream: true }
       format.json { render }
     end
   end
@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render stream: true }
       format.json { render }
     end
   end

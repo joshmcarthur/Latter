@@ -5,6 +5,9 @@ class StatisticsController < ApplicationController
   def index
     @data = Game.statistics
 
-    respond_with @data
+    respond_to do |format|
+      format.html { render stream: true }
+      format.json { render }
+    end
   end
 end

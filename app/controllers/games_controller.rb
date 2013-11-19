@@ -13,7 +13,7 @@ class GamesController < ApplicationController
       .page(params[:page])\
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render stream: true }
       format.json { render :index }
     end
   end
