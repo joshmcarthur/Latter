@@ -139,11 +139,11 @@ describe Game do
     end
 
     it "should save the change in rating for the challenged player" do
-      subject.challenger_rating_change.should eq subject.send(:challenger_rating).send(:change)
+      subject.challenger_rating_change.to_d.should eq subject.send(:challenger_rating).send(:change)
     end
 
     it "should save the change in rating for the challenger player" do
-      subject.challenged_rating_change.should eq subject.send(:challenged_rating).send(:change)
+      subject.challenged_rating_change.to_d.should eq subject.send(:challenged_rating).send(:change)
     end
   end
 end
