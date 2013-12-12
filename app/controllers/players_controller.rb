@@ -12,7 +12,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       format.html { render stream: true }
       format.json { render }
-    end
+    end if stale?(last_modified: @players.maximum(:updated_at))
   end
 
   def current
@@ -34,7 +34,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       format.html { render stream: true }
       format.json { render }
-    end
+    end if stale?(@player)
   end
 
   # GET /players/new

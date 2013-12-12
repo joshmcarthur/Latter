@@ -15,7 +15,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { render stream: true }
       format.json { render :index }
-    end
+    end if stale?(last_modified: @games.maximum(:updated_at))
   end
 
 
