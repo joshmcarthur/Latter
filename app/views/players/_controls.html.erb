@@ -1,9 +1,11 @@
 <% if current_player %>
-<div class="btn-group">
-	<%= link_to player, :class => 'btn btn-large' do %>
-		<i class='icon-user'></i>
-		<%= I18n.t('player.view') %>
-	<% end %>
-	<%= link_to_primary_action_for(player) %>
-</div>
+  <% cache [current_player, player] do %>
+    <div class="btn-group">
+    	<%= link_to player, :class => 'btn btn-large' do %>
+    		<i class='icon-user'></i>
+    		<%= I18n.t('player.view') %>
+    	<% end %>
+    	<%= link_to_primary_action_for(player) %>
+    </div>
+  <% end %>
 <% end %>
