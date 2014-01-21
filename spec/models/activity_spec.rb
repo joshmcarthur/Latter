@@ -16,15 +16,6 @@ describe Activity do
     subject.should_not be_persisted
   end
 
-  it "creates an activity for an awarded badge" do
-    award = FactoryGirl.build(:award)
-    award.badge = FactoryGirl.create(:badge)
-    award.player = FactoryGirl.create(:player)
-    awarded_badge = "#{award.player.name} was awarded the #{award.badge.name} badge."
-    Activity.should_receive(:create).with({:message => awarded_badge}).at_least(1).times.and_return(true)
-    award.save!
-  end
-
   it "creates an activity for a new game" do
     game_attributes = FactoryGirl.attributes_for(:game)
     new_game = "#{game_attributes[:challenger].name} challenged #{game_attributes[:challenged].name}."

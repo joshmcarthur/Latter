@@ -92,9 +92,6 @@ class Game < ActiveRecord::Base
     GameNotifier.completed_game(self).deliver!
     Activity.completed_game(self)
 
-    # Check all badges to see whether this result awards badges
-    self.award_badges
-
     self
   end
 
@@ -224,17 +221,6 @@ class Game < ActiveRecord::Base
   # Returns a string in the format id-player 1 name-vs-player 2 name
   def to_param
     "#{self.id}-#{self.challenger.name.parameterize}-vs-#{self.challenged.name.parameterize}"
-  end
-
-  # Check the challenger and challenged players for new badge awards
-  def award_badges
-    Badge.all.each do |the_badge|
-      [challenger,challenged].each do |the_player|
-        if the_badge.qualifies?(the_player)
-          the_player.award!(the_badge)
-        end
-       end
-    end
   end
 
   # Public: Rollback this game.

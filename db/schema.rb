@@ -30,27 +30,6 @@ ActiveRecord::Schema.define(version: 20121213022523) do
     t.string   "category",    default: "info", null: false
   end
 
-  create_table "awards", force: true do |t|
-    t.integer  "player_id"
-    t.integer  "badge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "award_date"
-    t.datetime "expiry"
-  end
-
-  create_table "badges", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "image_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "award_rule"
-    t.integer  "award_rule_count", default: 0
-    t.boolean  "allow_duplicates", default: false
-    t.integer  "expire_in_days",   default: 0
-  end
-
   create_table "games", force: true do |t|
     t.integer  "challenger_id",                            null: false
     t.integer  "challenged_id",                            null: false

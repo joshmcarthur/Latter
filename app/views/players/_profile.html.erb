@@ -12,11 +12,6 @@
     <h3><%= I18n.t('player.points', :points => player.rating) %></h3>
     <h3><%= I18n.t('player.profile.games', :count => player.games.count) %></h3>
 
-    <div class="badges">
-      <% if player.badges.any? %>
-        <%= render partial: 'badges/player_badge', collection: player.badges %>
-      <% end %>
-    </div>
   </div>
 </div>
 <% end %>

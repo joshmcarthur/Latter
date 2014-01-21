@@ -68,36 +68,6 @@ describe Player do
     end
   end
 
-  describe "Badges" do
-
-    before do
-       subject.save
-       @badge = FactoryGirl.create(:badge)
-       @award = subject.award!(@badge)
-       # @award = FactoryGirl.create(:award, :player => subject, :badge => @badge)
-    end
-
-    it "should be able to be assigned correctly" do
-      @award.should be_valid
-      subject.badges.should include { @badge }
-      subject.awards.should include { @award }
-    end
-
-    it "should not be duplicated unless allowed to be" do
-      subject.award!(@badge)
-      subject.badges.count.should eq 1
-      @badge.allow_duplicates = true
-      subject.award!(@badge)
-      subject.badges.count.should eq 2
-    end
-
-    it "should be removed when awards are destroyed" do
-      @award.destroy
-      subject.badges.should_not include { @badge }
-      subject.awards.should_not include { @award }
-    end
-
-  end
 
   describe "Pro rating" do
     it "should be pro if rating is over the threshold" do

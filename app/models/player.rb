@@ -35,9 +35,6 @@ class Player < ActiveRecord::Base
   has_many :challenger_games, :class_name => 'Game', :foreign_key => 'challenger_id', :dependent => :destroy
   has_many :won_games, :class_name => 'Game', :foreign_key => 'winner_id'
 
-  has_many :awards, :dependent => :destroy
-  has_many :badges, :through => :awards
-
   # Public - Return all games that a player has participated in
   #
   # Returns an array of games where the player was either a challenger or
@@ -164,31 +161,6 @@ class Player < ActiveRecord::Base
     end
   end
 
-  # Award a badge
-  #
-  # Award the badge to a player via an award
-  #
-  # Default is for the award_date datetime to be nil
-  # Which means it gets set in the model to created_at
-  # Player.award!(badge)
-  #
-  # To award on the 1st June 2012, do
-  # Player.award!(badge, Date.new(2012, 6, 1))
-  #
-  # Expiry is a number of days from the award_date for the badge to expire
-  def award!(badge, award_date = nil)
-    if !badge.awarded_to?(self) or badge.allow_duplicates
-
-      if badge.expire_in_days != 0
-        base_date = award_date.present? ? award_date : DateTime.now
-        abs_expiry = base_date.advance(:days => badge.expire_in_days)
-      else
-        abs_expiry = nil
-      end
-
-      self.awards.create(:badge_id => badge.id, :award_date => award_date, :expiry => abs_expiry )
-    end
-  end
 
   def serializable_hash(options={})
     options = {

@@ -13,7 +13,7 @@ mi:
       about_x_years:
         one: 'Tata 1 tau'
         other: 'Tata %{count} tau'
-      less_than_x_minutes: 
+      less_than_x_minutes:
         one: 'Iti 1 meneti'
         other: 'Iti iho %{count} nga meneti'
       less_than_x_seconds:
@@ -25,7 +25,7 @@ mi:
       x_minutes:
         one: '1 meneti'
         other: "%{count} nga meneti"
-      x_days: 
+      x_days:
         one: "1 rā"
         other: "%{count} nga rā"
 
@@ -42,35 +42,24 @@ mi:
     new:
       heading: Rōku Tomo te Latter
       submit_button: Rōku Tomo
-  navbar: 
-    links: 
+  navbar:
+    links:
       login: 'Rōku Tomo'
       players: 'Kaitākaro'
       all_players: 'Rāua Kaitākaro'
       edit_account: Ētita ā kōrua Rēhita
       new_player: Niu Kaitākaro
       games: Kēmu
-      badges: Nga Paraihe
       rules: Tikanga
       statistics: Tatauranga
       language: Reo
       log_out: 'Rōku Puta'
   brand:
     title: Latter
-  badges:
-    index:
-      heading: Nga Paraihe
-      table_headings:
-        badge_image: Pakoko
-        name: Ingoa
-        details: Mokamoka
-        awarded_to: Whakawhiwhi
-
   activities:
     heading: Mahinga
     game_complete: "%{challenger} whakakapi tō rāua kēmu mautohe %{challenged} %{result} (%{score})"
     new_game: "%{challenger} whakatara %{challenged}."
-    awarded_badge: "%{player} whakawhiwhi te %{name} paraihe."
     attributes:
       time_ago: "%{distance} nō nakua tonu nei  "
   page:
@@ -91,7 +80,7 @@ mi:
     points: "Kaute: %{points}"
     profile:
       games: "Kēmu: %{count}"
-    edit: 
+    edit:
       link: Ētita Rēhita
       heading: Ētita Rēhita
 

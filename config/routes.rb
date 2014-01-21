@@ -14,8 +14,6 @@ Latter::Application.routes.draw do
 
   get "/player" => "players#current", :constraints => {:format => :json}
 
-  resources :badges, :only => [:index, :show]
-
   root :to => 'players#index'
   get "/pages/*slug" => "pages#show", :as => 'page'
 
