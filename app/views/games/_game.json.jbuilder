@@ -1,4 +1,4 @@
-json.cache game do
+json.cache! game do
   json.id game.id
 
   json.challenger do

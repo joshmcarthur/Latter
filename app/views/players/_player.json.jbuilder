@@ -1,4 +1,4 @@
-json.cache player do
+json.cache! player do
   json.id   player.id
   json.name player.name
   json.pro  player.pro
