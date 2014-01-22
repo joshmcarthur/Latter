@@ -1,5 +1,6 @@
 <% if current_player %>
     <%= render 'profile', :player => current_player %>
+    <%= render 'layouts/activities' %>
 <% else %>
   <%= render 'pages/sections/about' %>
 <% end %>
