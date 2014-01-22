@@ -6,9 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'factory_girl'
-FactoryGirl.find_definitions
-
 Badge.find_or_create_by_name('Silver Bull', image_url: "/images/badges/silverbull.png", description: "Completed over 140 chargeable hours in a month")
 Badge.find_or_create_by_name('Gold Bull', image_url: "/images/badges/goldbull.png", description: "Completed over 170 chargeable hours in a month")
 
