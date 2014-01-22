@@ -10,6 +10,10 @@ gem 'dalli'
 # Build JSON views
 gem 'jbuilder'
 
+# Track model activity
+# Used for tracking players and games
+gem 'public_activity'
+
 # Implementation of the Elo ranking algorithm
 gem 'elo'
 
