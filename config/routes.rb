@@ -6,7 +6,6 @@ Latter::Application.routes.draw do
     resource :score, :controller => 'scores', :only => [:new, :create]
   end
 
-  resources :activities, :controller => 'activity', :only => :index
   resources :statistics, :only => [:index]
   resources :players do
     resource :authentication_token, :only => [:show, :destroy]
