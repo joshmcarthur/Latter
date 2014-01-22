@@ -24,8 +24,7 @@ class Game < ActiveRecord::Base
 
   scope :complete, -> { where(:complete => true) }
 
-  # Add a new game activity after a game is created
-  after_create :notify_player, :log_activity
+  after_create :notify_player
 
   # Public - result setter
   #
@@ -90,7 +89,6 @@ class Game < ActiveRecord::Base
     self.save!
 
     GameNotifier.completed_game(self).deliver!
-    Activity.completed_game(self)
 
     # Check all badges to see whether this result awards badges
     self.award_badges
@@ -355,12 +353,6 @@ class Game < ActiveRecord::Base
   # Private - Notify the challenged player that they have a pending game
   def notify_player
     GameNotifier.new_game(self).deliver!
-  end
-
-  # Private - Log the 'created game' activity
-  #
-  def log_activity
-    Activity.new_game(self)
   end
 
 end
