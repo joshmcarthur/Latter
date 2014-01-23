@@ -1,8 +1,11 @@
 class Game < ActiveRecord::Base
+  include PublicActivity::Common
 
   belongs_to :challenger, :class_name => 'Player', :touch => true
   belongs_to :challenged, :class_name => 'Player', :touch => true
   belongs_to :winner,     :class_name => 'Player'
+
+  define_callbacks :complete
 
   # Make player associations accessible to Elo
   alias :one :challenger
@@ -24,8 +27,17 @@ class Game < ActiveRecord::Base
 
   scope :complete, -> { where(:complete => true) }
 
-  # Add a new game activity after a game is created
-  after_create :notify_player, :log_activity
+  set_callback :complete, :after, :award_badges
+
+  after_create do
+    create_activity(key: 'game.created', owner: challenger)
+    GameNotifier.new_game(self).deliver!
+  end
+
+  set_callback :complete, :after do
+    create_activity(key: 'game.completed', owner: winner)
+    GameNotifier.completed_game(self).deliver!
+  end
 
   # Public - result setter
   #
@@ -71,29 +83,23 @@ class Game < ActiveRecord::Base
   def complete!(scores = {})
     return false unless scores and scores.has_key?(:challenger_score) and scores.has_key?(:challenged_score)
 
-    if scores[:challenger_score].to_i > scores[:challenged_score].to_i
-      self.winner = challenger
-      self.result = 1.0
+    run_callbacks :complete do
+      if scores[:challenger_score].to_i > scores[:challenged_score].to_i
+        self.winner = challenger
+        self.result = 1.0
 
-      self.score = [scores[:challenger_score], scores[:challenged_score]].join ' : '
-    else
-      self.winner = challenged
-      self.result = 0.0
+        self.score = [scores[:challenger_score], scores[:challenged_score]].join ' : '
+      else
+        self.winner = challenged
+        self.result = 0.0
 
-      self.score = [scores[:challenged_score], scores[:challenger_score]].join ' : '
+        self.score = [scores[:challenged_score], scores[:challenger_score]].join ' : '
+      end
+
+      self.complete = true
+      self.set_rating_changes
+      self.save!
     end
-
-    self.complete = true
-
-    self.set_rating_changes
-
-    self.save!
-
-    GameNotifier.completed_game(self).deliver!
-    Activity.completed_game(self)
-
-    # Check all badges to see whether this result awards badges
-    self.award_badges
 
     self
   end
@@ -352,15 +358,6 @@ class Game < ActiveRecord::Base
     end
   end
 
-  # Private - Notify the challenged player that they have a pending game
-  def notify_player
-    GameNotifier.new_game(self).deliver!
-  end
 
-  # Private - Log the 'created game' activity
-  #
-  def log_activity
-    Activity.new_game(self)
-  end
 
 end

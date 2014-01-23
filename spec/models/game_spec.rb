@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Game do
-  subject do
+  subject(:game) do
     FactoryGirl.build(:game)
   end
 
@@ -14,6 +14,10 @@ describe Game do
   it "should not create a game given invalid attributes" do
     subject.challenger = nil
     subject.should_not be_persisted
+  end
+
+  it "should create an activity when a game is created" do
+    expect { subject.save }.to change(PublicActivity::Activity, :count).by(1)
   end
 
   it "should not create a game when an inverse one is already in progress" do
@@ -61,18 +65,6 @@ describe Game do
     end
   end
 
-  describe "activities" do
-    it "should make a new challenge activity when the game is created" do
-      Activity.should_receive(:new_game).with(subject).at_least(1).times
-      subject.save
-    end
-
-    it "should make a completed game activity when the game is completed" do
-      Activity.should_receive(:completed_game).with(subject)
-      subject.complete! :challenger_score => 15, :challenged_score => 6
-    end
-  end
-
   describe "rollback" do
     before :each do
       subject.save!
@@ -106,44 +98,59 @@ describe Game do
   end
 
   describe "completion" do
-    before :each do
-      subject.complete! :challenger_score => 15, :challenged_score => 6
-      subject.reload
+    subject { game.complete!(challenger_score: 15, challenged_score: 6); }
+
+    it "should set the score" do
+      expect { subject }.to change(game, :score).to("15 : 6")
     end
 
-    it "should complete a game" do
-      subject.score.should eq "15 : 6"
-      subject.winner.should eq subject.challenger
-      subject.should be_complete
+    it "should set the winner" do
+      expect { subject }.to change(game, :winner).to(game.challenger)
+    end
+
+    it "should mark the game as complete" do
+      expect { subject }.to change(game, :complete?).to be_true
     end
 
     it "should save the correct game result" do
-      subject.result.should eq 1.0
+      expect { subject }.to change(game, :result).to 1.0
     end
 
     it "should correctly identify the winner" do
-      subject.winner?(subject.challenger).should be_true
+      subject
+      game.winner?(game.challenger).should be_true
     end
 
     it "should correctly identify the loser" do
-      subject.loser?(subject.challenged).should be_true
+      subject
+      game.loser?(game.challenged).should be_true
     end
 
     it "should return the correct score for each player" do
-      subject.score_for(subject.challenger).should eq 15
-      subject.score_for(subject.challenged).should eq 6
+      subject
+      game.score_for(game.challenger).should eq 15
+      game.score_for(game.challenged).should eq 6
     end
 
     it "should create ratings for each player" do
-      subject.ratings.length.should eq 2
+      subject
+      game.ratings.length.should eq 2
     end
 
     it "should save the change in rating for the challenged player" do
-      subject.challenger_rating_change.to_d.should eq subject.send(:challenger_rating).send(:change).to_d
+      subject
+      game.challenger_rating_change.to_d.should eq game.send(:challenger_rating).send(:change).to_d
     end
 
     it "should save the change in rating for the challenger player" do
-      subject.challenged_rating_change.to_d.should eq subject.send(:challenged_rating).send(:change).to_d
+      subject
+      game.challenged_rating_change.to_d.should eq game.send(:challenged_rating).send(:change).to_d
     end
+
+    it "should log the game completion as an activity" do
+      game.save! # This needs to be done to ensure that only one activity gets created
+      expect { subject }.to change(PublicActivity::Activity, :count).by(1)
+    end
+
   end
 end

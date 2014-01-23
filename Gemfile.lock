@@ -110,6 +110,11 @@ GEM
     polyamorous (0.6.3)
       activerecord (>= 3.0)
     polyglot (0.3.3)
+    public_activity (1.4.1)
+      actionpack (>= 3.0.0)
+      activerecord (>= 3.0)
+      i18n (>= 0.5.0)
+      railties (>= 3.0.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -187,7 +192,7 @@ DEPENDENCIES
   coffee-rails
   dalli
   database_cleaner
-  devise (= 3.0.0.rc)
+  devise
   dotenv-rails
   elo
   factory_girl_rails
@@ -199,6 +204,7 @@ DEPENDENCIES
   kaminari
   passenger
   pg
+  public_activity
   rails (~> 4.0)
   rails_12factor
   ransack!

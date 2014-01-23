@@ -1,0 +1,11 @@
+<table class="table table-striped table-bordered activity-feed">
+  <thead>
+    <tr>
+      <th><h4>Activity</h4></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render_activities ActivityAdapter.all, layout: :activity %>
+  </tbody>
+</table>

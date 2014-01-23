@@ -14,11 +14,11 @@ describe Award do
     it "should be able to be assigned to a player" do
       award.should be_valid
     end
-  
+
     it "should have a correct default award_date" do
        award.award_date.should eq award.created_at
     end
-    
+
     it "should have a correctly specified award_date" do
        datedaward.award_date.should eq datelastmonth
     end
@@ -32,7 +32,7 @@ describe Award do
        player.award!(expiring_badge,0.days.ago)
        player.badges.should include expiring_badge
     end
-  
+
     describe "when player id is not present" do
       before { award.player_id = nil }
       it { should_not be_valid }
@@ -43,9 +43,4 @@ describe Award do
       it { should_not be_valid }
     end
 
-    it "should create an activity when the record is saved" do
-      Activity.should_receive(:awarded_badge).with(award).at_least(1).times
-      award.save
-    end
-    
 end
