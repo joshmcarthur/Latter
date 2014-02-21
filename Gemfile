@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Main dependency gems
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.0.0'
 gem 'pg'
 gem 'dalli'
 
@@ -28,7 +28,7 @@ gem 'kaminari'
 
 # Use rails-4 branch of Ransack for fancy searching
 # Currently used for automatic awarding of badges.
-gem 'ransack', github: 'ernie/ransack', ref: 'rails-4'
+gem 'ransack', github: 'activerecord-hackery/ransack', ref: 'rails-4'
 
 # Use Coffeescript for writing Javascript
 gem 'coffee-rails'
