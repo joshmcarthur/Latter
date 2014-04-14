@@ -28,7 +28,7 @@ gem 'kaminari'
 
 # Use rails-4 branch of Ransack for fancy searching
 # Currently used for automatic awarding of badges.
-gem 'ransack', github: 'activerecord-hackery/ransack', ref: 'rails-4'
+gem 'ransack'
 
 # Use Coffeescript for writing Javascript
 gem 'coffee-rails'
