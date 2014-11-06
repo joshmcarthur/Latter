@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Main dependency gems
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.0.11'
 gem 'pg'
 gem 'dalli'
 

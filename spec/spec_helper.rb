@@ -1,4 +1,5 @@
 require 'spork'
+require 'ostruct'
 
 Spork.prefork do
   unless ENV['DRB']
