@@ -2,8 +2,10 @@ language: ruby
 cache: bundler
 bundler_args: --without development
 rvm:
+  - 1.9
   - 2.0
-  - ruby-head
+  - 2.1
+  - 2.2
 before_script:
   - "cp config/database.yml.example config/database.yml"
   - "psql -c 'create database latter_test;' -U postgres"
