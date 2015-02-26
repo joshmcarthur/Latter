@@ -31,6 +31,18 @@ describe Alert do
       subject.save
       subject.activate_at.should eq date
     end
+
+    it "should set a default expiry date" do
+      subject.expire_at = nil
+      subject.save
+      subject.expire_at.should be_within(5.seconds).of(DateTime.current + 1.day)
+    end
+
+    it "should not set an expiry date if one is already assigned" do
+      date = DateTime.yesterday
+      subject.expire_at = date
+      subject.save
+      subject.expire_at.should eq date
     end
   end
 
