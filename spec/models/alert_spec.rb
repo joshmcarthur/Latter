@@ -23,6 +23,12 @@ describe Alert do
     it "should set an default activation date" do
       subject.save
       subject.activate_at.should be_within(5.seconds).of(DateTime.now)
+    it "should not set an activation date if one is already assigned" do
+      date = DateTime.yesterday
+      subject.activate_at = date
+      subject.save
+      subject.activate_at.should eq date
+    end
     end
   end
 
