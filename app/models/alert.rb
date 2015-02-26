@@ -9,7 +9,7 @@ class Alert < ActiveRecord::Base
   private
 
   def default_activate_at
-    self.activate_at = DateTime.now unless self.activate_at.present?
+    self.activate_at ||= DateTime.current
   end
 
   def default_activate_at
