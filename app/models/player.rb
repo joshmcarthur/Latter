@@ -16,12 +16,10 @@ class Player < ActiveRecord::Base
 
   has_gravatar
   devise :database_authenticatable,
-         :token_authenticatable,
          :confirmable,
          :recoverable,
          :trackable,
-         :validatable,
-         :token_authenticatable
+         :validatable
 
   before_validation :set_default_password, :on => :create
   before_save :ensure_authentication_token
@@ -197,8 +195,22 @@ class Player < ActiveRecord::Base
     super(options)
   end
 
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
 
   private
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless Player.exists?(authentication_token: token)
+    end
+  end
+
+
 
   # Private - Set a default password for the user
   #
