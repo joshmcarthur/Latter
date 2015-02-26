@@ -4,7 +4,7 @@ class Alert < ActiveRecord::Base
 
   before_validation :default_activate_at, :default_deactivate_at, :on => :create
 
-  scope :current, proc { where('? >= activate_at AND (? <= expire_at OR expire_at IS NULL)', DateTime.now, DateTime.now) }
+  scope :current, proc { where('? >= activate_at AND (? <= expire_at OR expire_at IS NULL)', DateTime.current, DateTime.current) }
 
   private
 

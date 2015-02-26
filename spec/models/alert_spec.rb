@@ -22,7 +22,9 @@ describe Alert do
   describe "saving" do
     it "should set an default activation date" do
       subject.save
-      subject.activate_at.should be_within(5.seconds).of(DateTime.now)
+      subject.activate_at.should be_within(5.seconds).of(DateTime.current)
+    end
+
     it "should not set an activation date if one is already assigned" do
       date = DateTime.yesterday
       subject.activate_at = date
@@ -39,7 +41,7 @@ describe Alert do
     end
 
     it "should not find an active alert" do
-      subject.expire_at = DateTime.now
+      subject.expire_at = DateTime.current
       subject.save!
 
       sleep 1
