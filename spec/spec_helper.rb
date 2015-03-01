@@ -37,8 +37,5 @@ end
 
 
 load "#{Rails.root}/config/routes.rb"
-Dir["#{Rails.root}/app/**/*.rb"].each {|f| load f}
-Dir["#{Rails.root}/lib/**/*.rb"].each {|f| load f}
-
 Dir["#{Rails.root}/spec/support/**/*.rb"].each { |f| load f}
 
