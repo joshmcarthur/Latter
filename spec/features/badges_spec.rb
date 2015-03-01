@@ -18,7 +18,7 @@ describe "Badges" do
   it "should all be shown in the badges index" do
     visit badges_path
     Badge.all.each do |item|
-      page.should have_selector("td", text: item.name)
+      expect(page).to have_selector("td", text: item.name)
     end
   end
 
@@ -26,7 +26,7 @@ describe "Badges" do
     visit players_path
 
     @player.badges.each do |item|
-      page.should have_xpath("//img[@src='"+item.image_url+"']" )
+      expect(page).to have_xpath("//img[@src='"+item.image_url+"']" )
     end
   end
   
@@ -34,7 +34,7 @@ describe "Badges" do
     visit player_path(@player)
 
     @player.badges.each do |item|
-      page.should have_xpath("//img[@src='"+item.image_url+"']" )
+      expect(page).to have_xpath("//img[@src='"+item.image_url+"']" )
     end
   end
 

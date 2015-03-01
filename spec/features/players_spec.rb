@@ -11,13 +11,13 @@ describe "Players" do
     visit players_path
     
     Player.all.each do |item|
-      page.should have_selector("h3", :text => item.name )
+      expect(page).to have_selector("h3", :text => item.name )
     end
     
     sign_in(@player1)
     
     Player.all.each do |item|
-      page.should have_selector("h3", :text => item.name )
+      expect(page).to have_selector("h3", :text => item.name )
     end
     
   end

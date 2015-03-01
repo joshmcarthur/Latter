@@ -12,35 +12,35 @@ describe Award do
     subject { award }
 
     it "should be able to be assigned to a player" do
-      award.should be_valid
+      expect(award).to be_valid
     end
 
     it "should have a correct default award_date" do
-       award.award_date.should eq award.created_at
+       expect(award.award_date).to eq award.created_at
     end
 
     it "should have a correctly specified award_date" do
-       datedaward.award_date.should eq datelastmonth
+       expect(datedaward.award_date).to eq datelastmonth
     end
 
     it "should not be listed after it has expired" do
        player.award!(expiring_badge,2.days.ago)
-       player.badges.should_not include expiring_badge
+       expect(player.badges).not_to include expiring_badge
     end
 
      it "should be listed before it has expired" do
        player.award!(expiring_badge,0.days.ago)
-       player.badges.should include expiring_badge
+       expect(player.badges).to include expiring_badge
     end
 
     describe "when player id is not present" do
       before { award.player_id = nil }
-      it { should_not be_valid }
+      it { is_expected.not_to be_valid }
     end
 
     describe "when badge id is not present" do
       before { award.badge_id = nil }
-      it { should_not be_valid }
+      it { is_expected.not_to be_valid }
     end
 
 end
