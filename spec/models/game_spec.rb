@@ -139,12 +139,12 @@ describe Game do
 
     it "should save the change in rating for the challenged player" do
       subject
-      game.challenger_rating_change.to_d.should eq game.send(:challenger_rating).send(:change).to_d
+      game.challenger_rating_change.to_f.should eq game.send(:challenger_rating).send(:change).to_f
     end
 
     it "should save the change in rating for the challenger player" do
       subject
-      game.challenged_rating_change.to_d.should eq game.send(:challenged_rating).send(:change).to_d
+      game.challenged_rating_change.to_f.should eq game.send(:challenged_rating).send(:change).to_f
     end
 
     it "should log the game completion as an activity" do
