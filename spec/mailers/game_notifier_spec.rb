@@ -10,12 +10,12 @@ describe GameNotifier do
     end
 
     it "should send the email to the challenged player" do
-      @mail.to.should eq [game.challenged.email]
+      expect(@mail.to).to eq [game.challenged.email]
     end
 
     it "should contain the challenged and challenger player names" do
-      @mail.body.should include game.challenged.name
-      @mail.body.should include game.challenger.name
+      expect(@mail.body).to include game.challenged.name
+      expect(@mail.body).to include game.challenger.name
     end
   end
 
@@ -31,30 +31,30 @@ describe GameNotifier do
     end
 
     it "should send the email to both players" do
-      @mail.to.should eq [@game.challenged.email, @game.challenger.email]
+      expect(@mail.to).to eq [@game.challenged.email, @game.challenger.email]
     end
 
     it "should not send email to a player who has opted out" do
       @game.challenger.wants_challenge_completed_notifications = false
       @mail = GameNotifier.completed_game(@game)
-      @mail.to.should_not include @game.challenger.email
+      expect(@mail.to).not_to include @game.challenger.email
     end
 
     it "should not send email if both players have opted out" do
       @game.challenger.wants_challenge_completed_notifications = false
       @game.challenged.wants_challenge_completed_notifications = false
 
-      GameNotifier.should_not_receive(:mail)
+      expect(GameNotifier).not_to receive(:mail)
       @mail = GameNotifier.completed_game(@game)
     end
 
     it "should contain both scores" do
-      @mail.body.should include "21"
-      @mail.body.should include "15"
+      expect(@mail.body).to include "21"
+      expect(@mail.body).to include "15"
     end
 
     it "should identify the winner" do
-      @mail.body.should include "#{@game.challenger.name} won"
+      expect(@mail.body).to include "#{@game.challenger.name} won"
     end
   end
 end

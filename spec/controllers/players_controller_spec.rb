@@ -41,58 +41,58 @@ describe PlayersController do
     it "assigns all players as @players" do
       player
       get :index, {}
-      assigns(:players).should include player
+      expect(assigns(:players)).to include player
     end
   end
 
   describe "GET index format JSON" do
     it "renders the correct template" do
       get :index, :format => :json
-      response.should render_template "index"
+      expect(response).to render_template "index"
     end
   end
 
   describe "GET show" do
     let(:player) { FactoryGirl.build_stubbed(:player) }
-    before { Player.stub(find: player) }
+    before { allow(Player).to receive_messages(find: player) }
     it "assigns the requested player as @player" do
       get :show, {:id => player.to_param}
-      assigns(:player).should eq(player)
+      expect(assigns(:player)).to eq(player)
     end
   end
 
   describe "GET show format JSON" do
     it "renders the correct template" do
       get :show, :id => player.to_param, :format => :json
-      response.should render_template "show"
+      expect(response).to render_template "show"
     end
   end
 
   describe "GET current " do
     it "should not find a route" do
       get :current
-      response.should_not be_ok
+      expect(response).not_to be_ok
     end
   end
 
   describe "GET current format JSON" do
     it "renders the correct template" do
       get :current, :format => :json
-      response.should render_template "show"
+      expect(response).to render_template "show"
     end
   end
 
   describe "GET new" do
     it "assigns a new player as @player" do
       get :new, {}
-      assigns(:player).should be_a_new(Player)
+      expect(assigns(:player)).to be_a_new(Player)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested player as @player" do
       get :edit, {:id => player.to_param}
-      assigns(:player).should eq(controller.current_player)
+      expect(assigns(:player)).to eq(controller.current_player)
     end
   end
 
@@ -106,29 +106,29 @@ describe PlayersController do
 
       it "assigns a newly created player as @player" do
         post :create, {:player => valid_attributes}
-        assigns(:player).should be_a(Player)
-        assigns(:player).should be_persisted
+        expect(assigns(:player)).to be_a(Player)
+        expect(assigns(:player)).to be_persisted
       end
 
       it "redirects to the created player" do
         post :create, {:player => valid_attributes}
-        response.should redirect_to(Player)
+        expect(response).to redirect_to(Player)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved player as @player" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Player.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Player).to receive(:save).and_return(false)
         post :create, {:player => {:name => "Test"}}
-        assigns(:player).should be_a_new(Player)
+        expect(assigns(:player)).to be_a_new(Player)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Player.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Player).to receive(:save).and_return(false)
         post :create, {:player => {:name => "Test"}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -140,29 +140,29 @@ describe PlayersController do
         # specifies that the Player created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Player.any_instance.should_receive(:update_with_password).with({'name' => 'Tester'})
+        expect_any_instance_of(Player).to receive(:update_with_password).with({'name' => 'Tester'})
         put :update, {:id => player.to_param, :player => {'name' => 'Tester'}}
       end
 
       it "assigns the requested player as @player" do
         put :update, {:id => player.to_param, :player => valid_attributes}
-        assigns(:player).should eq(controller.current_player)
+        expect(assigns(:player)).to eq(controller.current_player)
       end
     end
 
     describe "with invalid params" do
       it "assigns the player as @player" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Player.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Player).to receive(:save).and_return(false)
         put :update, {:id => player.to_param, :player => {:name => "Test"}}
-        assigns(:player).should eq(controller.current_player)
+        expect(assigns(:player)).to eq(controller.current_player)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Player.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Player).to receive(:save).and_return(false)
         put :update, {:id => player.to_param, :player => {:name => "Test"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end

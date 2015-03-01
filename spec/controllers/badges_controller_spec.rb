@@ -4,7 +4,7 @@ describe BadgesController do
   login_player
 
   let(:badge) { FactoryGirl.build_stubbed(:badge) }
-  before { Badge.stub(find: badge) }
+  before { allow(Badge).to receive_messages(find: badge) }
 
   describe "GET index" do
     before do
@@ -12,11 +12,11 @@ describe BadgesController do
     end
 
     it "should assign all badges to @badges" do
-      assigns(:badges).should eq Badge.all
+      expect(assigns(:badges)).to eq Badge.all
     end
 
     it "should render the view" do
-      response.should render_template :index
+      expect(response).to render_template :index
     end
   end
 
@@ -26,11 +26,11 @@ describe BadgesController do
     end
 
     it "should assign the badge to @badge" do
-      assigns(:badge).should eq badge
+      expect(assigns(:badge)).to eq badge
     end
 
     it "should render the view" do
-      response.should render_template :show
+      expect(response).to render_template :show
     end
   end
 end
