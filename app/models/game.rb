@@ -31,12 +31,12 @@ class Game < ActiveRecord::Base
 
   after_create do
     create_activity(key: 'game.created', owner: challenger)
-    GameNotifier.new_game(self).deliver!
+    GameNotifier.new_game(self).deliver_now!
   end
 
   set_callback :complete, :after do
     create_activity(key: 'game.completed', owner: winner)
-    GameNotifier.completed_game(self).deliver!
+    GameNotifier.completed_game(self).deliver_now!
   end
 
   # Public - result setter
