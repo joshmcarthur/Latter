@@ -24,7 +24,7 @@ describe ApplicationHelper do
   end
 
   describe "#valid_html_badge" do
-    before { helper.stub(request: OpenStruct.new(original_url: 'http://test.dev')) }
+    before { allow(helper).to receive_messages(request: OpenStruct.new(original_url: 'http://test.dev')) }
     subject { helper.valid_html_badge }
 
     it { expect(subject).to include "validator.w3.org" }

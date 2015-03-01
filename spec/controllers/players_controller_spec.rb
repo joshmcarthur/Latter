@@ -54,7 +54,7 @@ describe PlayersController do
 
   describe "GET show" do
     let(:player) { FactoryGirl.build_stubbed(:player) }
-    before { Player.stub(find: player) }
+    before { allow(Player).to receive_messages(find: player) }
     it "assigns the requested player as @player" do
       get :show, {:id => player.to_param}
       expect(assigns(:player)).to eq(player)

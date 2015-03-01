@@ -4,7 +4,7 @@ describe BadgesController do
   login_player
 
   let(:badge) { FactoryGirl.build_stubbed(:badge) }
-  before { Badge.stub(find: badge) }
+  before { allow(Badge).to receive_messages(find: badge) }
 
   describe "GET index" do
     before do
