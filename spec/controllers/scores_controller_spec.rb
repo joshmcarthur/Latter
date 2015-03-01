@@ -22,7 +22,7 @@ describe ScoresController do
     end
 
     it "should render a JS template" do
-      get :new, :game_id => game.id, :format => :js
+      xhr :get, :new, :game_id => game.id, :format => :js
       response.should render_template('scores/new')
     end
   end
