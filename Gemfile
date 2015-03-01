@@ -47,7 +47,7 @@ gem 'font-awesome-rails'
 
 group :development, :test do
   # Test with rspec-rails
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.14.0'
 
   # Build objects for testing with Factory Girl
   # This is in the development group because db/seeds.rb
