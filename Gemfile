@@ -72,9 +72,6 @@ group :test do
   # that tests are decoupled from data.
   gem 'database_cleaner'
 
-  # DRb server for testing frameworks
-  gem 'spork', '1.0.0rc'
-
   # Generate test coverage report.
   gem 'simplecov', :require => false
 end
