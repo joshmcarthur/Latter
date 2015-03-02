@@ -17,18 +17,18 @@ describe PlayersHelper do
 
   describe "#trend" do
     it "should render a title if the player is improving" do
-      @player.should_receive(:trend).and_return(:up)
-      helper.trend(@player).should include "Improving"
+      expect(@player).to receive(:trend).and_return(:up)
+      expect(helper.trend(@player)).to include "Improving"
     end
 
     it "should render a title if the player is worsening" do
-      @player.should_receive(:trend).and_return(:down)
-      helper.trend(@player).should include "Worsening"
+      expect(@player).to receive(:trend).and_return(:down)
+      expect(helper.trend(@player)).to include "Worsening"
     end
 
     it "should not render anything if the player trend has not changed" do
-      @player.should_receive(:trend).and_return(:same)
-      helper.trend(@player).should be_blank
+      expect(@player).to receive(:trend).and_return(:same)
+      expect(helper.trend(@player)).to be_blank
     end
   end
 
@@ -37,7 +37,7 @@ describe PlayersHelper do
       game = FactoryGirl.build(:game, :updated_at => DateTime.now - 1.hour, :challenged => @player)
       game.complete!(:challenged_score => 21, :challenger_score => 15)
 
-      helper.distance_of_last_game_for(@player).should match "about 1 hour"
+      expect(helper.distance_of_last_game_for(@player)).to match "about 1 hour"
     end
 
     it "should handle the player having no games" do

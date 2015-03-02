@@ -8,12 +8,12 @@ describe Game do
 
   it "should create a game given valid attributes" do
     subject.save
-    subject.should be_persisted
+    expect(subject).to be_persisted
   end
 
   it "should not create a game given invalid attributes" do
     subject.challenger = nil
-    subject.should_not be_persisted
+    expect(subject).not_to be_persisted
   end
 
   it "should create an activity when a game is created" do
@@ -30,37 +30,37 @@ describe Game do
   it "should not create a game when an identical one is already is progress" do
     subject.save
     new_game = FactoryGirl.build(:game, :challenger => subject.challenger, :challenged => subject.challenged)
-    new_game.should_not be_valid
-    new_game.errors[:base].should_not be_empty
+    expect(new_game).not_to be_valid
+    expect(new_game.errors[:base]).not_to be_empty
   end
 
   it "should allow saving the game once the previous game is complete" do
     subject.save
     subject.complete!({challenged_score: 21, challenger_score: 10})
     new_game = FactoryGirl.build(:game, :challenger => subject.challenger, :challenged => subject.challenged)
-    new_game.should be_valid
+    expect(new_game).to be_valid
   end
 
   it "should not create a game when the challenger and challenged players are the same" do
     subject.challenger = subject.challenged
-    subject.should_not be_valid
-    subject.errors[:challenger].should_not be_blank
+    expect(subject).not_to be_valid
+    expect(subject.errors[:challenger]).not_to be_blank
   end
 
   it "should re-calculate the player scores when a result is set" do
-    subject.should_receive(:calculate)
+    expect(subject).to receive(:calculate)
     subject.result = 1.0
   end
 
   describe "complete scope" do
-    it { subject.save; Game.complete.should_not include subject }
-    it { subject.complete = true; subject.save; Game.complete.should include subject }
+    it { subject.save; expect(Game.complete).not_to include subject }
+    it { subject.complete = true; subject.save; expect(Game.complete).to include subject }
   end
 
   describe "calculation" do
     it "should update each player" do
-      subject.challenger.should_receive(:played, :with => subject)
-      subject.challenged.should_receive(:played, :with => subject)
+      expect(subject.challenger).to receive(:played).with(subject)
+      expect(subject.challenged).to receive(:played).with(subject)
       subject.result = 1.0
     end
   end
@@ -82,8 +82,8 @@ describe Game do
 
       @challenger.reload
       @challenged.reload
-      @challenged.rating.should eq @before_challenged_score
-      @challenger.rating.should eq @before_challenger_score
+      expect(@challenged.rating).to eq @before_challenged_score
+      expect(@challenger.rating).to eq @before_challenger_score
     end
 
     it "should rollback correctly when the challenged won" do
@@ -92,8 +92,8 @@ describe Game do
 
       @challenger.reload
       @challenged.reload
-      @challenged.rating.should eq @before_challenged_score
-      @challenger.rating.should eq @before_challenger_score
+      expect(@challenged.rating).to eq @before_challenged_score
+      expect(@challenger.rating).to eq @before_challenger_score
     end
   end
 
@@ -109,7 +109,7 @@ describe Game do
     end
 
     it "should mark the game as complete" do
-      expect { subject }.to change(game, :complete?).to be_true
+      expect { subject }.to change(game, :complete?).to be_truthy
     end
 
     it "should save the correct game result" do
@@ -118,33 +118,33 @@ describe Game do
 
     it "should correctly identify the winner" do
       subject
-      game.winner?(game.challenger).should be_true
+      expect(game.winner?(game.challenger)).to be_truthy
     end
 
     it "should correctly identify the loser" do
       subject
-      game.loser?(game.challenged).should be_true
+      expect(game.loser?(game.challenged)).to be_truthy
     end
 
     it "should return the correct score for each player" do
       subject
-      game.score_for(game.challenger).should eq 15
-      game.score_for(game.challenged).should eq 6
+      expect(game.score_for(game.challenger)).to eq 15
+      expect(game.score_for(game.challenged)).to eq 6
     end
 
     it "should create ratings for each player" do
       subject
-      game.ratings.length.should eq 2
+      expect(game.ratings.length).to eq 2
     end
 
     it "should save the change in rating for the challenged player" do
       subject
-      game.challenger_rating_change.to_d.should eq game.send(:challenger_rating).send(:change).to_d
+      expect(game.challenger_rating_change.to_f).to eq game.send(:challenger_rating).send(:change).to_f
     end
 
     it "should save the change in rating for the challenger player" do
       subject
-      game.challenged_rating_change.to_d.should eq game.send(:challenged_rating).send(:change).to_d
+      expect(game.challenged_rating_change.to_f).to eq game.send(:challenged_rating).send(:change).to_f
     end
 
     it "should log the game completion as an activity" do

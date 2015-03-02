@@ -5,6 +5,11 @@ Latter!
 
 > Latter is a table-tennis ladder web application used at [3months](http://3months.com). It uses the [Elo](http://en.wikipedia.org/wiki/Elo_rating_system) rating system to keep track of players' ratings and is fast and easy to use.
 
+### Upgrading
+
+Latter recently moved from Rails 4.0 to 4.1, and as part of this migration, moved the location of the `secret_key_base` configuration from an initializer to the `config/secrets.yml`. In order to make this change, you need to generate a secret using `rake secret`, and set it in your applications configuration in the `ENV` hash as the `SECRET_KEY_BASE` key. See http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#csrf-protection-from-remote-script-tags
+
+
 ### History
 
 Latter started life as a Sinatra application - in fact, one of the first apps that I had built. Due to it's awful original design and lack of usability though, it fell into disuse.
@@ -27,7 +32,7 @@ The set up for the application is very simple, and standard for a Ruby on Rails 
 * Copy the database YAML file: `cp config/database.yml.example config/database.yml`
 * Assuming you're using Faye (which you should in development): `cp Procfile.faye Procfile`
 * Start the Rails server: `foreman start`
-
+* Generate a session secret and configure it in your ENV hash on the production server: Run `rake secret` and set the config - for example, on Heroku, run `heroku config:add SECRET_KEY_BASE="[YOUR SECRET]"`
 
 ### Deployment
 

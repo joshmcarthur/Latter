@@ -17,12 +17,12 @@ describe TokenAuthenticatable, type: :controller do
 
   it "should sign the player in if a valid token is provided" do
     get :show, auth_token: player.authentication_token
-    response.should be_success
+    expect(response).to be_success
   end
 
   it "should not sign the player in if an invalid token is provided" do
     get :show
-    response.should_not be_success
+    expect(response).not_to be_success
   end
 end
 

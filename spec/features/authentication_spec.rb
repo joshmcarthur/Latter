@@ -18,7 +18,7 @@ describe "Authentication" do
     fill_in 'player_password', :with => logged_in_player.password
     click_on 'Sign in'
 
-    page.should have_content 'Log out'
+    expect(page).to have_content 'Log out'
   end
 
   it "should require a player confirm their account before logging in" do
@@ -27,8 +27,8 @@ describe "Authentication" do
     fill_in 'player_password', :with => player.password
     click_on 'Sign in'
 
-    current_path.should eq new_player_session_path
-    page.should have_content I18n.t('devise.failure.unconfirmed')
+    expect(current_path).to eq new_player_session_path
+    expect(page).to have_content I18n.t('devise.failure.unconfirmed')
   end
 
   it "should require a player change their password when first logging in" do
@@ -40,7 +40,7 @@ describe "Authentication" do
     fill_in 'player_password', :with => player.password
     click_on 'Sign in'
 
-    current_path.should eq edit_player_password_path
+    expect(current_path).to eq edit_player_password_path
   end
 
   it "should log the player in after changing password for the first time" do
@@ -56,8 +56,8 @@ describe "Authentication" do
     fill_in 'player_password_confirmation', :with => 'test123'
     click_on 'Change Password'
 
-    current_path.should eq root_path
-    page.should have_content 'Log out'
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Log out'
   end
 
   it "should log out a player" do
@@ -66,9 +66,9 @@ describe "Authentication" do
     fill_in 'player_password', :with => logged_in_player.password
     click_on 'Sign in'
 
-    page.should have_content 'Log out'
+    expect(page).to have_content 'Log out'
     click_on 'Log out'
 
-    page.should have_content 'Log in'
+    expect(page).to have_content 'Log in'
   end
 end

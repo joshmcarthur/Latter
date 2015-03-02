@@ -7,12 +7,12 @@ describe StatisticsController do
   describe "GET index" do
     it "should assign statistics to @data" do
       get :index
-      assigns(:data).symbolize_keys.should eq Game.statistics
+      expect(assigns(:data).symbolize_keys).to eq Game.statistics
     end
 
     it "should render the index template" do
       get :index
-      response.should render_template 'index'
+      expect(response).to render_template 'index'
     end
   end
 

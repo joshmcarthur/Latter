@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Main dependency gems
-gem 'rails', '~> 4.0.11'
+gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'dalli'
 
@@ -71,9 +71,6 @@ group :test do
   # Sanitize database after each test run to ensure
   # that tests are decoupled from data.
   gem 'database_cleaner'
-
-  # DRb server for testing frameworks
-  gem 'spork', '1.0.0rc'
 
   # Generate test coverage report.
   gem 'simplecov', :require => false

@@ -32,14 +32,14 @@ describe GamesController do
     it "assigns all games as @games" do
       game = FactoryGirl.create :game, :complete => true
       get :index, {}
-      assigns(:games).should eq([game])
+      expect(assigns(:games)).to eq([game])
     end
   end
 
   describe "GET index with JSON" do
     it "renders the correct template" do
       get :index
-      response.should render_template :index
+      expect(response).to render_template :index
     end
   end
 
@@ -54,18 +54,18 @@ describe GamesController do
 
       it "assigns a newly created game as @game" do
         post :create, {:game => valid_attributes}
-        assigns(:game).should be_a(Game)
-        assigns(:game).should be_persisted
+        expect(assigns(:game)).to be_a(Game)
+        expect(assigns(:game)).to be_persisted
       end
 
       it "redirects to the players page" do
         post :create, {:game => valid_attributes}
-        response.should redirect_to(Player)
+        expect(response).to redirect_to(Player)
       end
 
       it "renders JSON template if requesting with JSON" do
         post :create, {:game => valid_attributes, :format => :json}
-        response.should render_template :show
+        expect(response).to render_template :show
       end
 
     end
@@ -73,17 +73,17 @@ describe GamesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved game as @game" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         post :create, {:game => {}}
-        assigns(:game).should be_a_new(Game)
+        expect(assigns(:game)).to be_a_new(Game)
       end
 
       it "redirects to the root page with an error message" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Game.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Game).to receive(:save).and_return(false)
         post :create, {:game => {}}
-        response.should redirect_to root_path
-        flash[:alert].should_not be_blank
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).not_to be_blank
       end
     end
   end
@@ -99,7 +99,7 @@ describe GamesController do
     it "redirects to the games list" do
       game = FactoryGirl.create(:game, :challenged => controller.current_player)
       delete :destroy, {:id => game.to_param}
-      response.should redirect_to(games_url)
+      expect(response).to redirect_to(games_url)
     end
   end
 
